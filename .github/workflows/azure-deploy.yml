@@ -37,7 +37,7 @@ concurrency:
 env:
   ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
   ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
-  ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+  ARM_SUBSCRIPTION_ID: 3471ad5a-d8a8-4a80-b30b-668798733c14
   ARM_USE_OIDC: true
   TF_IN_AUTOMATION: true
 
@@ -59,7 +59,7 @@ jobs:
         with:
           client-id: ${{ secrets.AZURE_CLIENT_ID }}
           tenant-id: ${{ secrets.AZURE_TENANT_ID }}
-          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+          subscription-id: 3471ad5a-d8a8-4a80-b30b-668798733c14
 
       - name: Set up Terraform
         uses: hashicorp/setup-terraform@v3
@@ -77,16 +77,19 @@ jobs:
           container="tfstate"
 
           az group create \
+            --subscription "$ARM_SUBSCRIPTION_ID" \
             --name "$resource_group" \
             --location southeastasia \
             --tags environment=shared workload=terraform-state managed-by=github-actions \
             --output none
 
           if ! az storage account show \
+            --subscription "$ARM_SUBSCRIPTION_ID" \
             --resource-group "$resource_group" \
             --name "$storage_account" \
             --output none 2>/dev/null; then
             az storage account create \
+              --subscription "$ARM_SUBSCRIPTION_ID" \
               --resource-group "$resource_group" \
               --name "$storage_account" \
               --location southeastasia \
@@ -99,6 +102,7 @@ jobs:
           fi
 
           storage_scope=$(az storage account show \
+            --subscription "$ARM_SUBSCRIPTION_ID" \
             --resource-group "$resource_group" \
             --name "$storage_account" \
             --query id \
