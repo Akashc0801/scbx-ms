@@ -50,7 +50,10 @@ folder and GitHub Actions workflow for an existing module repository.
 
 ## Workflow
 
-- Pull requests and manual `plan` runs execute Terraform plan only.
+- Pull requests execute formatting and static Terraform validation without
+  Azure authentication.
+- Pushes to `main` and manual `plan` runs authenticate with OIDC and execute a
+  remote-state Terraform plan.
 - Apply is available only through `workflow_dispatch` with `action=apply`.
 - GitHub secrets: `AZURE_CLIENT_ID`, `AZURE_TENANT_ID`,
   `AZURE_SUBSCRIPTION_ID`.
