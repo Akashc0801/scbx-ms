@@ -1,0 +1,6 @@
+management_group_id = "scb123123"
+assignment_location = "southeastasia"
+
+# Override parameters by full policy definition ID before enabling policies that
+# require environment-specific values.
+policy_parameter_overrides = {}
