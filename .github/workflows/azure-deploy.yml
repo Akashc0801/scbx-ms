@@ -80,6 +80,25 @@ jobs:
             --query "[].{subscriptionId:id,subscriptionName:name,state:state,tenantId:tenantId}" \
             --output table
 
+          access_token=$(az account get-access-token \
+            --resource https://management.azure.com/ \
+            --query accessToken \
+            --output tsv)
+          ACCESS_TOKEN="$access_token" python - <<'PY'
+          import base64
+          import json
+          import os
+
+          payload = os.environ["ACCESS_TOKEN"].split(".")[1]
+          payload += "=" * (-len(payload) % 4)
+          claims = json.loads(base64.urlsafe_b64decode(payload))
+          print(json.dumps({
+              "appid": claims.get("appid"),
+              "oid": claims.get("oid"),
+              "tid": claims.get("tid"),
+          }, indent=2))
+          PY
+
       - name: Ensure Terraform state backend
         if: github.event_name != 'pull_request'
         shell: bash
