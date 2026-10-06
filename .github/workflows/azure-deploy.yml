@@ -1,28 +1,158 @@
-name: Azure OIDC Login
+name: Terraform Azure Policy Deployment
 
 on:
+  pull_request:
+    paths:
+      - ".github/workflows/azure-deploy.yml"
+      - "terraform/**"
+      - "modules/scb_policy_assignment/**"
+      - "modules/scb_role_assignments/**"
   push:
     branches:
       - main
+    paths:
+      - ".github/workflows/azure-deploy.yml"
+      - "terraform/**"
+      - "modules/scb_policy_assignment/**"
+      - "modules/scb_role_assignments/**"
+  workflow_dispatch:
+    inputs:
+      action:
+        description: Terraform action
+        required: true
+        default: plan
+        type: choice
+        options:
+          - plan
+          - apply
 
 permissions:
   id-token: write
   contents: read
 
+concurrency:
+  group: scb-ai-policy-assignments
+  cancel-in-progress: false
+
+env:
+  ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
+  ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
+  ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+  ARM_USE_OIDC: true
+  TF_IN_AUTOMATION: true
+
 jobs:
-  deploy:
+  terraform:
     runs-on: ubuntu-latest
+    environment: ${{ github.event_name == 'workflow_dispatch' && inputs.action == 'apply' && 'azure-policy-production' || '' }}
+    defaults:
+      run:
+        working-directory: terraform
 
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Login to Azure using OIDC
+      - name: Login to Azure with OIDC
         uses: azure/login@v2
         with:
           client-id: ${{ secrets.AZURE_CLIENT_ID }}
           tenant-id: ${{ secrets.AZURE_TENANT_ID }}
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
-      - name: Validate Azure connection
-        run: az account show
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: "1.16.4"
+
+      - name: Ensure Terraform state backend
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          resource_group="rg-scbx-terraform-state"
+          storage_account="stscbxtf3471ad5a"
+          container="tfstate"
+
+          az group create \
+            --name "$resource_group" \
+            --location southeastasia \
+            --tags environment=shared workload=terraform-state managed-by=github-actions \
+            --output none
+
+          if ! az storage account show \
+            --resource-group "$resource_group" \
+            --name "$storage_account" \
+            --output none 2>/dev/null; then
+            az storage account create \
+              --resource-group "$resource_group" \
+              --name "$storage_account" \
+              --location southeastasia \
+              --sku Standard_ZRS \
+              --kind StorageV2 \
+              --min-tls-version TLS1_2 \
+              --allow-shared-key-access false \
+              --https-only true \
+              --output none
+          fi
+
+          storage_scope=$(az storage account show \
+            --resource-group "$resource_group" \
+            --name "$storage_account" \
+            --query id \
+            --output tsv)
+          principal_id=$(az ad sp show \
+            --id "$ARM_CLIENT_ID" \
+            --query id \
+            --output tsv)
+
+          if [[ $(az role assignment list \
+            --assignee-object-id "$principal_id" \
+            --scope "$storage_scope" \
+            --role "Storage Blob Data Contributor" \
+            --query "length(@)" \
+            --output tsv) == "0" ]]; then
+            az role assignment create \
+              --assignee-object-id "$principal_id" \
+              --assignee-principal-type ServicePrincipal \
+              --scope "$storage_scope" \
+              --role "Storage Blob Data Contributor" \
+              --output none
+          fi
+
+          for attempt in {1..12}; do
+            if az storage container create \
+              --name "$container" \
+              --account-name "$storage_account" \
+              --auth-mode login \
+              --output none 2>/dev/null; then
+              exit 0
+            fi
+            sleep 10
+          done
+
+          echo "Timed out waiting for Storage Blob Data Contributor propagation." >&2
+          exit 1
+
+      - name: Check formatting
+        run: terraform fmt -check -recursive
+
+      - name: Initialize Terraform
+        run: >-
+          terraform init -input=false
+          -backend-config="resource_group_name=rg-scbx-terraform-state"
+          -backend-config="storage_account_name=stscbxtf3471ad5a"
+          -backend-config="container_name=tfstate"
+          -backend-config="key=scb-ai-policy-assignments.tfstate"
+          -backend-config="use_azuread_auth=true"
+          -backend-config="use_oidc=true"
+
+      - name: Validate Terraform
+        run: terraform validate
+
+      - name: Create Terraform plan
+        run: terraform plan -input=false -out=scb-policies.tfplan
+
+      - name: Apply Terraform plan
+        if: github.event_name == 'workflow_dispatch' && inputs.action == 'apply'
+        run: terraform apply -input=false -auto-approve scb-policies.tfplan
