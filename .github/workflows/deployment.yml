@@ -1,0 +1,192 @@
+name: Terraform deployment
+
+on:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  id-token: write
+
+env:
+  TF_VERSION: "1.10.5"
+  TF_WORKING_DIR: "base_infra/ai_platform_network"
+  TF_IN_AUTOMATION: "true"
+  TF_INPUT: "false"
+  ARM_USE_OIDC: "true"
+  ARM_USE_AZUREAD: "true"
+  ARM_CLIENT_ID: ${{ vars.AZURE_CLIENT_ID }}
+  ARM_TENANT_ID: ${{ vars.AZURE_TENANT_ID }}
+  ARM_SUBSCRIPTION_ID: ${{ vars.AZURE_SUBSCRIPTION_ID }}
+  TF_BACKEND_RESOURCE_GROUP: ${{ vars.TF_BACKEND_RESOURCE_GROUP }}
+  TF_BACKEND_STORAGE_ACCOUNT: ${{ vars.TF_BACKEND_STORAGE_ACCOUNT }}
+  TF_BACKEND_CONTAINER: ${{ vars.TF_BACKEND_CONTAINER }}
+  TF_BACKEND_KEY: ${{ vars.TF_BACKEND_KEY }}
+
+concurrency:
+  group: terraform-nprd
+  cancel-in-progress: false
+
+jobs:
+  terraform-validation:
+    name: Terraform validation and security
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: ${{ env.TF_VERSION }}
+          terraform_wrapper: false
+
+      - name: Check formatting
+        run: terraform -chdir="$TF_WORKING_DIR" fmt -check -recursive
+
+      - name: Initialize without backend
+        run: terraform -chdir="$TF_WORKING_DIR" init -backend=false -input=false
+
+      - name: Validate configuration
+        run: terraform -chdir="$TF_WORKING_DIR" validate -no-color
+
+      - name: Scan Terraform with Checkov
+        uses: bridgecrewio/checkov-action@v12
+        with:
+          directory: ${{ env.TF_WORKING_DIR }}
+          framework: terraform
+          quiet: true
+
+  terraform-plan:
+    name: Terraform plan
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    needs: terraform-validation
+    if: >-
+      github.event_name != 'pull_request' ||
+      github.event.pull_request.head.repo.full_name == github.repository
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: ${{ env.TF_VERSION }}
+          terraform_wrapper: false
+
+      - name: Azure login with OIDC
+        uses: azure/login@v2
+        with:
+          client-id: ${{ vars.AZURE_CLIENT_ID }}
+          tenant-id: ${{ vars.AZURE_TENANT_ID }}
+          subscription-id: ${{ vars.AZURE_SUBSCRIPTION_ID }}
+
+      - name: Initialize remote state
+        shell: bash
+        run: |
+          set -euo pipefail
+          : "${TF_BACKEND_RESOURCE_GROUP:?Set GitHub variable TF_BACKEND_RESOURCE_GROUP}"
+          : "${TF_BACKEND_STORAGE_ACCOUNT:?Set GitHub variable TF_BACKEND_STORAGE_ACCOUNT}"
+          : "${TF_BACKEND_CONTAINER:?Set GitHub variable TF_BACKEND_CONTAINER}"
+          : "${TF_BACKEND_KEY:?Set GitHub variable TF_BACKEND_KEY}"
+          terraform -chdir="$TF_WORKING_DIR" init -input=false -reconfigure \
+            -backend-config="resource_group_name=${TF_BACKEND_RESOURCE_GROUP}" \
+            -backend-config="storage_account_name=${TF_BACKEND_STORAGE_ACCOUNT}" \
+            -backend-config="container_name=${TF_BACKEND_CONTAINER}" \
+            -backend-config="key=${TF_BACKEND_KEY}" \
+            -backend-config="use_oidc=true" \
+            -backend-config="use_azuread_auth=true" \
+            -backend-config="client_id=${ARM_CLIENT_ID}" \
+            -backend-config="tenant_id=${ARM_TENANT_ID}" \
+            -backend-config="subscription_id=${ARM_SUBSCRIPTION_ID}"
+
+      - name: Create execution plan
+        run: >-
+          terraform -chdir="$TF_WORKING_DIR" plan -input=false -no-color
+          -var-file=variables.tfvars -out=tfplan
+
+      - name: Upload execution plan
+        uses: actions/upload-artifact@v4
+        with:
+          name: terraform-plan
+          path: ${{ env.TF_WORKING_DIR }}/tfplan
+          if-no-files-found: error
+          retention-days: 7
+
+  terraform-apply:
+    name: Terraform apply
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    needs:
+      - terraform-validation
+      - terraform-plan
+    if: >-
+      (github.event_name == 'push' && github.ref == 'refs/heads/main') ||
+      (github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main')
+    environment:
+      name: nprd
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: ${{ env.TF_VERSION }}
+          terraform_wrapper: false
+
+      - name: Azure login with OIDC
+        uses: azure/login@v2
+        with:
+          client-id: ${{ vars.AZURE_CLIENT_ID }}
+          tenant-id: ${{ vars.AZURE_TENANT_ID }}
+          subscription-id: ${{ vars.AZURE_SUBSCRIPTION_ID }}
+
+      - name: Initialize remote state
+        shell: bash
+        run: |
+          set -euo pipefail
+          : "${TF_BACKEND_RESOURCE_GROUP:?Set GitHub variable TF_BACKEND_RESOURCE_GROUP}"
+          : "${TF_BACKEND_STORAGE_ACCOUNT:?Set GitHub variable TF_BACKEND_STORAGE_ACCOUNT}"
+          : "${TF_BACKEND_CONTAINER:?Set GitHub variable TF_BACKEND_CONTAINER}"
+          : "${TF_BACKEND_KEY:?Set GitHub variable TF_BACKEND_KEY}"
+          terraform -chdir="$TF_WORKING_DIR" init -input=false -reconfigure \
+            -backend-config="resource_group_name=${TF_BACKEND_RESOURCE_GROUP}" \
+            -backend-config="storage_account_name=${TF_BACKEND_STORAGE_ACCOUNT}" \
+            -backend-config="container_name=${TF_BACKEND_CONTAINER}" \
+            -backend-config="key=${TF_BACKEND_KEY}" \
+            -backend-config="use_oidc=true" \
+            -backend-config="use_azuread_auth=true" \
+            -backend-config="client_id=${ARM_CLIENT_ID}" \
+            -backend-config="tenant_id=${ARM_TENANT_ID}" \
+            -backend-config="subscription_id=${ARM_SUBSCRIPTION_ID}"
+
+      - name: Require reviewed NPRD values
+        shell: bash
+        run: |
+          set -euo pipefail
+          if ! grep -Eq '^[[:space:]]*nprd_values_verified[[:space:]]*=[[:space:]]*true([[:space:]]*(#.*)?)?$' "$TF_WORKING_DIR/variables.tfvars"; then
+            echo "::error::Complete the blank values in $TF_WORKING_DIR/variables.tfvars, review the plan, and set nprd_values_verified = true before applying."
+            exit 1
+          fi
+
+      - name: Download planned execution
+        uses: actions/download-artifact@v4
+        with:
+          name: terraform-plan
+          path: ${{ env.TF_WORKING_DIR }}
+
+      - name: Apply the planned execution
+        run: terraform -chdir="$TF_WORKING_DIR" apply -input=false -auto-approve tfplan
