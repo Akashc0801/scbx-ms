@@ -1,0 +1,63 @@
+{
+  "type": "Microsoft.Authorization/policyDefinitions",
+  "apiVersion": "2021-06-01",
+  "name": "MAS_Policy_Manual_072_01",
+  "properties": {
+    "displayName": "MAS - Manual attestation for Implement Data Discovery , Classification with DLP policies and enforcement",
+    "policyType": "Custom",
+    "mode": "All",
+    "description": "Manual attestation is required to validate Data Loss Prevention (DLP) measures are in place, aligned with the organization's risk assessment, monitor and periodic review. (Data-Security-72).",
+    "metadata": {
+      "Description": "Data Discovery and Classification\nEncryption and Access Controls\nDLP Policies and Enforcement\nfor more details - refer to Control statement\nData Discovery and Classification\n1. Deploy automated data discovery tools across all cloud platforms to identify and categorize sensitive information\n- Scanning data repositories for sensitive information\n- Classifying data based on sensitivity levels (e.g., public, internal, confidential, highly confidential)\n- Applying appropriate tags to classified data\nEncryption and Access Controls\n1. To protect data at rest and in transit:\n- AES-256 encryption was implemented for all sensitive data stored across cloud platforms\nhttps://learn.microsoft.com/en-us/azure/security/fundamentals/encryption-overview\n- A centralized key management system was integrated with each cloud provider's native key management service.\n- Role-Based Access Control (RBAC) was enforced consistently across all cloud platforms, ensuring the principle of least privilege\nDLP Policies and Enforcement\n1. Deploy a multi-cloud DLP tool and develop standardized DLP policies aligned with its security requirements and regulatory obligations\n. These policies were consistently applied and enforced across all cloud platforms and services, including:\n- Blocking unauthorized data transfers\n- Encrypting sensitive data in transit\n- Applying data masking to prevent unauthorized access",
+      "Responsible teams": [
+        "Data Protection"
+      ],
+      "category": "Governance",
+      "controlDomain": "Data-Security-72",
+      "controlTitle": "Data Loss Prevention (DLP) measures are in place, aligned with the organization's risk assessment, monitor and periodic review.",
+      "masControlId": "72",
+      "createdBy": "695b7068-08dc-4778-b824-e8a1087605e1",
+      "createdOn": "2025-12-03T13:32:52Z",
+      "deployedBy": "mas/manual-attestations",
+      "pacOwnerId": "13b032ea-fae8-4455-b845-679a21e9cdd4",
+      "securityCenter": {
+        "severity": "Medium"
+      },
+      "severity": "Medium",
+      "updatedBy": "695b7068-08dc-4778-b824-e8a1087605e1",
+      "updatedOn": "2025-12-03T13:32:52Z",
+      "cloudSecurityDomain": "Data-Security"
+    },
+    "version": "1.0.0",
+    "parameters": {
+      "effect": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Effect",
+          "description": "Enable or disable the execution of the policy"
+        },
+        "allowedValues": [
+          "Manual",
+          "Disabled"
+        ],
+        "defaultValue": "Manual"
+      }
+    },
+    "policyRule": {
+      "if": {
+        "field": "type",
+        "equals": "Microsoft.Resources/subscriptions"
+      },
+      "then": {
+        "effect": "[parameters('effect')]",
+        "details": {
+          "defaultState": "Unknown"
+        }
+      }
+    },
+    "versions": [
+      "1.0.0"
+    ]
+  },
+  "id": "/providers/Microsoft.Management/managementGroups/MAS/providers/Microsoft.Authorization/policyDefinitions/MAS_Policy_Manual_072_01"
+}

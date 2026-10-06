@@ -1,0 +1,48 @@
+{
+    "type": "Microsoft.Authorization/policyDefinitions",
+    "apiVersion": "2021-06-01",
+    "name": "OJK_Policy_Custom_058_05",
+    "properties":{
+    "displayName": "Azure keyvault must not be Standard SKU",
+    "description": "This policy enforces premium sku for key vaults.",
+    "metadata": {
+      "category": "Key Vault",
+      "createdBy": "",
+      "updatedBy": null,
+      "updatedOn": null,
+      "version": "1.0.0"
+    },
+    "mode": "Indexed",
+    "parameters": {
+      "effect": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Effect",
+          "description": "Deny, Audit or Disabled the execution of the Policy"
+        },
+        "allowedValues": [
+          "Deny",
+          "Audit"
+        ],
+        "defaultValue": "Audit"
+      }
+    },
+    "policyRule": {
+      "if": {
+        "allOf": [
+          {
+            "equals": "Microsoft.KeyVault/Vaults",
+            "field": "type"
+          },
+          {
+            "field": "Microsoft.KeyVault/Vaults/sku.name",
+            "notEquals": "premium"
+          }
+        ]
+      },
+      "then": {
+        "effect": "[parameters('effect')]"
+      }
+    }
+  }
+}

@@ -1,0 +1,59 @@
+{
+  "type": "Microsoft.Authorization/policyDefinitions",
+  "apiVersion": "2021-06-01",
+  "name": "SEC_Policy_063",
+  "properties": {
+    "displayName": "SCF - Manual Attestation for Cloud-Native Threat Detection Integration",
+    "policyType": "Custom",
+    "mode": "All",
+    "description": "This policy requires manual attestation to ensure the use of cloud-native threat detection capabilities for analyzing security event data in conjunction with CSP provided threat intelligence and analytics. The aim is to detect anomalies, suspicious patterns, and correlations across all security event data, enhancing overall security posture. ",
+    "metadata": {
+      "Description": "This policy requires manual attestation to ensure the use of cloud-native threat detection capabilities for analyzing security event data in conjunction with CSP provided threat intelligence and analytics. The aim is to detect anomalies, suspicious patterns, and correlations across all security event data, enhancing overall security posture. ",
+      "Responsible teams": [
+        "Security Operations"
+      ],
+      "category": "Compliance",
+      "createdBy": "695b7068-08dc-4778-b824-e8a1087605e1",
+      "createdOn": "2025-09-25T08:22:20.988412Z",
+      "deployedBy": "epac/13b032ea-fae8-4455-b845-679a21e9cdd4/epac-scf",
+      "pacOwnerId": "13b032ea-fae8-4455-b845-679a21e9cdd4",
+      "securityCenter": {
+        "severity": "Medium"
+      },
+      "severity": "Medium",
+      "updatedBy": "695b7068-08dc-4778-b824-e8a1087605e1",
+      "updatedOn": "2025-10-13T12:06:30.9008921Z"
+    },
+    "version": "1.0.0",
+    "parameters": {
+      "effect": {
+        "allowedValues": [
+          "Manual",
+          "Disabled"
+        ],
+        "defaultValue": "Manual",
+        "metadata": {
+          "description": "Enable or disable the execution of the policy",
+          "displayName": "Effect"
+        },
+        "type": "String"
+      }
+    },
+    "policyRule": {
+      "if": {
+        "equals": "Microsoft.Resources/subscriptions",
+        "field": "type"
+      },
+      "then": {
+        "details": {
+          "defaultState": "Unknown"
+        },
+        "effect": "[parameters('effect')]"
+      }
+    },
+    "versions": [
+      "1.0.0"
+    ]
+  },
+  "id": "/providers/Microsoft.Management/managementGroups/SCF/providers/Microsoft.Authorization/policyDefinitions/c5c5993c-1de6-4f2f-8b76-788ecaeabf2a"
+}

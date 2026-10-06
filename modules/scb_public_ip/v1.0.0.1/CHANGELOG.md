@@ -1,0 +1,30 @@
+# Changelog
+
+[[_TOC_]]
+
+All notable changes to this module will be documented in this file.
+
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
+and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+<!-- ## [Unreleased]
+### Added
+### Changed
+### Removed -->
+
+## [1.0.0.1] - 2026-04-16
+
+### Changed
+
+- Updated module for SCB enterprise standards.
+- Integrated scb naming module for consistent resource naming and tagging.
+
+## [1.0.0.0] - Initial Release
+
+### Added
+
+- Create Azure Public IP Address Terraform Module.
+- Support for Standard and Basic SKU public IPs.
+- Diagnostic settings support.
+- Management locks and role assignments.
+- Telemetry integration.

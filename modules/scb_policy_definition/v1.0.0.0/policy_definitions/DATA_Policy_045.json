@@ -1,0 +1,53 @@
+{
+  "type": "Microsoft.Authorization/policyDefinitions",
+  "apiVersion": "2021-06-01",
+  "name": "DATA_Policy_045",
+  "properties": {
+    "displayName": "SCF - Manual attestation for Key Vault Security and Compliance Control",
+    "policyType": "Custom",
+    "mode": "All",
+    "description": "This policy requires manual attestation to confirm that all encryption keys are encrypted and stored in a secure, protected key vault. Encryption keys may be managed in a cloud platform–provided multi-tenant key management service or key vault. The key vault service must be validated to Federal Information Processing Standards (FIPS) 140-2 Level 2.",
+    "metadata": {
+      "securityCenter": {
+        "severity": "Medium"
+      },
+      "Responsible teams": [
+        "Platform",
+        "Application workload"
+      ],
+      "Description": "This policy requires manual attestation to confirm that all encryption keys are encrypted and stored in a secure, protected key vault. Encryption keys may be managed in a cloud platform–provided multi-tenant key management service or key vault. The key vault service must be validated to Federal Information Processing Standards (FIPS) 140-2 Level 2.",
+      "category": "Compliance",
+      "severity": "Medium"
+    },
+    "version": "1.0.0",
+    "parameters": {
+      "effect": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Effect",
+          "description": "Enable or disable the execution of the policy"
+        },
+        "allowedValues": [
+          "Manual",
+          "Disabled"
+        ],
+        "defaultValue": "Manual"
+      }
+    },
+    "policyRule": {
+      "if": {
+        "field": "type",
+        "equals": "Microsoft.Resources/subscriptions"
+      },
+      "then": {
+        "effect": "[parameters('effect')]",
+        "details": {
+          "defaultState": "Unknown"
+        }
+      }
+    },
+    "versions": [
+      "1.0.0"
+    ]
+  }
+}

@@ -1,0 +1,116 @@
+{
+  "name": "SCB Enterprise Initiative \u2013 Foundation Identity",
+  "properties": {
+    "displayName": "SCB Enterprise Initiative Foundation-Identity",
+    "description": "This inlcudes all the policies related to Identity for the SCB enterprise. ",
+    "metadata": {
+      "category": "Security Center"
+    },
+    "parameters": {
+      "Effect": {
+        "type": "String",
+        "defaultValue": "AuditIfNotExists",
+        "allowedValues": [
+          "AuditIfNotExists",
+          "Disabled"
+        ],
+        "metadata": {
+          "displayName": "Effect",
+          "description": "Enable or disable the execution of the policy"
+        }
+      }
+    },
+    "policyDefinitions": [
+      {
+        "policyDefinitionReferenceId": "Accounts with write permissions on Azure resources should be MFA enabled",
+        "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/931e118d-50a1-4457-a5e4-78550e086c52",
+        "parameters": {
+          "effect": {
+            "value": "[parameters('Effect')]"
+          }
+        },
+        "groupNames": []
+      },
+      {
+        "policyDefinitionReferenceId": "Accounts with read permissions on Azure resources should be MFA enabled",
+        "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/81b3ccb4-e6e8-4e4a-8d05-5df25cd29fd4",
+        "parameters": {
+          "effect": {
+            "value": "[parameters('Effect')]"
+          }
+        },
+        "groupNames": []
+      },
+      {
+        "policyDefinitionReferenceId": "Accounts with owner permissions on Azure resources should be MFA enabled",
+        "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/e3e008c3-56b9-4133-8fd7-d3347377402a",
+        "parameters": {
+          "effect": {
+            "value": "[parameters('Effect')]"
+          }
+        },
+        "groupNames": []
+      },
+      {
+        "policyDefinitionReferenceId": "Blocked accounts with owner permissions on Azure resources should be removed",
+        "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/0cfea604-3201-4e14-88fc-fae4c427a6c5",
+        "parameters": {
+          "effect": {
+            "value": "[parameters('Effect')]"
+          }
+        },
+        "groupNames": []
+      },
+      {
+        "policyDefinitionReferenceId": "Blocked accounts with read and write permissions on Azure resources should be removed",
+        "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/8d7e1fde-fe26-4b5f-8108-f8e432cbc2be",
+        "parameters": {
+          "effect": {
+            "value": "[parameters('Effect')]"
+          }
+        },
+        "groupNames": []
+      },
+      {
+        "policyDefinitionReferenceId": "Guest accounts with owner permissions on Azure resources should be removed",
+        "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/339353f6-2387-4a45-abe4-7f529d121046",
+        "parameters": {
+          "effect": {
+            "value": "[parameters('Effect')]"
+          }
+        },
+        "groupNames": []
+      },
+      {
+        "policyDefinitionReferenceId": "Guest accounts with read permissions on Azure resources should be removed",
+        "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/e9ac8f8e-ce22-4355-8f04-99b911d6be52",
+        "parameters": {
+          "effect": {
+            "value": "[parameters('Effect')]"
+          }
+        },
+        "groupNames": []
+      },
+      {
+        "policyDefinitionReferenceId": "Guest accounts with write permissions on Azure resources should be removed",
+        "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/94e1c2ac-cbbe-4cac-a2b5-389c812dee87",
+        "parameters": {
+          "effect": {
+            "value": "[parameters('Effect')]"
+          }
+        },
+        "groupNames": []
+      },
+      {
+        "policyDefinitionReferenceId": "Subscriptions should have a contact email address for security issues",
+        "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/4f4f78b8-e367-4b10-a341-d9a4ad5cf1c7",
+        "parameters": {
+          "effect": {
+            "value": "[parameters('Effect')]"
+          }
+        },
+        "groupNames": []
+      }
+    ]
+  }
+}

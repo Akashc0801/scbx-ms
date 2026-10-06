@@ -1,0 +1,63 @@
+{
+  "type": "Microsoft.Authorization/policyDefinitions",
+  "apiVersion": "2021-06-01",
+  "name": "MAS_Policy_Manual_053_02",
+  "properties": {
+    "displayName": "MAS - Manual attestation for Key Inventory and Discovery",
+    "policyType": "Custom",
+    "mode": "All",
+    "description": "Manual attestation is required to validate Implement a secure key management system for cloud environments, incorporating key inventory and discovery across infrastructure and workloads, with continuous monitoring and periodic reviews to ensure key protection and compliance. (Data-Security-53).",
+    "metadata": {
+      "Description": "Key Inventory and Discovery\nfor more details - refer to Control statement\nKey Inventory and Discovery\n1. Automated Asset Discovery\n- Implements comprehensive multi-cloud asset discovery and dependency mapping\n2. Key Catalog\n- Maintains a centralized inventory of all encryption keys, their locations, and associated cloud resources\n- Tags keys with metadata including owner, purpose, and expiration date\n3. Relationship Mapping\n- Maps dependencies between keys and cloud resources, applications, and data stores\n- Identifies potential security risks and compliance issues related to key usage",
+      "Responsible teams": [
+        "Data Protection"
+      ],
+      "category": "Governance",
+      "controlDomain": "Data-Security-53",
+      "controlTitle": "Implement a secure key management system for cloud environments, incorporating key inventory and discovery across infrastructure and workloads, with continuous monitoring and periodic reviews to ensure key protection and compliance.",
+      "masControlId": "53",
+      "createdBy": "695b7068-08dc-4778-b824-e8a1087605e1",
+      "createdOn": "2025-12-03T13:32:52Z",
+      "deployedBy": "mas/manual-attestations",
+      "pacOwnerId": "13b032ea-fae8-4455-b845-679a21e9cdd4",
+      "securityCenter": {
+        "severity": "Medium"
+      },
+      "severity": "Medium",
+      "updatedBy": "695b7068-08dc-4778-b824-e8a1087605e1",
+      "updatedOn": "2025-12-03T13:32:52Z",
+      "cloudSecurityDomain": "Data-Security"
+    },
+    "version": "1.0.0",
+    "parameters": {
+      "effect": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Effect",
+          "description": "Enable or disable the execution of the policy"
+        },
+        "allowedValues": [
+          "Manual",
+          "Disabled"
+        ],
+        "defaultValue": "Manual"
+      }
+    },
+    "policyRule": {
+      "if": {
+        "field": "type",
+        "equals": "Microsoft.Resources/subscriptions"
+      },
+      "then": {
+        "effect": "[parameters('effect')]",
+        "details": {
+          "defaultState": "Unknown"
+        }
+      }
+    },
+    "versions": [
+      "1.0.0"
+    ]
+  },
+  "id": "/providers/Microsoft.Management/managementGroups/MAS/providers/Microsoft.Authorization/policyDefinitions/MAS_Policy_Manual_053_02"
+}

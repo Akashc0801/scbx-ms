@@ -1,0 +1,50 @@
+{
+  "name": "Append-AppService-httpsonly",
+  "properties": {
+    "displayName": "App Service apps should use HTTPS only",
+    "description": "Use of HTTPS ensures server/service authentication and protects data in transit from network layer eavesdropping attacks. This policy appends the HTTPS only configuration to App Service apps.",
+    "metadata": {
+      "version": "1.0.0",
+      "category": "App Service",
+      "source": "SCB Azure Landing Zones"
+    },
+    "mode": "Indexed",
+    "parameters": {
+      "effect": {
+        "type": "String",
+        "defaultValue": "Append",
+        "allowedValues": [
+          "Append",
+          "Disabled"
+        ],
+        "metadata": {
+          "displayName": "Effect",
+          "description": "Enable or disable the execution of the policy"
+        }
+      }
+    },
+    "policyRule": {
+      "if": {
+        "allOf": [
+          {
+            "field": "type",
+            "equals": "Microsoft.Web/sites"
+          },
+          {
+            "field": "kind",
+            "notContains": "functionapp"
+          }
+        ]
+      },
+      "then": {
+        "effect": "[parameters('effect')]",
+        "details": [
+          {
+            "field": "Microsoft.Web/sites/httpsOnly",
+            "value": true
+          }
+        ]
+      }
+    }
+  }
+}

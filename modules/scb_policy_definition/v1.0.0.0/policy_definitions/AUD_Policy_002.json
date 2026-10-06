@@ -1,0 +1,76 @@
+{
+  "type": "Microsoft.Authorization/policyDefinitions",
+  "apiVersion": "2021-06-01",
+  "name": "AUD_Policy_002",
+  "properties": {
+    "displayName": "SCF - Custom Validate Azure Activity logs to stream to specified Log Analytics workspace",
+    "policyType": "Custom",
+    "mode": "All",
+    "description": "This policiy verifies if diagnostic settings for Azure Activity are configured to stream subscriptions audit logs to a Log Analytics workspace to monitor subscription-level events. This policy validates if a specific Log Analytics workspace is used as indicated by parameter.",
+    "metadata": {
+      "Description": "This policiy verifies if diagnostic settings for Azure Activity are configured to stream subscriptions audit logs to a Log Analytics workspace to monitor subscription-level events. This policy validates if a specific Log Analytics workspace is used as indicated by parameter.",
+      "category": "Compliance",
+      "createdBy": "695b7068-08dc-4778-b824-e8a1087605e1",
+      "createdOn": "2025-09-25T08:22:02.2015005Z",
+      "deployedBy": "epac/13b032ea-fae8-4455-b845-679a21e9cdd4/epac-scf",
+      "pacOwnerId": "13b032ea-fae8-4455-b845-679a21e9cdd4",
+      "securityCenter": {
+        "severity": "Medium"
+      },
+      "severity": "Medium"
+    },
+    "version": "1.0.0",
+    "parameters": {
+      "logAnalytics": {
+        "metadata": {
+          "assignPermissions": true,
+          "description": "This is the workspace used by SOC for security monitoring purposes.",
+          "displayName": "Primary Log Analytics workspace",
+          "strongType": "omsWorkspace"
+        },
+        "type": "String"
+      },
+      "logsEnabled": {
+        "allowedValues": [
+          "True",
+          "False"
+        ],
+        "defaultValue": "True",
+        "metadata": {
+          "description": "Whether to enable logs stream to the Log Analytics workspace - True or False",
+          "displayName": "Enable logs"
+        },
+        "type": "String"
+      }
+    },
+    "policyRule": {
+      "if": {
+        "equals": "Microsoft.Resources/subscriptions",
+        "field": "type"
+      },
+      "then": {
+        "details": {
+          "existenceCondition": {
+            "allOf": [
+              {
+                "equals": "[parameters('logsEnabled')]",
+                "field": "Microsoft.Insights/diagnosticSettings/logs.enabled"
+              },
+              {
+                "equals": "[parameters('logAnalytics')]",
+                "field": "Microsoft.Insights/diagnosticSettings/workspaceId"
+              }
+            ]
+          },
+          "existenceScope": "Subscription",
+          "type": "Microsoft.Insights/diagnosticSettings"
+        },
+        "effect": "AuditIfNotExists"
+      }
+    },
+    "versions": [
+      "1.0.0"
+    ]
+  },
+  "id": "/providers/Microsoft.Management/managementGroups/SCF/providers/Microsoft.Authorization/policyDefinitions/16f90090-e079-4aef-b270-1b715f430189"
+}

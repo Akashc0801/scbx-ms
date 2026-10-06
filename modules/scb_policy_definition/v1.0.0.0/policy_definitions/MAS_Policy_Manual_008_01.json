@@ -1,0 +1,63 @@
+{
+  "type": "Microsoft.Authorization/policyDefinitions",
+  "apiVersion": "2021-06-01",
+  "name": "MAS_Policy_Manual_008_01",
+  "properties": {
+    "displayName": "MAS - Manual attestation for Cloud based data security and privacy plan must be in place.",
+    "policyType": "Custom",
+    "mode": "All",
+    "description": "Manual attestation is required to validate Cloud based data security and privacy plan must be in place. (Security-Governance-8).",
+    "metadata": {
+      "Description": "Cloud based data security and privacy plan must be in place.\na. Develop, document:\n1. Organization-level data security and privacy policy that:\n(a) Addresses purpose, scope, roles, responsibilities, management commitment, coordination among organizational entities, and compliance; and\n(b) Is consistent with applicable laws, executive orders, directives, regulations, policies, standards, and guidelines; and\n2. Procedures to facilitate the implementation of the planning policy and the associated planning controls;\n\nb. Designate an organization-defined official to manage the development, documentation, and dissemination of the planning policy and procedures; and\n\nc. Review and update the current data security and privacy policies and procedures annually.",
+      "Responsible teams": [
+        "Security Governance"
+      ],
+      "category": "Governance",
+      "controlDomain": "Security-Governance-8",
+      "controlTitle": "Cloud based data security and privacy plan must be in place.",
+      "masControlId": "8",
+      "createdBy": "695b7068-08dc-4778-b824-e8a1087605e1",
+      "createdOn": "2025-12-03T13:32:52Z",
+      "deployedBy": "mas/manual-attestations",
+      "pacOwnerId": "13b032ea-fae8-4455-b845-679a21e9cdd4",
+      "securityCenter": {
+        "severity": "Medium"
+      },
+      "severity": "Medium",
+      "updatedBy": "695b7068-08dc-4778-b824-e8a1087605e1",
+      "updatedOn": "2025-12-03T13:32:52Z",
+      "cloudSecurityDomain": "Security-Governance"
+    },
+    "version": "1.0.0",
+    "parameters": {
+      "effect": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Effect",
+          "description": "Enable or disable the execution of the policy"
+        },
+        "allowedValues": [
+          "Manual",
+          "Disabled"
+        ],
+        "defaultValue": "Manual"
+      }
+    },
+    "policyRule": {
+      "if": {
+        "field": "type",
+        "equals": "Microsoft.Resources/subscriptions"
+      },
+      "then": {
+        "effect": "[parameters('effect')]",
+        "details": {
+          "defaultState": "Unknown"
+        }
+      }
+    },
+    "versions": [
+      "1.0.0"
+    ]
+  },
+  "id": "/providers/Microsoft.Management/managementGroups/MAS/providers/Microsoft.Authorization/policyDefinitions/MAS_Policy_Manual_008_01"
+}

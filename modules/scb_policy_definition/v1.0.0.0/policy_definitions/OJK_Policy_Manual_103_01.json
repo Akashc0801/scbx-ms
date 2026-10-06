@@ -1,0 +1,63 @@
+{
+  "type": "Microsoft.Authorization/policyDefinitions",
+  "apiVersion": "2021-06-01",
+  "name": "OJK_Policy_Manual_103_01",
+  "properties": {
+    "displayName": "OJK - Manual attestation for Ensure organization's cloud system maintenance controls are compliant with the following",
+    "policyType": "Custom",
+    "mode": "All",
+    "description": "Manual attestation is required to validate Ensure organization's cloud system maintenance controls are compliant with the following standards: scheduling and documenting all maintenance, repair, and replacement activities; obtaining explicit approval for off-site maintenance; sanitizing equipment to remove sensitive information; verifying control functionality post-maintenance; maintaining detailed records including dates, personnel, and actions. (Infra-Security-103).",
+    "metadata": {
+      "Description": "Ensure organization's cloud system maintenance controls are compliant with the following standards: scheduling and documenting all maintenance, repair, and replacement activities; obtaining explicit approval for off-site maintenance; sanitizing equipment to remove sensitive information; verifying control functionality post-maintenance; maintaining detailed records including dates, personnel, and actions; and conducting regular record reviews and audits.\nSchedule, document, and review records of maintenance, repair, and replacement on system components. Approve and monitor all maintenance activities. Require explicit approval for off-site maintenance. Sanitize equipment to remove sensitive information before off-site maintenance. Verify controls are functioning properly after maintenance. Maintain detailed maintenance records including dates, personnel, and actions performed",
+      "Responsible teams": [
+        "Infrastructure Security"
+      ],
+      "category": "Governance",
+      "controlDomain": "Infra-Security-103",
+      "controlTitle": "Ensure organization's cloud system maintenance controls are compliant with the following standards: scheduling and documenting all maintenance, repair, and replacement activities; obtaining explicit approval for off-site maintenance; sanitizing equipment to remove sensitive information; verifying control functionality post-maintenance; maintaining detailed records including dates, personnel, and actions; and conducting regular record reviews and audits.",
+      "ojkControlId": "103",
+      "createdBy": "695b7068-08dc-4778-b824-e8a1087605e1",
+      "createdOn": "2025-12-03T13:32:52Z",
+      "deployedBy": "ojk/manual-attestations",
+      "pacOwnerId": "13b032ea-fae8-4455-b845-679a21e9cdd4",
+      "securityCenter": {
+        "severity": "Medium"
+      },
+      "severity": "Medium",
+      "updatedBy": "695b7068-08dc-4778-b824-e8a1087605e1",
+      "updatedOn": "2025-12-03T13:32:52Z",
+      "cloudSecurityDomain": "Infra-Security"
+    },
+    "version": "1.0.0",
+    "parameters": {
+      "effect": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Effect",
+          "description": "Enable or disable the execution of the policy"
+        },
+        "allowedValues": [
+          "Manual",
+          "Disabled"
+        ],
+        "defaultValue": "Manual"
+      }
+    },
+    "policyRule": {
+      "if": {
+        "field": "type",
+        "equals": "Microsoft.Resources/subscriptions"
+      },
+      "then": {
+        "effect": "[parameters('effect')]",
+        "details": {
+          "defaultState": "Unknown"
+        }
+      }
+    },
+    "versions": [
+      "1.0.0"
+    ]
+  },
+  "id": "/providers/Microsoft.Management/managementGroups/a1074ffe-b122-4cec-946a-1becee305a4c/providers/Microsoft.Authorization/policyDefinitions/OJK_Policy_Manual_103_01"
+}

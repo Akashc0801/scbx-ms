@@ -1,0 +1,387 @@
+{
+  "name": "enforce_baseline_tags",
+  "type": "Microsoft.Authorization/policyDefinitions",
+  "properties": {
+    "displayName": "Add baseline tags to resource groups when missing or empty",
+    "description": "Ensures a standard set of resource group tags are added when absent or have empty values, without overwriting existing non-empty tag values.",
+    "metadata": {
+      "version": "1.3.0",
+      "category": "Tags"
+    },
+    "mode": "All",
+    "parameters": {
+      "effect": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Effect",
+          "description": "Modify adds missing tags, Disabled turns off the policy."
+        },
+        "allowedValues": [
+          "Modify",
+          "Disabled"
+        ],
+        "defaultValue": "Modify"
+      },
+      "appNameTagValue": {
+        "type": "String",
+        "metadata": {
+          "displayName": "AppName tag value",
+          "description": "Value assigned to the AppName tag."
+        }
+      },
+      "businessOwnerTagValue": {
+        "type": "String",
+        "metadata": {
+          "displayName": "BusinessOwner tag value",
+          "description": "Value assigned to the BusinessOwner tag."
+        }
+      },
+      "ownerTagValue": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Owner tag value",
+          "description": "Value assigned to the Owner tag."
+        }
+      },
+      "businessUnitTagValue": {
+        "type": "String",
+        "metadata": {
+          "displayName": "BusinessUnit tag value",
+          "description": "Value assigned to the BusinessUnit tag."
+        }
+      },
+      "appSupportTagValue": {
+        "type": "String",
+        "metadata": {
+          "displayName": "AppSupport tag value",
+          "description": "Value assigned to the AppSupport tag."
+        }
+      },
+      "environmentTagValue": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Environment tag value",
+          "description": "Value assigned to the Environment tag."
+        }
+      },
+      "criticalityTagValue": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Criticality tag value",
+          "description": "Value assigned to the Criticality tag."
+        }
+      },
+      "costCenterTagValue": {
+        "type": "String",
+        "metadata": {
+          "displayName": "CostCenter tag value",
+          "description": "Value assigned to the CostCenter tag."
+        }
+      },
+      "budgetIdTagValue": {
+        "type": "String",
+        "metadata": {
+          "displayName": "BudgetID tag value",
+          "description": "Value assigned to the BudgetID tag."
+        }
+      },
+      "complianceTagValue": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Compliance tag value",
+          "description": "Value assigned to the Compliance tag."
+        }
+      },
+      "dataClassificationTagValue": {
+        "type": "String",
+        "metadata": {
+          "displayName": "DataClassification tag value",
+          "description": "Value assigned to the DataClassification tag."
+        }
+      },
+      "statusTagValue": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Status tag value",
+          "description": "Value assigned to the Status tag."
+        }
+      },
+      "productNameTagValue": {
+        "type": "String",
+        "metadata": {
+          "displayName": "ProductName tag value",
+          "description": "Value assigned to the ProductName tag."
+        }
+      },
+      "productVersionTagValue": {
+        "type": "String",
+        "metadata": {
+          "displayName": "ProductVersion tag value",
+          "description": "Value assigned to the ProductVersion tag."
+        }
+      }
+    },
+    "policyRule": {
+      "if": {
+        "allOf": [
+          {
+            "field": "type",
+            "equals": "Microsoft.Resources/subscriptions/resourceGroups"
+          },
+          {
+            "anyOf": [
+              {
+                "anyOf": [
+                  {
+                    "field": "tags['AppName']",
+                    "exists": "false"
+                  },
+                  {
+                    "field": "tags['AppName']",
+                    "equals": ""
+                  }
+                ]
+              },
+              {
+                "anyOf": [
+                  {
+                    "field": "tags['BusinessOwner']",
+                    "exists": "false"
+                  },
+                  {
+                    "field": "tags['BusinessOwner']",
+                    "equals": ""
+                  }
+                ]
+              },
+              {
+                "anyOf": [
+                  {
+                    "field": "tags['Owner']",
+                    "exists": "false"
+                  },
+                  {
+                    "field": "tags['Owner']",
+                    "equals": ""
+                  }
+                ]
+              },
+              {
+                "anyOf": [
+                  {
+                    "field": "tags['BusinessUnit']",
+                    "exists": "false"
+                  },
+                  {
+                    "field": "tags['BusinessUnit']",
+                    "equals": ""
+                  }
+                ]
+              },
+              {
+                "anyOf": [
+                  {
+                    "field": "tags['AppSupport']",
+                    "exists": "false"
+                  },
+                  {
+                    "field": "tags['AppSupport']",
+                    "equals": ""
+                  }
+                ]
+              },
+              {
+                "anyOf": [
+                  {
+                    "field": "tags['Environment']",
+                    "exists": "false"
+                  },
+                  {
+                    "field": "tags['Environment']",
+                    "equals": ""
+                  }
+                ]
+              },
+              {
+                "anyOf": [
+                  {
+                    "field": "tags['Criticality']",
+                    "exists": "false"
+                  },
+                  {
+                    "field": "tags['Criticality']",
+                    "equals": ""
+                  }
+                ]
+              },
+              {
+                "anyOf": [
+                  {
+                    "field": "tags['CostCenter']",
+                    "exists": "false"
+                  },
+                  {
+                    "field": "tags['CostCenter']",
+                    "equals": ""
+                  }
+                ]
+              },
+              {
+                "anyOf": [
+                  {
+                    "field": "tags['BudgetID']",
+                    "exists": "false"
+                  },
+                  {
+                    "field": "tags['BudgetID']",
+                    "equals": ""
+                  }
+                ]
+              },
+              {
+                "anyOf": [
+                  {
+                    "field": "tags['Compliance']",
+                    "exists": "false"
+                  },
+                  {
+                    "field": "tags['Compliance']",
+                    "equals": ""
+                  }
+                ]
+              },
+              {
+                "anyOf": [
+                  {
+                    "field": "tags['DataClassification']",
+                    "exists": "false"
+                  },
+                  {
+                    "field": "tags['DataClassification']",
+                    "equals": ""
+                  }
+                ]
+              },
+              {
+                "anyOf": [
+                  {
+                    "field": "tags['Status']",
+                    "exists": "false"
+                  },
+                  {
+                    "field": "tags['Status']",
+                    "equals": ""
+                  }
+                ]
+              },
+              {
+                "anyOf": [
+                  {
+                    "field": "tags['ProductName']",
+                    "exists": "false"
+                  },
+                  {
+                    "field": "tags['ProductName']",
+                    "equals": ""
+                  }
+                ]
+              },
+              {
+                "anyOf": [
+                  {
+                    "field": "tags['ProductVersion']",
+                    "exists": "false"
+                  },
+                  {
+                    "field": "tags['ProductVersion']",
+                    "equals": ""
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "then": {
+        "effect": "[parameters('effect')]",
+        "details": {
+          "roleDefinitionIds": [
+            "/providers/Microsoft.Authorization/roleDefinitions/4a9ae827-6dc8-4573-8ac7-8239d42aa03f"
+          ],
+          "operations": [
+            {
+              "operation": "addOrReplace",
+              "field": "tags['AppName']",
+              "value": "[parameters('appNameTagValue')]"
+            },
+            {
+              "operation": "addOrReplace",
+              "field": "tags['BusinessOwner']",
+              "value": "[parameters('businessOwnerTagValue')]"
+            },
+            {
+              "operation": "addOrReplace",
+              "field": "tags['Owner']",
+              "value": "[parameters('ownerTagValue')]"
+            },
+            {
+              "operation": "addOrReplace",
+              "field": "tags['BusinessUnit']",
+              "value": "[parameters('businessUnitTagValue')]"
+            },
+            {
+              "operation": "addOrReplace",
+              "field": "tags['AppSupport']",
+              "value": "[parameters('appSupportTagValue')]"
+            },
+            {
+              "operation": "addOrReplace",
+              "field": "tags['Environment']",
+              "value": "[parameters('environmentTagValue')]"
+            },
+            {
+              "operation": "addOrReplace",
+              "field": "tags['Criticality']",
+              "value": "[parameters('criticalityTagValue')]"
+            },
+            {
+              "operation": "addOrReplace",
+              "field": "tags['CostCenter']",
+              "value": "[parameters('costCenterTagValue')]"
+            },
+            {
+              "operation": "addOrReplace",
+              "field": "tags['BudgetID']",
+              "value": "[parameters('budgetIdTagValue')]"
+            },
+            {
+              "operation": "addOrReplace",
+              "field": "tags['Compliance']",
+              "value": "[parameters('complianceTagValue')]"
+            },
+            {
+              "operation": "addOrReplace",
+              "field": "tags['DataClassification']",
+              "value": "[parameters('dataClassificationTagValue')]"
+            },
+            {
+              "operation": "addOrReplace",
+              "field": "tags['Status']",
+              "value": "[parameters('statusTagValue')]"
+            },
+            {
+              "operation": "addOrReplace",
+              "field": "tags['ProductName']",
+              "value": "[parameters('productNameTagValue')]"
+            },
+            {
+              "operation": "addOrReplace",
+              "field": "tags['ProductVersion']",
+              "value": "[parameters('productVersionTagValue')]"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

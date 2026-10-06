@@ -1,0 +1,69 @@
+{
+    "name": "DeployDefenderforCloud",
+    "type": "Microsoft.Authorization/policyAssignments",
+    "apiVersion": "2019-09-01",
+    "properties": {
+      "description": "Deploy Microsoft Defender for Cloud configuration.",
+      "displayName": "Deploy Microsoft Defender for Cloud configuration_Nonprod",
+      "metadata": {
+        "assignedBy": "Cloud Center of Excellence"
+      },
+      "notScopes": ["/providers/Microsoft.Management/managementGroups/c0ce9cf9-9431-4e43-a2fc-a763d4cb8a66","/providers/Microsoft.Management/managementGroups/6c24fefa-babe-405d-9b5e-3d9141a3cf95","/providers/Microsoft.Management/managementGroups/5de17b3b-325e-4409-9878-b42a3cb09cb0","/providers/Microsoft.Management/managementGroups/27a244e1-ba69-4a95-b2fa-1cedc80b4d45","/providers/Microsoft.Management/managementGroups/a3402ebd-1352-40d6-8da2-e48ffd2974bd","/providers/Microsoft.Management/managementGroups/a0fe583d-e77d-4585-9196-b84411b66b07"],
+      "parameters": {
+        "logAnalytics": {
+          "value": "/subscriptions/342b0b1f-c2d9-4474-a477-78363ce73cab/resourceGroups/rg-core-sea-security-nonprod-platform-001/providers/Microsoft.OperationalInsights/workspaces/law-core-sea-security-nonprod-platform-001"
+        },
+        "emailSecurityContact": {
+          "value": "akashc@microsoft.com"
+        },
+        "ascExportResourceGroupName": {
+          "value": "rg-core-sea-security-nonprod-platform-001"
+        },
+        "ascExportResourceGroupLocation": {
+          "value": "southeastasia"
+        },
+        "enableAscForSql" : {
+          "value": "DeployIfNotExists"
+        },
+        "enableAscForSqlOnVm": {
+          "value": "DeployIfNotExists"
+        },
+        "enableAscForDns": {
+          "value": "DeployIfNotExists"
+        },
+        "enableAscForArm": {
+          "value": "DeployIfNotExists"
+        },
+        "enableAscForOssDb": {
+          "value": "DeployIfNotExists"
+        },
+        "enableAscForAppServices": {
+          "value": "DeployIfNotExists"
+        },
+        "enableAscForKeyVault": {
+          "value": "DeployIfNotExists"
+        },
+        "enableAscForStorage": {
+          "value": "DeployIfNotExists"
+        },
+        "enableAscForContainers": {
+          "value": "DeployIfNotExists"
+        },
+        "enableAscForServers" : {
+          "value": "DeployIfNotExists"
+        }
+      },
+      "nonComplianceMessages": [
+        {
+            "message": "Ensures that Azure resources are configured to use Defender for cloud."
+        }
+    ],
+      "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/mg-scb-root/providers/Microsoft.Authorization/policySetDefinitions/Deploy-MDFC-Config",
+      "scope": "/providers/Microsoft.Management/managementGroups/mg-scb-root",
+      "enforcementMode": true
+    },
+    "location": "southeastasia",
+    "identity": {
+      "type": "SystemAssigned"
+    }
+  }

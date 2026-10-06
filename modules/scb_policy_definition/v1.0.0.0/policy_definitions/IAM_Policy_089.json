@@ -1,0 +1,59 @@
+{
+  "type": "Microsoft.Authorization/policyDefinitions",
+  "apiVersion": "2021-06-01",
+  "name": "IAM_Policy_089",
+  "properties": {
+    "displayName": "SCF - Manual attestation to verify conditional access policies being applied",
+    "policyType": "Custom",
+    "mode": "All",
+    "description": "This policy requires manual attestation, to verify conditional access policies are in place to at least: 1. Block access based on sign-in risk. 2. Block access to control-plane from locations outside the EER. 3. Block access from non-allowed locations",
+    "metadata": {
+      "Description": "This policy requires manual attestation, to verify conditional access policies are in place to at least: 1. Block access based on sign-in risk. 2. Block access to control-plane from locations outside the EER. 3. Block access from non-allowed locations",
+      "Responsible teams": [
+        "Application workload"
+      ],
+      "category": "Compliance",
+      "createdBy": "695b7068-08dc-4778-b824-e8a1087605e1",
+      "createdOn": "2025-09-25T08:22:00.006927Z",
+      "deployedBy": "epac/13b032ea-fae8-4455-b845-679a21e9cdd4/epac-scf",
+      "pacOwnerId": "13b032ea-fae8-4455-b845-679a21e9cdd4",
+      "securityCenter": {
+        "severity": "Medium"
+      },
+      "severity": "Medium",
+      "updatedBy": "695b7068-08dc-4778-b824-e8a1087605e1",
+      "updatedOn": "2025-10-13T12:06:29.8143052Z"
+    },
+    "version": "1.0.0",
+    "parameters": {
+      "effect": {
+        "allowedValues": [
+          "Manual",
+          "Disabled"
+        ],
+        "defaultValue": "Manual",
+        "metadata": {
+          "description": "Enable or disable the execution of the policy",
+          "displayName": "Effect"
+        },
+        "type": "String"
+      }
+    },
+    "policyRule": {
+      "if": {
+        "equals": "Microsoft.Resources/subscriptions",
+        "field": "type"
+      },
+      "then": {
+        "details": {
+          "defaultState": "Unknown"
+        },
+        "effect": "[parameters('effect')]"
+      }
+    },
+    "versions": [
+      "1.0.0"
+    ]
+  },
+  "id": "/providers/Microsoft.Management/managementGroups/SCF/providers/Microsoft.Authorization/policyDefinitions/8519b009-2914-4153-91b4-e22f0dda40c3"
+}

@@ -1,0 +1,53 @@
+{
+  "type": "Microsoft.Authorization/policyDefinitions",
+  "apiVersion": "2021-06-01",
+  "name": "SEC_Policy_055",
+  "properties": {
+    "displayName": "SCF - Audit logging by category group for microsoft.network/dnsresolverpolicies to Log Analytics",
+    "policyType": "Custom",
+    "mode": "All",
+    "description": "This policy requires manual attestation to ensure security event data from protective controls is collected, aggregated, and stored in a centralized CSP data store, then fed into SCB SIEM for analysis and response. Data includes DDOS metrics, identity risk detection, WAF, DNS, and web access logs from SCF controls: SCF-AUD-01, SCF-AUD-02, IAM-05, SCF-SEC-02, SCF-NETW-04, SCF-NETW-02.",
+    "metadata": {
+      "securityCenter": {
+        "severity": "Medium"
+      },
+      "Responsible teams": [
+        "Platform",
+        "Security Operations"
+      ],
+      "Description": "This policy requires manual attestation to ensure security event data from protective controls is collected, aggregated, and stored in a centralized CSP data store, then fed into SCB SIEM for analysis and response. Data includes DDOS metrics, identity risk detection, WAF, DNS, and web access logs from SCF controls: SCF-AUD-01, SCF-AUD-02, IAM-05, SCF-SEC-02, SCF-NETW-04, SCF-NETW-02.",
+      "category": "Compliance",
+      "severity": "Medium"
+    },
+    "version": "1.0.0",
+    "parameters": {
+      "effect": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Effect",
+          "description": "Enable or disable the execution of the policy"
+        },
+        "allowedValues": [
+          "Manual",
+          "Disabled"
+        ],
+        "defaultValue": "Manual"
+      }
+    },
+    "policyRule": {
+      "if": {
+        "field": "type",
+        "equals": "Microsoft.Resources/subscriptions"
+      },
+      "then": {
+        "effect": "[parameters('effect')]",
+        "details": {
+          "defaultState": "Unknown"
+        }
+      }
+    },
+    "versions": [
+      "1.0.0"
+    ]
+  }
+}

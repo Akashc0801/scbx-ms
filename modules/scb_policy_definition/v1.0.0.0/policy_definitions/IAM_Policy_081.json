@@ -1,0 +1,60 @@
+{
+  "type": "Microsoft.Authorization/policyDefinitions",
+  "apiVersion": "2021-06-01",
+  "name": "IAM_Policy_081",
+  "properties": {
+    "displayName": "SCF - Manual attestation for verifying Defender for DevOps is enabled",
+    "policyType": "Custom",
+    "mode": "All",
+    "description": "This policy requires manual attestation to verify if Defender for DevOps is enabled. It scans code repositories and CI/CD pipelines for secrets, sensitive data, and vulnerabilities. It enforces security standards and alerts developers when issues are found, helping prevent exposure of secrets like API keys, passwords, and connection strings in code. Detailed reports support quick remediation and improved code security.",
+    "metadata": {
+      "Description": "This policy requires manual attestation to verify if Defender for DevOps is enabled. It scans code repositories and CI/CD pipelines for secrets, sensitive data, and vulnerabilities. It enforces security standards and alerts developers when issues are found, helping prevent exposure of secrets like API keys, passwords, and connection strings in code. Detailed reports support quick remediation and improved code security.",
+      "Responsible teams": [
+        "Application workload",
+        "Platform"
+      ],
+      "category": "Compliance",
+      "createdBy": "695b7068-08dc-4778-b824-e8a1087605e1",
+      "createdOn": "2025-09-25T08:22:28.1477129Z",
+      "deployedBy": "epac/13b032ea-fae8-4455-b845-679a21e9cdd4/epac-scf",
+      "pacOwnerId": "13b032ea-fae8-4455-b845-679a21e9cdd4",
+      "securityCenter": {
+        "severity": ""
+      },
+      "severity": "Medium",
+      "updatedBy": "695b7068-08dc-4778-b824-e8a1087605e1",
+      "updatedOn": "2025-10-13T12:06:33.2161539Z"
+    },
+    "version": "1.0.0",
+    "parameters": {
+      "effect": {
+        "allowedValues": [
+          "Manual",
+          "Disabled"
+        ],
+        "defaultValue": "Manual",
+        "metadata": {
+          "description": "Enable or disable the execution of the policy",
+          "displayName": "Effect"
+        },
+        "type": "String"
+      }
+    },
+    "policyRule": {
+      "if": {
+        "equals": "Microsoft.Resources/subscriptions",
+        "field": "type"
+      },
+      "then": {
+        "details": {
+          "defaultState": "Unknown"
+        },
+        "effect": "[parameters('effect')]"
+      }
+    },
+    "versions": [
+      "1.0.0"
+    ]
+  },
+  "id": "/providers/Microsoft.Management/managementGroups/SCF/providers/Microsoft.Authorization/policyDefinitions/6a77ef15-04a2-4275-914e-d4befbd9ead9"
+}

@@ -1,0 +1,63 @@
+{
+  "type": "Microsoft.Authorization/policyDefinitions",
+  "apiVersion": "2021-06-01",
+  "name": "OJK_Policy_Manual_045_01",
+  "properties": {
+    "displayName": "OJK - Manual attestation for Define Centralized Authenticator Inventory",
+    "policyType": "Custom",
+    "mode": "All",
+    "description": "Manual attestation is required to validate Maintain an approved list of system authenticators, with continuous monitoring and periodic reviews. (IAM-45).",
+    "metadata": {
+      "Description": "\"Centralized Authenticator Inventory\n- Create a centralized inventory of all approved authenticators across all cloud platforms.\n- Include details such as authenticator type, strength, associated cloud platform, and expiration date.\nAuthenticator Categories\n1. Categorize authenticators based on their type and strength:\n- High-Security Authenticators: Hardware security keys (FIDO2) for privileged accounts\n- Standard Authenticators: Software-based TOTP apps for regular user accounts\n- Legacy Authenticators: SMS-based OTP (to be phased out)\nAuthenticator Lifecycle Management\n1. Implement a process for adding new authenticators to the approved list\n2. Set up automated reminders for authenticator expiration and renewal\n3. Define procedures for revoking compromised or outdated authenticators\n\"Centralized Authenticator Inventory\n- Create a centralized inventory of all approved authenticators across all cloud platforms.\n- Include details such as authenticator type, strength, associated cloud platform, and expiration date.\nAuthenticator Categories\n1. Categorize authenticators based on their type and strength:\n- High-Security Authenticators: Hardware security keys (FIDO2) for privileged accounts\n- Standard Authenticators: Software-based TOTP apps for regular user accounts\n- Legacy Authenticators: SMS-based OTP (to be phased out)\nAuthenticator Lifecycle Management\n1. Implement a process for adding new authenticators to the approved list\n2. Set up automated reminders for authenticator expiration and renewal\n3. Define procedures for revoking compromised or outdated authenticators",
+      "Responsible teams": [
+        "Identity & Access Management"
+      ],
+      "category": "Governance",
+      "controlDomain": "IAM-45",
+      "controlTitle": "Maintain an approved list of system authenticators, with continuous monitoring and periodic reviews.",
+      "ojkControlId": "45",
+      "createdBy": "695b7068-08dc-4778-b824-e8a1087605e1",
+      "createdOn": "2025-12-03T13:32:52Z",
+      "deployedBy": "ojk/manual-attestations",
+      "pacOwnerId": "13b032ea-fae8-4455-b845-679a21e9cdd4",
+      "securityCenter": {
+        "severity": "Medium"
+      },
+      "severity": "Medium",
+      "updatedBy": "695b7068-08dc-4778-b824-e8a1087605e1",
+      "updatedOn": "2025-12-03T13:32:52Z",
+      "cloudSecurityDomain": "IAM"
+    },
+    "version": "1.0.0",
+    "parameters": {
+      "effect": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Effect",
+          "description": "Enable or disable the execution of the policy"
+        },
+        "allowedValues": [
+          "Manual",
+          "Disabled"
+        ],
+        "defaultValue": "Manual"
+      }
+    },
+    "policyRule": {
+      "if": {
+        "field": "type",
+        "equals": "Microsoft.Resources/subscriptions"
+      },
+      "then": {
+        "effect": "[parameters('effect')]",
+        "details": {
+          "defaultState": "Unknown"
+        }
+      }
+    },
+    "versions": [
+      "1.0.0"
+    ]
+  },
+  "id": "/providers/Microsoft.Management/managementGroups/a1074ffe-b122-4cec-946a-1becee305a4c/providers/Microsoft.Authorization/policyDefinitions/OJK_Policy_Manual_045_01"
+}

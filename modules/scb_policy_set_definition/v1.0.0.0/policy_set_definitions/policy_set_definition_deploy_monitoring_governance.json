@@ -1,0 +1,53 @@
+{
+  "name": "SCB Enterprise Initiative \u2013 Governance",
+  "properties": {
+    "displayName": "SCB Enterprise Initiative \u2013 Governance",
+    "description": "This Initiative includes all policy that are related to governance and compliance for SCB Enterprise.",
+    "metadata": {
+      "category": "Governance",
+      "parameterScopes": {
+        "listOfAllowedLocations : Allowed locations for resource groups_1": "/providers/Microsoft.Management/managementGroups/test",
+        "listOfAllowedLocations : Allowed locations_1": "/providers/Microsoft.Management/managementGroups/test"
+      }
+    },
+    "parameters": {},
+    "policyDefinitions": [
+      {
+        "policyDefinitionReferenceId": "Network interfaces should disable IP forwarding_1",
+        "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/88c0b9da-ce96-4b03-9635-f29a937e2900",
+        "parameters": {},
+        "groupNames": []
+      },
+      {
+        "policyDefinitionReferenceId": "Allowed locations for resource groups_1",
+        "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/e765b5de-1225-4ba3-bd56-1ac6695af988",
+        "parameters": {
+          "listOfAllowedLocations": {
+            "value": [
+              "southeastasia",
+              "eastasia",
+              "eastasiastage",
+              "southeastasiastage"
+            ]
+          }
+        },
+        "groupNames": []
+      },
+      {
+        "policyDefinitionReferenceId": "Allowed locations_1",
+        "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/e56962a6-4747-49cd-b67b-bf8b01975c4c",
+        "parameters": {
+          "listOfAllowedLocations": {
+            "value": [
+              "eastasia",
+              "eastasiastage",
+              "southeastasia",
+              "southeastasiastage"
+            ]
+          }
+        },
+        "groupNames": []
+      }
+    ]
+  }
+}

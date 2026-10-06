@@ -1,0 +1,64 @@
+{
+  "type": "Microsoft.Authorization/policyDefinitions",
+  "apiVersion": "2021-06-01",
+  "name": "NETW_Policy_129",
+  "properties": {
+    "displayName": "SCF - Virtual networks should be protected by Azure DDoS Protection",
+    "policyType": "Custom",
+    "mode": "Indexed",
+    "description": "Protect your virtual networks against volumetric and protocol attacks with Azure DDoS Protection. For more information, visit https://aka.ms/ddosprotectiondocs.",
+    "metadata": {
+      "category": "Network",
+      "createdBy": "695b7068-08dc-4778-b824-e8a1087605e1",
+      "createdOn": "2025-09-25T08:22:52.7564295Z",
+      "deployedBy": "epac/13b032ea-fae8-4455-b845-679a21e9cdd4/epac-scf",
+      "pacOwnerId": "13b032ea-fae8-4455-b845-679a21e9cdd4",
+      "version": "1.0",
+      "severity": "Medium"
+    },
+    "version": "1.0.0",
+    "parameters": {
+      "effect": {
+        "allowedValues": [
+          "Audit",
+          "Disabled"
+        ],
+        "defaultValue": "Audit",
+        "metadata": {
+          "description": "Enable or disable the execution of the policy",
+          "displayName": "Effect"
+        },
+        "type": "String"
+      }
+    },
+    "policyRule": {
+      "if": {
+        "allOf": [
+          {
+            "equals": "Microsoft.Network/virtualNetworks",
+            "field": "type"
+          },
+          {
+            "anyOf": [
+              {
+                "field": "Microsoft.Network/virtualNetworks/enableDdosProtection",
+                "notEquals": true
+              },
+              {
+                "equals": "",
+                "field": "Microsoft.Network/virtualNetworks/ddosProtectionPlan"
+              }
+            ]
+          }
+        ]
+      },
+      "then": {
+        "effect": "[parameters('effect')]"
+      }
+    },
+    "versions": [
+      "1.0.0"
+    ]
+  },
+  "id": "/providers/Microsoft.Management/managementGroups/SCF/providers/Microsoft.Authorization/policyDefinitions/8a1d47a6-b309-42cd-b333-154c5f316a3c"
+}

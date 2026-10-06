@@ -1,0 +1,63 @@
+{
+  "type": "Microsoft.Authorization/policyDefinitions",
+  "apiVersion": "2021-06-01",
+  "name": "MAS_Policy_Manual_126_01",
+  "properties": {
+    "displayName": "MAS - Manual attestation for Implement Centralized Repository and security process",
+    "policyType": "Custom",
+    "mode": "All",
+    "description": "Manual attestation is required to validate Ensure the organization have a centralized repository for software packages and dependencies, with established validation processes, automated management, tracking, vulnerability monitoring, CI/CD integration, documentation, training, regular reviews, access controls, audits, and incident response protocols in place. (App-Security-126).",
+    "metadata": {
+      "Description": "Centralized Repository\nValidation Processes\nCI/CD Integration\nfor more details - refer to Control statement\nCentralized Repository\n1. Implements a mulit-cloud artifact repository solution, such as JFrog Artifactory or Sonatype Nexus, hosted on a dedicated cloud environment:\n- This repository stores all software packages, libraries, and dependencies used across the organization's multi-cloud infrastructure.\n- It supports various package formats including Docker images, npm packages, Maven artifacts, and more.\nValidation Processes\n1. Implement automated security scans for all incoming packages using tools integrated with the repository:\n- Vulnerability scanners like Snyk or Trivy scan for known vulnerabilities.\n- Static Application Security Testing (SAST) tools analyze source code for potential security issues.\n2. Establish a formal approval process for new packages:\n- A dedicated team reviews and approves packages before they are made available for use.\n- Implement automated policy checks to ensure compliance with organizational standards.\nCI/CD Integration\n1. Integrate the centralized repository with CI/CD pipelines across all cloud platforms:\n- Configure build tools to pull dependencies from the centralized repository.\n- Implement automated checks in CI/CD pipelines to ensure only approved packages are used in builds.\n2. Set up automated dependency updates in CI/CD pipelines:\n-Use tools like Dependabot to automatically create pull requests for dependency updates.",
+      "Responsible teams": [
+        "Application & Container Security"
+      ],
+      "category": "Governance",
+      "controlDomain": "App-Security-126",
+      "controlTitle": "Ensure the organization have a centralized repository for software packages and dependencies, with established validation processes, automated management, tracking, vulnerability monitoring, CI/CD integration, documentation, training, regular reviews, access controls, audits, and incident response protocols in place.",
+      "masControlId": "126",
+      "createdBy": "695b7068-08dc-4778-b824-e8a1087605e1",
+      "createdOn": "2025-12-03T13:32:52Z",
+      "deployedBy": "mas/manual-attestations",
+      "pacOwnerId": "13b032ea-fae8-4455-b845-679a21e9cdd4",
+      "securityCenter": {
+        "severity": "Medium"
+      },
+      "severity": "Medium",
+      "updatedBy": "695b7068-08dc-4778-b824-e8a1087605e1",
+      "updatedOn": "2025-12-03T13:32:52Z",
+      "cloudSecurityDomain": "App-Security"
+    },
+    "version": "1.0.0",
+    "parameters": {
+      "effect": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Effect",
+          "description": "Enable or disable the execution of the policy"
+        },
+        "allowedValues": [
+          "Manual",
+          "Disabled"
+        ],
+        "defaultValue": "Manual"
+      }
+    },
+    "policyRule": {
+      "if": {
+        "field": "type",
+        "equals": "Microsoft.Resources/subscriptions"
+      },
+      "then": {
+        "effect": "[parameters('effect')]",
+        "details": {
+          "defaultState": "Unknown"
+        }
+      }
+    },
+    "versions": [
+      "1.0.0"
+    ]
+  },
+  "id": "/providers/Microsoft.Management/managementGroups/MAS/providers/Microsoft.Authorization/policyDefinitions/MAS_Policy_Manual_126_01"
+}

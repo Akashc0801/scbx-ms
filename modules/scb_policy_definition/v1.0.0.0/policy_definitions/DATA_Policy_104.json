@@ -1,0 +1,53 @@
+{
+  "type": "Microsoft.Authorization/policyDefinitions",
+  "apiVersion": "2021-06-01",
+  "name": "DATA_Policy_104",
+  "properties": {
+    "displayName": "SCF - Manual attestation for usage of Data Management tool for data discovery and classification",
+    "policyType": "Custom",
+    "mode": "All",
+    "description": "This policy requires manual attestation to validate that sensitive data is discovered and classified using the approved Data Management tool, in compliance with organizational policies and regulatory requirements.",
+    "metadata": {
+      "securityCenter": {
+        "severity": "Medium"
+      },
+      "Responsible teams": [
+        "Application workload",
+        "Platform"
+      ],
+      "Description": "This policy requires manual attestation to validate that sensitive data is discovered and classified using the approved Data Management tool, in compliance with organizational policies and regulatory requirements.",
+      "category": "Compliance",
+      "severity": "Medium"
+    },
+    "version": "1.0.0",
+    "parameters": {
+      "effect": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Effect",
+          "description": "Enable or disable the execution of the policy"
+        },
+        "allowedValues": [
+          "Manual",
+          "Disabled"
+        ],
+        "defaultValue": "Manual"
+      }
+    },
+    "policyRule": {
+      "if": {
+        "field": "type",
+        "equals": "Microsoft.Resources/subscriptions"
+      },
+      "then": {
+        "effect": "[parameters('effect')]",
+        "details": {
+          "defaultState": "Unknown"
+        }
+      }
+    },
+    "versions": [
+      "1.0.0"
+    ]
+  }
+}

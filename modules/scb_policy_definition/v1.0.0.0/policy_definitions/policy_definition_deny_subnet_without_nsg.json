@@ -1,0 +1,87 @@
+{
+  "name": "Deny-Subnet-Without-Nsg",
+  "properties": {
+    "displayName": "Subnets should have a Network Security Group",
+    "description": "This policy denies the creation of a subnet without a Network Security Group. NSG help to protect traffic across subnet-level.",
+    "metadata": {
+      "version": "2.0.0",
+      "category": "Network",
+      "source": "SCB Azure Landing Zones"
+    },
+    "mode": "All",
+    "parameters": {
+      "effect": {
+        "type": "String",
+        "defaultValue": "Deny",
+        "allowedValues": [
+          "Audit",
+          "Deny", 
+          "Disabled"
+        ],
+        "metadata": {
+          "displayName": "Effect",
+          "description": "Enable or disable the execution of the policy"
+        }
+      }
+    },
+    "policyRule": {
+      "if": {
+        "anyOf": [
+          {
+            "allOf": [
+              {
+                "field": "type",
+                "equals": "Microsoft.Network/virtualNetworks"
+              },
+              {
+                "count": {
+                  "field": "Microsoft.Network/virtualNetworks/subnets[*]",
+                  "where": {
+                    "allOf": [
+                      {
+                        "field": "Microsoft.Network/virtualNetworks/subnets[*].networkSecurityGroup.id",
+                        "exists": "false"
+                      },
+                      {
+                        "field": "Microsoft.Network/virtualNetworks/subnets[*].name",
+                        "notIn": [
+                          "GatewaySubnet",
+                          "AzureFirewallSubnet",
+                          "AzureFirewallManagementSubnet"
+                        ]
+                      }
+                    ]
+                  }
+                },
+                "greater": 0
+              }
+            ]
+          },
+          {
+            "allOf": [
+              {
+                "field": "type",
+                "equals": "Microsoft.Network/virtualNetworks/subnets"
+              },
+              {
+                "field": "Microsoft.Network/virtualNetworks/subnets/networkSecurityGroup.id",
+                "exists": "false"
+              },
+              {
+                "field": "name",
+                "notIn": [
+                  "GatewaySubnet",
+                  "AzureFirewallSubnet", 
+                  "AzureFirewallManagementSubnet"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "then": {
+        "effect": "[parameters('effect')]"
+      }
+    }
+  }
+}

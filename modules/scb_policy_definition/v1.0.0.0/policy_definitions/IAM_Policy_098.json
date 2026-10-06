@@ -1,0 +1,59 @@
+{
+  "type": "Microsoft.Authorization/policyDefinitions",
+  "apiVersion": "2021-06-01",
+  "name": "IAM_Policy_098",
+  "properties": {
+    "displayName": "SCF - Manual Attestation for Prevention of Impossible or Known Bad Sign-In Attempts",
+    "policyType": "Custom",
+    "mode": "All",
+    "description": "This policy requires manual attestation to ensure that mechanisms are in place to prevent impossible or known bad sign-in attempts for identities and service accounts.",
+    "metadata": {
+      "Description": "This policy requires manual attestation to ensure that mechanisms are in place to prevent impossible or known bad sign-in attempts for identities and service accounts.",
+      "Responsible teams": [
+        "IAM team"
+      ],
+      "category": "Compliance",
+      "createdBy": "695b7068-08dc-4778-b824-e8a1087605e1",
+      "createdOn": "2025-09-25T08:22:05.8660523Z",
+      "deployedBy": "epac/13b032ea-fae8-4455-b845-679a21e9cdd4/epac-scf",
+      "pacOwnerId": "13b032ea-fae8-4455-b845-679a21e9cdd4",
+      "securityCenter": {
+        "severity": "Medium"
+      },
+      "severity": "Medium",
+      "updatedBy": "695b7068-08dc-4778-b824-e8a1087605e1",
+      "updatedOn": "2025-10-13T12:06:30.7029642Z"
+    },
+    "version": "1.0.0",
+    "parameters": {
+      "effect": {
+        "allowedValues": [
+          "Manual",
+          "Disabled"
+        ],
+        "defaultValue": "Manual",
+        "metadata": {
+          "description": "Enable or disable the execution of the policy",
+          "displayName": "Effect"
+        },
+        "type": "String"
+      }
+    },
+    "policyRule": {
+      "if": {
+        "equals": "Microsoft.Resources/subscriptions",
+        "field": "type"
+      },
+      "then": {
+        "details": {
+          "defaultState": "Unknown"
+        },
+        "effect": "[parameters('effect')]"
+      }
+    },
+    "versions": [
+      "1.0.0"
+    ]
+  },
+  "id": "/providers/Microsoft.Management/managementGroups/SCF/providers/Microsoft.Authorization/policyDefinitions/b5fa12fa-d2a4-4637-9bc2-e04b891d65d1"
+}

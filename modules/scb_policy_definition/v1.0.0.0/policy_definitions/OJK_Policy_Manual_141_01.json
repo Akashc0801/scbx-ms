@@ -1,0 +1,63 @@
+{
+  "type": "Microsoft.Authorization/policyDefinitions",
+  "apiVersion": "2021-06-01",
+  "name": "OJK_Policy_Manual_141_01",
+  "properties": {
+    "displayName": "OJK - Manual attestation for Define and enable Alert playbooks manual and automated",
+    "policyType": "Custom",
+    "mode": "All",
+    "description": "Manual attestation is required to validate Ensure security alerts and advisories are received, monitored, disseminated, and acted upon to ensure timely response and compliance. (Monitoring-IR-141).",
+    "metadata": {
+      "Description": "Alert Dissemination and Escalation\nAutomated Response and Remediation\n\nfor more details - refer to Control statement\nAlert Dissemination and Escalation\n1. Configures alerts to be sent through multiple channels, including email, SMS, and integration with incident management platforms like PagerDuty.\n2. Implements a tiered alerting system based on severity and potential impact.\n3. Establishes an escalation matrix for unacknowledged alerts, automatically notifying higher-level IT and security managers after a specified timeframe.\nAutomated Response and Remediation\n1. Implements automated remediation scripts for common security issues, such as closing open ports or revoking compromised access keys.\n2. Deploy Security Orchestration, Automation, and Response (SOAR) tools to streamline incident response processes across all cloud platforms.",
+      "Responsible teams": [
+        "Monitoring & Incident Response"
+      ],
+      "category": "Governance",
+      "controlDomain": "Monitoring-IR-141",
+      "controlTitle": "Ensure security alerts and advisories are received, monitored, disseminated, and acted upon to ensure timely response and compliance.",
+      "ojkControlId": "141",
+      "createdBy": "695b7068-08dc-4778-b824-e8a1087605e1",
+      "createdOn": "2025-12-03T13:32:52Z",
+      "deployedBy": "ojk/manual-attestations",
+      "pacOwnerId": "13b032ea-fae8-4455-b845-679a21e9cdd4",
+      "securityCenter": {
+        "severity": "Medium"
+      },
+      "severity": "Medium",
+      "updatedBy": "695b7068-08dc-4778-b824-e8a1087605e1",
+      "updatedOn": "2025-12-03T13:32:52Z",
+      "cloudSecurityDomain": "Monitoring-IR"
+    },
+    "version": "1.0.0",
+    "parameters": {
+      "effect": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Effect",
+          "description": "Enable or disable the execution of the policy"
+        },
+        "allowedValues": [
+          "Manual",
+          "Disabled"
+        ],
+        "defaultValue": "Manual"
+      }
+    },
+    "policyRule": {
+      "if": {
+        "field": "type",
+        "equals": "Microsoft.Resources/subscriptions"
+      },
+      "then": {
+        "effect": "[parameters('effect')]",
+        "details": {
+          "defaultState": "Unknown"
+        }
+      }
+    },
+    "versions": [
+      "1.0.0"
+    ]
+  },
+  "id": "/providers/Microsoft.Management/managementGroups/a1074ffe-b122-4cec-946a-1becee305a4c/providers/Microsoft.Authorization/policyDefinitions/OJK_Policy_Manual_141_01"
+}

@@ -1,0 +1,52 @@
+{
+  "type": "Microsoft.Authorization/policyDefinitions",
+  "apiVersion": "2021-06-01",
+  "name": "GOV_Policy_002",
+  "properties": {
+    "displayName": "SCF - Manual attestation for enforcing Approved Cloud Usage: Providers, Regions, and Service Types",
+    "policyType": "Custom",
+    "mode": "All",
+    "description": "This policy requires manual attestation to confirm that policies are established and enforced for cloud usage, including approved providers, regions, and service types.",
+    "metadata": {
+      "securityCenter": {
+        "severity": "Medium"
+      },
+      "Responsible teams": [
+        "Platform"
+      ],
+      "Description": "This policy requires manual attestation to confirm that policies are established and enforced for cloud usage, including approved providers, regions, and service types.",
+      "category": "Compliance",
+      "severity": "Medium"
+    },
+    "version": "1.0.0",
+    "parameters": {
+      "effect": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Effect",
+          "description": "Enable or disable the execution of the policy"
+        },
+        "allowedValues": [
+          "Manual",
+          "Disabled"
+        ],
+        "defaultValue": "Manual"
+      }
+    },
+    "policyRule": {
+      "if": {
+        "field": "type",
+        "equals": "Microsoft.Resources/subscriptions"
+      },
+      "then": {
+        "effect": "[parameters('effect')]",
+        "details": {
+          "defaultState": "Unknown"
+        }
+      }
+    },
+    "versions": [
+      "1.0.0"
+    ]
+  }
+}

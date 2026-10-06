@@ -1,0 +1,53 @@
+{
+    "name": "Decommissioned-Landing-Zone",
+    "type": "Microsoft.Authorization/policySetDefinitions",
+    "apiVersion": "2021-06-01",
+    "scope": null,
+    "properties": {
+        "policyType": "Custom",
+        "displayName": "SCB Enterprise Initiative - Enforce policies in the Decommissioned Landing Zone",
+        "description": "Enforce policies in the Decommissioned Landing Zone.",
+        "metadata": {
+            "version": "1.1.0",
+            "category": "Decommissioned",
+            "source": "https://github.com/Azure/Enterprise-Scale/",
+            "alzCloudEnvironments": [
+                "AzureCloud",
+                "AzureChinaCloud",
+                "AzureUSGovernment"
+            ]
+        },
+        "parameters": {
+            "listOfResourceTypesAllowed": {
+                "type": "Array",
+                "defaultValue": [],
+                "metadata": {
+                    "displayName": "Allowed resource types in the Decommissioned landing zone",
+                    "description": "Allowed resource types in the Decommissioned landing zone, default is none.",
+                    "strongType": "resourceTypes"
+                }
+            }
+        },
+        "policyDefinitions": [
+            {
+                "policyDefinitionReferenceId": "DecomDenyResources",
+                "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/a08ec900-254a-4555-9bf5-e42af04b5c5c",
+                "definitionVersion": "1.*.*",
+                "parameters": {
+                    "listOfResourceTypesAllowed": {
+                        "value": "[parameters('listOfResourceTypesAllowed')]"
+                    }
+                },
+                "groupNames": []
+            },
+            {
+                "policyDefinitionReferenceId": "DecomShutdownMachines",
+                "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/006b8151-7b0f-47c3-9c06-103c8157276f/providers/Microsoft.Authorization/policyDefinitions/Deploy-Vm-autoShutdown",
+                "definitionVersion": "1.*.*",
+                "parameters": {},
+                "groupNames": []
+            }
+        ],
+        "policyDefinitionGroups": null
+    }
+}

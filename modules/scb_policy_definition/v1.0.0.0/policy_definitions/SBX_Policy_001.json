@@ -1,0 +1,59 @@
+{
+  "type": "Microsoft.Authorization/policyDefinitions",
+  "apiVersion": "2021-06-01",
+  "name": "SBX_Policy_001",
+  "properties": {
+    "displayName": "SCF - Manual attestation for validating security guidance of sandbox usage",
+    "policyType": "Custom",
+    "mode": "All",
+    "description": "Provide security guidance (e.g. do not expose servers to open internet) to sandbox users in order to drive the right behaviour, security awareness and safe sandbox usage",
+    "metadata": {
+      "Description": "Provide security guidance (e.g. do not expose servers to open internet) to sandbox users in order to drive the right behaviour, security awareness and safe sandbox usage",
+      "Responsible teams": [
+        "Platform"
+      ],
+      "category": "Compliance",
+      "createdBy": "695b7068-08dc-4778-b824-e8a1087605e1",
+      "createdOn": "2025-09-25T08:22:50.1491774Z",
+      "deployedBy": "epac/13b032ea-fae8-4455-b845-679a21e9cdd4/epac-scf",
+      "pacOwnerId": "13b032ea-fae8-4455-b845-679a21e9cdd4",
+      "securityCenter": {
+        "severity": ""
+      },
+      "severity": "Medium",
+      "updatedBy": "695b7068-08dc-4778-b824-e8a1087605e1",
+      "updatedOn": "2025-10-13T12:06:34.4539183Z"
+    },
+    "version": "1.0.0",
+    "parameters": {
+      "effect": {
+        "allowedValues": [
+          "Manual",
+          "Disabled"
+        ],
+        "defaultValue": "Manual",
+        "metadata": {
+          "description": "Enable or disable the execution of the policy",
+          "displayName": "Effect"
+        },
+        "type": "String"
+      }
+    },
+    "policyRule": {
+      "if": {
+        "equals": "Microsoft.Resources/subscriptions",
+        "field": "type"
+      },
+      "then": {
+        "details": {
+          "defaultState": "Unknown"
+        },
+        "effect": "[parameters('effect')]"
+      }
+    },
+    "versions": [
+      "1.0.0"
+    ]
+  },
+  "id": "/providers/Microsoft.Management/managementGroups/SCF/providers/Microsoft.Authorization/policyDefinitions/3d202f46-25f3-42d6-abef-2a6f6ab8ac00"
+}

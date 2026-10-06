@@ -1,0 +1,63 @@
+{
+  "type": "Microsoft.Authorization/policyDefinitions",
+  "apiVersion": "2021-06-01",
+  "name": "MAS_Policy_Manual_009_01",
+  "properties": {
+    "displayName": "MAS - Manual attestation for Cloud based data classification plan must be in place.",
+    "policyType": "Custom",
+    "mode": "All",
+    "description": "Manual attestation is required to validate Cloud based data classification plan must be in place. (Security-Governance-9).",
+    "metadata": {
+      "Description": "Cloud based data classification plan must be in place.\na. Develop and disseminate an organization-wide information security program plan that:\n1. Provides an overview of the requirements for the security program and a description of the security program management controls and common controls in place or planned for meeting those requirements;\n2. Includes the identification and assignment of roles, responsibilities, management commitment, coordination among organizational entities, and compliance;\n3. Reflects the coordination among organizational entities responsible for information security; and\n4. Is approved by a senior official with responsibility and accountability for the risk being incurred to organizational operations (including mission, functions, image, and reputation), organizational assets, individuals, other organizations, and the Nation;\nb. Review and update the organization-wide information security program plan on organization-defined frequency and following organization-defined events; and\nc. Protect the information security program plan from unauthorized disclosure and modification.",
+      "Responsible teams": [
+        "Security Governance"
+      ],
+      "category": "Governance",
+      "controlDomain": "Security-Governance-9",
+      "controlTitle": "Cloud based data classification plan must be in place.",
+      "masControlId": "9",
+      "createdBy": "695b7068-08dc-4778-b824-e8a1087605e1",
+      "createdOn": "2025-12-03T13:32:52Z",
+      "deployedBy": "mas/manual-attestations",
+      "pacOwnerId": "13b032ea-fae8-4455-b845-679a21e9cdd4",
+      "securityCenter": {
+        "severity": "Medium"
+      },
+      "severity": "Medium",
+      "updatedBy": "695b7068-08dc-4778-b824-e8a1087605e1",
+      "updatedOn": "2025-12-03T13:32:52Z",
+      "cloudSecurityDomain": "Security-Governance"
+    },
+    "version": "1.0.0",
+    "parameters": {
+      "effect": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Effect",
+          "description": "Enable or disable the execution of the policy"
+        },
+        "allowedValues": [
+          "Manual",
+          "Disabled"
+        ],
+        "defaultValue": "Manual"
+      }
+    },
+    "policyRule": {
+      "if": {
+        "field": "type",
+        "equals": "Microsoft.Resources/subscriptions"
+      },
+      "then": {
+        "effect": "[parameters('effect')]",
+        "details": {
+          "defaultState": "Unknown"
+        }
+      }
+    },
+    "versions": [
+      "1.0.0"
+    ]
+  },
+  "id": "/providers/Microsoft.Management/managementGroups/MAS/providers/Microsoft.Authorization/policyDefinitions/MAS_Policy_Manual_009_01"
+}

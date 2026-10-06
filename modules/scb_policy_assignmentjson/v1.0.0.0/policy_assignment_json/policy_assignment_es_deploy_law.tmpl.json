@@ -1,0 +1,30 @@
+{
+    "name": "ActivityLogs",
+    "type": "Microsoft.Authorization/policyAssignments",
+    "apiVersion": "2019-09-01",
+    "properties": {
+      "description": "Diagnostic settings for Azure Activity to stream subscriptions audit logs to a Log Analytics workspace to monitor subscription-level events",
+      "displayName": "SCB-SEC-Baseline-Deploy  Activity Log to Log Analytics workspaces",
+      "metadata": {
+        "assignedBy": "Cloud Center of Excellence"
+      },
+      "notScopes": [],
+      "parameters": {
+        "logAnalytics": {
+          "value": "/subscriptions/9364bdc0-86ff-49db-986d-b1dac36960c7/resourcegroups/scb-rg-snl-prd-sea-01/providers/microsoft.operationalinsights/workspaces/scblawsnlprdsea01"
+        }
+      },
+      "nonComplianceMessages": [
+        {
+            "message": "Ensures that Azure resources are configured to send logs to LAW"
+        }
+    ],
+      "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/2465583e-4e78-4c15-b6be-a36cbc7c8b0f",
+      "scope": "/providers/Microsoft.Management/managementGroups/95014307-5384-4b80-83f0-9b7a1ab29ac2",
+      "enforcementMode": true
+    },
+    "location": "southeastasia",
+    "identity": {
+      "type": "SystemAssigned"
+    }
+  }

@@ -1,0 +1,63 @@
+{
+  "type": "Microsoft.Authorization/policyDefinitions",
+  "apiVersion": "2021-06-01",
+  "name": "MAS_Policy_Manual_058_02",
+  "properties": {
+    "displayName": "MAS - Manual attestation for Attest cryptographic keys in accordance with organization-defined requirements for generation",
+    "policyType": "Custom",
+    "mode": "All",
+    "description": "Manual attestation is required to validate Manage cryptographic keys in accordance with organization-defined requirements for generation, distribution, storage, access, rotation, and destruction, with continuous monitoring and periodic reviews. (Data-Security-58).",
+    "metadata": {
+      "Description": "Key Generation\nfor more details - refer to Control statement\nKey Generation\n- Implements a centralized key management system using a Hardware Security Module (HSM) that is FIPS 140-2 Level 3 certified\n. This system generates strong cryptographic keys using a secure random number generator - Microsoft Managed\nKey Distribution\n- Keys are securely distributed to different cloud environments using encrypted channels and secure protocols\nKey Storage\n- Keys are stored in cloud-native key management services:\n- These services are configured to use customer-managed keys (CMKs) with the Bring Your Own Key (BYOK) option\nAccess Control\n- Only authorized personnel have access to key management functions\n- Multi-Factor Authentication (MFA) is enforced for all key operations\n- Access is granted based on the principle of least privilege7\nKey Rotation\n- Symmetric keys are rotated every 90 days\n- Asymmetric keys are rotated annually\n- Rotation schedules are adjusted based on risk assessments for high-impact keys\nKey Destruction\n- When keys are no longer needed, they are immediately revoked across all cloud platforms\n- Secure deletion processes are initiated to ensure complete removal\n- Hardware-backed key deletion is used where available",
+      "Responsible teams": [
+        "Data Protection"
+      ],
+      "category": "Governance",
+      "controlDomain": "Data-Security-58",
+      "controlTitle": "Manage cryptographic keys in accordance with organization-defined requirements for generation, distribution, storage, access, rotation, and destruction, with continuous monitoring and periodic reviews.",
+      "masControlId": "58",
+      "createdBy": "695b7068-08dc-4778-b824-e8a1087605e1",
+      "createdOn": "2025-12-03T13:32:52Z",
+      "deployedBy": "mas/manual-attestations",
+      "pacOwnerId": "13b032ea-fae8-4455-b845-679a21e9cdd4",
+      "securityCenter": {
+        "severity": "Medium"
+      },
+      "severity": "Medium",
+      "updatedBy": "695b7068-08dc-4778-b824-e8a1087605e1",
+      "updatedOn": "2025-12-03T13:32:52Z",
+      "cloudSecurityDomain": "Data-Security"
+    },
+    "version": "1.0.0",
+    "parameters": {
+      "effect": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Effect",
+          "description": "Enable or disable the execution of the policy"
+        },
+        "allowedValues": [
+          "Manual",
+          "Disabled"
+        ],
+        "defaultValue": "Manual"
+      }
+    },
+    "policyRule": {
+      "if": {
+        "field": "type",
+        "equals": "Microsoft.Resources/subscriptions"
+      },
+      "then": {
+        "effect": "[parameters('effect')]",
+        "details": {
+          "defaultState": "Unknown"
+        }
+      }
+    },
+    "versions": [
+      "1.0.0"
+    ]
+  },
+  "id": "/providers/Microsoft.Management/managementGroups/MAS/providers/Microsoft.Authorization/policyDefinitions/MAS_Policy_Manual_058_02"
+}

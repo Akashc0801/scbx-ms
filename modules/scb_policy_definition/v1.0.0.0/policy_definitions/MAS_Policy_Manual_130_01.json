@@ -1,0 +1,63 @@
+{
+  "type": "Microsoft.Authorization/policyDefinitions",
+  "apiVersion": "2021-06-01",
+  "name": "MAS_Policy_Manual_130_01",
+  "properties": {
+    "displayName": "MAS - Manual attestation for Implement SIEM with 3 years retention",
+    "policyType": "Custom",
+    "mode": "All",
+    "description": "Manual attestation is required to validate Ensure the audit logs are properly secured, retained for a minimum of 3 years, with monitoring and periodic review (Monitoring-IR-130).",
+    "metadata": {
+      "Description": "Centralized Log Collection\nEncryption and Access Control\nLong-term Retention\nfor more details - refer to Control statement\nCentralized Log Collection\n1. Deploy a multi-cloud SIEM solution to collect and aggregate audit logs from all cloud platforms.\n2. Implement log forwarding from each cloud platform to the centralized SIEM.\nEncryption and Access Control\n1. Encrypt all audit logs at rest and in transit using strong encryption algorithms.\n2. Implement role-based access control (RBAC) to restrict access to audit logs only to authorized personnel.\n3. Use multi-factor authentication (MFA) for accessing audit log data.\nLong-term Retention\n1. Configure retention policies in each cloud platform to retain audit logs for a minimum of 3 years\n2. Implement a tiered storage strategy, moving older logs to cost-effective cold storage solutions while maintaining accessibility.",
+      "Responsible teams": [
+        "Monitoring & Incident Response"
+      ],
+      "category": "Governance",
+      "controlDomain": "Monitoring-IR-130",
+      "controlTitle": "Ensure the audit logs are properly secured, retained for a minimum of 3 years, with monitoring and periodic review",
+      "masControlId": "130",
+      "createdBy": "695b7068-08dc-4778-b824-e8a1087605e1",
+      "createdOn": "2025-12-03T13:32:52Z",
+      "deployedBy": "mas/manual-attestations",
+      "pacOwnerId": "13b032ea-fae8-4455-b845-679a21e9cdd4",
+      "securityCenter": {
+        "severity": "Medium"
+      },
+      "severity": "Medium",
+      "updatedBy": "695b7068-08dc-4778-b824-e8a1087605e1",
+      "updatedOn": "2025-12-03T13:32:52Z",
+      "cloudSecurityDomain": "Monitoring-IR"
+    },
+    "version": "1.0.0",
+    "parameters": {
+      "effect": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Effect",
+          "description": "Enable or disable the execution of the policy"
+        },
+        "allowedValues": [
+          "Manual",
+          "Disabled"
+        ],
+        "defaultValue": "Manual"
+      }
+    },
+    "policyRule": {
+      "if": {
+        "field": "type",
+        "equals": "Microsoft.Resources/subscriptions"
+      },
+      "then": {
+        "effect": "[parameters('effect')]",
+        "details": {
+          "defaultState": "Unknown"
+        }
+      }
+    },
+    "versions": [
+      "1.0.0"
+    ]
+  },
+  "id": "/providers/Microsoft.Management/managementGroups/MAS/providers/Microsoft.Authorization/policyDefinitions/MAS_Policy_Manual_130_01"
+}

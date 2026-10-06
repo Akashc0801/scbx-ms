@@ -1,0 +1,258 @@
+{
+  "name": "Application-Enforce-Enhanced-Security-Controls",
+  "properties": {
+    "displayName": "Enforce Enhanced Security Controls",
+    "description": "This policy initiative enforces enhanced security controls across network infrastructure, container services, and resource access management to strengthen security posture and compliance.",
+    "metadata": {
+      "version": "1.0.0",
+      "category": "Security Center",
+      "source": "https://github.com/Akashc0801/scbx-ms",
+      "alzCloudEnvironments": [
+        "AzureCloud",
+        "AzureChinaCloud",
+        "AzureUSGovernment"
+      ]
+    },
+    "parameters": {
+      "effectDenyMgmtPortsFromInternet": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Effect - Deny Management Ports From Internet",
+          "description": "Enable or disable the execution of the policy to deny management ports accessible from internet"
+        },
+        "allowedValues": [
+          "Audit",
+          "Deny",
+          "Disabled"
+        ],
+        "defaultValue": "Deny"
+      },
+      "effectDenySubnetWithoutNsg": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Effect - Deny Subnet Without NSG",
+          "description": "Enable or disable the execution of the policy to deny subnets without network security groups"
+        },
+        "allowedValues": [
+          "Audit",
+          "Deny",
+          "Disabled"
+        ],
+        "defaultValue": "Deny"
+      },
+      "effectEnforceComplexPolicy1": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Effect - Security Policy 1",
+          "description": "Enable or disable the execution of security policy 1"
+        },
+        "allowedValues": [
+          "Audit",
+          "AuditIfNotExists",
+          "Deny",
+          "DeployIfNotExists",
+          "Disabled"
+        ],
+        "defaultValue": "Audit"
+      },
+      "effectEnforceComplexPolicy2": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Effect - Security Policy 2",
+          "description": "Enable or disable the execution of security policy 2"
+        },
+        "allowedValues": [
+          "Audit",
+          "AuditIfNotExists",
+          "Deny",
+          "DeployIfNotExists",
+          "Disabled"
+        ],
+        "defaultValue": "Audit"
+      },
+      "effectEnforceComplexPolicy4": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Effect - Security Policy 4",
+          "description": "Enable or disable the execution of security policy 4"
+        },
+        "allowedValues": [
+          "Audit",
+          "AuditIfNotExists",
+          "Deny",
+          "DeployIfNotExists",
+          "Disabled"
+        ],
+        "defaultValue": "Audit"
+      },
+      "effectEnforceComplexPolicy5": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Effect - Security Policy 5",
+          "description": "Enable or disable the execution of security policy 5"
+        },
+        "allowedValues": [
+          "Audit",
+          "AuditIfNotExists",
+          "Deny",
+          "DeployIfNotExists",
+          "Disabled"
+        ],
+        "defaultValue": "Audit"
+      },
+      "effectEnforceComplexPolicy6": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Effect - Security Policy 6",
+          "description": "Enable or disable the execution of security policy 6"
+        },
+        "allowedValues": [
+          "Audit",
+          "AuditIfNotExists",
+          "Deny",
+          "DeployIfNotExists",
+          "Disabled"
+        ],
+        "defaultValue": "Audit"
+      },
+      "effectEnforceComplexPolicy7": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Effect - Security Policy 7",
+          "description": "Enable or disable the execution of security policy 7"
+        },
+        "allowedValues": [
+          "Audit",
+          "AuditIfNotExists",
+          "Deny",
+          "DeployIfNotExists",
+          "Disabled"
+        ],
+        "defaultValue": "Audit"
+      },
+      "listOfResourceTypesNotAllowed": {
+        "type": "Array",
+        "metadata": {
+          "displayName": "Not allowed resource types",
+          "description": "List of resource types that are not allowed to be deployed"
+        },
+        "defaultValue": [
+          "Microsoft.Network/virtualWans",
+          "Microsoft.Network/virtualHubs",
+          "Microsoft.Network/vpnGateways",
+          "Microsoft.Network/expressRouteGateways",
+          "Microsoft.Network/expressRouteCircuits",
+          "Microsoft.Network/virtualHubs/p2sVpnGateways",
+          "Microsoft.Network/virtualHubs/vpnConnections",
+          "Microsoft.Network/virtualHubs/expressRouteConnections"
+        ]
+      }
+    },
+    "policyDefinitions": [
+      {
+        "policyDefinitionReferenceId": "ComplexSecurityPolicy1",
+        "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/95edb821-ddaf-4404-9732-666045e056b4",
+        "definitionVersion": "1.*.*",
+        "parameters": {
+          "effect": {
+            "value": "[parameters('effectEnforceComplexPolicy1')]"
+          }
+        },
+        "groupNames": []
+      },
+      {
+        "policyDefinitionReferenceId": "ComplexSecurityPolicy2",
+        "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/1a5b4dca-0b6f-4cf5-907c-56316bc1bf3d",
+        "definitionVersion": "1.*.*",
+        "parameters": {
+          "effect": {
+            "value": "[parameters('effectEnforceComplexPolicy2')]"
+          }
+        },
+        "groupNames": []
+      },
+      {
+        "policyDefinitionReferenceId": "NetworkInterfacesNoPublicIP",
+        "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/83a86a26-fd1f-447c-b59d-e51f44264114",
+        "definitionVersion": "1.*.*",
+        "groupNames": []
+      },
+      {
+        "policyDefinitionReferenceId": "ComplexSecurityPolicy4",
+        "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/6c112d4e-5bc7-47ae-a041-ea2d9dccd749",
+        "definitionVersion": "1.*.*",
+        "parameters": {
+          "effect": {
+            "value": "[parameters('effectEnforceComplexPolicy4')]"
+          },
+          "listOfResourceTypesNotAllowed": {
+            "value": "[parameters('listOfResourceTypesNotAllowed')]"
+          }
+        },
+        "groupNames": []
+      },
+      {
+        "policyDefinitionReferenceId": "DenyMgmtPortsFromInternet",
+        "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/a1074ffe-b122-4cec-946a-1becee305a4c/providers/Microsoft.Authorization/policyDefinitions/Deny-MgmtPorts-From-Internet",
+        "definitionVersion": "1.*.*",
+        "parameters": {
+          "effect": {
+            "value": "[parameters('effectDenyMgmtPortsFromInternet')]"
+          }
+        },
+        "groupNames": []
+      },
+      {
+        "policyDefinitionReferenceId": "DenySubnetWithoutNsg",
+        "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/a1074ffe-b122-4cec-946a-1becee305a4c/providers/Microsoft.Authorization/policyDefinitions/Deny-Subnet-Without-Nsg",
+        "definitionVersion": "2.*.*",
+        "parameters": {
+          "effect": {
+            "value": "[parameters('effectDenySubnetWithoutNsg')]"
+          }
+        },
+        "groupNames": []
+      },
+      {
+        "policyDefinitionReferenceId": "NetworkInterfacesDisableIPForwarding",
+        "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/88c0b9da-ce96-4b03-9635-f29a937e2900",
+        "definitionVersion": "1.*.*",
+        "parameters": {},
+        "groupNames": []
+      },
+      {
+        "policyDefinitionReferenceId": "ComplexSecurityPolicy5",
+        "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/404c3081-a854-4457-ae30-26a93ef643f9",
+        "definitionVersion": "1.*.*",
+        "parameters": {
+          "effect": {
+            "value": "[parameters('effectEnforceComplexPolicy5')]"
+          }
+        },
+        "groupNames": []
+      },
+      {
+        "policyDefinitionReferenceId": "ComplexSecurityPolicy6",
+        "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/564feb30-bf6a-4854-b4bb-0d2d2d1e6c66",
+        "definitionVersion": "1.*.*",
+        "parameters": {
+          "effect": {
+            "value": "[parameters('effectEnforceComplexPolicy6')]"
+          }
+        },
+        "groupNames": []
+      },
+      {
+        "policyDefinitionReferenceId": "ComplexSecurityPolicy7",
+        "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/7bca8353-aa3b-429b-904a-9229c4385837",
+        "definitionVersion": "1.*.*",
+        "parameters": {
+          "effect": {
+            "value": "[parameters('effectEnforceComplexPolicy7')]"
+          }
+        },
+        "groupNames": []
+      }
+    ]
+  }
+}

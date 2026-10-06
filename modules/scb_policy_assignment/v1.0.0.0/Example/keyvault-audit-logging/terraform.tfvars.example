@@ -1,0 +1,12 @@
+# Example Terraform variables file for Key Vault Audit Logging
+# Copy this to terraform.tfvars and update with your actual values
+
+log_analytics_workspace_name = "testing-policy"
+log_analytics_resource_group = "myresourcegroup"
+policy_assignment_location   = "southeastasia"
+policy_enforcement_mode      = "Default"
+
+# Policy-specific settings
+policy_effect             = "DeployIfNotExists"
+diagnostic_setting_name   = "setByPolicy-LogAnalytics"
+resource_location_list    = ["*"]

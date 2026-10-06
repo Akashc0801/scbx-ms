@@ -1,0 +1,53 @@
+{
+  "name": "Deny-EH-minTLS",
+  "properties": {
+    "displayName": "Event Hub namespaces should use minimum TLS version of 1.2",
+    "description": "Manage your organizational compliance requirements by denying Event Hub namespaces that allow minimum TLS version that is less secure such as 1.0 or 1.1.",
+    "metadata": {
+      "version": "1.0.0",
+      "category": "Event Hub",
+      "source": "SCB Azure Landing Zones"
+    },
+    "mode": "Indexed",
+    "parameters": {
+      "effect": {
+        "type": "String",
+        "defaultValue": "Deny",
+        "allowedValues": [
+          "Audit",
+          "Deny",
+          "Disabled"
+        ],
+        "metadata": {
+          "displayName": "Effect",
+          "description": "Enable or disable the execution of the policy"
+        }
+      }
+    },
+    "policyRule": {
+      "if": {
+        "allOf": [
+          {
+            "field": "type",
+            "equals": "Microsoft.EventHub/namespaces"
+          },
+          {
+            "anyOf": [
+              {
+                "field": "Microsoft.EventHub/namespaces/minimumTlsVersion",
+                "exists": false
+              },
+              {
+                "field": "Microsoft.EventHub/namespaces/minimumTlsVersion",
+                "notEquals": "1.2"
+              }
+            ]
+          }
+        ]
+      },
+      "then": {
+        "effect": "[parameters('effect')]"
+      }
+    }
+  }
+}

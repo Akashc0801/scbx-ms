@@ -1,0 +1,42 @@
+{
+  "name": "Append-Redis-disableNonSslPort",
+  "properties": {
+    "displayName": "Disable non-SSL port for Azure Cache for Redis",
+    "description": "Disable the non-SSL port for Azure Cache for Redis instances to ensure only secure connections are allowed.",
+    "metadata": {
+      "version": "1.0.0",
+      "category": "Cache",
+      "source": "SCB Azure Landing Zones"
+    },
+    "mode": "Indexed",
+    "parameters": {
+      "effect": {
+        "type": "String",
+        "defaultValue": "Append",
+        "allowedValues": [
+          "Append",
+          "Disabled"
+        ],
+        "metadata": {
+          "displayName": "Effect",
+          "description": "Enable or disable the execution of the policy"
+        }
+      }
+    },
+    "policyRule": {
+      "if": {
+        "field": "type",
+        "equals": "Microsoft.Cache/redis"
+      },
+      "then": {
+        "effect": "[parameters('effect')]",
+        "details": [
+          {
+            "field": "Microsoft.Cache/redis/enableNonSslPort",
+            "value": false
+          }
+        ]
+      }
+    }
+  }
+}

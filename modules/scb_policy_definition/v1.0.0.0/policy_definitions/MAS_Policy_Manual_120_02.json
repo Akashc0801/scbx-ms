@@ -1,0 +1,63 @@
+{
+  "type": "Microsoft.Authorization/policyDefinitions",
+  "apiVersion": "2021-06-01",
+  "name": "MAS_Policy_Manual_120_02",
+  "properties": {
+    "displayName": "MAS - Manual attestation for Prepare the plan for rollbacks",
+    "policyType": "Custom",
+    "mode": "All",
+    "description": "Manual attestation is required to validate Ensure secure and standardized deployment policies are in place, including CI/CD processes, security checks, containerization, configuration management, rollback procedures, monitoring, training, and regular reviews. (App-Security-120).",
+    "metadata": {
+      "Description": "Rollback Procedures\n1. Implement blue-green deployment strategies to enable quick rollbacks if issues are detected.\n2. Use Istio for advanced deployment strategies and automated canary analysis.\n3. Maintain versioned backups of critical data and configurations to support rollbacks.\nRollback Procedures\n1. Implement blue-green deployment strategies to enable quick rollbacks if issues are detected.\n2. Use Istio for advanced deployment strategies and automated canary analysis.\n3. Maintain versioned backups of critical data and configurations to support rollbacks.",
+      "Responsible teams": [
+        "Application & Container Security"
+      ],
+      "category": "Governance",
+      "controlDomain": "App-Security-120",
+      "controlTitle": "Ensure secure and standardized deployment policies are in place, including CI/CD processes, security checks, containerization, configuration management, rollback procedures, monitoring, training, and regular reviews.",
+      "masControlId": "120",
+      "createdBy": "695b7068-08dc-4778-b824-e8a1087605e1",
+      "createdOn": "2025-12-03T13:32:52Z",
+      "deployedBy": "mas/manual-attestations",
+      "pacOwnerId": "13b032ea-fae8-4455-b845-679a21e9cdd4",
+      "securityCenter": {
+        "severity": "Medium"
+      },
+      "severity": "Medium",
+      "updatedBy": "695b7068-08dc-4778-b824-e8a1087605e1",
+      "updatedOn": "2025-12-03T13:32:52Z",
+      "cloudSecurityDomain": "App-Security"
+    },
+    "version": "1.0.0",
+    "parameters": {
+      "effect": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Effect",
+          "description": "Enable or disable the execution of the policy"
+        },
+        "allowedValues": [
+          "Manual",
+          "Disabled"
+        ],
+        "defaultValue": "Manual"
+      }
+    },
+    "policyRule": {
+      "if": {
+        "field": "type",
+        "equals": "Microsoft.Resources/subscriptions"
+      },
+      "then": {
+        "effect": "[parameters('effect')]",
+        "details": {
+          "defaultState": "Unknown"
+        }
+      }
+    },
+    "versions": [
+      "1.0.0"
+    ]
+  },
+  "id": "/providers/Microsoft.Management/managementGroups/MAS/providers/Microsoft.Authorization/policyDefinitions/MAS_Policy_Manual_120_02"
+}

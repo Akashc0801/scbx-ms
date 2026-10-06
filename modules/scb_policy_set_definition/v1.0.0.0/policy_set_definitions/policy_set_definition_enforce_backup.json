@@ -1,0 +1,131 @@
+{
+  "name": "Applicationlz-Enforce-Backup",
+  "properties": {
+    "displayName": "Enforce enhanced recovery and backup policies",
+    "description": "This policy initiative enforces minimum guardrails for Recovery Services Vaults: Immutability must be enabled for backup vaults, Immutability must be enabled for Recovery Services vaults, Soft delete should be enabled for Backup Vaults, Multi-User Authorization (MUA) must be enabled for Backup Vaults, Multi-User Authorization (MUA) must be enabled for Recovery Services Vaults.",
+    "metadata": {
+      "version": "1.0.0",
+      "category": "Backup",
+      "source": "https://github.com/Azure/Enterprise-Scale/",
+      "alzCloudEnvironments": [
+        "AzureCloud",
+        "AzureChinaCloud",
+        "AzureUSGovernment"
+      ]
+    },
+    "parameters": {
+      "immutabilityBackupVaultsEffect": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Effect for 'Immutability must be enabled for backup vaults' policy",
+          "description": "Enable or disable the execution of the policy"
+        },
+        "allowedValues": [
+          "Audit",
+          "Disabled"
+        ],
+        "defaultValue": "Audit"
+      },
+      "immutabilityRecoveryServicesVaultsEffect": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Effect for 'Immutability must be enabled for Recovery Services vaults' policy",
+          "description": "Enable or disable the execution of the policy"
+        },
+        "allowedValues": [
+          "Audit",
+          "Disabled"
+        ],
+        "defaultValue": "Audit"
+      },
+      "softDeleteBackupVaultsEffect": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Effect for 'Soft delete should be enabled for Backup Vaults' policy",
+          "description": "Enable or disable the execution of the policy"
+        },
+        "allowedValues": [
+          "Audit",
+          "Disabled"
+        ],
+        "defaultValue": "Audit"
+      },
+      "muaBackupVaultsEffect": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Effect for 'Multi-User Authorization (MUA) must be enabled for Backup Vaults' policy",
+          "description": "Enable or disable the execution of the policy"
+        },
+        "allowedValues": [
+          "Audit",
+          "Disabled"
+        ],
+        "defaultValue": "Audit"
+      },
+      "muaBackupVaultsAdditionalEffect": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Effect for 'Multi-User Authorization (MUA) must be enabled for Backup Vaults' policy (additional)",
+          "description": "Enable or disable the execution of the additional backup vaults MUA policy"
+        },
+        "allowedValues": [
+          "Audit",
+          "Disabled"
+        ],
+        "defaultValue": "Audit"
+      }
+    },
+    "policyDefinitions": [
+      {
+        "policyDefinitionReferenceId": "ImmutabilityBackupVaults",
+        "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/2514263b-bc0d-4b06-ac3e-f262c0979018",
+        "parameters": {
+          "effect": {
+            "value": "[parameters('immutabilityBackupVaultsEffect')]"
+          }
+        },
+        "groupNames": []
+      },
+      {
+        "policyDefinitionReferenceId": "ImmutabilityRecoveryServicesVaults",
+        "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/d6f6f560-14b7-49a4-9fc8-d2c3a9807868",
+        "parameters": {
+          "effect": {
+            "value": "[parameters('immutabilityRecoveryServicesVaultsEffect')]"
+          }
+        },
+        "groupNames": []
+      },
+      {
+        "policyDefinitionReferenceId": "SoftDeleteBackupVaults",
+        "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/9798d31d-6028-4dee-8643-46102185c016",
+        "parameters": {
+          "effect": {
+            "value": "[parameters('softDeleteBackupVaultsEffect')]"
+          }
+        },
+        "groupNames": []
+      },
+      {
+        "policyDefinitionReferenceId": "MUABackupVaults",
+        "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/c58e083e-7982-4e24-afdc-be14d312389e",
+        "parameters": {
+          "effect": {
+            "value": "[parameters('muaBackupVaultsEffect')]"
+          }
+        },
+        "groupNames": []
+      },
+      {
+        "policyDefinitionReferenceId": "MUABackupVaultsAdditional",
+        "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/c58e083e-7982-4e24-afdc-be14d312389e",
+        "parameters": {
+          "effect": {
+            "value": "[parameters('muaBackupVaultsAdditionalEffect')]"
+          }
+        },
+        "groupNames": []
+      }
+    ]
+  }
+}

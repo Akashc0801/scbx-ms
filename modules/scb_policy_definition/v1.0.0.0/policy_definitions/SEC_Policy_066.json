@@ -1,0 +1,59 @@
+{
+  "type": "Microsoft.Authorization/policyDefinitions",
+  "apiVersion": "2021-06-01",
+  "name": "SEC_Policy_066",
+  "properties": {
+    "displayName": "SCF - Manual Attestation for Proactive Security Threat Hunting",
+    "policyType": "Custom",
+    "mode": "All",
+    "description": "This policy requires manual attestation to ensure the provision of capabilities and query tools for proactive hunting of security threats, anomalies, and suspicious activities that may not be detected by cloud-native or SIEM analytics rules. Proactive threat hunting enhances the organization's ability to detect and respond to emerging security threats effectively.",
+    "metadata": {
+      "Description": "This policy requires manual attestation to ensure the provision of capabilities and query tools for proactive hunting of security threats, anomalies, and suspicious activities that may not be detected by cloud-native or SIEM analytics rules. Proactive threat hunting enhances the organization's ability to detect and respond to emerging security threats effectively.",
+      "Responsible teams": [
+        "Platform"
+      ],
+      "category": "Compliance",
+      "createdBy": "695b7068-08dc-4778-b824-e8a1087605e1",
+      "createdOn": "2025-09-25T08:22:56.8936658Z",
+      "deployedBy": "epac/13b032ea-fae8-4455-b845-679a21e9cdd4/epac-scf",
+      "pacOwnerId": "13b032ea-fae8-4455-b845-679a21e9cdd4",
+      "securityCenter": {
+        "severity": "Medium"
+      },
+      "severity": "Medium",
+      "updatedBy": "695b7068-08dc-4778-b824-e8a1087605e1",
+      "updatedOn": "2025-10-13T12:06:34.2674423Z"
+    },
+    "version": "1.0.0",
+    "parameters": {
+      "effect": {
+        "allowedValues": [
+          "Manual",
+          "Disabled"
+        ],
+        "defaultValue": "Manual",
+        "metadata": {
+          "description": "Enable or disable the execution of the policy",
+          "displayName": "Effect"
+        },
+        "type": "String"
+      }
+    },
+    "policyRule": {
+      "if": {
+        "equals": "Microsoft.Resources/subscriptions",
+        "field": "type"
+      },
+      "then": {
+        "details": {
+          "defaultState": "Unknown"
+        },
+        "effect": "[parameters('effect')]"
+      }
+    },
+    "versions": [
+      "1.0.0"
+    ]
+  },
+  "id": "/providers/Microsoft.Management/managementGroups/SCF/providers/Microsoft.Authorization/policyDefinitions/fdbb146e-cfd9-4127-b367-a9f2ce0aa174"
+}

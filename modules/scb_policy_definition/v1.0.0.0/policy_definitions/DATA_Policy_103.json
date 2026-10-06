@@ -1,0 +1,59 @@
+{
+  "type": "Microsoft.Authorization/policyDefinitions",
+  "apiVersion": "2021-06-01",
+  "name": "DATA_Policy_103",
+  "properties": {
+    "displayName": "SCF - Manual attestation for validating review of audit reports like SOC 2 Type 2",
+    "policyType": "Custom",
+    "mode": "All",
+    "description": "This policy requires manual attestation to verify if audit reports such as SOC 2 Type II Reports have been reviewed. Cloud Service Provider store, maintain, and manage encryption keys securely and appropriately, including the rotation of encryption keys on a periodic basis according to their Cryptographic Control Standard Operating Procedure (SOP). This is verified by internal and external auditors, and it is <CUSTOMER> responsibility for reviewing audit reports such as SOC 2 Type II Reports.",
+    "metadata": {
+      "Description": "This policy requires manual attestation to verify if audit reports such as SOC 2 Type II Reports have been reviewed. Cloud Service Provider store, maintain, and manage encryption keys securely and appropriately, including the rotation of encryption keys on a periodic basis according to their Cryptographic Control Standard Operating Procedure (SOP). This is verified by internal and external auditors, and it is <CUSTOMER> responsibility for reviewing audit reports such as SOC 2 Type II Reports.",
+      "Responsible teams": [
+        "Platform"
+      ],
+      "category": "Compliance",
+      "createdBy": "695b7068-08dc-4778-b824-e8a1087605e1",
+      "createdOn": "2025-09-25T08:22:56.1589416Z",
+      "deployedBy": "epac/13b032ea-fae8-4455-b845-679a21e9cdd4/epac-scf",
+      "pacOwnerId": "13b032ea-fae8-4455-b845-679a21e9cdd4",
+      "securityCenter": {
+        "severity": "Medium"
+      },
+      "severity": "Medium",
+      "updatedBy": "695b7068-08dc-4778-b824-e8a1087605e1",
+      "updatedOn": "2025-10-13T12:06:39.4776275Z"
+    },
+    "version": "1.0.0",
+    "parameters": {
+      "effect": {
+        "allowedValues": [
+          "Manual",
+          "Disabled"
+        ],
+        "defaultValue": "Manual",
+        "metadata": {
+          "description": "Enable or disable the execution of the policy",
+          "displayName": "Effect"
+        },
+        "type": "String"
+      }
+    },
+    "policyRule": {
+      "if": {
+        "equals": "Microsoft.Resources/subscriptions",
+        "field": "type"
+      },
+      "then": {
+        "details": {
+          "defaultState": "Unknown"
+        },
+        "effect": "[parameters('effect')]"
+      }
+    },
+    "versions": [
+      "1.0.0"
+    ]
+  },
+  "id": "/providers/Microsoft.Management/managementGroups/SCF/providers/Microsoft.Authorization/policyDefinitions/d02035a1-18b9-4fef-832a-083ad53407b2"
+}

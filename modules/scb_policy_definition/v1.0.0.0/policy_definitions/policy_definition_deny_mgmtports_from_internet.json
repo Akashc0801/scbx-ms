@@ -1,0 +1,210 @@
+{
+  "name": "Deny-MgmtPorts-From-Internet",
+  "properties": {
+    "displayName": "Management port access from the Internet should be blocked",
+    "description": "This policy denies any network security rule that allows management port access from the Internet, by default blocking SSH/RDP ports.",
+    "metadata": {
+      "version": "2.2.0",
+      "category": "Network",
+      "source": "SCB Azure Landing Zones"
+    },
+    "mode": "All",
+    "parameters": {
+      "effect": {
+        "type": "String",
+        "defaultValue": "Deny",
+        "allowedValues": [
+          "Audit",
+          "Deny",
+          "Disabled"
+        ],
+        "metadata": {
+          "displayName": "Effect",
+          "description": "Enable or disable the execution of the policy"
+        }
+      },
+      "ports": {
+        "type": "Array",
+        "defaultValue": [
+          "22",
+          "3389"
+        ],
+        "metadata": {
+          "displayName": "Ports",
+          "description": "Ports to block for inbound access from Internet. By default SSH (22) and RDP (3389)"
+        }
+      }
+    },
+    "policyRule": {
+      "if": {
+        "anyOf": [
+          {
+            "allOf": [
+              {
+                "field": "type",
+                "equals": "Microsoft.Network/networkSecurityGroups"
+              },
+              {
+                "count": {
+                  "field": "Microsoft.Network/networkSecurityGroups/securityRules[*]",
+                  "where": {
+                    "allOf": [
+                      {
+                        "field": "Microsoft.Network/networkSecurityGroups/securityRules[*].access",
+                        "equals": "Allow"
+                      },
+                      {
+                        "field": "Microsoft.Network/networkSecurityGroups/securityRules[*].direction",
+                        "equals": "Inbound"
+                      },
+                      {
+                        "anyOf": [
+                          {
+                            "field": "Microsoft.Network/networkSecurityGroups/securityRules[*].sourceAddressPrefix",
+                            "equals": "*"
+                          },
+                          {
+                            "field": "Microsoft.Network/networkSecurityGroups/securityRules[*].sourceAddressPrefix",
+                            "equals": "Internet"
+                          },
+                          {
+                            "field": "Microsoft.Network/networkSecurityGroups/securityRules[*].sourceAddressPrefix",
+                            "equals": "0.0.0.0/0"
+                          }
+                        ]
+                      },
+                      {
+                        "anyOf": [
+                          {
+                            "field": "Microsoft.Network/networkSecurityGroups/securityRules[*].destinationPortRange",
+                            "in": "[parameters('ports')]"
+                          },
+                          {
+                            "count": {
+                              "value": "[parameters('ports')]",
+                              "name": "ports",
+                              "where": {
+                                "value": "[if(and(contains(field('Microsoft.Network/networkSecurityGroups/securityRules[*].destinationPortRange'), '-'), greater(length(split(field('Microsoft.Network/networkSecurityGroups/securityRules[*].destinationPortRange'), '-')), 1)), and(lessOrEquals(int(first(split(field('Microsoft.Network/networkSecurityGroups/securityRules[*].destinationPortRange'), '-'))), int(current('ports'))), greaterOrEquals(int(last(split(field('Microsoft.Network/networkSecurityGroups/securityRules[*].destinationPortRange'), '-'))), int(current('ports')))), equals(field('Microsoft.Network/networkSecurityGroups/securityRules[*].destinationPortRange'), current('ports')))]",
+                                "equals": true
+                              }
+                            },
+                            "greater": 0
+                          },
+                          {
+                            "count": {
+                              "field": "Microsoft.Network/networkSecurityGroups/securityRules[*].destinationPortRanges[*]",
+                              "where": {
+                                "anyOf": [
+                                  {
+                                    "field": "Microsoft.Network/networkSecurityGroups/securityRules[*].destinationPortRanges[*]",
+                                    "in": "[parameters('ports')]"
+                                  },
+                                  {
+                                    "count": {
+                                      "value": "[parameters('ports')]",
+                                      "name": "ports",
+                                      "where": {
+                                        "value": "[if(and(contains(current('Microsoft.Network/networkSecurityGroups/securityRules[*].destinationPortRanges[*]'), '-'), greater(length(split(current('Microsoft.Network/networkSecurityGroups/securityRules[*].destinationPortRanges[*]'), '-')), 1)), and(lessOrEquals(int(first(split(current('Microsoft.Network/networkSecurityGroups/securityRules[*].destinationPortRanges[*]'), '-'))), int(current('ports'))), greaterOrEquals(int(last(split(current('Microsoft.Network/networkSecurityGroups/securityRules[*].destinationPortRanges[*]'), '-'))), int(current('ports')))), equals(current('Microsoft.Network/networkSecurityGroups/securityRules[*].destinationPortRanges[*]'), current('ports')))]",
+                                        "equals": true
+                                      }
+                                    },
+                                    "greater": 0
+                                  }
+                                ]
+                              }
+                            },
+                            "greater": 0
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                },
+                "greater": 0
+              }
+            ]
+          },
+          {
+            "allOf": [
+              {
+                "field": "type",
+                "equals": "Microsoft.Network/networkSecurityGroups/securityRules"
+              },
+              {
+                "field": "Microsoft.Network/networkSecurityGroups/securityRules/access",
+                "equals": "Allow"
+              },
+              {
+                "field": "Microsoft.Network/networkSecurityGroups/securityRules/direction",
+                "equals": "Inbound"
+              },
+              {
+                "anyOf": [
+                  {
+                    "field": "Microsoft.Network/networkSecurityGroups/securityRules/sourceAddressPrefix",
+                    "equals": "*"
+                  },
+                  {
+                    "field": "Microsoft.Network/networkSecurityGroups/securityRules/sourceAddressPrefix",
+                    "equals": "Internet"
+                  },
+                  {
+                    "field": "Microsoft.Network/networkSecurityGroups/securityRules/sourceAddressPrefix",
+                    "equals": "0.0.0.0/0"
+                  }
+                ]
+              },
+              {
+                "anyOf": [
+                  {
+                    "field": "Microsoft.Network/networkSecurityGroups/securityRules/destinationPortRange",
+                    "in": "[parameters('ports')]"
+                  },
+                  {
+                    "count": {
+                      "value": "[parameters('ports')]",
+                      "name": "ports",
+                      "where": {
+                        "value": "[if(and(contains(field('Microsoft.Network/networkSecurityGroups/securityRules/destinationPortRange'), '-'), greater(length(split(field('Microsoft.Network/networkSecurityGroups/securityRules/destinationPortRange'), '-')), 1)), and(lessOrEquals(int(first(split(field('Microsoft.Network/networkSecurityGroups/securityRules/destinationPortRange'), '-'))), int(current('ports'))), greaterOrEquals(int(last(split(field('Microsoft.Network/networkSecurityGroups/securityRules/destinationPortRange'), '-'))), int(current('ports')))), equals(field('Microsoft.Network/networkSecurityGroups/securityRules/destinationPortRange'), current('ports')))]",
+                        "equals": true
+                      }
+                    },
+                    "greater": 0
+                  },
+                  {
+                    "count": {
+                      "field": "Microsoft.Network/networkSecurityGroups/securityRules/destinationPortRanges[*]",
+                      "where": {
+                        "anyOf": [
+                          {
+                            "field": "Microsoft.Network/networkSecurityGroups/securityRules/destinationPortRanges[*]",
+                            "in": "[parameters('ports')]"
+                          },
+                          {
+                            "count": {
+                              "value": "[parameters('ports')]",
+                              "name": "ports",
+                              "where": {
+                                "value": "[if(and(contains(current('Microsoft.Network/networkSecurityGroups/securityRules/destinationPortRanges[*]'), '-'), greater(length(split(current('Microsoft.Network/networkSecurityGroups/securityRules/destinationPortRanges[*]'), '-')), 1)), and(lessOrEquals(int(first(split(current('Microsoft.Network/networkSecurityGroups/securityRules/destinationPortRanges[*]'), '-'))), int(current('ports'))), greaterOrEquals(int(last(split(current('Microsoft.Network/networkSecurityGroups/securityRules/destinationPortRanges[*]'), '-'))), int(current('ports')))), equals(current('Microsoft.Network/networkSecurityGroups/securityRules/destinationPortRanges[*]'), current('ports')))]",
+                                "equals": true
+                              }
+                            },
+                            "greater": 0
+                          }
+                        ]
+                      }
+                    },
+                    "greater": 0
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "then": {
+        "effect": "[parameters('effect')]"
+      }
+    }
+  }
+}

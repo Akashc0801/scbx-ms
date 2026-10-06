@@ -1,0 +1,63 @@
+{
+  "type": "Microsoft.Authorization/policyDefinitions",
+  "apiVersion": "2021-06-01",
+  "name": "MAS_Policy_Manual_156_01",
+  "properties": {
+    "displayName": "MAS - Manual attestation for Define the process for Vulnerbility assessment and remediation",
+    "policyType": "Custom",
+    "mode": "All",
+    "description": "Manual attestation is required to validate Ensure the organization maintain centralized vulnerability database, with regular assessments, prioritized remediation efforts, documented actions, monitoring for recurring vulnerabilities. (CSPM-156).",
+    "metadata": {
+      "Description": "Prioritized Remediation Efforts\nDocumented Actions\nMonitoring for Recurring Vulnerabilities\n\nfor more details - refer to Control statement\nPrioritized Remediation Efforts\n1. Automated prioritization: The vulnerability management platform uses machine learning algorithms to prioritize vulnerabilities based on severity, exploitability, and potential business impact\n2. Remediation SLAs:\n- Critical vulnerabilities: 24 hours\n- High vulnerabilities: 7 days\n- Medium vulnerabilities: 30 days\n- Low vulnerabilities: 90 days\n3. Automated remediation:\n- For common vulnerabilities, the platform triggers automated remediation workflows (e.g., patching, configuration changes) across all affected cloud environments\nDocumented Actions\n1. Remediation tracking:\n- Each identified vulnerability is assigned a unique identifier\n- All actions taken to address the vulnerability are logged with timestamps and responsible parties\n2. Change management integration:\n- Remediation actions are linked to the organization's change management system for auditing purposes\nMonitoring for Recurring Vulnerabilities\n1. Trend analysis:\n- The vulnerability management platform performs regular trend analysis to identify frequently recurring vulnerabilities across cloud environments\n2. Root cause analysis:\n- For recurring vulnerabilities, the security team conducts in-depth root cause analysis to identify underlying issues (e.g., inadequate patch management, misconfigurations).",
+      "Responsible teams": [
+        "Cloud Security Posture Management"
+      ],
+      "category": "Governance",
+      "controlDomain": "CSPM-156",
+      "controlTitle": "Ensure the organization maintain centralized vulnerability database, with regular assessments, prioritized remediation efforts, documented actions, monitoring for recurring vulnerabilities.",
+      "masControlId": "156",
+      "createdBy": "695b7068-08dc-4778-b824-e8a1087605e1",
+      "createdOn": "2025-12-03T13:32:52Z",
+      "deployedBy": "mas/manual-attestations",
+      "pacOwnerId": "13b032ea-fae8-4455-b845-679a21e9cdd4",
+      "securityCenter": {
+        "severity": "Medium"
+      },
+      "severity": "Medium",
+      "updatedBy": "695b7068-08dc-4778-b824-e8a1087605e1",
+      "updatedOn": "2025-12-03T13:32:52Z",
+      "cloudSecurityDomain": "CSPM"
+    },
+    "version": "1.0.0",
+    "parameters": {
+      "effect": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Effect",
+          "description": "Enable or disable the execution of the policy"
+        },
+        "allowedValues": [
+          "Manual",
+          "Disabled"
+        ],
+        "defaultValue": "Manual"
+      }
+    },
+    "policyRule": {
+      "if": {
+        "field": "type",
+        "equals": "Microsoft.Resources/subscriptions"
+      },
+      "then": {
+        "effect": "[parameters('effect')]",
+        "details": {
+          "defaultState": "Unknown"
+        }
+      }
+    },
+    "versions": [
+      "1.0.0"
+    ]
+  },
+  "id": "/providers/Microsoft.Management/managementGroups/MAS/providers/Microsoft.Authorization/policyDefinitions/MAS_Policy_Manual_156_01"
+}

@@ -1,0 +1,33 @@
+{
+    "name": "IdentityLZ",
+    "type": "Microsoft.Authorization/policyAssignments",
+    "apiVersion": "2019-09-01",
+    "properties": {
+      "description": "This inlcudes all the policies related to Identity for the platform & LZ enterprise.",
+      "displayName": "scb Enterprise Initiative – Production Identity",
+      "metadata": {
+        "assignedBy": "Cloud Center of Excellence"
+      },
+      "notScopes": [],
+      "parameters": {
+        "Effect": {
+          "value": "AuditIfNotExists"
+        },
+        "SQLEffect": {
+          "value": "Audit"
+        }
+      },
+      "nonComplianceMessages": [
+        {
+            "message": "Ensures that Azure resources are configured to Audit Foundation Intitative"
+        }
+    ],
+      "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/mg-scb-root/providers/Microsoft.Authorization/policySetDefinitions/scb Enterprise Initiative – Production Identity",
+      "scope": "/providers/Microsoft.Management/managementGroups/97adf8b8-f23a-4c00-8c61-b6bedece9d98",
+      "enforcementMode": true
+    },
+    "location": "southeastasia",
+    "identity": {
+      "type": "SystemAssigned"
+    }
+  }

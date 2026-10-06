@@ -1,0 +1,108 @@
+{
+  "name": "Deploy-LogicApp-TLS",
+  "properties": {
+    "displayName": "Configure Logic Apps to use the latest TLS version",
+    "description": "Deploy configuration to ensure Logic Apps use the latest TLS version for improved security. This policy will configure Logic Apps to use TLS 1.2 or higher.",
+    "metadata": {
+      "version": "1.0.0",
+      "category": "Logic Apps",
+      "source": "SCB Azure Landing Zones"
+    },
+    "mode": "Indexed",
+    "parameters": {
+      "effect": {
+        "type": "String",
+        "defaultValue": "DeployIfNotExists",
+        "allowedValues": [
+          "DeployIfNotExists",
+          "Disabled"
+        ],
+        "metadata": {
+          "displayName": "Effect",
+          "description": "Enable or disable the execution of the policy"
+        }
+      }
+    },
+    "policyRule": {
+      "if": {
+        "allOf": [
+          {
+            "field": "type",
+            "equals": "Microsoft.Logic/workflows"
+          }
+        ]
+      },
+      "then": {
+        "effect": "[parameters('effect')]",
+        "details": {
+          "type": "Microsoft.Logic/workflows",
+          "existenceCondition": {
+            "field": "Microsoft.Logic/workflows/accessControl.triggers.openAuthenticationPolicies.policies",
+            "exists": true
+          },
+          "roleDefinitionIds": [
+            "/providers/Microsoft.Authorization/roleDefinitions/b24988ac-6180-42a0-ab88-20f7382dd24c"
+          ],
+          "deployment": {
+            "properties": {
+              "mode": "incremental",
+              "template": {
+                "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+                "contentVersion": "1.0.0.0",
+                "parameters": {
+                  "workflowName": {
+                    "type": "string"
+                  },
+                  "location": {
+                    "type": "string"
+                  }
+                },
+                "resources": [
+                  {
+                    "type": "Microsoft.Logic/workflows",
+                    "apiVersion": "2019-05-01",
+                    "name": "[parameters('workflowName')]",
+                    "location": "[parameters('location')]",
+                    "properties": {
+                      "definition": {
+                        "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+                        "contentVersion": "1.0.0.0",
+                        "triggers": {},
+                        "actions": {}
+                      },
+                      "accessControl": {
+                        "triggers": {
+                          "openAuthenticationPolicies": {
+                            "policies": {
+                              "minimalTLS": {
+                                "type": "AAD",
+                                "claims": [
+                                  {
+                                    "name": "ver",
+                                    "value": "2.0"
+                                  }
+                                ]
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                ]
+              },
+              "parameters": {
+                "workflowName": {
+                  "value": "[field('name')]"
+                },
+                "location": {
+                  "value": "[field('location')]"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

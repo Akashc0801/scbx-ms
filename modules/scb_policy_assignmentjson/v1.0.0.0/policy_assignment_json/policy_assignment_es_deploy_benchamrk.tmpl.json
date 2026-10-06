@@ -1,0 +1,26 @@
+{
+    "name": "CloudBenchamrk",
+    "type": "Microsoft.Authorization/policyAssignments",
+    "apiVersion": "2019-09-01",
+    "properties": {
+      "description": "The Microsoft cloud security benchmark initiative represents the policies and controls implementing security recommendations defined in Microsoft cloud security benchmark, see https://aka.ms/azsecbm. This also serves as the Microsoft Defender for Cloud default policy initiative. You can directly assign this initiative, or manage its policies and compliance results within Microsoft Defender for Cloud",
+      "displayName": "SCB-Microsoft cloud security benchmark",
+      "metadata": {
+        "assignedBy": "Cloud Center of Excellence"
+      },
+      "notScopes": ["/providers/Microsoft.Management/managementGroups/c0ce9cf9-9431-4e43-a2fc-a763d4cb8a66","/providers/Microsoft.Management/managementGroups/a0fe583d-e77d-4585-9196-b84411b66b07"],
+      "parameters": {},
+      "nonComplianceMessages": [
+        {
+            "message": "The Microsoft cloud security benchmark initiative represents the policies and controls implementing security recommendations defined in Microsoft cloud security benchmark, see https://aka.ms/azsecbm. This also serves as the Microsoft Defender for Cloud default policy initiative. You can directly assign this initiative, or manage its policies and compliance results within Microsoft Defender for Cloud"
+        }
+    ],
+      "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/mg-scb-root/providers/Microsoft.Authorization/policySetDefinitions/SCB-Microsoft cloud security benchmark",
+      "scope": "/providers/Microsoft.Management/managementGroups/mg-scb-root",
+      "enforcementMode": true
+    },
+    "location": "southeastasia",
+    "identity": {
+      "type": "SystemAssigned"
+    }
+  }
