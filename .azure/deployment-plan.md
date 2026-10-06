@@ -55,8 +55,8 @@ folder and GitHub Actions workflow for an existing module repository.
 - Pushes to `main` and manual `plan` runs authenticate with OIDC and execute a
   remote-state Terraform plan.
 - Apply is available only through `workflow_dispatch` with `action=apply`.
-- GitHub secrets: `AZURE_CLIENT_ID`, `AZURE_TENANT_ID`,
-  `AZURE_SUBSCRIPTION_ID`.
+- GitHub secrets: `AZURE_CLIENT_ID`, `AZURE_TENANT_ID`. The non-secret
+  subscription ID is pinned in the workflow and Terraform configuration.
 - The workflow targets the `azure-policy-production` GitHub environment so
   repository owners can configure required reviewers.
 
