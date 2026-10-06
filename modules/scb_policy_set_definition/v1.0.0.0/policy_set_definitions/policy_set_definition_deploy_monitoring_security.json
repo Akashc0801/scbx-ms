@@ -1,0 +1,26 @@
+{
+  "name": "SCB Enterprise Initiative \u2013 Security",
+  "properties": {
+    "displayName": "SCB Enterprise Initiative \u2013 Security",
+    "description": "This policy Initiative includes all policy that includes seurity framwork for the SCB Enterprise.",
+    "metadata": {
+      "version": "3.0.0",
+      "category": "Security Center",
+      "source": "https://github.com/Azure/Enterprise-Scale/",
+      "alzCloudEnvironments": [
+        "AzureCloud",
+        "AzureChinaCloud",
+        "AzureUSGovernment"
+      ]
+    },
+    "parameters": {},
+    "policyDefinitions": [
+      {
+        "policyDefinitionReferenceId": "Subscriptions should have a contact email address for security issues_1",
+        "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/4f4f78b8-e367-4b10-a341-d9a4ad5cf1c7",
+        "parameters": {},
+        "groupNames": []
+      }
+    ]
+  }
+}

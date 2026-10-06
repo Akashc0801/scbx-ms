@@ -1,0 +1,891 @@
+{
+  "name": "SCB-Enterprise-AppLZ-AI-Security",
+  "properties": {
+    "displayName": "Azure AI, Machine Learning, Cognitive Services and Application Gateway Security Controls",
+    "description": "This policy initiative enforces security controls for Azure Machine Learning, Azure AI Services, Cognitive Services, Azure AI Search, and Application Gateway/WAF, including network access restrictions, encryption, identity management, authentication, compute security, WAF enablement, and diagnostic logging.",
+    "metadata": {
+      "version": "1.0.0",
+      "category": "Security Center",
+      "source": "SCF-AI-Initiative",
+      "alzCloudEnvironments": [
+        "AzureCloud"
+      ]
+    },
+    "parameters": {
+      "effectMlDisablePublicNetworkAccess": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Effect - Azure Machine Learning Workspaces should disable public network access",
+          "description": "Disabling public network access improves security by ensuring that the Machine Learning workspaces aren't exposed on the public internet."
+        },
+        "allowedValues": [
+          "Audit",
+          "Deny",
+          "Disabled"
+        ],
+        "defaultValue": "Audit"
+      },
+      "effectMlUsePrivateLink": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Effect - Azure Machine Learning workspaces should use private link",
+          "description": "Azure Private Link lets you connect your virtual network to Azure services without a public IP address at the source or destination."
+        },
+        "allowedValues": [
+          "Audit",
+          "Disabled"
+        ],
+        "defaultValue": "Audit"
+      },
+      "effectMlUserAssignedManagedIdentity": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Effect - Azure Machine Learning workspaces should use user-assigned managed identity",
+          "description": "Manage access to Azure Machine Learning workspace and associated resources using user-assigned managed identities."
+        },
+        "allowedValues": [
+          "Audit",
+          "Deny",
+          "Disabled"
+        ],
+        "defaultValue": "Audit"
+      },
+      "effectMlEncryptedWithCmk": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Effect - Azure Machine Learning workspaces should be encrypted with a customer-managed key",
+          "description": "Manage encryption at rest of Azure Machine Learning workspace data with customer-managed keys."
+        },
+        "allowedValues": [
+          "Audit",
+          "Deny",
+          "Disabled"
+        ],
+        "defaultValue": "Audit"
+      },
+      "effectMlEncryptedWithCmkAine": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Effect - Azure Machine Learning workspaces should be encrypted with the use of a customer-managed key",
+          "description": "Azure Machine Learning workspaces should be encrypted with the use of a customer-managed key (CMK)."
+        },
+        "allowedValues": [
+          "AuditIfNotExists",
+          "Disabled"
+        ],
+        "defaultValue": "AuditIfNotExists"
+      },
+      "effectConfigureMlDisablePublicNetworkAccess": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Effect - Configure Azure Machine Learning Workspaces to disable public network access",
+          "description": "Disable public network access for Azure Machine Learning workspaces so that they are not accessible over the public internet."
+        },
+        "allowedValues": [
+          "Modify",
+          "Disabled"
+        ],
+        "defaultValue": "Modify"
+      },
+      "effectAiServicesDisableKeyAccess": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Effect - Azure AI Services resources should have key access disabled (disable local authentication)",
+          "description": "Key access (local authentication) is recommended to be disabled for security."
+        },
+        "allowedValues": [
+          "Audit",
+          "Deny",
+          "Disabled"
+        ],
+        "defaultValue": "Audit"
+      },
+      "effectAiServicesRestrictNetworkAccess": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Effect - Azure AI Services resources should restrict network access",
+          "description": "By restricting network access, you can ensure that only allowed networks can access the service."
+        },
+        "allowedValues": [
+          "Audit",
+          "Deny",
+          "Disabled"
+        ],
+        "defaultValue": "Audit"
+      },
+      "effectAiServicesUsePrivateLink": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Effect - Azure AI Services resources should use Azure Private Link",
+          "description": "Azure Private Link lets you connect your virtual networks to Azure services without a public IP address at the source or destination."
+        },
+        "allowedValues": [
+          "Audit",
+          "Disabled"
+        ],
+        "defaultValue": "Audit"
+      },
+      "effectCognitiveServicesManagedIdentity": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Effect - Cognitive Services accounts should use a managed identity",
+          "description": "Assigning a managed identity to your Cognitive Services account supports secure, Azure AD based authentication."
+        },
+        "allowedValues": [
+          "Audit",
+          "Deny",
+          "Disabled"
+        ],
+        "defaultValue": "Audit"
+      },
+      "effectCognitiveServicesCustomerOwnedStorage": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Effect - Cognitive Services accounts should use customer owned storage",
+          "description": "Use customer owned storage to control the data stored in Cognitive Services."
+        },
+        "allowedValues": [
+          "Audit",
+          "Deny",
+          "Disabled"
+        ],
+        "defaultValue": "Audit"
+      },
+      "effectConfigureCognitiveServicesDisableLocalAuth": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Effect - Configure Cognitive Services accounts to disable local authentication methods",
+          "description": "Disable local authentication methods so that your Cognitive Services accounts require Azure Active Directory identities exclusively for authentication."
+        },
+        "allowedValues": [
+          "Modify",
+          "Disabled"
+        ],
+        "defaultValue": "Modify"
+      },
+      "effectConfigureCognitiveServicesDisablePublicNetwork": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Effect - Configure Cognitive Services accounts to disable public network access",
+          "description": "Disable public network access for your Cognitive Services resource so that it's not accessible over the public internet."
+        },
+        "allowedValues": [
+          "Disabled",
+          "Modify"
+        ],
+        "defaultValue": "Modify"
+      },
+      "effectDiagnosticLogsAiServices": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Effect - Diagnostic logs in Azure AI services resources should be enabled",
+          "description": "Enable diagnostic logs for Azure AI services resources. This enables you to recreate activity trails for investigation purposes."
+        },
+        "allowedValues": [
+          "AuditIfNotExists",
+          "Disabled"
+        ],
+        "defaultValue": "AuditIfNotExists"
+      },
+      "effectAiSearchZoneRedundant": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Effect - [Preview]: Azure AI Search Service should be Zone Redundant",
+          "description": "Azure AI Search Service should be Zone Redundant to ensure high availability."
+        },
+        "allowedValues": [
+          "Audit",
+          "Deny",
+          "Disabled"
+        ],
+        "defaultValue": "Audit"
+      },
+      "effectAiSearchSkuSupportsPrivateLink": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Effect - Azure AI Search service should use a SKU that supports private link",
+          "description": "With supported SKUs of Azure AI Search, Azure Private Link lets you connect your virtual network to Azure services."
+        },
+        "allowedValues": [
+          "Audit",
+          "Deny",
+          "Disabled"
+        ],
+        "defaultValue": "Audit"
+      },
+      "effectAiSearchDisablePublicNetworkAccess": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Effect - Azure AI Search services should disable public network access",
+          "description": "Disabling public network access improves security by ensuring that your Azure AI Search service is not exposed on the public internet."
+        },
+        "allowedValues": [
+          "Audit",
+          "Deny",
+          "Disabled"
+        ],
+        "defaultValue": "Audit"
+      },
+      "effectAiSearchDisableLocalAuth": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Effect - Azure AI Search services should have local authentication methods disabled",
+          "description": "Disabling local authentication methods improves security by ensuring that Azure AI Search services exclusively require Azure Active Directory identities for authentication."
+        },
+        "allowedValues": [
+          "Audit",
+          "Deny",
+          "Disabled"
+        ],
+        "defaultValue": "Audit"
+      },
+      "effectAiSearchCmkEncryption": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Effect - Azure AI Search services should use customer-managed keys to encrypt data at rest",
+          "description": "Using customer-managed keys to encrypt data at rest in Azure AI Search services provides additional control over the key used for encryption."
+        },
+        "allowedValues": [
+          "AuditIfNotExists",
+          "Disabled"
+        ],
+        "defaultValue": "AuditIfNotExists"
+      },
+      "effectConfigureAiSearchDisableLocalAuth": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Effect - Configure Azure AI Search services to disable local authentication",
+          "description": "Disable local authentication methods so that your Azure AI Search services exclusively require Azure Active Directory identities for authentication."
+        },
+        "allowedValues": [
+          "Modify",
+          "Disabled"
+        ],
+        "defaultValue": "Modify"
+      },
+      "effectConfigureAiSearchDisablePublicNetworkAccess": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Effect - Configure Azure AI Search services to disable public network access",
+          "description": "Disable public network access for your Azure AI Search service so that it is not accessible over the public internet."
+        },
+        "allowedValues": [
+          "Modify",
+          "Disabled"
+        ],
+        "defaultValue": "Modify"
+      },
+      "effectConfigureAiSearchEnforceCmk": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Effect - Configure Azure AI Search services to enforce customer-managed keys to encrypt data at rest",
+          "description": "Enforce the use of customer-managed keys to encrypt data at rest in Azure AI Search services."
+        },
+        "allowedValues": [
+          "Deny",
+          "Disabled"
+        ],
+        "defaultValue": "Deny"
+      },
+      "effectWafEnabledForAppGateway": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Effect - Web Application Firewall (WAF) should be enabled for Application Gateway",
+          "description": "Deploy Azure Web Application Firewall (WAF) in front of public facing web applications for additional inspection of incoming traffic."
+        },
+        "allowedValues": [
+          "Audit",
+          "Deny",
+          "Disabled"
+        ],
+        "defaultValue": "Audit"
+      },
+      "effectAppGatewayDeployedWithWaf": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Effect - Azure Application Gateway should be deployed with Azure WAF",
+          "description": "Requires Azure Application Gateway resources to be deployed with Azure WAF."
+        },
+        "allowedValues": [
+          "Audit",
+          "Deny",
+          "Disabled"
+        ],
+        "defaultValue": "Audit"
+      },
+      "effectWafRequestBodyInspection": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Effect - Azure Web Application Firewall on Azure Application Gateway should have request body inspection enabled",
+          "description": "Ensure that Web Application Firewalls associated to Azure Application Gateways have request body inspection enabled."
+        },
+        "allowedValues": [
+          "Audit",
+          "Deny",
+          "Disabled"
+        ],
+        "defaultValue": "Audit"
+      },
+      "effectBotProtectionEnabled": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Effect - Bot Protection should be enabled for Azure Application Gateway WAF",
+          "description": "This policy ensures that Bot Protection is enabled in all Azure Application Gateway Web Application Firewall (WAF) policies."
+        },
+        "allowedValues": [
+          "Audit",
+          "Deny",
+          "Disabled"
+        ],
+        "defaultValue": "Audit"
+      },
+      "effectMigrateWafConfigToPolicy": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Effect - Migrate WAF from WAF Config to WAF Policy on Application Gateway",
+          "description": "If you have WAF Config instead of WAF Policy, then you may want to move to the new WAF Policy."
+        },
+        "allowedValues": [
+          "Audit",
+          "Deny",
+          "Disabled"
+        ],
+        "defaultValue": "Audit"
+      },
+      "effectAppGatewayContainersSecurityPolicies": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Effect - Azure Application Gateway for Containers must have security policies",
+          "description": "Ensure that Azure Application Gateway for Containers has security policies configured."
+        },
+        "allowedValues": [
+          "AuditIfNotExists",
+          "Disabled"
+        ],
+        "defaultValue": "AuditIfNotExists"
+      },
+      "effectAppGatewayResourceLogsEnabled": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Effect - Azure Application Gateway should have Resource logs enabled",
+          "description": "Enable Resource logs for Azure Application Gateway (plus WAF) and stream to a Log Analytics workspace."
+        },
+        "allowedValues": [
+          "AuditIfNotExists",
+          "Disabled"
+        ],
+        "defaultValue": "AuditIfNotExists"
+      },
+      "effectDenyCognitiveServicesNetworkAcls": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Effect - Network ACLs should be restricted for Cognitive Services",
+          "description": "Network ACLs should be restricted for Cognitive Services to prevent unauthorized network access."
+        },
+        "allowedValues": [
+          "Audit",
+          "Deny",
+          "Disabled"
+        ],
+        "defaultValue": "Deny"
+      },
+      "effectDenyCognitiveServicesRestrictOutboundNetworkAccess": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Effect - Outbound network access should be restricted for Cognitive Services",
+          "description": "Outbound network access should be restricted for Cognitive Services to prevent data exfiltration."
+        },
+        "allowedValues": [
+          "Audit",
+          "Deny",
+          "Disabled"
+        ],
+        "defaultValue": "Deny"
+      },
+      "effectMlComputeIdleShutdown": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Effect - Azure Machine Learning Compute Instance should have idle shutdown",
+          "description": "Idle shutdown policy reduces cost by shutting down compute instances that are idle."
+        },
+        "allowedValues": [
+          "Audit",
+          "Deny",
+          "Disabled"
+        ],
+        "defaultValue": "Audit"
+      },
+      "effectMlComputeRecreatedForUpdates": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Effect - Azure Machine Learning compute instances should be recreated to get the latest software updates",
+          "description": "Ensure that Azure Machine Learning compute instances run on the latest available operating system with latest security patches and software updates."
+        },
+        "allowedValues": [
+          "Audit",
+          "Disabled"
+        ],
+        "defaultValue": "Audit"
+      },
+      "effectMlComputeInVnet": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Effect - Azure Machine Learning Computes should be in a virtual network",
+          "description": "Azure Virtual Networks provide enhanced security and isolation for your Azure Machine Learning Computes."
+        },
+        "allowedValues": [
+          "Audit",
+          "Disabled"
+        ],
+        "defaultValue": "Audit"
+      },
+      "effectMlComputeLocalAuthDisabled": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Effect - Azure Machine Learning Computes should have local auth disabled",
+          "description": "Disabling local authentication methods improves security by ensuring that Machine Learning Computes require Azure Active Directory identities exclusively for authentication."
+        },
+        "allowedValues": [
+          "Audit",
+          "Deny",
+          "Disabled"
+        ],
+        "defaultValue": "Audit"
+      },
+      "effectMlEnableV1LegacyMode": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Effect - Azure Machine Learning workspaces should enable V1LegacyMode",
+          "description": "Azure Machine Learning workspaces should enable V1LegacyMode to ensure network isolation backward compatibility."
+        },
+        "allowedValues": [
+          "Audit",
+          "Deny",
+          "Disabled"
+        ],
+        "defaultValue": "Audit"
+      },
+      "effectConfigureMlComputeDisableLocalAuth": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Effect - Configure Azure Machine Learning Computes to disable local auth",
+          "description": "Configure Azure Machine Learning Computes to disable local authentication methods."
+        },
+        "allowedValues": [
+          "Modify",
+          "Disabled"
+        ],
+        "defaultValue": "Modify"
+      }
+    },
+    "policyDefinitions": [
+      {
+        "policyDefinitionReferenceId": "AzureMlDisablePublicNetworkAccess",
+        "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/438c38d2-3772-465a-a9cc-7a6666a275ce",
+        "definitionVersion": "2.*.*",
+        "parameters": {
+          "effect": {
+            "value": "[parameters('effectMlDisablePublicNetworkAccess')]"
+          }
+        },
+        "groupNames": []
+      },
+      {
+        "policyDefinitionReferenceId": "AzureMlUsePrivateLink",
+        "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/45e05259-1eb5-4f70-9574-baf73e9d219b",
+        "definitionVersion": "1.*.*",
+        "parameters": {
+          "effect": {
+            "value": "[parameters('effectMlUsePrivateLink')]"
+          }
+        },
+        "groupNames": []
+      },
+      {
+        "policyDefinitionReferenceId": "AzureMlUserAssignedManagedIdentity",
+        "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/5f0c7d88-c7de-45b8-ac49-db49e72eaa78",
+        "definitionVersion": "1.*.*",
+        "parameters": {
+          "effect": {
+            "value": "[parameters('effectMlUserAssignedManagedIdentity')]"
+          }
+        },
+        "groupNames": []
+      },
+      {
+        "policyDefinitionReferenceId": "AzureMlEncryptedWithCmk",
+        "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/ba769a63-b8cc-4b2d-abf6-ac33c7204be8",
+        "definitionVersion": "1.*.*",
+        "parameters": {
+          "effect": {
+            "value": "[parameters('effectMlEncryptedWithCmk')]"
+          }
+        },
+        "groupNames": []
+      },
+      {
+        "policyDefinitionReferenceId": "AzureMlEncryptedWithCmkAine",
+        "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/7f40cee6-e933-4d0f-a782-b96615e0f4a6",
+        "definitionVersion": "1.*.*",
+        "parameters": {
+          "effect": {
+            "value": "[parameters('effectMlEncryptedWithCmkAine')]"
+          }
+        },
+        "groupNames": []
+      },
+      {
+        "policyDefinitionReferenceId": "ConfigureAzureMlDisablePublicNetworkAccess",
+        "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/a10ee784-7409-4941-b091-663697637c0f",
+        "definitionVersion": "1.*.*",
+        "parameters": {
+          "effect": {
+            "value": "[parameters('effectConfigureMlDisablePublicNetworkAccess')]"
+          }
+        },
+        "groupNames": []
+      },
+      {
+        "policyDefinitionReferenceId": "AiServicesDisableKeyAccess",
+        "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/71ef260a-8f18-47b7-abcb-62d0673d94dc",
+        "definitionVersion": "1.*.*",
+        "parameters": {
+          "effect": {
+            "value": "[parameters('effectAiServicesDisableKeyAccess')]"
+          }
+        },
+        "groupNames": []
+      },
+      {
+        "policyDefinitionReferenceId": "AiServicesRestrictNetworkAccess",
+        "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/037eea7a-bd0a-46c5-9a66-03aea78705d3",
+        "definitionVersion": "3.*.*",
+        "parameters": {
+          "effect": {
+            "value": "[parameters('effectAiServicesRestrictNetworkAccess')]"
+          }
+        },
+        "groupNames": []
+      },
+      {
+        "policyDefinitionReferenceId": "AiServicesUsePrivateLink",
+        "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/d6759c02-b87f-42b7-892e-71b3f471d782",
+        "definitionVersion": "1.*.*",
+        "parameters": {
+          "effect": {
+            "value": "[parameters('effectAiServicesUsePrivateLink')]"
+          }
+        },
+        "groupNames": []
+      },
+      {
+        "policyDefinitionReferenceId": "CognitiveServicesManagedIdentity",
+        "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/fe3fd216-4f83-4fc1-8984-2bbec80a3418",
+        "definitionVersion": "1.*.*",
+        "parameters": {
+          "effect": {
+            "value": "[parameters('effectCognitiveServicesManagedIdentity')]"
+          }
+        },
+        "groupNames": []
+      },
+      {
+        "policyDefinitionReferenceId": "CognitiveServicesCustomerOwnedStorage",
+        "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/46aa9b05-0e60-4eae-a88b-1e9d374fa515",
+        "definitionVersion": "1.*.*",
+        "parameters": {
+          "effect": {
+            "value": "[parameters('effectCognitiveServicesCustomerOwnedStorage')]"
+          }
+        },
+        "groupNames": []
+      },
+      {
+        "policyDefinitionReferenceId": "ConfigureCognitiveServicesDisableLocalAuth",
+        "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/14de9e63-1b31-492e-a5a3-c3f7fd57f555",
+        "definitionVersion": "1.*.*",
+        "parameters": {
+          "effect": {
+            "value": "[parameters('effectConfigureCognitiveServicesDisableLocalAuth')]"
+          }
+        },
+        "groupNames": []
+      },
+      {
+        "policyDefinitionReferenceId": "ConfigureCognitiveServicesDisablePublicNetwork",
+        "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/47ba1dd7-28d9-4b07-a8d5-9813bed64e0c",
+        "definitionVersion": "1.*.*",
+        "parameters": {
+          "effect": {
+            "value": "[parameters('effectConfigureCognitiveServicesDisablePublicNetwork')]"
+          }
+        },
+        "groupNames": []
+      },
+      {
+        "policyDefinitionReferenceId": "DiagnosticLogsAiServices",
+        "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/1b4d1c4e-934c-4703-944c-27c82c06bebb",
+        "definitionVersion": "1.*.*",
+        "parameters": {
+          "effect": {
+            "value": "[parameters('effectDiagnosticLogsAiServices')]"
+          }
+        },
+        "groupNames": []
+      },
+      {
+        "policyDefinitionReferenceId": "AiSearchZoneRedundant",
+        "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/90bc8109-d21a-4692-88fc-51419391da3d",
+        "definitionVersion": "1.*.*",
+        "parameters": {
+          "effect": {
+            "value": "[parameters('effectAiSearchZoneRedundant')]"
+          }
+        },
+        "groupNames": []
+      },
+      {
+        "policyDefinitionReferenceId": "AiSearchSkuSupportsPrivateLink",
+        "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/a049bf77-880b-470f-ba6d-9f21c530cf83",
+        "definitionVersion": "1.*.*",
+        "parameters": {
+          "effect": {
+            "value": "[parameters('effectAiSearchSkuSupportsPrivateLink')]"
+          }
+        },
+        "groupNames": []
+      },
+      {
+        "policyDefinitionReferenceId": "AiSearchDisablePublicNetworkAccess",
+        "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/ee980b6d-0eca-4501-8d54-f6290fd512c3",
+        "definitionVersion": "1.*.*",
+        "parameters": {
+          "effect": {
+            "value": "[parameters('effectAiSearchDisablePublicNetworkAccess')]"
+          }
+        },
+        "groupNames": []
+      },
+      {
+        "policyDefinitionReferenceId": "AiSearchDisableLocalAuth",
+        "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/6300012e-e9a4-4649-b41f-a85f5c43be91",
+        "definitionVersion": "1.*.*",
+        "parameters": {
+          "effect": {
+            "value": "[parameters('effectAiSearchDisableLocalAuth')]"
+          }
+        },
+        "groupNames": []
+      },
+      {
+        "policyDefinitionReferenceId": "AiSearchCmkEncryption",
+        "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/76a56461-9dc0-40f0-82f5-2453283afa2f",
+        "definitionVersion": "1.*.*",
+        "parameters": {
+          "effect": {
+            "value": "[parameters('effectAiSearchCmkEncryption')]"
+          }
+        },
+        "groupNames": []
+      },
+      {
+        "policyDefinitionReferenceId": "ConfigureAiSearchDisableLocalAuth",
+        "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/4eb216f2-9dba-4979-86e6-5d7e63ce3b75",
+        "definitionVersion": "1.*.*",
+        "parameters": {
+          "effect": {
+            "value": "[parameters('effectConfigureAiSearchDisableLocalAuth')]"
+          }
+        },
+        "groupNames": []
+      },
+      {
+        "policyDefinitionReferenceId": "ConfigureAiSearchDisablePublicNetworkAccess",
+        "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/9cee519f-d9c1-4fd9-9f79-24ec3449ed30",
+        "definitionVersion": "1.*.*",
+        "parameters": {
+          "effect": {
+            "value": "[parameters('effectConfigureAiSearchDisablePublicNetworkAccess')]"
+          }
+        },
+        "groupNames": []
+      },
+      {
+        "policyDefinitionReferenceId": "ConfigureAiSearchEnforceCmk",
+        "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/356da939-f20a-4bb9-86f8-5db445b0e354",
+        "definitionVersion": "1.*.*",
+        "parameters": {
+          "effect": {
+            "value": "[parameters('effectConfigureAiSearchEnforceCmk')]"
+          }
+        },
+        "groupNames": []
+      },
+      {
+        "policyDefinitionReferenceId": "WafEnabledForAppGateway",
+        "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/564feb30-bf6a-4854-b4bb-0d2d2d1e6c66",
+        "definitionVersion": "1.*.*",
+        "parameters": {
+          "effect": {
+            "value": "[parameters('effectWafEnabledForAppGateway')]"
+          }
+        },
+        "groupNames": []
+      },
+      {
+        "policyDefinitionReferenceId": "AppGatewayDeployedWithWaf",
+        "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/ff1f1879-a60d-4f23-9641-41e7391ec19a",
+        "definitionVersion": "1.*.*",
+        "parameters": {
+          "effect": {
+            "value": "[parameters('effectAppGatewayDeployedWithWaf')]"
+          }
+        },
+        "groupNames": []
+      },
+      {
+        "policyDefinitionReferenceId": "WafRequestBodyInspection",
+        "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/ca85ef9a-741d-461d-8b7a-18c2da82c666",
+        "definitionVersion": "1.*.*",
+        "parameters": {
+          "effect": {
+            "value": "[parameters('effectWafRequestBodyInspection')]"
+          }
+        },
+        "groupNames": []
+      },
+      {
+        "policyDefinitionReferenceId": "BotProtectionEnabled",
+        "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/ebea0d86-7fbd-42e3-8a46-27e7568c2525",
+        "definitionVersion": "1.*.*",
+        "parameters": {
+          "effect": {
+            "value": "[parameters('effectBotProtectionEnabled')]"
+          }
+        },
+        "groupNames": []
+      },
+      {
+        "policyDefinitionReferenceId": "MigrateWafConfigToPolicy",
+        "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/882e19a6-996f-400e-a30f-c090887254f4",
+        "definitionVersion": "1.*.*",
+        "parameters": {
+          "effect": {
+            "value": "[parameters('effectMigrateWafConfigToPolicy')]"
+          }
+        },
+        "groupNames": []
+      },
+      {
+        "policyDefinitionReferenceId": "AppGatewayContainersSecurityPolicies",
+        "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/c3a8e4bd-b215-4c99-bd53-92f8d7ea65f7",
+        "definitionVersion": "1.*.*",
+        "parameters": {
+          "effect": {
+            "value": "[parameters('effectAppGatewayContainersSecurityPolicies')]"
+          }
+        },
+        "groupNames": []
+      },
+      {
+        "policyDefinitionReferenceId": "AppGatewayResourceLogsEnabled",
+        "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/8a04f872-51e9-4313-97fb-fc1c3543011c",
+        "definitionVersion": "1.*.*",
+        "parameters": {
+          "effect": {
+            "value": "[parameters('effectAppGatewayResourceLogsEnabled')]"
+          }
+        },
+        "groupNames": []
+      },
+      {
+        "policyDefinitionReferenceId": "DenyCognitiveServicesNetworkAcls",
+        "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/a1074ffe-b122-4cec-946a-1becee305a4c/providers/Microsoft.Authorization/policyDefinitions/Deny-CognitiveServices-NetworkAcls",
+        "definitionVersion": "1.*.*",
+        "parameters": {
+          "effect": {
+            "value": "[parameters('effectDenyCognitiveServicesNetworkAcls')]"
+          }
+        },
+        "groupNames": []
+      },
+      {
+        "policyDefinitionReferenceId": "DenyCognitiveServicesRestrictOutboundNetworkAccess",
+        "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/a1074ffe-b122-4cec-946a-1becee305a4c/providers/Microsoft.Authorization/policyDefinitions/Deny-CognitiveServices-RestrictOutboundNetworkAccess",
+        "definitionVersion": "1.*.*",
+        "parameters": {
+          "effect": {
+            "value": "[parameters('effectDenyCognitiveServicesRestrictOutboundNetworkAccess')]"
+          }
+        },
+        "groupNames": []
+      },
+      {
+        "policyDefinitionReferenceId": "AzureMlComputeIdleShutdown",
+        "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/679ddf89-ab8f-48a5-9029-e76054077449",
+        "definitionVersion": "1.*.*",
+        "parameters": {
+          "effect": {
+            "value": "[parameters('effectMlComputeIdleShutdown')]"
+          }
+        },
+        "groupNames": []
+      },
+      {
+        "policyDefinitionReferenceId": "AzureMlComputeRecreatedForUpdates",
+        "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/f110a506-2dcb-422e-bcea-d533fc8c35e2",
+        "definitionVersion": "1.*.*",
+        "parameters": {
+          "effects": {
+            "value": "[parameters('effectMlComputeRecreatedForUpdates')]"
+          }
+        },
+        "groupNames": []
+      },
+      {
+        "policyDefinitionReferenceId": "AzureMlComputeInVnet",
+        "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/7804b5c7-01dc-4723-969b-ae300cc07ff1",
+        "definitionVersion": "1.*.*",
+        "parameters": {
+          "effect": {
+            "value": "[parameters('effectMlComputeInVnet')]"
+          }
+        },
+        "groupNames": []
+      },
+      {
+        "policyDefinitionReferenceId": "AzureMlComputeLocalAuthDisabled",
+        "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/e96a9a5f-07ca-471b-9bc5-6a0f33cbd68f",
+        "definitionVersion": "1.*.*",
+        "parameters": {
+          "effect": {
+            "value": "[parameters('effectMlComputeLocalAuthDisabled')]"
+          }
+        },
+        "groupNames": []
+      },
+      {
+        "policyDefinitionReferenceId": "AzureMlEnableV1LegacyMode",
+        "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/e413671a-dd10-4cc1-a943-45b598596cb7",
+        "definitionVersion": "1.*.*",
+        "parameters": {
+          "effect": {
+            "value": "[parameters('effectMlEnableV1LegacyMode')]"
+          }
+        },
+        "groupNames": []
+      },
+      {
+        "policyDefinitionReferenceId": "ConfigureAzureMlComputeDisableLocalAuth",
+        "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/a6f9a2d0-cff7-4855-83ad-4cd750666512",
+        "definitionVersion": "1.*.*",
+        "parameters": {
+          "effect": {
+            "value": "[parameters('effectConfigureMlComputeDisableLocalAuth')]"
+          }
+        },
+        "groupNames": []
+      }
+    ]
+  }
+}

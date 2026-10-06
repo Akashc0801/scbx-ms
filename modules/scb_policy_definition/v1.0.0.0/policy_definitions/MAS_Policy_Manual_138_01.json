@@ -1,0 +1,63 @@
+{
+  "type": "Microsoft.Authorization/policyDefinitions",
+  "apiVersion": "2021-06-01",
+  "name": "MAS_Policy_Manual_138_01",
+  "properties": {
+    "displayName": "MAS - Manual attestation for Implement Centralized Monitoring Platform for metrics",
+    "policyType": "Custom",
+    "mode": "All",
+    "description": "Manual attestation is required to validate Ensure the organization have a continuous (24x7) monitoring strategy in place, such as must-have metrics, frequency of review. (Monitoring-IR-138).",
+    "metadata": {
+      "Description": "Must-Have Metrics\n\nMonitoring Frequency\n\nCentralized Monitoring Platform\nAuto-Discovery and Scaling\nStandardized KPIs\nAlerting and Notification\nDashboard and Visualization\nAutomated Response\nfor more details - refer to Control statement\nMust-Have Metrics\n1. Resource Utilization:\n- CPU usage, Memory utilization, Storage capacity and I/O performance, Network throughput and latency\n2. Application Performance:\n- Response times, Error rates, Transaction volumes, API call latency\n3. Security and Compliance:\n- Failed login attempts, Unusual access patterns, Configuration changes, Compliance status\n4. Cost Optimization:\n- Resource costs by service, Idle resources, Underutilized instances\nMonitoring Frequency\n1. Real-time monitoring for critical metrics (e.g., application availability, security events)\n2. 5-minute intervals for resource utilization metrics\n3. Hourly aggregation for performance trends\n4. Daily cost analysis and optimization reports\nCentralized Monitoring Platform\nImplement a unified monitoring solution that can integrate data from all cloud providers\nAuto-Discovery and Scaling\nSet up automatic discovery of new resources to ensure comprehensive coverage as the infrastructure scales\nStandardized KPIs\nDefine standardized KPIs across all cloud platforms to enable consistent comparison and analysis\nAlerting and Notification\nConfigure real-time alerts for critical issues, with escalation procedures for unresolved problems.\nDashboard and Visualization\nCreate customized dashboards for different teams (e.g., DevOps, Security, Management) to provide relevant insights\nAutomated Response\nImplement automated responses for common issues, such as auto-scaling during traffic spikes or initiating failover procedures",
+      "Responsible teams": [
+        "Monitoring & Incident Response"
+      ],
+      "category": "Governance",
+      "controlDomain": "Monitoring-IR-138",
+      "controlTitle": "Ensure the organization have a continuous (24x7) monitoring strategy in place, such as must-have metrics, frequency of review.",
+      "masControlId": "138",
+      "createdBy": "695b7068-08dc-4778-b824-e8a1087605e1",
+      "createdOn": "2025-12-03T13:32:52Z",
+      "deployedBy": "mas/manual-attestations",
+      "pacOwnerId": "13b032ea-fae8-4455-b845-679a21e9cdd4",
+      "securityCenter": {
+        "severity": "Medium"
+      },
+      "severity": "Medium",
+      "updatedBy": "695b7068-08dc-4778-b824-e8a1087605e1",
+      "updatedOn": "2025-12-03T13:32:52Z",
+      "cloudSecurityDomain": "Monitoring-IR"
+    },
+    "version": "1.0.0",
+    "parameters": {
+      "effect": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Effect",
+          "description": "Enable or disable the execution of the policy"
+        },
+        "allowedValues": [
+          "Manual",
+          "Disabled"
+        ],
+        "defaultValue": "Manual"
+      }
+    },
+    "policyRule": {
+      "if": {
+        "field": "type",
+        "equals": "Microsoft.Resources/subscriptions"
+      },
+      "then": {
+        "effect": "[parameters('effect')]",
+        "details": {
+          "defaultState": "Unknown"
+        }
+      }
+    },
+    "versions": [
+      "1.0.0"
+    ]
+  },
+  "id": "/providers/Microsoft.Management/managementGroups/MAS/providers/Microsoft.Authorization/policyDefinitions/MAS_Policy_Manual_138_01"
+}

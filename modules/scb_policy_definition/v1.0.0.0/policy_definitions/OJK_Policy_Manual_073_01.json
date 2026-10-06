@@ -1,0 +1,63 @@
+{
+  "type": "Microsoft.Authorization/policyDefinitions",
+  "apiVersion": "2021-06-01",
+  "name": "OJK_Policy_Manual_073_01",
+  "properties": {
+    "displayName": "OJK - Manual attestation for Critical business functions are identified, and recovery time objectives (RTO) and recovery",
+    "policyType": "Custom",
+    "mode": "All",
+    "description": "Manual attestation is required to validate Critical business functions are identified, and recovery time objectives (RTO) and recovery point objectives (RPO) are defined for each function to guide restoration efforts during a contingency event. (Data-Security-73).",
+    "metadata": {
+      "Description": "Critical business functions are identified, and recovery time objectives (RTO) and recovery point objectives (RPO) are defined for each function to guide restoration efforts during a contingency event.\nDevelop a comprehensive Contingency Plan to ensure continuity of operations for mission and business functions in cloud environments. The plan should identify essential functions, recovery objectives, restoration priorities, metrics, roles and responsibilities, contact information, and system restoration procedures without compromising security controls. The plan should be reviewed, approved, distributed to key personnel, coordinated with incident handling activities, regularly updated, and protected from unauthorized disclosure and modification",
+      "Responsible teams": [
+        "Data Protection"
+      ],
+      "category": "Governance",
+      "controlDomain": "Data-Security-73",
+      "controlTitle": "Critical business functions are identified, and recovery time objectives (RTO) and recovery point objectives (RPO) are defined for each function to guide restoration efforts during a contingency event.",
+      "ojkControlId": "73",
+      "createdBy": "695b7068-08dc-4778-b824-e8a1087605e1",
+      "createdOn": "2025-12-03T13:32:52Z",
+      "deployedBy": "ojk/manual-attestations",
+      "pacOwnerId": "13b032ea-fae8-4455-b845-679a21e9cdd4",
+      "securityCenter": {
+        "severity": "Medium"
+      },
+      "severity": "Medium",
+      "updatedBy": "695b7068-08dc-4778-b824-e8a1087605e1",
+      "updatedOn": "2025-12-03T13:32:52Z",
+      "cloudSecurityDomain": "Data-Security"
+    },
+    "version": "1.0.0",
+    "parameters": {
+      "effect": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Effect",
+          "description": "Enable or disable the execution of the policy"
+        },
+        "allowedValues": [
+          "Manual",
+          "Disabled"
+        ],
+        "defaultValue": "Manual"
+      }
+    },
+    "policyRule": {
+      "if": {
+        "field": "type",
+        "equals": "Microsoft.Resources/subscriptions"
+      },
+      "then": {
+        "effect": "[parameters('effect')]",
+        "details": {
+          "defaultState": "Unknown"
+        }
+      }
+    },
+    "versions": [
+      "1.0.0"
+    ]
+  },
+  "id": "/providers/Microsoft.Management/managementGroups/a1074ffe-b122-4cec-946a-1becee305a4c/providers/Microsoft.Authorization/policyDefinitions/OJK_Policy_Manual_073_01"
+}

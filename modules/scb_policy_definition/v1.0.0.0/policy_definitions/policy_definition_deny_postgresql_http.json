@@ -1,0 +1,67 @@
+{
+  "name": "Deny-PostgreSql-http",
+  "properties": {
+    "displayName": "Enforce SSL connection should be enabled for PostgreSQL database servers",
+    "description": "Azure Database for PostgreSQL supports connecting your Azure Database for PostgreSQL server to client applications using Secure Sockets Layer (SSL). Enforcing SSL connections between your database server and your client applications helps protect against 'man in the middle' attacks.",
+    "metadata": {
+      "version": "1.0.0",
+      "category": "SQL",
+      "source": "SCB Azure Landing Zones"
+    },
+    "mode": "Indexed",
+    "parameters": {
+      "effect": {
+        "type": "String",
+        "defaultValue": "Deny",
+        "allowedValues": [
+          "Audit",
+          "Deny",
+          "Disabled"
+        ],
+        "metadata": {
+          "displayName": "Effect",
+          "description": "Enable or disable the execution of the policy"
+        }
+      },
+      "minimalTlsVersion": {
+        "type": "String",
+        "defaultValue": "TLS1_2",
+        "allowedValues": [
+          "TLS1_0",
+          "TLS1_1",
+          "TLS1_2",
+          "TLSEnforcementDisabled"
+        ],
+        "metadata": {
+          "displayName": "Minimal TLS version",
+          "description": "Minimal TLS version for PostgreSQL servers"
+        }
+      }
+    },
+    "policyRule": {
+      "if": {
+        "allOf": [
+          {
+            "field": "type",
+            "equals": "Microsoft.DBforPostgreSQL/servers"
+          },
+          {
+            "anyOf": [
+              {
+                "field": "Microsoft.DBforPostgreSQL/servers/sslEnforcement",
+                "notEquals": "Enabled"
+              },
+              {
+                "field": "Microsoft.DBforPostgreSQL/servers/minimalTlsVersion",
+                "notEquals": "[parameters('minimalTlsVersion')]"
+              }
+            ]
+          }
+        ]
+      },
+      "then": {
+        "effect": "[parameters('effect')]"
+      }
+    }
+  }
+}

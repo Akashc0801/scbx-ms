@@ -1,0 +1,166 @@
+{
+  "name": "ETQ-Enterprise-Initiative-Sandbox",
+  "properties": {
+    "displayName": "ETQ Enterprise Initiative Sandbox",
+    "description": "This inlcudes all the policies related to Sandbox for the Application Landing Zones.",
+    "metadata": {
+      "category": "Governance"
+    },
+    "parameters": {
+      "SQLlistOfSKUName": {
+        "type": "Array",
+        "metadata": {
+          "description": "The list of SKUs that can be specified for SQL Databases.",
+          "displayName": "Allowed SKU Names"
+        }
+      },
+      "SQLlistOfSKUId": {
+        "type": "Array",
+        "metadata": {
+          "description": "The list of SKUs that can be specified for SQL Databases.",
+          "displayName": "Allowed SKU IDs"
+        }
+      },
+      "SQLEffect": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Effect",
+          "description": "Deny, Audit or Disabled the execution of the Policy"
+        },
+        "allowedValues": [
+          "Deny",
+          "Audit",
+          "Disabled"
+        ],
+        "defaultValue": "Deny"
+      },
+      "VnetEffect": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Effect",
+          "description": "Enable or disable the execution of the policy"
+        },
+        "allowedValues": [
+          "Audit",
+          "Deny",
+          "Disabled"
+        ],
+        "defaultValue": "Deny"
+      },
+      "allowedVnets": {
+        "type": "Array",
+        "metadata": {
+          "displayName": "Allowed vNets to peer with",
+          "description": "Array of allowed vNets that can be peered with. Must be entered using their resource ID. Example: /subscriptions/{subId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{vnetName}"
+        },
+        "defaultValue": []
+      },
+      "budgetEffect": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Effect",
+          "description": "DeployIfNotExists, AuditIfNotExists or Disabled the execution of the Policy"
+        },
+        "allowedValues": [
+          "DeployIfNotExists",
+          "AuditIfNotExists",
+          "Disabled"
+        ],
+        "defaultValue": "DeployIfNotExists"
+      },
+      "storageAccountEffect": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Effect",
+          "description": "Enable or disable the execution of the audit policy"
+        },
+        "allowedValues": [
+          "Audit",
+          "Deny",
+          "Disabled"
+        ],
+        "defaultValue": "Deny"
+      },
+      "StorageAccountListOfAllowedSKUs": {
+        "type": "Array",
+        "metadata": {
+          "description": "The list of SKUs that can be specified for storage accounts.",
+          "displayName": "Allowed SKUs",
+          "strongType": "StorageSKUs"
+        }
+      },
+      "VMlistOfAllowedSKUs": {
+        "type": "Array",
+        "metadata": {
+          "description": "The list of size SKUs that can be specified for virtual machines.",
+          "displayName": "Allowed Size SKUs",
+          "strongType": "VMSKUs"
+        }
+      }
+    },
+    "policyDefinitions": [
+      {
+        "policyDefinitionReferenceId": "Allowed SQL Database SKUs_1",
+        "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/c9ed1fba-33f2-4839-b5e1-5572874951aa/providers/Microsoft.Authorization/policyDefinitions/AllowedSQLDBSKUs",
+        "parameters": {
+          "listOfSKUName": {
+            "value": "[parameters('SQLlistOfSKUName')]"
+          },
+          "listOfSKUId": {
+            "value": "[parameters('SQLlistOfSKUId')]"
+          },
+          "effect": {
+            "value": "[parameters('SQLEffect')]"
+          }
+        },
+        "groupNames": []
+      },
+      {
+        "policyDefinitionReferenceId": "Deny vNet peering cross subscription_1",
+        "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/c9ed1fba-33f2-4839-b5e1-5572874951aa/providers/Microsoft.Authorization/policyDefinitions/DenyvNetpeeringcrosssubscription",
+        "parameters": {
+          "effect": {
+            "value": "[parameters('VnetEffect')]"
+          },
+          "allowedVnets": {
+            "value": "[parameters('allowedVnets')]"
+          }
+        },
+        "groupNames": []
+      },
+      {
+        "policyDefinitionReferenceId": "Deploy subscription budget in MG_1",
+        "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/c9ed1fba-33f2-4839-b5e1-5572874951aa/providers/Microsoft.Authorization/policyDefinitions/DeploysubscriptionbudgetinMG",
+        "parameters": {
+          "effect": {
+            "value": "[parameters('budgetEffect')]"
+          }
+        },
+        "groupNames": []
+      },
+      {
+        "policyDefinitionReferenceId": "Storage accounts should be limited by allowed SKUs_1",
+        "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/7433c107-6db4-4ad1-b57a-a76dce0154a1",
+        "parameters": {
+          "effect": {
+            "value": "[parameters('storageAccountEffect')]"
+          },
+          "listOfAllowedSKUs": {
+            "value": "[parameters('StorageAccountListOfAllowedSKUs')]"
+          }
+        },
+        "groupNames": []
+      },
+      {
+        "policyDefinitionReferenceId": "Allowed virtual machine size SKUs_1",
+        "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/cccc23c7-8427-4f53-ad12-b6a63eb452b3",
+        "parameters": {
+          "listOfAllowedSKUs": {
+            "value": "[parameters('VMlistOfAllowedSKUs')]"
+          }
+        },
+        "groupNames": []
+      }
+    ]
+  }
+}

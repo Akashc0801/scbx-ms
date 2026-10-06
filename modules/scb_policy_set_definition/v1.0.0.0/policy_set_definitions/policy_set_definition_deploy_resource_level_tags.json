@@ -1,0 +1,253 @@
+{
+    "name": "SCB-Enterprise-Resource-level-tags",
+    "type": "Microsoft.Authorization/policySetDefinitions",
+    "apiVersion": "2021-06-01",
+    "scope": null,
+    "properties": {
+        "displayName": "SCB Enterprise Initiative Resource-level Tags",
+        "policyType": "Custom",
+        "description": "This includes all the policies related to Resource-level Tags.",
+        "metadata": {
+            "category": "Governance"
+        },
+        "parameters": {
+            "AppName": {
+                "type": "String",
+                "metadata": {
+                    "displayName": "AppName",
+                    "description": "Enable or disable the execution of the policy"
+                },
+                "defaultValue": "AppName"
+            },
+            "BusinessOwner": {
+                "type": "String",
+                "metadata": {
+                    "displayName": "BusinessOwner",
+                    "description": "Enable or disable the execution of the policy"
+                },
+                "defaultValue": "BusinessOwner"
+            },
+            "Owner": {
+                "type": "String",
+                "metadata": {
+                    "displayName": "Owner",
+                    "description": "Enable or disable the execution of the policy"
+                },
+                "defaultValue": "Owner"
+            },
+            "BusinessUnit": {
+                "type": "String",
+                "metadata": {
+                    "displayName": "BusinessUnit",
+                    "description": "Enable or disable the execution of the policy"
+                },
+                "defaultValue": "BusinessUnit"
+            },
+            "AppSupport": {
+                "type": "String",
+                "metadata": {
+                    "displayName": "AppSupport",
+                    "description": "Enable or disable the execution of the policy"
+                },
+                "defaultValue": "AppSupport"
+            },
+            "Environment": {
+                "type": "String",
+                "metadata": {
+                    "displayName": "Environment",
+                    "description": "Enable or disable the execution of the policy"
+                },
+                "defaultValue": "Environment"
+            },
+            "Criticality": {
+                "type": "String",
+                "metadata": {
+                    "displayName": "Criticality",
+                    "description": "Enable or disable the execution of the policy"
+                },
+                "defaultValue": "Criticality"
+            },
+            "CostCenter": {
+                "type": "String",
+                "metadata": {
+                    "displayName": "CostCenter",
+                    "description": "Enable or disable the execution of the policy"
+                },
+                "defaultValue": "CostCenter"
+            },
+            "BudgetID": {
+                "type": "String",
+                "metadata": {
+                    "displayName": "BudgetID",
+                    "description": "Enable or disable the execution of the policy"
+                },
+                "defaultValue": "BudgetID"
+            },
+            "Compliance": {
+                "type": "String",
+                "metadata": {
+                    "displayName": "Compliance",
+                    "description": "Enable or disable the execution of the policy"
+                },
+                "defaultValue": "Compliance"
+            },
+            "DataClassification": {
+                "type": "String",
+                "metadata": {
+                    "displayName": "DataClassification",
+                    "description": "Enable or disable the execution of the policy"
+                },
+                "defaultValue": "DataClassification"
+            },
+            "Status": {
+                "type": "String",
+                "metadata": {
+                    "displayName": "Status",
+                    "description": "Enable or disable the execution of the policy"
+                },
+                "defaultValue": "Status"
+            },
+            "Region": {
+                "type": "String",
+                "metadata": {
+                    "displayName": "Region",
+                    "description": "Enable or disable the execution of the policy"
+                },
+                "defaultValue": "Region"
+            }
+        },
+        "policyDefinitions": [
+            {
+                "policyDefinitionReferenceId": "TagPolicy_1",
+                "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/ea3f2387-9b95-492a-a190-fcdc54f7b070",
+                "parameters": {
+                    "tagName": {
+                        "value": "[parameters('AppName')]"
+                    }
+                },
+                "groupNames": []
+            },
+            {
+                "policyDefinitionReferenceId": "TagPolicy_2",
+                "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/ea3f2387-9b95-492a-a190-fcdc54f7b070",
+                "parameters": {
+                    "tagName": {
+                        "value": "[parameters('BusinessOwner')]"
+                    }
+                },
+                "groupNames": []
+            },
+            {
+                "policyDefinitionReferenceId": "TagPolicy_3",
+                "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/ea3f2387-9b95-492a-a190-fcdc54f7b070",
+                "parameters": {
+                    "tagName": {
+                        "value": "[parameters('Owner')]"
+                    }
+                },
+                "groupNames": []
+            },
+            {
+                "policyDefinitionReferenceId": "TagPolicy_4",
+                "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/ea3f2387-9b95-492a-a190-fcdc54f7b070",
+                "parameters": {
+                    "tagName": {
+                        "value": "[parameters('BusinessUnit')]"
+                    }
+                },
+                "groupNames": []
+            },
+            {
+                "policyDefinitionReferenceId": "TagPolicy_5",
+                "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/ea3f2387-9b95-492a-a190-fcdc54f7b070",
+                "parameters": {
+                    "tagName": {
+                        "value": "[parameters('AppSupport')]"
+                    }
+                },
+                "groupNames": []
+            },
+            {
+                "policyDefinitionReferenceId": "TagPolicy_6",
+                "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/ea3f2387-9b95-492a-a190-fcdc54f7b070",
+                "parameters": {
+                    "tagName": {
+                        "value": "[parameters('Environment')]"
+                    }
+                },
+                "groupNames": []
+            },
+            {
+                "policyDefinitionReferenceId": "TagPolicy_7",
+                "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/ea3f2387-9b95-492a-a190-fcdc54f7b070",
+                "parameters": {
+                    "tagName": {
+                        "value": "[parameters('Criticality')]"
+                    }
+                },
+                "groupNames": []
+            },
+            {
+                "policyDefinitionReferenceId": "TagPolicy_8",
+                "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/ea3f2387-9b95-492a-a190-fcdc54f7b070",
+                "parameters": {
+                    "tagName": {
+                        "value": "[parameters('CostCenter')]"
+                    }
+                },
+                "groupNames": []
+            },
+            {
+                "policyDefinitionReferenceId": "TagPolicy_9",
+                "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/ea3f2387-9b95-492a-a190-fcdc54f7b070",
+                "parameters": {
+                    "tagName": {
+                        "value": "[parameters('BudgetID')]"
+                    }
+                },
+                "groupNames": []
+            },
+            {
+                "policyDefinitionReferenceId": "TagPolicy_10",
+                "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/ea3f2387-9b95-492a-a190-fcdc54f7b070",
+                "parameters": {
+                    "tagName": {
+                        "value": "[parameters('Compliance')]"
+                    }
+                },
+                "groupNames": []
+            },
+            {
+                "policyDefinitionReferenceId": "TagPolicy_11",
+                "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/ea3f2387-9b95-492a-a190-fcdc54f7b070",
+                "parameters": {
+                    "tagName": {
+                        "value": "[parameters('DataClassification')]"
+                    }
+                },
+                "groupNames": []
+            },
+            {
+                "policyDefinitionReferenceId": "TagPolicy_12",
+                "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/ea3f2387-9b95-492a-a190-fcdc54f7b070",
+                "parameters": {
+                    "tagName": {
+                        "value": "[parameters('Status')]"
+                    }
+                },
+                "groupNames": []
+            },
+            {
+                "policyDefinitionReferenceId": "TagPolicy_13",
+                "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/ea3f2387-9b95-492a-a190-fcdc54f7b070",
+                "parameters": {
+                    "tagName": {
+                        "value": "[parameters('Region')]"
+                    }
+                },
+                "groupNames": []
+            }
+        ],
+        "policyDefinitionGroups": []
+    }
+}

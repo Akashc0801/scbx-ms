@@ -1,0 +1,103 @@
+{
+  "name": "Deploy-Storage-sslEnforcement",
+  "properties": {
+    "displayName": "Deploy HTTPS enforcement on storage accounts",
+    "description": "Deploy HTTPS enforcement and minimum TLS version on storage accounts to ensure secure transfer. This policy will configure storage accounts to only accept secure HTTPS connections.",
+    "metadata": {
+      "version": "1.0.0",
+      "category": "Storage",
+      "source": "SCB Azure Landing Zones"
+    },
+    "mode": "Indexed",
+    "parameters": {
+      "effect": {
+        "type": "String",
+        "defaultValue": "DeployIfNotExists",
+        "allowedValues": [
+          "DeployIfNotExists",
+          "Disabled"
+        ],
+        "metadata": {
+          "displayName": "Effect",
+          "description": "Enable or disable the execution of the policy"
+        }
+      },
+      "minimumTlsVersion": {
+        "type": "String",
+        "defaultValue": "TLS1_2",
+        "allowedValues": [
+          "TLS1_0",
+          "TLS1_1",
+          "TLS1_2"
+        ],
+        "metadata": {
+          "displayName": "Minimum TLS version",
+          "description": "Minimum TLS version for Storage accounts"
+        }
+      }
+    },
+    "policyRule": {
+      "if": {
+        "field": "type",
+        "equals": "Microsoft.Storage/storageAccounts"
+      },
+      "then": {
+        "effect": "[parameters('effect')]",
+        "details": {
+          "type": "Microsoft.Storage/storageAccounts",
+          "existenceCondition": {
+            "allOf": [
+              {
+                "field": "Microsoft.Storage/storageAccounts/supportsHttpsTrafficOnly",
+                "equals": true
+              },
+              {
+                "field": "Microsoft.Storage/storageAccounts/minimumTlsVersion",
+                "equals": "[parameters('minimumTlsVersion')]"
+              }
+            ]
+          },
+          "roleDefinitionIds": [
+            "/providers/Microsoft.Authorization/roleDefinitions/b24988ac-6180-42a0-ab88-20f7382dd24c"
+          ],
+          "deployment": {
+            "properties": {
+              "mode": "incremental",
+              "template": {
+                "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+                "contentVersion": "1.0.0.0",
+                "parameters": {
+                  "storageAccountName": {
+                    "type": "string"
+                  },
+                  "minimumTlsVersion": {
+                    "type": "string"
+                  }
+                },
+                "resources": [
+                  {
+                    "type": "Microsoft.Storage/storageAccounts",
+                    "apiVersion": "2021-09-01",
+                    "name": "[parameters('storageAccountName')]",
+                    "properties": {
+                      "supportsHttpsTrafficOnly": true,
+                      "minimumTlsVersion": "[parameters('minimumTlsVersion')]"
+                    }
+                  }
+                ]
+              },
+              "parameters": {
+                "storageAccountName": {
+                  "value": "[field('name')]"
+                },
+                "minimumTlsVersion": {
+                  "value": "[parameters('minimumTlsVersion')]"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

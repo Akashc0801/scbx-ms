@@ -1,0 +1,60 @@
+{
+  "type": "Microsoft.Authorization/policyDefinitions",
+  "apiVersion": "2021-06-01",
+  "name": "IAM_Policy_105",
+  "properties": {
+    "displayName": "SCF - Manual attestation for Detection and Investigation of Break Glass Accounts",
+    "policyType": "Custom",
+    "mode": "All",
+    "description": "This policy requires manual attestation to ensure that mechanisms are in place to detect and investigate the use of break glass accounts. Break glass accounts are highly privileged accounts used for emergency access to critical systems. It is crucial to monitor their usage to prevent and respond to potential security incidents.",
+    "metadata": {
+      "Description": "This policy requires manual attestation to ensure that mechanisms are in place to detect and investigate the use of break glass accounts. Break glass accounts are highly privileged accounts used for emergency access to critical systems. It is crucial to monitor their usage to prevent and respond to potential security incidents.",
+      "Responsible teams": [
+        "Platform",
+        "Security Operations"
+      ],
+      "category": "Compliance",
+      "createdBy": "695b7068-08dc-4778-b824-e8a1087605e1",
+      "createdOn": "2025-09-25T08:21:53.6944352Z",
+      "deployedBy": "epac/13b032ea-fae8-4455-b845-679a21e9cdd4/epac-scf",
+      "pacOwnerId": "13b032ea-fae8-4455-b845-679a21e9cdd4",
+      "securityCenter": {
+        "severity": "Medium"
+      },
+      "severity": "Medium",
+      "updatedBy": "695b7068-08dc-4778-b824-e8a1087605e1",
+      "updatedOn": "2025-10-13T12:06:33.4050546Z"
+    },
+    "version": "1.0.0",
+    "parameters": {
+      "effect": {
+        "allowedValues": [
+          "Manual",
+          "Disabled"
+        ],
+        "defaultValue": "Manual",
+        "metadata": {
+          "description": "Enable or disable the execution of the policy",
+          "displayName": "Effect"
+        },
+        "type": "String"
+      }
+    },
+    "policyRule": {
+      "if": {
+        "equals": "Microsoft.Resources/subscriptions",
+        "field": "type"
+      },
+      "then": {
+        "details": {
+          "defaultState": "Unknown"
+        },
+        "effect": "[parameters('effect')]"
+      }
+    },
+    "versions": [
+      "1.0.0"
+    ]
+  },
+  "id": "/providers/Microsoft.Management/managementGroups/SCF/providers/Microsoft.Authorization/policyDefinitions/7d17a2bd-a8b8-4f20-b40c-dddbdd7d79af"
+}

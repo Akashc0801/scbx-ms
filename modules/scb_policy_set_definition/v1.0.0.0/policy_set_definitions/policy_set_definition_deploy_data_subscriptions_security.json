@@ -1,0 +1,961 @@
+{
+  "name": "SCB-Enterprise-Data-Subscriptions-Security",
+  "properties": {
+    "displayName": "Azure Data Subscriptions Security Controls",
+    "description": "This policy initiative enforces security controls for Data subscriptions, including network isolation, encryption, identity management, authentication, diagnostic logging, and data protection for ADLS Gen2/Azure Storage, Event Hub, Event Grid, Azure Data Factory, Azure SQL Database, and Logic Apps.",
+    "metadata": {
+      "version": "1.0.0",
+      "category": "Security Center",
+      "source": "SCF-Data-Subscriptions-Initiative",
+      "alzCloudEnvironments": [
+        "AzureCloud"
+      ]
+    },
+    "parameters": {
+      "effectStorageMinTls": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Effect - Storage accounts should have the specified minimum TLS version",
+          "description": "Enforce minimum TLS version for Storage accounts."
+        },
+        "allowedValues": [
+          "Audit",
+          "Deny",
+          "Disabled"
+        ],
+        "defaultValue": "Audit"
+      },
+      "storageMinimumTlsVersion": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Minimum TLS Version - Storage Accounts",
+          "description": "The minimum TLS version for Storage accounts."
+        },
+        "defaultValue": "TLS1_2"
+      },
+      "effectConfigureStoragePrivateLink": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Effect - Configure Storage account to use a private link connection",
+          "description": "Configure private link for Storage accounts. As per deployment/infra configuration of environment."
+        },
+        "allowedValues": [
+          "DeployIfNotExists",
+          "Disabled"
+        ],
+        "defaultValue": "DeployIfNotExists"
+      },
+      "storagePrivateEndpointSubnetId": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Private Endpoint Subnet ID - Storage Account",
+          "description": "The subnet resource ID for the Storage account private endpoint. As per deployment/infra configuration of environment."
+        }
+      },
+      "storageTargetSubResource": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Target Sub Resource - Storage Account Private Link",
+          "description": "The target sub-resource for the Storage account private link connection."
+        },
+        "allowedValues": [
+          "blob",
+          "blob_secondary",
+          "table",
+          "table_secondary",
+          "queue",
+          "queue_secondary",
+          "file",
+          "web",
+          "web_secondary",
+          "dfs",
+          "dfs_secondary"
+        ],
+        "defaultValue": "blob"
+      },
+      "effectStorageDiagToLogAnalytics": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Effect - Configure diagnostic settings for Storage Accounts to Log Analytics",
+          "description": "Configure diagnostic settings for Storage Accounts to Log Analytics workspace."
+        },
+        "allowedValues": [
+          "DeployIfNotExists",
+          "AuditIfNotExists",
+          "Disabled"
+        ],
+        "defaultValue": "DeployIfNotExists"
+      },
+      "effectBlobDiagToLogAnalytics": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Effect - Configure diagnostic settings for Blob Services to Log Analytics",
+          "description": "Configure diagnostic settings for Blob Services to Log Analytics workspace."
+        },
+        "allowedValues": [
+          "DeployIfNotExists",
+          "AuditIfNotExists",
+          "Disabled"
+        ],
+        "defaultValue": "DeployIfNotExists"
+      },
+      "storageMetricsEnabled": {
+        "type": "Boolean",
+        "metadata": {
+          "displayName": "Storage Metrics Enabled",
+          "description": "Whether to enable metrics for Storage diagnostic settings (Boolean type for Storage/Blob diagnostics policies 59759c62 and b4fe1a3b)."
+        },
+        "allowedValues": [
+          true,
+          false
+        ],
+        "defaultValue": true
+      },
+      "storageBlobLogsEnabled": {
+        "type": "Boolean",
+        "metadata": {
+          "displayName": "Storage Blob Logs Enabled",
+          "description": "Whether to enable logs for Blob Services diagnostic settings (Boolean type for Blob diagnostics policy b4fe1a3b)."
+        },
+        "allowedValues": [
+          true,
+          false
+        ],
+        "defaultValue": true
+      },
+      "effectConfigureEventHubPE": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Effect - Configure Event Hub namespaces with private endpoints",
+          "description": "Configure private endpoints for Event Hub namespaces. As per deployment/infra configuration of environment."
+        },
+        "allowedValues": [
+          "DeployIfNotExists",
+          "Disabled"
+        ],
+        "defaultValue": "DeployIfNotExists"
+      },
+      "eventHubPrivateEndpointSubnetId": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Private Endpoint Subnet ID - Event Hub",
+          "description": "The subnet resource ID for the Event Hub private endpoint. As per deployment/infra configuration of environment."
+        }
+      },
+      "effectEventHubResourceLogs": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Effect - Resource logs in Event Hub should be enabled",
+          "description": "Enable resource logs for Event Hub."
+        },
+        "allowedValues": [
+          "AuditIfNotExists",
+          "Disabled"
+        ],
+        "defaultValue": "AuditIfNotExists"
+      },
+      "eventHubRetentionDays": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Required Retention Days - Event Hub Resource Logs",
+          "description": "The required diagnostic logs retention in days for Event Hub."
+        },
+        "defaultValue": "90"
+      },
+      "effectEventHubDiagToEventHub": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Effect - Deploy Diagnostic Settings for Event Hub to Event Hub",
+          "description": "Deploy diagnostic settings for Event Hub to Event Hub."
+        },
+        "allowedValues": [
+          "DeployIfNotExists",
+          "Disabled"
+        ],
+        "defaultValue": "DeployIfNotExists"
+      },
+      "effectEventHubDiagToLogAnalytics": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Effect - Deploy Diagnostic Settings for Event Hub to Log Analytics",
+          "description": "Deploy diagnostic settings for Event Hub to Log Analytics workspace."
+        },
+        "allowedValues": [
+          "DeployIfNotExists",
+          "Disabled"
+        ],
+        "defaultValue": "DeployIfNotExists"
+      },
+      "effectConfigureEventGridDomainsPE": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Effect - Configure Azure Event Grid domains with private endpoints",
+          "description": "Configure private endpoints for Azure Event Grid domains. As per deployment/infra configuration of environment."
+        },
+        "allowedValues": [
+          "DeployIfNotExists",
+          "Disabled"
+        ],
+        "defaultValue": "DeployIfNotExists"
+      },
+      "eventGridDomainsPrivateEndpointSubnetId": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Private Endpoint Subnet ID - Event Grid Domains",
+          "description": "The subnet resource ID for the Event Grid domains private endpoint. As per deployment/infra configuration of environment."
+        }
+      },
+      "effectConfigureEventGridTopicsPE": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Effect - Configure Azure Event Grid topics with private endpoints",
+          "description": "Configure private endpoints for Azure Event Grid topics. As per deployment/infra configuration of environment."
+        },
+        "allowedValues": [
+          "DeployIfNotExists",
+          "Disabled"
+        ],
+        "defaultValue": "DeployIfNotExists"
+      },
+      "eventGridTopicsPrivateEndpointSubnetId": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Private Endpoint Subnet ID - Event Grid Topics",
+          "description": "The subnet resource ID for the Event Grid topics private endpoint. As per deployment/infra configuration of environment."
+        }
+      },
+      "effectAdfLinkedServiceAllowList": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Effect - Azure Data Factory linked service resource type should be in allow list",
+          "description": "Restrict Data Factory linked service resource types to an allowed list."
+        },
+        "allowedValues": [
+          "Audit",
+          "Deny",
+          "Disabled"
+        ],
+        "defaultValue": "Audit"
+      },
+      "adfAllowedLinkedServiceResourceTypes": {
+        "type": "Array",
+        "metadata": {
+          "displayName": "Allowed Linked Service Resource Types - ADF",
+          "description": "The list of allowed linked service resource types for Azure Data Factory. As per deployment/infra configuration of environment."
+        },
+        "defaultValue": []
+      },
+      "effectAdfIntegrationRuntimeCores": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Effect - Azure Data Factory integration runtime should have a limit for number of cores",
+          "description": "Limit the number of cores for Data Factory integration runtime."
+        },
+        "allowedValues": [
+          "Audit",
+          "Deny",
+          "Disabled"
+        ],
+        "defaultValue": "Audit"
+      },
+      "adfMaxCores": {
+        "type": "Integer",
+        "metadata": {
+          "displayName": "Max Cores - ADF Integration Runtime",
+          "description": "The maximum number of cores allowed for ADF integration runtime."
+        },
+        "defaultValue": 32
+      },
+      "effectAdfAllowedDomains": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Effect - [Preview]: ADF pipelines should only communicate with allowed domains",
+          "description": "Restrict ADF pipelines to communicate only with allowed domains."
+        },
+        "allowedValues": [
+          "Deny",
+          "Disabled"
+        ],
+        "defaultValue": "Deny"
+      },
+      "adfAllowedDomainNames": {
+        "type": "Array",
+        "metadata": {
+          "displayName": "Allowed Domain Names - ADF Pipelines",
+          "description": "The list of allowed domain names for ADF pipelines. As per deployment/infra configuration of environment."
+        },
+        "defaultValue": []
+      },
+      "effectConfigureAdfPE": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Effect - Configure private endpoints for Data factories",
+          "description": "Configure private endpoints for Azure Data Factory. As per deployment/infra configuration of environment."
+        },
+        "allowedValues": [
+          "DeployIfNotExists",
+          "Disabled"
+        ],
+        "defaultValue": "DeployIfNotExists"
+      },
+      "adfPrivateEndpointSubnetId": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Private Endpoint Subnet ID - Azure Data Factory",
+          "description": "The subnet resource ID for the Data Factory private endpoint. As per deployment/infra configuration of environment."
+        }
+      },
+      "adfGroupId": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Group ID - ADF Private Endpoint",
+          "description": "The group ID (target sub-resource) for the Data Factory private endpoint."
+        },
+        "allowedValues": [
+          "dataFactory",
+          "portal"
+        ],
+        "defaultValue": "dataFactory"
+      },
+      "effectSqlAuditingEnabled": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Effect - Auditing on SQL server should be enabled",
+          "description": "Audit whether auditing is enabled on SQL servers."
+        },
+        "allowedValues": [
+          "AuditIfNotExists",
+          "Disabled"
+        ],
+        "defaultValue": "AuditIfNotExists"
+      },
+      "effectConfigureSqlPE": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Effect - Configure Azure SQL Server to enable private endpoint connections",
+          "description": "Configure private endpoints for Azure SQL Server. As per deployment/infra configuration of environment."
+        },
+        "allowedValues": [
+          "DeployIfNotExists",
+          "Disabled"
+        ],
+        "defaultValue": "DeployIfNotExists"
+      },
+      "sqlPrivateEndpointSubnetId": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Private Endpoint Subnet ID - Azure SQL Server",
+          "description": "The subnet resource ID for the SQL Server private endpoint. As per deployment/infra configuration of environment."
+        }
+      },
+      "effectConfigureSqlAuditing": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Effect - Configure SQL servers to have auditing enabled",
+          "description": "Configure auditing for SQL servers."
+        },
+        "allowedValues": [
+          "DeployIfNotExists",
+          "Disabled"
+        ],
+        "defaultValue": "DeployIfNotExists"
+      },
+      "sqlAuditingRetentionDays": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Retention Days - SQL Auditing",
+          "description": "The number of days to retain SQL auditing logs."
+        },
+        "defaultValue": "180"
+      },
+      "sqlAuditingStorageResourceGroup": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Storage Resource Group - SQL Auditing",
+          "description": "The resource group of the storage account for SQL auditing. As per deployment/infra configuration of environment."
+        },
+        "defaultValue": ""
+      },
+      "effectConfigureSqlAuditingToLAW": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Effect - Configure SQL servers to have auditing enabled to Log Analytics workspace",
+          "description": "Configure auditing for SQL servers to send audit logs to Log Analytics workspace."
+        },
+        "allowedValues": [
+          "DeployIfNotExists",
+          "Disabled"
+        ],
+        "defaultValue": "DeployIfNotExists"
+      },
+      "effectLogicAppsResourceLogs": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Effect - Resource logs in Logic Apps should be enabled",
+          "description": "Enable resource logs for Logic Apps."
+        },
+        "allowedValues": [
+          "AuditIfNotExists",
+          "Disabled"
+        ],
+        "defaultValue": "AuditIfNotExists"
+      },
+      "logicAppsRetentionDays": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Required Retention Days - Logic Apps Resource Logs",
+          "description": "The required diagnostic logs retention in days for Logic Apps."
+        },
+        "defaultValue": "30"
+      },
+      "effectLogicAppsDiagToEventHub": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Effect - Deploy Diagnostic Settings for Logic Apps to Event Hub",
+          "description": "Deploy diagnostic settings for Logic Apps to Event Hub."
+        },
+        "allowedValues": [
+          "DeployIfNotExists",
+          "Disabled"
+        ],
+        "defaultValue": "DeployIfNotExists"
+      },
+      "effectLogicAppsDiagToLogAnalytics": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Effect - Deploy Diagnostic Settings for Logic Apps to Log Analytics",
+          "description": "Deploy diagnostic settings for Logic Apps to Log Analytics workspace."
+        },
+        "allowedValues": [
+          "DeployIfNotExists",
+          "Disabled"
+        ],
+        "defaultValue": "DeployIfNotExists"
+      },
+      "effectStorageCopyScope": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Effect - Allowed Copy scope should be restricted for Storage Accounts",
+          "description": "Restrict the allowed copy scope for Storage Accounts. Source and destination are authenticated via AAD."
+        },
+        "allowedValues": [
+          "Audit",
+          "Deny",
+          "Disabled"
+        ],
+        "defaultValue": "Deny"
+      },
+      "storageAllowedCopyScope": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Allowed Copy Scope - Storage Accounts",
+          "description": "The allowed copy scope for Storage Accounts."
+        },
+        "defaultValue": "AAD"
+      },
+      "effectStorageNetworkAclsBypass": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Effect - Network ACL bypass option should be restricted for Storage Accounts",
+          "description": "Restrict the network ACL bypass options for Storage Accounts. Logging and Metrics are safe, non-data-plane bypasses."
+        },
+        "allowedValues": [
+          "Audit",
+          "Deny",
+          "Disabled"
+        ],
+        "defaultValue": "Deny"
+      },
+      "storageAllowedBypassOptions": {
+        "type": "Array",
+        "metadata": {
+          "displayName": "Allowed Bypass Options - Storage Network ACLs",
+          "description": "The allowed network ACL bypass options for Storage Accounts."
+        },
+        "defaultValue": [
+          "Logging",
+          "Metrics"
+        ]
+      },
+      "effectStorageContainerDeleteRetention": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Effect - Storage Accounts should use container delete retention",
+          "description": "Enforce container delete retention policy for Storage Accounts."
+        },
+        "allowedValues": [
+          "Audit",
+          "Deny",
+          "Disabled"
+        ],
+        "defaultValue": "Deny"
+      },
+      "storageMinContainerDeleteRetentionDays": {
+        "type": "Integer",
+        "metadata": {
+          "displayName": "Minimum Container Delete Retention Days - Storage Accounts",
+          "description": "The minimum number of days for container delete retention on Storage Accounts."
+        },
+        "defaultValue": 30
+      },
+      "logAnalyticsWorkspaceId": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Log Analytics Workspace ID",
+          "description": "The Log Analytics workspace resource ID for diagnostic logging. As per deployment/infra configuration of environment.",
+          "strongType": "omsWorkspace"
+        }
+      },
+      "eventHubRuleId": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Event Hub Authorization Rule ID",
+          "description": "The Event Hub authorization rule resource ID for diagnostic logging. As per deployment/infra configuration of environment."
+        }
+      },
+      "eventHubLocation": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Event Hub Location",
+          "description": "The location for Event Hub diagnostic logging. As per deployment/infra configuration of environment."
+        }
+      },
+      "diagnosticProfileName": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Diagnostic Profile Name",
+          "description": "The name of the diagnostic settings profile."
+        },
+        "defaultValue": "setByPolicy"
+      },
+      "metricsEnabled": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Metrics Enabled",
+          "description": "Whether to enable metrics for diagnostic settings (String type for EventHub/Logic Apps Deploy Diagnostic Settings policies)."
+        },
+        "allowedValues": [
+          "True",
+          "False"
+        ],
+        "defaultValue": "True"
+      },
+      "logsEnabled": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Logs Enabled",
+          "description": "Whether to enable logs for diagnostic settings (String type for EventHub/Logic Apps Deploy Diagnostic Settings policies)."
+        },
+        "allowedValues": [
+          "True",
+          "False"
+        ],
+        "defaultValue": "True"
+      }
+    },
+    "policyDefinitions": [
+      {
+        "policyDefinitionReferenceId": "StorageMinTlsVersion",
+        "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/fe83a0eb-a853-422d-aac2-1bffd182c5d0",
+        "definitionVersion": "1.*.*",
+        "parameters": {
+          "effect": {
+            "value": "[parameters('effectStorageMinTls')]"
+          },
+          "minimumTlsVersion": {
+            "value": "[parameters('storageMinimumTlsVersion')]"
+          }
+        },
+        "groupNames": []
+      },
+      {
+        "policyDefinitionReferenceId": "ConfigureStoragePrivateLink",
+        "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/9f766f00-8d11-464e-80e1-4091d7874074",
+        "definitionVersion": "1.*.*",
+        "parameters": {
+          "effect": {
+            "value": "[parameters('effectConfigureStoragePrivateLink')]"
+          },
+          "privateEndpointSubnetId": {
+            "value": "[parameters('storagePrivateEndpointSubnetId')]"
+          },
+          "targetSubResource": {
+            "value": "[parameters('storageTargetSubResource')]"
+          }
+        },
+        "groupNames": []
+      },
+      {
+        "policyDefinitionReferenceId": "StorageDiagToLogAnalytics",
+        "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/59759c62-9a22-4cdf-ae64-074495983fef",
+        "definitionVersion": "1.*.*",
+        "parameters": {
+          "effect": {
+            "value": "[parameters('effectStorageDiagToLogAnalytics')]"
+          },
+          "profileName": {
+            "value": "[parameters('diagnosticProfileName')]"
+          },
+          "logAnalytics": {
+            "value": "[parameters('logAnalyticsWorkspaceId')]"
+          },
+          "metricsEnabled": {
+            "value": "[parameters('storageMetricsEnabled')]"
+          }
+        },
+        "groupNames": []
+      },
+      {
+        "policyDefinitionReferenceId": "BlobDiagToLogAnalytics",
+        "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/b4fe1a3b-0715-4c6c-a5ea-ffc33cf823cb",
+        "definitionVersion": "1.*.*",
+        "parameters": {
+          "effect": {
+            "value": "[parameters('effectBlobDiagToLogAnalytics')]"
+          },
+          "profileName": {
+            "value": "[parameters('diagnosticProfileName')]"
+          },
+          "logAnalytics": {
+            "value": "[parameters('logAnalyticsWorkspaceId')]"
+          },
+          "metricsEnabled": {
+            "value": "[parameters('storageMetricsEnabled')]"
+          },
+          "logsEnabled": {
+            "value": "[parameters('storageBlobLogsEnabled')]"
+          }
+        },
+        "groupNames": []
+      },
+      {
+        "policyDefinitionReferenceId": "ConfigureEventHubPE",
+        "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/91678b7c-d721-4fc5-b179-3cdf74e96b1c",
+        "definitionVersion": "1.*.*",
+        "parameters": {
+          "effect": {
+            "value": "[parameters('effectConfigureEventHubPE')]"
+          },
+          "privateEndpointSubnetId": {
+            "value": "[parameters('eventHubPrivateEndpointSubnetId')]"
+          }
+        },
+        "groupNames": []
+      },
+      {
+        "policyDefinitionReferenceId": "EventHubResourceLogs",
+        "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/83a214f7-d01a-484b-91a9-ed54470c9a6a",
+        "definitionVersion": "1.*.*",
+        "parameters": {
+          "effect": {
+            "value": "[parameters('effectEventHubResourceLogs')]"
+          },
+          "requiredRetentionDays": {
+            "value": "[parameters('eventHubRetentionDays')]"
+          }
+        },
+        "groupNames": []
+      },
+      {
+        "policyDefinitionReferenceId": "EventHubDiagToEventHub",
+        "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/ef7b61ef-b8e4-4c91-8e78-6946c6b0023f",
+        "definitionVersion": "1.*.*",
+        "parameters": {
+          "effect": {
+            "value": "[parameters('effectEventHubDiagToEventHub')]"
+          },
+          "profileName": {
+            "value": "[parameters('diagnosticProfileName')]"
+          },
+          "eventHubRuleId": {
+            "value": "[parameters('eventHubRuleId')]"
+          },
+          "eventHubLocation": {
+            "value": "[parameters('eventHubLocation')]"
+          },
+          "metricsEnabled": {
+            "value": "[parameters('metricsEnabled')]"
+          },
+          "logsEnabled": {
+            "value": "[parameters('logsEnabled')]"
+          }
+        },
+        "groupNames": []
+      },
+      {
+        "policyDefinitionReferenceId": "EventHubDiagToLogAnalytics",
+        "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/1f6e93e8-6b31-41b1-83f6-36e449a42579",
+        "definitionVersion": "1.*.*",
+        "parameters": {
+          "effect": {
+            "value": "[parameters('effectEventHubDiagToLogAnalytics')]"
+          },
+          "profileName": {
+            "value": "[parameters('diagnosticProfileName')]"
+          },
+          "logAnalytics": {
+            "value": "[parameters('logAnalyticsWorkspaceId')]"
+          },
+          "metricsEnabled": {
+            "value": "[parameters('metricsEnabled')]"
+          },
+          "logsEnabled": {
+            "value": "[parameters('logsEnabled')]"
+          }
+        },
+        "groupNames": []
+      },
+      {
+        "policyDefinitionReferenceId": "ConfigureEventGridDomainsPE",
+        "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/36f4658a-848a-467b-881c-e6fa20cf75fc",
+        "definitionVersion": "1.*.*",
+        "parameters": {
+          "effect": {
+            "value": "[parameters('effectConfigureEventGridDomainsPE')]"
+          },
+          "privateEndpointSubnetId": {
+            "value": "[parameters('eventGridDomainsPrivateEndpointSubnetId')]"
+          }
+        },
+        "groupNames": []
+      },
+      {
+        "policyDefinitionReferenceId": "ConfigureEventGridTopicsPE",
+        "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/6fcec95c-fbdf-45e8-91e1-e3175d9c9eca",
+        "definitionVersion": "1.*.*",
+        "parameters": {
+          "effect": {
+            "value": "[parameters('effectConfigureEventGridTopicsPE')]"
+          },
+          "privateEndpointSubnetId": {
+            "value": "[parameters('eventGridTopicsPrivateEndpointSubnetId')]"
+          }
+        },
+        "groupNames": []
+      },
+      {
+        "policyDefinitionReferenceId": "AdfLinkedServiceAllowList",
+        "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/6809a3d0-d354-42fb-b955-783d207c62a8",
+        "definitionVersion": "1.*.*",
+        "parameters": {
+          "effect": {
+            "value": "[parameters('effectAdfLinkedServiceAllowList')]"
+          },
+          "allowedLinkedServiceResourceTypes": {
+            "value": "[parameters('adfAllowedLinkedServiceResourceTypes')]"
+          }
+        },
+        "groupNames": []
+      },
+      {
+        "policyDefinitionReferenceId": "AdfIntegrationRuntimeCores",
+        "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/85bb39b5-2f66-49f8-9306-77da3ac5130f",
+        "definitionVersion": "1.*.*",
+        "parameters": {
+          "effect": {
+            "value": "[parameters('effectAdfIntegrationRuntimeCores')]"
+          },
+          "maxCores": {
+            "value": "[parameters('adfMaxCores')]"
+          }
+        },
+        "groupNames": []
+      },
+      {
+        "policyDefinitionReferenceId": "AdfAllowedDomains",
+        "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/3d02a511-74e5-4dab-a5fd-878704d4a61a",
+        "definitionVersion": "1.*.*",
+        "parameters": {
+          "effect": {
+            "value": "[parameters('effectAdfAllowedDomains')]"
+          },
+          "allowedDomainNames": {
+            "value": "[parameters('adfAllowedDomainNames')]"
+          }
+        },
+        "groupNames": []
+      },
+      {
+        "policyDefinitionReferenceId": "ConfigureAdfPE",
+        "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/496ca26b-f669-4322-a1ad-06b7b5e41882",
+        "definitionVersion": "1.*.*",
+        "parameters": {
+          "effect": {
+            "value": "[parameters('effectConfigureAdfPE')]"
+          },
+          "privateEndpointSubnetId": {
+            "value": "[parameters('adfPrivateEndpointSubnetId')]"
+          },
+          "groupId": {
+            "value": "[parameters('adfGroupId')]"
+          }
+        },
+        "groupNames": []
+      },
+      {
+        "policyDefinitionReferenceId": "SqlAuditingEnabled",
+        "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/a6fb4358-5bf4-4ad7-ba82-2cd2f41ce5e9",
+        "definitionVersion": "1.*.*",
+        "parameters": {
+          "effect": {
+            "value": "[parameters('effectSqlAuditingEnabled')]"
+          },
+          "setting": {
+            "value": "enabled"
+          }
+        },
+        "groupNames": []
+      },
+      {
+        "policyDefinitionReferenceId": "ConfigureSqlPE",
+        "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/8e8ca470-d980-4831-99e6-dc70d9f6af87",
+        "definitionVersion": "1.*.*",
+        "parameters": {
+          "effect": {
+            "value": "[parameters('effectConfigureSqlPE')]"
+          },
+          "privateEndpointSubnetId": {
+            "value": "[parameters('sqlPrivateEndpointSubnetId')]"
+          }
+        },
+        "groupNames": []
+      },
+      {
+        "policyDefinitionReferenceId": "ConfigureSqlAuditing",
+        "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/f4c68484-132f-41f9-9b6d-3e4b1cb55036",
+        "definitionVersion": "1.*.*",
+        "parameters": {
+          "effect": {
+            "value": "[parameters('effectConfigureSqlAuditing')]"
+          },
+          "retentionDays": {
+            "value": "[parameters('sqlAuditingRetentionDays')]"
+          },
+          "storageAccountsResourceGroup": {
+            "value": "[parameters('sqlAuditingStorageResourceGroup')]"
+          }
+        },
+        "groupNames": []
+      },
+      {
+        "policyDefinitionReferenceId": "ConfigureSqlAuditingToLAW",
+        "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/25da7dfb-0666-4a15-a8f5-402127efd8bb",
+        "definitionVersion": "1.*.*",
+        "parameters": {
+          "effect": {
+            "value": "[parameters('effectConfigureSqlAuditingToLAW')]"
+          },
+          "logAnalyticsWorkspaceId": {
+            "value": "[parameters('logAnalyticsWorkspaceId')]"
+          }
+        },
+        "groupNames": []
+      },
+      {
+        "policyDefinitionReferenceId": "LogicAppsResourceLogs",
+        "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/34f95f76-5386-4de7-b824-0d8478470c9d",
+        "definitionVersion": "1.*.*",
+        "parameters": {
+          "effect": {
+            "value": "[parameters('effectLogicAppsResourceLogs')]"
+          },
+          "requiredRetentionDays": {
+            "value": "[parameters('logicAppsRetentionDays')]"
+          }
+        },
+        "groupNames": []
+      },
+      {
+        "policyDefinitionReferenceId": "LogicAppsDiagToEventHub",
+        "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/a1dae6c7-13f3-48ea-a149-ff8442661f60",
+        "definitionVersion": "1.*.*",
+        "parameters": {
+          "effect": {
+            "value": "[parameters('effectLogicAppsDiagToEventHub')]"
+          },
+          "profileName": {
+            "value": "[parameters('diagnosticProfileName')]"
+          },
+          "eventHubRuleId": {
+            "value": "[parameters('eventHubRuleId')]"
+          },
+          "eventHubLocation": {
+            "value": "[parameters('eventHubLocation')]"
+          },
+          "metricsEnabled": {
+            "value": "[parameters('metricsEnabled')]"
+          },
+          "logsEnabled": {
+            "value": "[parameters('logsEnabled')]"
+          }
+        },
+        "groupNames": []
+      },
+      {
+        "policyDefinitionReferenceId": "LogicAppsDiagToLogAnalytics",
+        "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/b889a06c-ec72-4b03-910a-cb169ee18721",
+        "definitionVersion": "1.*.*",
+        "parameters": {
+          "effect": {
+            "value": "[parameters('effectLogicAppsDiagToLogAnalytics')]"
+          },
+          "profileName": {
+            "value": "[parameters('diagnosticProfileName')]"
+          },
+          "logAnalytics": {
+            "value": "[parameters('logAnalyticsWorkspaceId')]"
+          },
+          "metricsEnabled": {
+            "value": "[parameters('metricsEnabled')]"
+          },
+          "logsEnabled": {
+            "value": "[parameters('logsEnabled')]"
+          }
+        },
+        "groupNames": []
+      },
+      {
+        "policyDefinitionReferenceId": "StorageCopyScope",
+        "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/a1074ffe-b122-4cec-946a-1becee305a4c/providers/Microsoft.Authorization/policyDefinitions/Deny-Storage-CopyScope",
+        "definitionVersion": "1.*.*",
+        "parameters": {
+          "effect": {
+            "value": "[parameters('effectStorageCopyScope')]"
+          },
+          "allowedCopyScope": {
+            "value": "[parameters('storageAllowedCopyScope')]"
+          }
+        },
+        "groupNames": []
+      },
+      {
+        "policyDefinitionReferenceId": "StorageNetworkAclsBypass",
+        "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/a1074ffe-b122-4cec-946a-1becee305a4c/providers/Microsoft.Authorization/policyDefinitions/Deny-Storage-NetworkAclsBypass",
+        "definitionVersion": "1.*.*",
+        "parameters": {
+          "effect": {
+            "value": "[parameters('effectStorageNetworkAclsBypass')]"
+          },
+          "allowedBypassOptions": {
+            "value": "[parameters('storageAllowedBypassOptions')]"
+          }
+        },
+        "groupNames": []
+      },
+      {
+        "policyDefinitionReferenceId": "StorageContainerDeleteRetention",
+        "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/a1074ffe-b122-4cec-946a-1becee305a4c/providers/Microsoft.Authorization/policyDefinitions/Deny-Storage-ContainerDeleteRetentionPolicy",
+        "definitionVersion": "1.*.*",
+        "parameters": {
+          "effect": {
+            "value": "[parameters('effectStorageContainerDeleteRetention')]"
+          },
+          "minContainerDeleteRetentionInDays": {
+            "value": "[parameters('storageMinContainerDeleteRetentionDays')]"
+          }
+        },
+        "groupNames": []
+      }
+    ]
+  }
+}

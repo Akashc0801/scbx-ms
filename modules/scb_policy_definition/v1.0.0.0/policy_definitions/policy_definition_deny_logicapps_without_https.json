@@ -1,0 +1,53 @@
+{
+  "name": "Deny-LogicApps-Without-Https",
+  "properties": {
+    "displayName": "Logic Apps should only be accessible over HTTPS",
+    "description": "Use of HTTPS ensures server/service authentication and protects data in transit from network layer eavesdropping attacks. This policy denies the creation of Logic Apps that allow HTTP traffic.",
+    "metadata": {
+      "version": "1.0.0",
+      "category": "Logic Apps",
+      "source": "SCB Azure Landing Zones"
+    },
+    "mode": "Indexed",
+    "parameters": {
+      "effect": {
+        "type": "String",
+        "defaultValue": "Deny",
+        "allowedValues": [
+          "Audit",
+          "Deny",
+          "Disabled"
+        ],
+        "metadata": {
+          "displayName": "Effect",
+          "description": "Enable or disable the execution of the policy"
+        }
+      }
+    },
+    "policyRule": {
+      "if": {
+        "allOf": [
+          {
+            "field": "type",
+            "equals": "Microsoft.Logic/workflows"
+          },
+          {
+            "anyOf": [
+              {
+                "field": "Microsoft.Logic/workflows/accessControl.triggers.allowedCallerIpAddresses",
+                "exists": false
+              },
+              {
+                "field": "Microsoft.Logic/workflows/accessControl.triggers.allowedCallerIpAddresses[*].addressRange",
+                "exists": false
+              }
+            ]
+          }
+        ]
+      },
+      "then": {
+        "effect": "[parameters('effect')]"
+      }
+    }
+  }
+}

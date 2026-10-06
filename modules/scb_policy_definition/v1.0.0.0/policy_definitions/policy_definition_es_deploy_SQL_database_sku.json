@@ -1,0 +1,76 @@
+{
+  "name": "AllowedSQLDBSKUs",
+  "type": "Microsoft.Authorization/policyDefinitions",
+  "apiVersion": "2021-06-01",
+  "scope": null,
+  "properties": {
+    "policyType": "Custom",
+    "displayName": "Allowed SQL DB SKUs",
+    "description": "This policy enables you to specify a set of SQL DB SKUs",
+    "metadata": {
+      "version": "1.0.0",
+      "category": "SQL"
+    },
+    "mode": "All",
+    "parameters": {
+      "listOfSKUId": {
+        "type": "Array",
+        "metadata": {
+          "description": "The list of SKUs that can be specified for SQL Databases.",
+          "displayName": "Allowed SKU IDs"
+        }
+      },
+      "listOfSKUName": {
+        "type": "Array",
+        "metadata": {
+          "description": "The list of SKUs that can be specified for SQL Databases.",
+          "displayName": "Allowed SKU Names"
+        }
+      },
+      "effect": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Effect",
+          "description": "Deny, Audit or Disabled the execution of the Policy"
+        },
+        "allowedValues": [
+          "Deny",
+          "Audit",
+          "Disabled"
+        ],
+        "defaultValue": "Deny"
+      }
+    },
+    "policyRule": {
+      "if": {
+        "allOf": [
+          {
+            "field": "type",
+            "equals": "Microsoft.SQL/servers/databases"
+          },
+          {
+            "field": "name",
+            "notEquals": "master"
+          },
+          {
+            "not": {
+              "anyOf": [
+                {
+                  "field": "Microsoft.SQL/servers/databases/requestedServiceObjectiveId",
+                  "in": "[parameters('listOfSKUId')]"
+                },
+                {
+                  "field": "Microsoft.SQL/servers/databases/requestedServiceObjectiveName",
+                  "in": "[parameters('listOfSKUName')]"
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "then": {
+        "effect": "[parameters('effect')]"
+      }
+    }
+  }
+}

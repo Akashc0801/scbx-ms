@@ -1,0 +1,63 @@
+{
+  "type": "Microsoft.Authorization/policyDefinitions",
+  "apiVersion": "2021-06-01",
+  "name": "MAS_Policy_Manual_063_01",
+  "properties": {
+    "displayName": "MAS - Manual attestation for Implement Automated Data classification and retention policies",
+    "policyType": "Custom",
+    "mode": "All",
+    "description": "Manual attestation is required to validate Implement controls to manage and retain information within the system and its outputs in compliance with applicable laws, regulations, and operational requirements, with continuous monitoring and periodic reviews. (Data-Security-63).",
+    "metadata": {
+      "Description": "Automated Classification\nGeolocation-Based Retention\nDeletion Approval Workflow\n\nfor more details - refer to Control statement\n\"Automated Classification\n- Machine learning algorithms automatically classify data based on content and context\n- Data is tagged with relevant metadata including data type, sensitivity level, and applicable regulations\nConsistent Tagging Across Clouds\n- Implement a standardized tagging system across all cloud platforms\n- Tags include retention periods, data owner, and compliance requirements\nPolicy-Driven Retention\n- Define retention policies based on data classification, regulatory requirements, and business needs\n- Automatically apply retention periods to data based on its classification and tags\nGeolocation-Based Retention\n- Implement location-aware retention policies to comply with regional data residency requirements\n- Ensure data is retained in specific geographic locations as required by regulations\nAutomated Data Deletion\n- Schedule automatic deletion of data that has reached the end of its retention period\n- Implement secure deletion methods to ensure data cannot be recovered\nDeletion Approval Workflow\n- For sensitive data, implement an approval workflow before deletion\n- Maintain audit trails of all deletion activities\"",
+      "Responsible teams": [
+        "Data Protection"
+      ],
+      "category": "Governance",
+      "controlDomain": "Data-Security-63",
+      "controlTitle": "Implement controls to manage and retain information within the system and its outputs in compliance with applicable laws, regulations, and operational requirements, with continuous monitoring and periodic reviews.",
+      "masControlId": "63",
+      "createdBy": "695b7068-08dc-4778-b824-e8a1087605e1",
+      "createdOn": "2025-12-03T13:32:52Z",
+      "deployedBy": "mas/manual-attestations",
+      "pacOwnerId": "13b032ea-fae8-4455-b845-679a21e9cdd4",
+      "securityCenter": {
+        "severity": "Medium"
+      },
+      "severity": "Medium",
+      "updatedBy": "695b7068-08dc-4778-b824-e8a1087605e1",
+      "updatedOn": "2025-12-03T13:32:52Z",
+      "cloudSecurityDomain": "Data-Security"
+    },
+    "version": "1.0.0",
+    "parameters": {
+      "effect": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Effect",
+          "description": "Enable or disable the execution of the policy"
+        },
+        "allowedValues": [
+          "Manual",
+          "Disabled"
+        ],
+        "defaultValue": "Manual"
+      }
+    },
+    "policyRule": {
+      "if": {
+        "field": "type",
+        "equals": "Microsoft.Resources/subscriptions"
+      },
+      "then": {
+        "effect": "[parameters('effect')]",
+        "details": {
+          "defaultState": "Unknown"
+        }
+      }
+    },
+    "versions": [
+      "1.0.0"
+    ]
+  },
+  "id": "/providers/Microsoft.Management/managementGroups/MAS/providers/Microsoft.Authorization/policyDefinitions/MAS_Policy_Manual_063_01"
+}

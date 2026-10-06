@@ -1,0 +1,160 @@
+{
+  "name": "Application-Sandbox-Exclusion-Policies",
+  "properties": {
+    "displayName": "Enforce Kubernetes and SQL Security Controls",
+    "description": "This policy initiative enforces security controls for Kubernetes clusters and SQL servers. These policies are excluded from sandbox environments due to their operational impact and specialized requirements.",
+    "metadata": {
+      "version": "1.0.0",
+      "category": "Security Center",
+      "source": "https://github.com/Akashc0801/scbx-ms",
+      "alzCloudEnvironments": [
+        "AzureCloud",
+        "AzureChinaCloud",
+        "AzureUSGovernment"
+      ]
+    },
+    "parameters": {
+      "effectDeployAKSPolicyAddOn": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Effect - Deploy Azure Policy Add-on to AKS clusters",
+          "description": "Enable or disable the execution of the policy to deploy Azure Policy Add-on to AKS clusters"
+        },
+        "allowedValues": [
+          "DeployIfNotExists",
+          "Disabled"
+        ],
+        "defaultValue": "DeployIfNotExists"
+      },
+      "effectKubernetesPrivilegedContainers": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Effect - Kubernetes cluster should not allow privileged containers",
+          "description": "Enable or disable the execution of the policy to deny privileged containers in Kubernetes clusters"
+        },
+        "allowedValues": [
+          "Audit",
+          "Deny",
+          "Disabled"
+        ],
+        "defaultValue": "Audit"
+      },
+      "effectKubernetesPrivilegeEscalation": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Effect - Kubernetes clusters should not allow container privilege escalation",
+          "description": "Enable or disable the execution of the policy to deny container privilege escalation in Kubernetes clusters"
+        },
+        "allowedValues": [
+          "Audit",
+          "Deny",
+          "Disabled"
+        ],
+        "defaultValue": "Audit"
+      },
+      "effectDeploySQLTDE": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Effect - Deploy TDE on SQL servers",
+          "description": "Enable or disable the execution of the policy to deploy Transparent Data Encryption on SQL servers"
+        },
+        "allowedValues": [
+          "DeployIfNotExists",
+          "Disabled"
+        ],
+        "defaultValue": "DeployIfNotExists"
+      },
+      "effect": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Effect - General policy effect",
+          "description": "Enable or disable the execution of policies with general effect parameter"
+        },
+        "allowedValues": [
+          "Audit",
+          "Deny",
+          "Disabled"
+        ],
+        "defaultValue": "Audit"
+      },
+      "minimumTlsVersionSQL": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Minimum TLS version for SQL servers",
+          "description": "The minimum TLS version required for SQL servers"
+        },
+        "allowedValues": [
+          "1.0",
+          "1.1", 
+          "1.2"
+        ],
+        "defaultValue": "1.2"
+      },
+      "kubernetesNamespaceExclusions": {
+        "type": "Array",
+        "metadata": {
+          "displayName": "Kubernetes namespaces to exclude",
+          "description": "List of Kubernetes namespaces to exclude from policy evaluation. System namespaces kube-system, gatekeeper-system, and azure-arc are always excluded."
+        },
+        "defaultValue": [
+          "kube-system",
+          "gatekeeper-system",
+          "azure-arc",
+          "azure-extensions-usage-system"
+        ]
+      }
+    },
+    "policyDefinitions": [
+      {
+        "policyDefinitionReferenceId": "DeployAKSPolicyAddOn",
+        "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/a8eff44f-8c92-45c3-a3fb-9880802d67a7",
+        "definitionVersion": "4.*.*",
+        "parameters": {
+          "effect": {
+            "value": "[parameters('effectDeployAKSPolicyAddOn')]"
+          }
+        },
+        "groupNames": []
+      },
+      {
+        "policyDefinitionReferenceId": "KubernetesPrivilegedContainers",
+        "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/1c6e92c9-99f0-4e55-9cf2-0c234dc48f99",
+        "definitionVersion": "7.*.*",
+        "parameters": {
+          "effect": {
+            "value": "[parameters('effectKubernetesPrivilegedContainers')]"
+          },
+          "excludedNamespaces": {
+            "value": "[parameters('kubernetesNamespaceExclusions')]"
+          }
+        },
+        "groupNames": []
+      },
+      {
+        "policyDefinitionReferenceId": "KubernetesPrivilegeEscalation",
+        "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/47a1ee2f-2a2a-4576-bf2a-e0e36709c2b8",
+        "definitionVersion": "7.*.*",
+        "parameters": {
+          "effect": {
+            "value": "[parameters('effectKubernetesPrivilegeEscalation')]"
+          },
+          "excludedNamespaces": {
+            "value": "[parameters('kubernetesNamespaceExclusions')]"
+          }
+        },
+        "groupNames": []
+      },
+      {
+        "policyDefinitionReferenceId": "DeploySQLTDE",
+        "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/86a912f6-9a06-4e26-b447-11b16ba8659f",
+        "definitionVersion": "1.*.*",
+        "parameters": {
+          "effect": {
+            "value": "[parameters('effectDeploySQLTDE')]"
+          }
+        },
+        "groupNames": []
+      }
+    ]
+  }
+}

@@ -1,0 +1,108 @@
+{
+    "name": "Deploy-Defender-For-APIs",
+    "type": "Microsoft.Authorization/policyDefinitions",
+    "apiVersion": "2021-06-01",
+    "scope": null,
+    "properties": {
+        "policyType": "Custom",
+        "mode": "All",
+        "displayName": "Configure Microsoft Defender for APIs",
+        "description": "Microsoft Defender for APIs provides an additional layer of protection and security intelligence by detecting unusual and potentially harmful attempts to access or exploit API resources.",
+        "metadata": {
+            "version": "1.1.0",
+            "category": "Security Center"
+        },
+        "parameters": {
+            "effect": {
+                "type": "String",
+                "metadata": {
+                    "displayName": "Effect",
+                    "description": "Enable or disable the execution of the policy"
+                },
+                "allowedValues": [
+                    "DeployIfNotExists",
+                    "Disabled"
+                ],
+                "defaultValue": "DeployIfNotExists"
+            },
+            "subPlan": {
+                "type": "String",
+                "metadata": {
+                    "displayName": "APIs bundle's sub plan",
+                    "description": "Select a Defender for APIs plan"
+                },
+                "allowedValues": [
+                    "P1",
+                    "P2",
+                    "P3",
+                    "P4",
+                    "P5"
+                ],
+                "defaultValue": "P1"
+            }
+        },
+        "policyRule": {
+            "if": {
+                "field": "type",
+                "equals": "Microsoft.Resources/subscriptions"
+            },
+            "then": {
+                "effect": "[parameters('effect')]",
+                "details": {
+                    "type": "Microsoft.Security/pricings",
+                    "name": "Api",
+                    "deploymentScope": "subscription",
+                    "existenceScope": "subscription",
+                    "roleDefinitionIds": [
+                        "/providers/Microsoft.Authorization/roleDefinitions/8e3af657-a8ff-443c-a75c-2fe8c4bcb635"
+                    ],
+                    "existenceCondition": {
+                        "allOf": [
+                            {
+                                "field": "Microsoft.Security/pricings/pricingTier",
+                                "equals": "Standard"
+                            },
+                            {
+                                "field": "Microsoft.Security/pricings/subPlan",
+                                "equals": "[parameters('subPlan')]"
+                            }
+                        ]
+                    },
+                    "deployment": {
+                        "location": "westeurope",
+                        "properties": {
+                            "mode": "incremental",
+                            "parameters": {
+                                "subPlan": {
+                                    "value": "[parameters('subPlan')]"
+                                }
+                            },
+                            "template": {
+                                "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+                                "contentVersion": "1.0.0.0",
+                                "parameters": {
+                                    "subPlan": {
+                                        "type": "String"
+                                    }
+                                },
+                                "variables": {},
+                                "resources": [
+                                    {
+                                        "type": "Microsoft.Security/pricings",
+                                        "apiVersion": "2023-01-01",
+                                        "name": "Api",
+                                        "properties": {
+                                            "pricingTier": "Standard",
+                                            "subPlan": "[parameters('subPlan')]"
+                                        }
+                                    }
+                                ],
+                                "outputs": {}
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

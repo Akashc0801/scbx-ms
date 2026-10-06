@@ -1,0 +1,52 @@
+{
+  "type": "Microsoft.Authorization/policyDefinitions",
+  "apiVersion": "2021-06-01",
+  "name": "IAM_Policy_003",
+  "properties": {
+    "displayName": "SCF - Manual attestation for enable Conditional access for users with RIsk based authentication",
+    "policyType": "Custom",
+    "mode": "All",
+    "description": "This policy requires manual attestation to confirm that:MFA is enforced for all non-privileged user accounts for access to resources, regardless of device, device trust level, or network location.Single sign-on (SSO) is used for subsequent access to resources and applications when a user is authenticated with MFA.For high-risk resources and applications, or when authentication lifetime is exceeded, users may be required to re-authenticate with MFA.",
+    "metadata": {
+      "securityCenter": {
+        "severity": "Medium"
+      },
+      "Responsible teams": [
+        "IAM team"
+      ],
+      "Description": "This policy requires manual attestation to confirm that:MFA is enforced for all non-privileged user accounts for access to resources, regardless of device, device trust level, or network location.Single sign-on (SSO) is used for subsequent access to resources and applications when a user is authenticated with MFA.For high-risk resources and applications, or when authentication lifetime is exceeded, users may be required to re-authenticate with MFA.",
+      "category": "Compliance",
+      "severity": "Medium"
+    },
+    "version": "1.0.0",
+    "parameters": {
+      "effect": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Effect",
+          "description": "Enable or disable the execution of the policy"
+        },
+        "allowedValues": [
+          "Manual",
+          "Disabled"
+        ],
+        "defaultValue": "Manual"
+      }
+    },
+    "policyRule": {
+      "if": {
+        "field": "type",
+        "equals": "Microsoft.Resources/subscriptions"
+      },
+      "then": {
+        "effect": "[parameters('effect')]",
+        "details": {
+          "defaultState": "Unknown"
+        }
+      }
+    },
+    "versions": [
+      "1.0.0"
+    ]
+  }
+}

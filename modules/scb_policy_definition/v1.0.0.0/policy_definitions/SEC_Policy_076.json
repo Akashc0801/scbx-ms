@@ -1,0 +1,58 @@
+{
+  "type": "Microsoft.Authorization/policyDefinitions",
+  "apiVersion": "2021-06-01",
+  "name": "SEC_Policy_076",
+  "properties": {
+  "displayName": "SCF - Audit resources missing environment tag",
+    "policyType": "Custom",
+    "mode": "All",
+  "description": "Audit if resources have the environment tag indicating Standard or Advanced",
+    "metadata": {
+      "category": "Tags",
+      "createdBy": "695b7068-08dc-4778-b824-e8a1087605e1",
+      "createdOn": "2025-09-25T08:13:52.3892028Z",
+      "deployedBy": "epac/13b032ea-fae8-4455-b845-679a21e9cdd4/epac-scf",
+      "pacOwnerId": "13b032ea-fae8-4455-b845-679a21e9cdd4",
+      "version": "1.1.0",
+      "severity": "Medium"
+    },
+    "version": "1.0.0",
+    "parameters": {
+      "effect": {
+        "allowedValues": [
+          "Audit",
+          "Disabled"
+        ],
+        "defaultValue": "Audit",
+        "metadata": {
+          "description": "Audit or Disabled the execution of the Policy",
+          "displayName": "Effect"
+        },
+        "type": "String"
+      },
+      "tagName": {
+        "metadata": {
+          "description": "Name of the SCF-environment tag"
+        },
+        "type": "String"
+      }
+    },
+    "policyRule": {
+      "if": {
+        "allOf": [
+          {
+            "exists": false,
+            "field": "[concat('tags[',parameters('tagName'),']')]"
+          }
+        ]
+      },
+      "then": {
+        "effect": "[parameters('effect')]"
+      }
+    },
+    "versions": [
+      "1.0.0"
+    ]
+  },
+  "id": "/providers/Microsoft.Management/managementGroups/SCF/providers/Microsoft.Authorization/policyDefinitions/21d3a9e3-85e8-4082-a35d-7ba3084f0598"
+}

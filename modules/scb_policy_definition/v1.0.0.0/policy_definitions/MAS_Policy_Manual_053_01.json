@@ -1,0 +1,63 @@
+{
+  "type": "Microsoft.Authorization/policyDefinitions",
+  "apiVersion": "2021-06-01",
+  "name": "MAS_Policy_Manual_053_01",
+  "properties": {
+    "displayName": "MAS - Manual attestation for Implement Centralized Key Management Platform",
+    "policyType": "Custom",
+    "mode": "All",
+    "description": "Manual attestation is required to validate Implement a secure key management system for cloud environments, incorporating key inventory and discovery across infrastructure and workloads, with continuous monitoring and periodic reviews to ensure key protection and compliance. (Data-Security-53).",
+    "metadata": {
+      "Description": "\"Centralized Key Management Platform\n1. Implements a centralized key management solution that works across SCB Clouds, e.g Azure Key vault\n- Provides a single interface for managing keys across multiple cloud environments\n- Supports both Bring Your Own Key (BYOK) and cloud-native key management\n- Offers automated key rotation and expiration handling\nKey Protection Measures\n1. Secure Key Generation\n- Utilizes hardware security modules (HSMs) for generating FIPS 140-2 certified keys\n- Implements key derivation functions for creating strong, unique keys for each application or data set\n2. Key Rotation and Expiration\n- Automates key rotation based on defined policies (e.g., every 90 days)\n- Implements automated alerts for upcoming key expirations\n3. Access Control\n- Enforces strict role-based access control (RBAC) for key management operations\n- Implements multi-factor authentication (MFA) for accessing the key management system\n4. Encryption of Keys at Rest and in Transit\n- Encrypts keys when stored in the centralized key management system - Microsoft Managed.\n- Uses secure protocols (e.g., TLS) for transmitting keys between cloud environments - Microsoft Managed\n\"Centralized Key Management Platform\n1. Implements a centralized key management solution that works across SCB Clouds, e.g Azure Key vault\n- Provides a single interface for managing keys across multiple cloud environments\n- Supports both Bring Your Own Key (BYOK) and cloud-native key management\n- Offers automated key rotation and expiration handling\nKey Protection Measures\n1. Secure Key Generation\n- Utilizes hardware security modules (HSMs) for generating FIPS 140-2 certified keys\n- Implements key derivation functions for creating strong, unique keys for each application or data set\n2. Key Rotation and Expiration\n- Automates key rotation based on defined policies (e.g., every 90 days)\n- Implements automated alerts for upcoming key expirations\n3. Access Control\n- Enforces strict role-based access control (RBAC) for key management operations\n- Implements multi-factor authentication (MFA) for accessing the key management system\n4. Encryption of Keys at Rest and in Transit\n- Encrypts keys when stored in the centralized key management system - Microsoft Managed.\n- Uses secure protocols (e.g., TLS) for transmitting keys between cloud environments - Microsoft Managed",
+      "Responsible teams": [
+        "Data Protection"
+      ],
+      "category": "Governance",
+      "controlDomain": "Data-Security-53",
+      "controlTitle": "Implement a secure key management system for cloud environments, incorporating key inventory and discovery across infrastructure and workloads, with continuous monitoring and periodic reviews to ensure key protection and compliance.",
+      "masControlId": "53",
+      "createdBy": "695b7068-08dc-4778-b824-e8a1087605e1",
+      "createdOn": "2025-12-03T13:32:52Z",
+      "deployedBy": "mas/manual-attestations",
+      "pacOwnerId": "13b032ea-fae8-4455-b845-679a21e9cdd4",
+      "securityCenter": {
+        "severity": "Medium"
+      },
+      "severity": "Medium",
+      "updatedBy": "695b7068-08dc-4778-b824-e8a1087605e1",
+      "updatedOn": "2025-12-03T13:32:52Z",
+      "cloudSecurityDomain": "Data-Security"
+    },
+    "version": "1.0.0",
+    "parameters": {
+      "effect": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Effect",
+          "description": "Enable or disable the execution of the policy"
+        },
+        "allowedValues": [
+          "Manual",
+          "Disabled"
+        ],
+        "defaultValue": "Manual"
+      }
+    },
+    "policyRule": {
+      "if": {
+        "field": "type",
+        "equals": "Microsoft.Resources/subscriptions"
+      },
+      "then": {
+        "effect": "[parameters('effect')]",
+        "details": {
+          "defaultState": "Unknown"
+        }
+      }
+    },
+    "versions": [
+      "1.0.0"
+    ]
+  },
+  "id": "/providers/Microsoft.Management/managementGroups/MAS/providers/Microsoft.Authorization/policyDefinitions/MAS_Policy_Manual_053_01"
+}

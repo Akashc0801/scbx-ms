@@ -1,0 +1,59 @@
+{
+  "type": "Microsoft.Authorization/policyDefinitions",
+  "apiVersion": "2021-06-01",
+  "name": "NETW_Policy_115",
+  "properties": {
+    "displayName": "SCF - Manual attestation to verify web applications are published securely",
+    "policyType": "Custom",
+    "mode": "All",
+    "description": "This policy requires manual attestation to verify inbound connectivity to web based applications are routed through a gateway PaaS service to provide defense in depth such as traffic inspection, vulnerability management, and network containment.",
+    "metadata": {
+      "Description": "This policy requires manual attestation to verify inbound connectivity to web based applications are routed through a gateway PaaS service to provide defense in depth such as traffic inspection, vulnerability management, and network containment.",
+      "Responsible teams": [
+        "Application workload"
+      ],
+      "category": "Compliance",
+      "createdBy": "695b7068-08dc-4778-b824-e8a1087605e1",
+      "createdOn": "2025-09-25T08:22:12.2367509Z",
+      "deployedBy": "epac/13b032ea-fae8-4455-b845-679a21e9cdd4/epac-scf",
+      "pacOwnerId": "13b032ea-fae8-4455-b845-679a21e9cdd4",
+      "securityCenter": {
+        "severity": "Medium"
+      },
+      "severity": "Medium",
+      "updatedBy": "695b7068-08dc-4778-b824-e8a1087605e1",
+      "updatedOn": "2025-10-13T12:06:32.9415473Z"
+    },
+    "version": "1.0.0",
+    "parameters": {
+      "effect": {
+        "allowedValues": [
+          "Manual",
+          "Disabled"
+        ],
+        "defaultValue": "Manual",
+        "metadata": {
+          "description": "Enable or disable the execution of the policy",
+          "displayName": "Effect"
+        },
+        "type": "String"
+      }
+    },
+    "policyRule": {
+      "if": {
+        "equals": "Microsoft.Resources/subscriptions",
+        "field": "type"
+      },
+      "then": {
+        "details": {
+          "defaultState": "Unknown"
+        },
+        "effect": "[parameters('effect')]"
+      }
+    },
+    "versions": [
+      "1.0.0"
+    ]
+  },
+  "id": "/providers/Microsoft.Management/managementGroups/SCF/providers/Microsoft.Authorization/policyDefinitions/fb5c4aff-6552-4df6-820c-843c6b96fb2d"
+}

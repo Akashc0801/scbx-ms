@@ -1,0 +1,55 @@
+{
+    "type": "Microsoft.Authorization/policyDefinitions",
+    "apiVersion": "2021-06-01",
+    "name": "MAS_Policy_Custom_140_01",
+    "properties":{
+    "displayName": "Audit if Network Watcher is not enabled for region",
+    "description": "This policy audits if Network Watcher is not enabled for a selected region.",
+    "metadata": {
+        "version": "1.0.0",
+        "category": "Network"
+    },
+    "mode": "All",
+    "parameters": {
+        "location": {
+            "type": "string",
+            "metadata": {
+                "displayName": "Audit if Network Watcher is not enabled for region",
+                "description": "This policy audits if Network Watcher is not enabled for a selected region.",
+                "strongType": "location"
+            },
+            "defaultValue": "southeastasia"
+        },
+        "effect": {
+            "type": "String",
+            "metadata": {
+                "displayName": "Effect",
+                "description": "AuditIfNotExists or Disabled the execution of the Policy"
+            },
+            "allowedValues": [
+                "AuditIfNotExists",
+                "Audit",
+                "Disabled"
+            ],
+            "defaultValue": "Audit"
+        }
+    },
+    "policyRule": {
+        "if": {
+            "field": "type",
+            "equals": "Microsoft.Network/virtualNetworks"
+        },
+        "then": {
+            "effect": "[parameters('effect')]",
+            "details": {
+                "type": "Microsoft.Network/networkWatchers",
+                "resourceGroupName": "NetworkWatcherRG",
+                "existenceCondition": {
+                    "field": "location",
+                    "equals": "[parameters('location')]"
+                }
+            }
+        }
+    }
+}
+}

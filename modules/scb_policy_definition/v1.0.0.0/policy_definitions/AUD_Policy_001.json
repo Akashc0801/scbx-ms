@@ -1,0 +1,246 @@
+{
+  "type": "Microsoft.Authorization/policyDefinitions",
+  "apiVersion": "2021-06-01",
+  "name": "AUD_Policy_001",
+  "properties": {
+    "displayName": "SCF - Custom MDC data should be exported to a Log Analytics Workspace",
+    "policyType": "Custom",
+    "mode": "All",
+    "description": "This policiy verifies if Microsoft Defender for Cloud data is exported to a Log Analytics workspace. This policy validates if a specific Log Analytics workspace is used as indicated by parameter.",
+    "metadata": {
+      "Description": "This policiy verifies if Microsoft Defender for Cloud data is exported to a Log Analytics workspace. This policy validates if a specific Log Analytics workspace is used as indicated by parameter.",
+      "category": "Compliance",
+      "createdBy": "695b7068-08dc-4778-b824-e8a1087605e1",
+      "createdOn": "2025-09-25T08:22:23.550097Z",
+      "deployedBy": "epac/13b032ea-fae8-4455-b845-679a21e9cdd4/epac-scf",
+      "pacOwnerId": "13b032ea-fae8-4455-b845-679a21e9cdd4",
+      "securityCenter": {
+        "severity": "Medium"
+      },
+      "severity": "Medium"
+    },
+    "version": "1.0.0",
+    "parameters": {
+      "exportedDataTypes": {
+        "allowedValues": [
+          "Security recommendations",
+          "Security alerts",
+          "Overall secure score",
+          "Secure score controls",
+          "Regulatory compliance",
+          "Overall secure score - snapshot",
+          "Secure score controls - snapshot",
+          "Regulatory compliance - snapshot",
+          "Security recommendations - snapshot",
+          "Security findings - snapshot"
+        ],
+        "defaultValue": [
+          "Security recommendations",
+          "Security alerts",
+          "Overall secure score",
+          "Secure score controls",
+          "Regulatory compliance",
+          "Overall secure score - snapshot",
+          "Secure score controls - snapshot",
+          "Regulatory compliance - snapshot",
+          "Security recommendations - snapshot",
+          "Security findings - snapshot"
+        ],
+        "metadata": {
+          "description": "The data types to be exported. To export a snapshot (preview) of the data once a week, choose the data types which contains 'snapshot', other data types will be sent in real-time streaming.",
+          "displayName": "Exported data types"
+        },
+        "type": "Array"
+      },
+      "isSecurityFindingsEnabled": {
+        "allowedValues": [
+          true,
+          false
+        ],
+        "defaultValue": true,
+        "metadata": {
+          "description": "Security findings are results from vulnerability assessment solutions, and can be thought of as 'sub' recommendations grouped into a 'parent' recommendation.",
+          "displayName": "Include security findings"
+        },
+        "type": "Boolean"
+      },
+      "resourceGroupName": {
+        "metadata": {
+          "description": "The resource group name where the export to Log Analytics workspace configuration is created. If you enter a name for a resource group that doesn't exist, it'll be created in the subscription. Note that each resource group can only have one export to Log Analytics workspace configured.",
+          "displayName": "Resource group name"
+        },
+        "type": "String"
+      }
+    },
+    "policyRule": {
+      "if": {
+        "equals": "Microsoft.Resources/subscriptions",
+        "field": "type"
+      },
+      "then": {
+        "details": {
+          "ResourceGroupName": "[parameters('resourceGroupName')]",
+          "existenceCondition": {
+            "allOf": [
+              {
+                "equals": true,
+                "field": "Microsoft.Security/automations/isEnabled"
+              },
+              {
+                "count": {
+                  "field": "Microsoft.Security/automations/sources[*]"
+                },
+                "equals": "[if(parameters('isSecurityFindingsEnabled'),add(length(parameters('exportedDataTypes')),1),length(parameters('exportedDataTypes')))]"
+              },
+              {
+                "count": {
+                  "name": "dataType",
+                  "value": "[parameters('exportedDataTypes')]",
+                  "where": {
+                    "count": {
+                      "field": "Microsoft.Security/automations/sources[*]",
+                      "where": {
+                        "anyOf": [
+                          {
+                            "allOf": [
+                              {
+                                "equals": "Assessments",
+                                "field": "Microsoft.Security/automations/sources[*].eventSource"
+                              },
+                              {
+                                "equals": "Security recommendations",
+                                "value": "[current('dataType')]"
+                              }
+                            ]
+                          },
+                          {
+                            "allOf": [
+                              {
+                                "equals": "Alerts",
+                                "field": "Microsoft.Security/automations/sources[*].eventSource"
+                              },
+                              {
+                                "equals": "Security alerts",
+                                "value": "[current('dataType')]"
+                              }
+                            ]
+                          },
+                          {
+                            "allOf": [
+                              {
+                                "equals": "SecureScores",
+                                "field": "Microsoft.Security/automations/sources[*].eventSource"
+                              },
+                              {
+                                "equals": "Overall secure score",
+                                "value": "[current('dataType')]"
+                              }
+                            ]
+                          },
+                          {
+                            "allOf": [
+                              {
+                                "equals": "SecureScoreControls",
+                                "field": "Microsoft.Security/automations/sources[*].eventSource"
+                              },
+                              {
+                                "equals": "Secure score controls",
+                                "value": "[current('dataType')]"
+                              }
+                            ]
+                          },
+                          {
+                            "allOf": [
+                              {
+                                "equals": "RegulatoryComplianceAssessment",
+                                "field": "Microsoft.Security/automations/sources[*].eventSource"
+                              },
+                              {
+                                "equals": "Regulatory compliance",
+                                "value": "[current('dataType')]"
+                              }
+                            ]
+                          },
+                          {
+                            "allOf": [
+                              {
+                                "equals": "SecureScoresSnapshot",
+                                "field": "Microsoft.Security/automations/sources[*].eventSource"
+                              },
+                              {
+                                "equals": "Overall secure score - snapshot",
+                                "value": "[current('dataType')]"
+                              }
+                            ]
+                          },
+                          {
+                            "allOf": [
+                              {
+                                "equals": "SecureScoreControlsSnapshot",
+                                "field": "Microsoft.Security/automations/sources[*].eventSource"
+                              },
+                              {
+                                "equals": "Secure score controls - snapshot",
+                                "value": "[current('dataType')]"
+                              }
+                            ]
+                          },
+                          {
+                            "allOf": [
+                              {
+                                "equals": "RegulatoryComplianceAssessmentSnapshot",
+                                "field": "Microsoft.Security/automations/sources[*].eventSource"
+                              },
+                              {
+                                "equals": "Regulatory compliance - snapshot",
+                                "value": "[current('dataType')]"
+                              }
+                            ]
+                          },
+                          {
+                            "allOf": [
+                              {
+                                "equals": "AssessmentsSnapshot",
+                                "field": "Microsoft.Security/automations/sources[*].eventSource"
+                              },
+                              {
+                                "equals": "Security recommendations - snapshot",
+                                "value": "[current('dataType')]"
+                              }
+                            ]
+                          },
+                          {
+                            "allOf": [
+                              {
+                                "equals": "SubAssessmentsSnapshot",
+                                "field": "Microsoft.Security/automations/sources[*].eventSource"
+                              },
+                              {
+                                "equals": "Security findings - snapshot",
+                                "value": "[current('dataType')]"
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    },
+                    "equals": 1
+                  }
+                },
+                "equals": "[length(parameters('exportedDataTypes'))]"
+              }
+            ]
+          },
+          "existenceScope": "resourcegroup",
+          "name": "ExportToWorkspace",
+          "type": "Microsoft.Security/automations"
+        },
+        "effect": "AuditIfNotExists"
+      }
+    },
+    "versions": [
+      "1.0.0"
+    ]
+  },
+  "id": "/providers/Microsoft.Management/managementGroups/SCF/providers/Microsoft.Authorization/policyDefinitions/fa6ae5b7-49ac-4af7-9cd5-83997f380f64"
+}

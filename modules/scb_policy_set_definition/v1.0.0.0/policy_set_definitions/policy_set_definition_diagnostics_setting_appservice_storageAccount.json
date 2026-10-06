@@ -1,0 +1,116 @@
+{
+	"name": "SCB-Deploy-Diagnostics-AppService-StorageAccount",
+	"properties": {
+		"displayName": "Deploy diagnostic settings for App Service and Storage Account to Log Analytics",
+		"description": "This custom policy initiative deploys diagnostic settings for App Service and Storage Account resources (including Blob, Queue, Table, and File services) to a Log Analytics workspace.",
+		"metadata": {
+			"version": "1.0.0",
+			"category": "Monitoring",
+			"source": "https://github.com/Azure/Enterprise-Scale/",
+			"alzCloudEnvironments": [
+				"AzureCloud",
+				"AzureChinaCloud",
+				"AzureUSGovernment"
+			]
+		},
+		"parameters": {
+			"diagnosticSettingName": {
+				"type": "String",
+				"metadata": {
+					"displayName": "Diagnostic setting name",
+					"description": "The diagnostic settings profile name to be deployed by policy."
+				},
+				"defaultValue": "setByPolicy-LogAnalytics"
+			},
+			"logAnalytics": {
+				"type": "String",
+				"metadata": {
+					"displayName": "Log Analytics workspace",
+					"description": "Select Log Analytics workspace from dropdown list. If this workspace is outside of the scope of the assignment you must manually grant 'Log Analytics Contributor' permissions (or similar) to the policy assignment's principal ID.",
+					"strongType": "omsWorkspace",
+					"assignPermissions": true
+				}
+			}
+		},
+		"policyDefinitions": [
+			{
+				"policyDefinitionReferenceId": "AppServiceDiagnosticSettingsConfigured",
+				"policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/c0d8e23a-47be-4032-961f-8b0ff3957061",
+				"parameters": {
+					"diagnosticSettingName": {
+						"value": "[parameters('diagnosticSettingName')]"
+					},
+					"logAnalytics": {
+						"value": "[parameters('logAnalytics')]"
+					}
+				},
+				"groupNames": []
+			},
+			{
+				"policyDefinitionReferenceId": "BlobServicesDiagnosticSettingsConfigured",
+				"policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/b4fe1a3b-0715-4c6c-a5ea-ffc33cf823cb",
+				"parameters": {
+					"profileName": {
+						"value": "[parameters('diagnosticSettingName')]"
+					},
+					"logAnalytics": {
+						"value": "[parameters('logAnalytics')]"
+					}
+				},
+				"groupNames": []
+			},
+			{
+				"policyDefinitionReferenceId": "StorageAccountDiagnosticSettingsConfigured",
+				"policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/59759c62-9a22-4cdf-ae64-074495983fef",
+				"parameters": {
+					"profileName": {
+						"value": "[parameters('diagnosticSettingName')]"
+					},
+					"logAnalytics": {
+						"value": "[parameters('logAnalytics')]"
+					}
+				},
+				"groupNames": []
+			},
+			{
+				"policyDefinitionReferenceId": "QueueServicesDiagnosticSettingsConfigured",
+				"policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/7bd000e3-37c7-4928-9f31-86c4b77c5c45",
+				"parameters": {
+					"profileName": {
+						"value": "[parameters('diagnosticSettingName')]"
+					},
+					"logAnalytics": {
+						"value": "[parameters('logAnalytics')]"
+					}
+				},
+				"groupNames": []
+			},
+			{
+				"policyDefinitionReferenceId": "TableServicesDiagnosticSettingsConfigured",
+				"policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/2fb86bf3-d221-43d1-96d1-2434af34eaa0",
+				"parameters": {
+					"profileName": {
+						"value": "[parameters('diagnosticSettingName')]"
+					},
+					"logAnalytics": {
+						"value": "[parameters('logAnalytics')]"
+					}
+				},
+				"groupNames": []
+			},
+			{
+				"policyDefinitionReferenceId": "FileServicesDiagnosticSettingsConfigured",
+				"policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/25a70cc8-2bd4-47f1-90b6-1478e4662c96",
+				"parameters": {
+					"profileName": {
+						"value": "[parameters('diagnosticSettingName')]"
+					},
+					"logAnalytics": {
+						"value": "[parameters('logAnalytics')]"
+					}
+				},
+				"groupNames": []
+			}
+		]
+	}
+}

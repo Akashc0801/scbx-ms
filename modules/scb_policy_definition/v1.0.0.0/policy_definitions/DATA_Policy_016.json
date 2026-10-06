@@ -1,0 +1,48 @@
+{
+  "type": "Microsoft.Authorization/policyDefinitions",
+  "apiVersion": "2021-06-01",
+  "name": "DATA_Policy_016",
+  "properties": {
+    "displayName": "Audit for Application Gateway without HTTP Redirect",
+    "policyType": "Custom",
+    "mode": "All",
+    "description": "This Policy looks to see if an HTTP listener exists. It then checks to see if a routing rule is configured for redirect. If a redirect is not detected then an audit is performed.",
+    "metadata": {
+      "category": "Compliance",
+      "severity": "Medium"
+    },
+    "version": "1.0.0",
+    "parameters": {},
+    "policyRule": {
+      "if": {
+        "allOf": [
+          {
+            "field": "type",
+            "equals": "Microsoft.Network/applicationGateways"
+          },
+          {
+            "field": "Microsoft.Network/applicationGateways/httpListeners[*].protocol",
+            "equals": "http"
+          }
+        ]
+      },
+      "then": {
+        "effect": "auditIfNotExists",
+        "details": {
+          "type": "Microsoft.Network/applicationGateways/requestRoutingRules",
+          "existenceCondition": {
+            "allOf": [
+              {
+                "field": "Microsoft.Network/applicationGateways/requestRoutingRules[*].redirectConfiguration.id",
+                "exists": true
+              }
+            ]
+          }
+        }
+      }
+    },
+    "versions": [
+      "1.0.0"
+    ]
+  }
+}

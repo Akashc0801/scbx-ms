@@ -1,0 +1,53 @@
+{
+  "type": "Microsoft.Authorization/policyDefinitions",
+  "apiVersion": "2021-06-01",
+  "name": "DATA_Policy_036",
+  "properties": {
+    "displayName": "SCF - Manual attestation for usage of Confidential VMs (Intel SGX / AMD SEV-SNP) only",
+    "policyType": "Custom",
+    "mode": "All",
+    "description": "This policy requires manual attestation to confirm the enforcement of measures that provide isolated and secure application enclaves to protect data in use and application code for applications designed for enclaves and isolated environments.",
+    "metadata": {
+      "securityCenter": {
+        "severity": "Medium"
+      },
+      "Responsible teams": [
+        "Platform",
+        "Application workload"
+      ],
+      "Description": "This policy requires manual attestation to confirm the enforcement of measures that provide isolated and secure application enclaves to protect data in use and application code for applications designed for enclaves and isolated environments.",
+      "category": "Compliance",
+      "severity": "Medium"
+    },
+    "version": "1.0.0",
+    "parameters": {
+      "effect": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Effect",
+          "description": "Enable or disable the execution of the policy"
+        },
+        "allowedValues": [
+          "Manual",
+          "Disabled"
+        ],
+        "defaultValue": "Manual"
+      }
+    },
+    "policyRule": {
+      "if": {
+        "field": "type",
+        "equals": "Microsoft.Resources/subscriptions"
+      },
+      "then": {
+        "effect": "[parameters('effect')]",
+        "details": {
+          "defaultState": "Unknown"
+        }
+      }
+    },
+    "versions": [
+      "1.0.0"
+    ]
+  }
+}

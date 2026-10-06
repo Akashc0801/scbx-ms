@@ -1,0 +1,39 @@
+{
+  "name": "AdvancedBYOK",
+  "type": "Microsoft.Authorization/policyAssignments",
+  "apiVersion": "2019-09-01",
+  "properties": {
+    "description": "This inlcudes all the policies related to Identity for the platform & LZ enterprise.",
+    "displayName": "SCB Enterprise Initiative – Advanced BYOK",
+    "metadata": {
+      "assignedBy": "Cloud Center of Excellence"
+    },
+    "notScopes": ["/providers/Microsoft.Management/managementGroups/27a244e1-ba69-4a95-b2fa-1cedc80b4d45","/providers/Microsoft.Management/managementGroups/91fdbcd9-43ae-4f20-acb1-756058024202","/providers/Microsoft.Management/managementGroups/5de17b3b-325e-4409-9878-b42a3cb09cb0","/providers/Microsoft.Management/managementGroups/a3402ebd-1352-40d6-8da2-e48ffd2974bd","/providers/Microsoft.Management/managementGroups/ee81765a-9c2c-4697-95e6-24c083d16b19","/providers/Microsoft.Management/managementGroups/6c24fefa-babe-405d-9b5e-3d9141a3cf95"],
+    "parameters": {
+      "Effect": {
+        "value": "AuditIfNotExists"
+      },
+      "EffectByok": {
+        "value": "Audit"
+      },
+      "EffectPolicies": {
+        "value": "Audit"
+      },
+      "EffectST": {
+        "value": "Audit"
+      }
+    },
+    "nonComplianceMessages": [
+      {
+          "message": "Ensures that Azure resources are configured to Audit Foundation Intitative"
+      }
+  ],
+    "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/mg-scb-root/providers/Microsoft.Authorization/policySetDefinitions/SCB Enterprise Initiative – Advanced BYOK",
+    "scope": "/providers/Microsoft.Management/managementGroups/97adf8b8-f23a-4c00-8c61-b6bedece9d98",
+    "enforcementMode": true
+  },
+  "location": "southeastasia",
+  "identity": {
+    "type": "SystemAssigned"
+  }
+}

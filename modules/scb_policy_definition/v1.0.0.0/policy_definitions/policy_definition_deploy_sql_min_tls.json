@@ -1,0 +1,94 @@
+{
+  "name": "Deploy-SQL-minTLS",
+  "properties": {
+    "displayName": "Deploy minimum TLS version on SQL servers",
+    "description": "Deploy a specific min TLS version requirement and enforce SSL on SQL servers. Enables secure server to client by enforcing minimal TLS Version to secure the connection between your database server and your client applications.",
+    "metadata": {
+      "version": "1.0.0",
+      "category": "SQL",
+      "source": "SCB Azure Landing Zones"
+    },
+    "mode": "Indexed",
+    "parameters": {
+      "effect": {
+        "type": "String",
+        "defaultValue": "DeployIfNotExists",
+        "allowedValues": [
+          "DeployIfNotExists",
+          "Disabled"
+        ],
+        "metadata": {
+          "displayName": "Effect",
+          "description": "Enable or disable the execution of the policy"
+        }
+      },
+      "minimalTlsVersion": {
+        "type": "String",
+        "defaultValue": "1.2",
+        "allowedValues": [
+          "1.0",
+          "1.1",
+          "1.2"
+        ],
+        "metadata": {
+          "displayName": "Minimal TLS version",
+          "description": "Minimal TLS version for SQL servers"
+        }
+      }
+    },
+    "policyRule": {
+      "if": {
+        "field": "type",
+        "equals": "Microsoft.Sql/servers"
+      },
+      "then": {
+        "effect": "[parameters('effect')]",
+        "details": {
+          "type": "Microsoft.Sql/servers",
+          "existenceCondition": {
+            "field": "Microsoft.Sql/servers/minimalTlsVersion",
+            "equals": "[parameters('minimalTlsVersion')]"
+          },
+          "roleDefinitionIds": [
+            "/providers/Microsoft.Authorization/roleDefinitions/b24988ac-6180-42a0-ab88-20f7382dd24c"
+          ],
+          "deployment": {
+            "properties": {
+              "mode": "incremental",
+              "template": {
+                "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+                "contentVersion": "1.0.0.0",
+                "parameters": {
+                  "serverName": {
+                    "type": "string"
+                  },
+                  "minimalTlsVersion": {
+                    "type": "string"
+                  }
+                },
+                "resources": [
+                  {
+                    "type": "Microsoft.Sql/servers",
+                    "apiVersion": "2021-11-01",
+                    "name": "[parameters('serverName')]",
+                    "properties": {
+                      "minimalTlsVersion": "[parameters('minimalTlsVersion')]"
+                    }
+                  }
+                ]
+              },
+              "parameters": {
+                "serverName": {
+                  "value": "[field('name')]"
+                },
+                "minimalTlsVersion": {
+                  "value": "[parameters('minimalTlsVersion')]"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

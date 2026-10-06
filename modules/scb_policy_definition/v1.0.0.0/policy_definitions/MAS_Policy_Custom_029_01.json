@@ -1,0 +1,49 @@
+{
+    "type": "Microsoft.Authorization/policyDefinitions",
+    "apiVersion": "2021-06-01",
+    "name": "MAS_Policy_Custom_029_01",
+    "properties": {
+    "displayName": "Audit: Direct Azure RBAC assignments to Users (enforce Group-based access)",
+    "description": "Audits role assignments where principalType is 'User'. Use group-based assignments to reduce identity sprawl and improve governance.",
+    "mode": "All",
+    "metadata": {
+      "version": "1.0.0",
+      "category": "Authorization"
+    },
+    "parameters": {
+      "excludedUserObjectIds": {
+        "type": "Array",
+        "metadata": {
+          "displayName": "Excluded user object IDs",
+          "description": "Optional: users to exclude (break-glass accounts or exceptions)."
+        },
+        "defaultValue": []
+      },
+      "scopesToIncludeSubscriptionOnly": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Only audit at subscription scope (Yes/No)",
+          "description": "If 'Yes', only audit assignments scoped to the current subscription."
+        },
+        "allowedValues": [ "Yes", "No" ],
+        "defaultValue": "No"
+      }
+    },
+    "policyRule": {
+      "if": {
+        "allOf": [
+          { "field": "type", "equals": "Microsoft.Authorization/roleAssignments" },
+          { "field": "Microsoft.Authorization/roleAssignments/principalType", "equals": "User" },
+          { "not": { "field": "Microsoft.Authorization/roleAssignments/principalId", "in": "[parameters('excludedUserObjectIds')]" } },
+          {
+            "anyOf": [
+              { "value": "[parameters('scopesToIncludeSubscriptionOnly')]", "equals": "No" },
+              { "field": "Microsoft.Authorization/roleAssignments/scope", "equals": "[subscription().id]" }
+            ]
+          }
+        ]
+      },
+      "then": { "effect": "audit" }
+    }
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "name": "Deny-SqlMi-minTLS",
+  "properties": {
+    "displayName": "SQL Managed Instance should have the minimal TLS version of 1.2",
+    "description": "Setting minimal TLS version to 1.2 improves security by ensuring your SQL Managed Instance can only be accessed from clients using TLS 1.2. Using versions of TLS less than 1.2 is not recommended since they have well documented security vulnerabilities.",
+    "metadata": {
+      "version": "1.0.0",
+      "category": "SQL",
+      "source": "SCB Azure Landing Zones"
+    },
+    "mode": "Indexed",
+    "parameters": {
+      "effect": {
+        "type": "String",
+        "defaultValue": "Deny",
+        "allowedValues": [
+          "Audit",
+          "Deny",
+          "Disabled"
+        ],
+        "metadata": {
+          "displayName": "Effect",
+          "description": "Enable or disable the execution of the policy"
+        }
+      },
+      "minimalTlsVersion": {
+        "type": "String",
+        "defaultValue": "1.2",
+        "allowedValues": [
+          "1.0",
+          "1.1",
+          "1.2"
+        ],
+        "metadata": {
+          "displayName": "Minimal TLS version",
+          "description": "Minimal TLS version for SQL Managed Instance"
+        }
+      }
+    },
+    "policyRule": {
+      "if": {
+        "allOf": [
+          {
+            "field": "type",
+            "equals": "Microsoft.Sql/managedInstances"
+          },
+          {
+            "field": "Microsoft.Sql/managedInstances/minimalTlsVersion",
+            "notEquals": "[parameters('minimalTlsVersion')]"
+          }
+        ]
+      },
+      "then": {
+        "effect": "[parameters('effect')]"
+      }
+    }
+  }
+}

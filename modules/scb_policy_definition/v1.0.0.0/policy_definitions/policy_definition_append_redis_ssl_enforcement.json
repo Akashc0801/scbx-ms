@@ -1,0 +1,55 @@
+{
+  "name": "Append-Redis-sslEnforcement",
+  "properties": {
+    "displayName": "Deploy SSL enforcement on Azure Cache for Redis",
+    "description": "Deploy a specific min TLS version requirement and enforce SSL on Azure Cache for Redis. Enables secure server to client by enforcing minimal TLS Version to secure the connection between your cache and your client applications.",
+    "metadata": {
+      "version": "1.0.0",
+      "category": "Cache",
+      "source": "SCB Azure Landing Zones"
+    },
+    "mode": "Indexed",
+    "parameters": {
+      "effect": {
+        "type": "String",
+        "defaultValue": "Append",
+        "allowedValues": [
+          "Append",
+          "Disabled"
+        ],
+        "metadata": {
+          "displayName": "Effect",
+          "description": "Enable or disable the execution of the policy"
+        }
+      },
+      "minimumTlsVersion": {
+        "type": "String",
+        "defaultValue": "1.2",
+        "allowedValues": [
+          "1.0",
+          "1.1",
+          "1.2"
+        ],
+        "metadata": {
+          "displayName": "Minimum TLS version",
+          "description": "Minimum TLS version for Azure Cache for Redis"
+        }
+      }
+    },
+    "policyRule": {
+      "if": {
+        "field": "type",
+        "equals": "Microsoft.Cache/redis"
+      },
+      "then": {
+        "effect": "[parameters('effect')]",
+        "details": [
+          {
+            "field": "Microsoft.Cache/redis/minimumTlsVersion",
+            "value": "[parameters('minimumTlsVersion')]"
+          }
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,213 @@
+{
+  "name": "DeployresourcegroupbudgetinMG",
+  "type": "Microsoft.Authorization/policyDefinitions",
+  "apiVersion": "2021-06-01",
+  "scope": null,
+  "properties": {
+    "displayName": "Deploy resource group budget in MG with tag-based configuration",
+    "description": "Deploy a budget for a resource group using BudgetLimit tag for amount (in RM) and CostAlertThreshold tag for notification threshold. Use the tags 'NotificationEmails' with email addresses to send emails to those emails.",
+    "metadata": {
+      "category": "Budget",
+      "version": "2.0.0"
+    },
+    "mode": "All",
+    "parameters": {
+      "budgetName": {
+        "defaultValue": "budget-set-by-policy",
+        "metadata": {
+          "description": "The name for the budget to be created",
+          "displayName": "budgetName"
+        },
+        "type": "String"
+      },
+      "contactRoles": {
+        "defaultValue": [
+          "Owner"
+        ],
+        "metadata": {
+          "description": "The list of contact RBAC roles, in an array, to send the budget notification to when the threshold is exceeded.",
+          "displayName": "contactRoles"
+        },
+        "type": "Array"
+      },
+      "timeGrain": {
+        "allowedValues": [
+          "Monthly",
+          "Quarterly",
+          "Annually",
+          "BillingMonth",
+          "BillingQuarter",
+          "BillingAnnual"
+        ],
+        "defaultValue": "BillingMonth",
+        "metadata": {
+          "description": "The time covered by a budget. Tracking of the amount will be reset based on the time grain.",
+          "displayName": "timeGrain"
+        },
+        "type": "String"
+      },
+      "effect": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Effect",
+          "description": "DeployIfNotExists, AuditIfNotExists or Disabled the execution of the Policy"
+        },
+        "allowedValues": [
+          "DeployIfNotExists",
+          "AuditIfNotExists",
+          "Disabled"
+        ],
+        "defaultValue": "DeployIfNotExists"
+      }
+    },
+    "policyRule": {
+      "if": {
+        "allOf": [
+          {
+            "equals": "Microsoft.Resources/resourceGroups",
+            "field": "type"
+          },
+          {
+            "exists": "true",
+            "field": "tags['BudgetLimit']"
+          },
+          {
+            "exists": "true", 
+            "field": "tags['CostAlertThreshold']"
+          }
+        ]
+      },
+      "then": {
+        "details": {
+          "deployment": {
+            "properties": {
+              "mode": "Incremental",
+              "parameters": {
+                "budgetLimit": {
+                  "value": "[field('tags[BudgetLimit]')]"
+                },
+                "costAlertThreshold": {
+                  "value": "[field('tags[CostAlertThreshold]')]"
+                },
+                "budgetName": {
+                  "value": "[parameters('budgetName')]"
+                },
+                "contactEmails": {
+                  "value": [
+                    "[field(concat('tags[','NotificationEmails', ']'))]"
+                  ]
+                },
+                "contactRoles": {
+                  "value": "[parameters('contactRoles')]"
+                },
+                "timeGrain": {
+                  "value": "[parameters('timeGrain')]"
+                },
+                "resourceGroupName": {
+                  "value": "[resourceGroup().name]"
+                },
+                "subscriptionId": {
+                  "value": "[subscription().subscriptionId]"
+                }
+              },
+              "template": {
+                "$schema": "http://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+                "contentVersion": "1.0.0.0",
+                "parameters": {
+                  "budgetLimit": {
+                    "type": "String"
+                  },
+                  "costAlertThreshold": {
+                    "type": "String"
+                  },
+                  "budgetName": {
+                    "type": "String"
+                  },
+                  "contactEmails": {
+                    "type": "Array"
+                  },
+                  "contactRoles": {
+                    "type": "Array"
+                  },
+                  "startDate": {
+                    "defaultValue": "[concat(utcNow('MM'), '/01/', utcNow('yyyy'))]",
+                    "type": "String"
+                  },
+                  "timeGrain": {
+                    "type": "String"
+                  },
+                  "resourceGroupName": {
+                    "type": "String"
+                  },
+                  "subscriptionId": {
+                    "type": "String"
+                  }
+                },
+                "resources": [
+                  {
+                    "apiVersion": "2021-10-01",
+                    "name": "[parameters('budgetName')]",
+                    "properties": {
+                      "amount": "[parameters('budgetLimit')]",
+                      "category": "Cost",
+                      "filter": {
+                        "and": [
+                          {
+                            "dimensions": {
+                              "name": "ResourceGroupName",
+                              "operator": "In",
+                              "values": [
+                                "[parameters('resourceGroupName')]"
+                              ]
+                            }
+                          }
+                        ]
+                      },
+                      "notifications": {
+                        "NotificationForExceededBudget": {
+                          "contactEmails": "[parameters('contactEmails')]",
+                          "contactRoles": "[parameters('contactRoles')]",
+                          "enabled": true,
+                          "operator": "GreaterThan",
+                          "threshold": "[parameters('costAlertThreshold')]"
+                        }
+                      },
+                      "timeGrain": "[parameters('timeGrain')]",
+                      "timePeriod": {
+                        "startDate": "[parameters('startDate')]"
+                      }
+                    },
+                    "type": "Microsoft.Consumption/budgets"
+                  }
+                ]
+              }
+            }
+          },
+          "deploymentScope": "subscription",
+          "existenceCondition": {
+            "allOf": [
+              {
+                "equals": "[field('tags[BudgetLimit]')]",
+                "field": "Microsoft.Consumption/budgets/amount"
+              },
+              {
+                "equals": "[parameters('timeGrain')]",
+                "field": "Microsoft.Consumption/budgets/timeGrain"
+              },
+              {
+                "equals": "Cost",
+                "field": "Microsoft.Consumption/budgets/category"
+              }
+            ]
+          },
+          "existenceScope": "subscription",
+          "roleDefinitionIds": [
+            "/providers/Microsoft.Authorization/roleDefinitions/434105ed-43f6-45c7-a02f-909b2ba83430"
+          ],
+          "type": "Microsoft.Consumption/budgets"
+        },
+        "effect": "[parameters('effect')]"
+      }
+    }
+  }
+}

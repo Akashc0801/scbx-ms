@@ -1,0 +1,19 @@
+{
+  "name": "SCB Enterprise Initiative \u2013 CostMGMT",
+  "properties": {
+    "displayName": "SCB Enterprise Initiative - CostMGMT",
+    "description": "This inlcudes all the policies related to Cost/Budget management for the SCB enterprise. ",
+    "metadata": {
+      "category": "Cost Management"
+    },
+    "parameters": {},
+    "policyDefinitions": [
+      {
+        "policyDefinitionReferenceId": "Establish a discrete line item in budgeting documentation_1",
+        "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/06af77de-02ca-0f3e-838a-a9420fe466f5",
+        "parameters": {},
+        "groupNames": []
+      }
+    ]
+  }
+}

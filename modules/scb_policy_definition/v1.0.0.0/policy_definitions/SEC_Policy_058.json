@@ -1,0 +1,108 @@
+{
+  "type": "Microsoft.Authorization/policyDefinitions",
+  "apiVersion": "2021-06-01",
+  "name": "SEC_Policy_058",
+  "properties": {
+    "displayName": "SCF - Public IP addresses should have resource logs enabled for Azure DDoS Protection",
+    "policyType": "Custom",
+    "mode": "Indexed",
+    "description": "Enable resource logs for public IP addressess in diagnostic settings to stream to a Log Analytics workspace. Get detailed visibility into attack traffic and actions taken to mitigate DDoS attacks via notifications, reports and flow logs.",
+    "metadata": {
+      "category": "Monitoring",
+      "createdBy": "695b7068-08dc-4778-b824-e8a1087605e1",
+      "createdOn": "2025-09-25T08:21:54.741504Z",
+      "deployedBy": "epac/13b032ea-fae8-4455-b845-679a21e9cdd4/epac-scf",
+      "pacOwnerId": "13b032ea-fae8-4455-b845-679a21e9cdd4",
+      "version": "1.0",
+      "severity": "Medium"
+    },
+    "version": "1.0.0",
+    "parameters": {
+      "effect": {
+        "allowedValues": [
+          "AuditIfNotExists",
+          "Disabled"
+        ],
+        "defaultValue": "AuditIfNotExists",
+        "metadata": {
+          "description": "Enable or disable the execution of the policy",
+          "displayName": "Effect"
+        },
+        "type": "String"
+      },
+      "logAnalytics": {
+        "metadata": {
+          "assignPermissions": true,
+          "description": "The target Log Analytics workspace for the diagnostic settings",
+          "displayName": "Log Analytics workspace",
+          "strongType": "omsWorkspace"
+        },
+        "type": "String"
+      },
+      "logsEnabled": {
+        "allowedValues": [
+          "True",
+          "False"
+        ],
+        "defaultValue": "True",
+        "metadata": {
+          "description": "Enable Logs - True or False",
+          "displayName": "Enable Logs"
+        },
+        "type": "String"
+      },
+      "metricsEnabled": {
+        "allowedValues": [
+          "True",
+          "False"
+        ],
+        "defaultValue": "False",
+        "metadata": {
+          "description": "Enable Metrics - True or False",
+          "displayName": "Enable Metrics"
+        },
+        "type": "String"
+      },
+      "profileName": {
+        "metadata": {
+          "description": "Profile name for the Azure diagnostic settings resource",
+          "displayName": "Diagnostic setting name"
+        },
+        "type": "String"
+      }
+    },
+    "policyRule": {
+      "if": {
+        "equals": "Microsoft.Network/publicIPAddresses",
+        "field": "type"
+      },
+      "then": {
+        "details": {
+          "existenceCondition": {
+            "allOf": [
+              {
+                "equals": "[parameters('LogsEnabled')]",
+                "field": "Microsoft.Insights/diagnosticSettings/logs.enabled"
+              },
+              {
+                "equals": "[parameters('MetricsEnabled')]",
+                "field": "Microsoft.Insights/diagnosticSettings/metrics.enabled"
+              },
+              {
+                "equals": "[parameters('logAnalytics')]",
+                "field": "Microsoft.Insights/diagnosticSettings/workspaceId"
+              }
+            ]
+          },
+          "name": "[parameters('profileName')]",
+          "type": "Microsoft.Insights/diagnosticSettings"
+        },
+        "effect": "[parameters('effect')]"
+      }
+    },
+    "versions": [
+      "1.0.0"
+    ]
+  },
+  "id": "/providers/Microsoft.Management/managementGroups/SCF/providers/Microsoft.Authorization/policyDefinitions/5dd112a0-9c41-48a2-9609-69f3767e3057"
+}

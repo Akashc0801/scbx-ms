@@ -1,0 +1,63 @@
+
+{
+  "name": "SandboxLZ",
+  "type": "Microsoft.Authorization/policyAssignments",
+  "apiVersion": "2019-09-01",
+  "properties": {
+    "description": "This inlcudes all the policies related to Sandbox for the Application Landing Zone.",
+    "displayName": "SCB Enterprise Initiative Sandbox",
+    "metadata": {
+      "assignedBy": "Cloud Center of Excellence"
+    },
+    "notScopes": [],
+    "parameters": {
+      "SQLlistOfSKUName": {
+        "value": [
+          "Basic",
+          "GP_S_Gen5_1"
+        ]
+      },
+      "SQLlistOfSKUId": {
+        "value": [
+          "standard__basic",
+          "generalpurpose__gp_s_gen5_1"
+        ]
+      },
+      "StorageAccountListOfAllowedSKUs": {
+        "value": [
+          "Standard_LRS",
+          "Standard_ZRS"
+        ]
+      },
+      "allowedVnets": {
+        "value": [
+          "/subscriptions/66f0d854-131d-4a6d-8ba0-6e289d4b540d/resourceGroups/scb-rg-network-sb-myw-06/providers/Microsoft.Network/virtualNetworks/scb-vnet-network-sb-myw-01",
+          "/subscriptions/afb55810-ff35-4693-98ef-eb88ea71d397/resourceGroups/scb-rg-network-sb-sea-06/providers/Microsoft.Network/virtualNetworks/scb-vnet-network-sb-sea-01",
+          "/subscriptions/73ada150-ea40-440b-afa8-101e9ec9a17e/resourceGroups/scb-rg-network-sb-idc-06/providers/Microsoft.Network/virtualNetworks/scb-vnet-network-sb-idc-01",
+          "/subscriptions/13350f3d-f0d7-498b-abfa-2781443ecee0/resourceGroups/scb-rg-shared-sb-idc-01/providers/Microsoft.Network/virtualNetworks/scb-vnet-shared-sb-idc-01",
+          "/subscriptions/13350f3d-f0d7-498b-abfa-2781443ecee0/resourceGroups/scb-rg-app-sb-idc-01/providers/Microsoft.Network/virtualNetworks/scb-vnet-app-sb-idc-01",
+          "/subscriptions/294cb2ac-a6b7-4bc7-8e2c-f9397f5aaf7d/resourceGroups/etq-rg-network-sb-myw-06/providers/Microsoft.Network/virtualNetworks/etq-vnet-network-sb-myw-01"
+        ]
+      },
+      "VMlistOfAllowedSKUs": {
+        "value": [
+          "Standard_B1s",
+          "Standard_B2ms",
+          "Standard_D8s_v4"
+        ]
+      }
+    },
+    "nonComplianceMessages": [
+      {
+        "message": "Ensures that Azure resources are configured to Sandbox Initiative"
+      }
+    ],
+    "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/aa8b8771-71bc-493f-8deb-7cf3665e4ccc/providers/Microsoft.Authorization/policySetDefinitions/SCB-Enterprise-Initiative-Sandbox",
+    "scope": "/providers/Microsoft.Management/managementGroups/aa8b8771-71bc-493f-8deb-7cf3665e4ccc",
+    "enforcementMode": true
+  },
+  "location": "southeastasia",
+  "identity": {
+    "type": "SystemAssigned"
+  }
+}

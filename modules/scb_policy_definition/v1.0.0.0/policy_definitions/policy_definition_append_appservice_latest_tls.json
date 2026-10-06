@@ -1,0 +1,64 @@
+{
+  "name": "Append-AppService-latestTLS",
+  "properties": {
+    "displayName": "App Service apps should use the latest TLS version",
+    "description": "Use the latest TLS version for your App Service apps. This policy appends the minimum TLS version configuration to App Service apps.",
+    "metadata": {
+      "version": "1.0.0",
+      "category": "App Service",
+      "source": "SCB Azure Landing Zones"
+    },
+    "mode": "Indexed",
+    "parameters": {
+      "effect": {
+        "type": "String",
+        "defaultValue": "Append",
+        "allowedValues": [
+          "Append",
+          "Disabled"
+        ],
+        "metadata": {
+          "displayName": "Effect",
+          "description": "Enable or disable the execution of the policy"
+        }
+      },
+      "minTlsVersion": {
+        "type": "String",
+        "defaultValue": "1.3",
+        "allowedValues": [
+          "1.0",
+          "1.1",
+          "1.2",
+          "1.3"
+        ],
+        "metadata": {
+          "displayName": "Minimum TLS version",
+          "description": "Minimum TLS version for App Service apps"
+        }
+      }
+    },
+    "policyRule": {
+      "if": {
+        "allOf": [
+          {
+            "field": "type",
+            "equals": "Microsoft.Web/sites"
+          },
+          {
+            "field": "kind",
+            "notContains": "functionapp"
+          }
+        ]
+      },
+      "then": {
+        "effect": "[parameters('effect')]",
+        "details": [
+          {
+            "field": "Microsoft.Web/sites/siteConfig.minTlsVersion",
+            "value": "[parameters('minTlsVersion')]"
+          }
+        ]
+      }
+    }
+  }
+}

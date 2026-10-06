@@ -1,0 +1,1739 @@
+{
+  "name": "SCB-Enterprise-AI-Subscriptions-Security",
+  "properties": {
+    "displayName": "Azure AI Subscriptions Security Controls",
+    "description": "This policy initiative enforces security controls for AI subscriptions, including network isolation, encryption, identity management, authentication, compute security, content filtering, diagnostic logging, and WAF controls for Azure Machine Learning, Azure AI Services, Cognitive Services, Azure AI Search, and Application Gateway.",
+    "metadata": {
+      "version": "1.0.0",
+      "category": "Security Center",
+      "source": "SCF-AI-Subscriptions-Initiative",
+      "alzCloudEnvironments": [
+        "AzureCloud"
+      ]
+    },
+    "parameters": {
+      "effectMlApprovedOutboundManagedVnet": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Effect - Azure Machine Learning and AI Studio should use Allow Only Approved Outbound Managed Vnet mode",
+          "description": "Managed VNet isolation streamlines and automates your network isolation configuration with a built-in, workspace-level Azure Machine Learning managed VNet. To have strict network control on outbound traffic."
+        },
+        "allowedValues": [
+          "Audit",
+          "Deny",
+          "Disabled"
+        ],
+        "defaultValue": "Audit"
+      },
+      "effectConfigureMlPrivateEndpoints": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Effect - Configure Azure Machine Learning workspaces with private endpoints",
+          "description": "Configure private endpoints for Azure Machine Learning workspaces. As per deployment/infra configuration of environment."
+        },
+        "allowedValues": [
+          "DeployIfNotExists",
+          "Disabled"
+        ],
+        "defaultValue": "DeployIfNotExists"
+      },
+      "configureMlPrivateEndpointsSubnetId": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Private Endpoint Subnet ID - Configure Azure ML workspaces with private endpoints",
+          "description": "The subnet resource ID for the private endpoint to be created in. As per deployment/infra configuration of environment."
+        }
+      },
+      "effectConfigureMlPrivateDnsZones": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Effect - Configure Azure Machine Learning workspace to use private DNS zones",
+          "description": "Use private DNS zones to override the DNS resolution for a private endpoint for Azure Machine Learning workspaces. As per deployment/infra configuration of environment."
+        },
+        "allowedValues": [
+          "DeployIfNotExists",
+          "Disabled"
+        ],
+        "defaultValue": "DeployIfNotExists"
+      },
+      "configureMlPrivateDnsZoneId": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Private DNS Zone ID - Configure Azure ML workspace to use private DNS zones",
+          "description": "The private DNS zone resource ID for the first private DNS zone. As per deployment/infra configuration of environment."
+        }
+      },
+      "configureMlSecondPrivateDnsZoneId": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Second Private DNS Zone ID - Configure Azure ML workspace to use private DNS zones",
+          "description": "The private DNS zone resource ID for the second private DNS zone. As per deployment/infra configuration of environment."
+        }
+      },
+      "effectMlResourceLogsEnabled": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Effect - Resource logs in Azure Machine Learning Workspaces should be enabled",
+          "description": "Enable resource logs for Azure Machine Learning Workspaces."
+        },
+        "allowedValues": [
+          "AuditIfNotExists",
+          "Disabled"
+        ],
+        "defaultValue": "AuditIfNotExists"
+      },
+      "mlResourceLogsRetentionDays": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Required Retention Days - ML Resource Logs",
+          "description": "The required diagnostic logs retention in days for Azure ML Workspaces."
+        },
+        "defaultValue": "90"
+      },
+      "effectMlLoggingToLogAnalytics": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Effect - Enable logging by category group for Azure Machine Learning to Log Analytics",
+          "description": "Enable logging by category group for Azure Machine Learning to Log Analytics."
+        },
+        "allowedValues": [
+          "DeployIfNotExists",
+          "Disabled"
+        ],
+        "defaultValue": "DeployIfNotExists"
+      },
+      "effectMlLoggingToStorage": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Effect - Enable logging by category group for Azure Machine Learning to Storage",
+          "description": "Enable logging by category group for Azure Machine Learning to Storage."
+        },
+        "allowedValues": [
+          "DeployIfNotExists",
+          "Disabled"
+        ],
+        "defaultValue": "DeployIfNotExists"
+      },
+      "effectMlLoggingToEventHub": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Effect - Enable logging by category group for Azure Machine Learning to Event Hub",
+          "description": "Enable logging by category group for Azure Machine Learning to Event Hub."
+        },
+        "allowedValues": [
+          "DeployIfNotExists",
+          "Disabled"
+        ],
+        "defaultValue": "DeployIfNotExists"
+      },
+      "effectMlDiagnosticSettingsToLogAnalytics": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Effect - Configure diagnostic settings for Azure Machine Learning Workspaces to Log Analytics workspace",
+          "description": "Configure diagnostic settings for Azure Machine Learning Workspaces to stream to a Log Analytics workspace."
+        },
+        "allowedValues": [
+          "DeployIfNotExists",
+          "Disabled"
+        ],
+        "defaultValue": "DeployIfNotExists"
+      },
+      "effectMlDeploymentsApprovedRegistryModels": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Effect - [Preview]: Azure Machine Learning Deployments should only use approved Registry Models",
+          "description": "Restrict ML deployments to only use approved registry models. Will only use OpenAI models for now."
+        },
+        "allowedValues": [
+          "Audit",
+          "Deny",
+          "Disabled"
+        ],
+        "defaultValue": "Audit"
+      },
+      "effectMlRestrictedRegistryDeployments": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Effect - [Preview]: Azure Machine Learning Model Registry Deployments are restricted except for the allowed Registry",
+          "description": "Restrict ML model registry deployments except for the allowed registry. Will only use OpenAI models for now."
+        },
+        "allowedValues": [
+          "Deny",
+          "Disabled"
+        ],
+        "defaultValue": "Deny"
+      },
+      "effectCsCompletionContentFiltering": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Effect - [Preview]: Cognitive Services Deployments should only use allowed completion content filtering",
+          "description": "Enforce completion content filtering for Cognitive Services deployments."
+        },
+        "allowedValues": [
+          "Audit",
+          "Disabled"
+        ],
+        "defaultValue": "Audit"
+      },
+      "effectCsControlFiltering": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Effect - [Preview]: Cognitive Services Deployments should only use allowed control",
+          "description": "Enforce content safety control filtering for Cognitive Services deployments (Hate, Sexual, Violence, Selfharm)."
+        },
+        "allowedValues": [
+          "Audit",
+          "Disabled"
+        ],
+        "defaultValue": "Audit"
+      },
+      "effectCsAllowedControlMode": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Effect - [Preview]: Cognitive Services Deployments Should Only Use Allowed Control Mode",
+          "description": "Enforce allowed RAI policy control mode for Cognitive Services deployments."
+        },
+        "allowedValues": [
+          "Audit",
+          "Disabled"
+        ],
+        "defaultValue": "Audit"
+      },
+      "effectCsPromptContentFiltering": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Effect - [Preview]: Cognitive Services Deployments should only use allowed prompt content filtering",
+          "description": "Enforce prompt content filtering for Cognitive Services deployments."
+        },
+        "allowedValues": [
+          "Audit",
+          "Disabled"
+        ],
+        "defaultValue": "Audit"
+      },
+      "effectAiServicesCmkEncryption": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Effect - Azure AI Services resources should encrypt data at rest with a customer-managed key (CMK)",
+          "description": "Audit AI Services resources for CMK encryption. Enterprise baseline with excluded kinds."
+        },
+        "allowedValues": [
+          "Audit",
+          "Deny",
+          "Disabled"
+        ],
+        "defaultValue": "Audit"
+      },
+      "effectCsDeploymentsApprovedRegistryModels": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Effect - Cognitive Services Deployments should only use approved Registry Models",
+          "description": "Restrict Cognitive Services deployments to only use approved registry models."
+        },
+        "allowedValues": [
+          "Audit",
+          "Deny",
+          "Disabled"
+        ],
+        "defaultValue": "Audit"
+      },
+      "effectConfigureAiServicesDisableLocalKey": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Effect - Configure Azure AI Services resources to disable local key access (disable local authentication)",
+          "description": "Disable local key access and public network access for Azure AI Services resources."
+        },
+        "allowedValues": [
+          "DeployIfNotExists",
+          "Disabled"
+        ],
+        "defaultValue": "DeployIfNotExists"
+      },
+      "effectConfigureCsPrivateEndpoints": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Effect - Configure Cognitive Services accounts with private endpoints",
+          "description": "Configure private endpoints for Cognitive Services accounts. As per deployment/infra configuration of environment."
+        },
+        "allowedValues": [
+          "DeployIfNotExists",
+          "Disabled"
+        ],
+        "defaultValue": "DeployIfNotExists"
+      },
+      "configureCsPrivateEndpointsSubnetId": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Private Endpoint Subnet ID - Configure Cognitive Services with private endpoints",
+          "description": "The subnet resource ID for the Cognitive Services private endpoint. As per deployment/infra configuration of environment."
+        }
+      },
+      "effectCsLoggingToEventHub": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Effect - Enable logging by category group for Cognitive Services to Event Hub",
+          "description": "Enable logging by category group for Cognitive Services to Event Hub."
+        },
+        "allowedValues": [
+          "DeployIfNotExists",
+          "Disabled"
+        ],
+        "defaultValue": "DeployIfNotExists"
+      },
+      "effectCsLoggingToLogAnalytics": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Effect - Enable logging by category group for Cognitive Services to Log Analytics",
+          "description": "Enable logging by category group for Cognitive Services to Log Analytics."
+        },
+        "allowedValues": [
+          "DeployIfNotExists",
+          "Disabled"
+        ],
+        "defaultValue": "DeployIfNotExists"
+      },
+      "effectCsLoggingToStorage": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Effect - Enable logging by category group for Cognitive Services to Storage",
+          "description": "Enable logging by category group for Cognitive Services to Storage."
+        },
+        "allowedValues": [
+          "DeployIfNotExists",
+          "Disabled"
+        ],
+        "defaultValue": "DeployIfNotExists"
+      },
+      "effectConfigureAiSearchPrivateEndpoints": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Effect - Configure Azure AI Search services with private endpoints",
+          "description": "Configure private endpoints for Azure AI Search services. As per deployment/infra configuration of environment."
+        },
+        "allowedValues": [
+          "DeployIfNotExists",
+          "Disabled"
+        ],
+        "defaultValue": "DeployIfNotExists"
+      },
+      "configureAiSearchPrivateEndpointsSubnetId": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Private Endpoint Subnet ID - Configure AI Search with private endpoints",
+          "description": "The subnet resource ID for the AI Search private endpoint. As per deployment/infra configuration of environment."
+        }
+      },
+      "effectConfigureAiServicesDisableLocalKeyV2": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Effect - Configure Azure AI Services resources to disable local key access (v2)",
+          "description": "Disable local key access for Azure AI Services resources."
+        },
+        "allowedValues": [
+          "DeployIfNotExists",
+          "Disabled"
+        ],
+        "defaultValue": "DeployIfNotExists"
+      },
+      "effectSearchDiagnosticsToEventHub": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Effect - Deploy Diagnostic Settings for Search Services to Event Hub",
+          "description": "Deploy diagnostic settings for Search Services to Event Hub."
+        },
+        "allowedValues": [
+          "DeployIfNotExists",
+          "Disabled"
+        ],
+        "defaultValue": "DeployIfNotExists"
+      },
+      "effectSearchDiagnosticsToLogAnalytics": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Effect - Deploy Diagnostic Settings for Search Services to Log Analytics workspace",
+          "description": "Deploy diagnostic settings for Search Services to Log Analytics workspace."
+        },
+        "allowedValues": [
+          "DeployIfNotExists",
+          "Disabled"
+        ],
+        "defaultValue": "DeployIfNotExists"
+      },
+      "effectSearchLoggingToEventHub": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Effect - Enable logging by category group for Search services to Event Hub",
+          "description": "Enable logging by category group for Search services to Event Hub."
+        },
+        "allowedValues": [
+          "DeployIfNotExists",
+          "Disabled"
+        ],
+        "defaultValue": "DeployIfNotExists"
+      },
+      "effectSearchLoggingToLogAnalytics": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Effect - Enable logging by category group for Search services to Log Analytics",
+          "description": "Enable logging by category group for Search services to Log Analytics."
+        },
+        "allowedValues": [
+          "DeployIfNotExists",
+          "Disabled"
+        ],
+        "defaultValue": "DeployIfNotExists"
+      },
+      "effectSearchLoggingToStorage": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Effect - Enable logging by category group for Search services to Storage",
+          "description": "Enable logging by category group for Search services to Storage."
+        },
+        "allowedValues": [
+          "DeployIfNotExists",
+          "Disabled"
+        ],
+        "defaultValue": "DeployIfNotExists"
+      },
+      "effectSearchResourceLogsEnabled": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Effect - Resource logs in Search services should be enabled",
+          "description": "Enable resource logs for Search services."
+        },
+        "allowedValues": [
+          "AuditIfNotExists",
+          "Disabled"
+        ],
+        "defaultValue": "AuditIfNotExists"
+      },
+      "searchResourceLogsRetentionDays": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Required Retention Days - Search Resource Logs",
+          "description": "The required diagnostic logs retention in days for Search services."
+        },
+        "defaultValue": "90"
+      },
+      "effectWafSpecifiedModeAppGateway": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Effect - Web Application Firewall (WAF) should use the specified mode for Application Gateway",
+          "description": "Mandates the use of Prevention mode for WAF on Application Gateway."
+        },
+        "allowedValues": [
+          "Audit",
+          "Deny",
+          "Disabled"
+        ],
+        "defaultValue": "Audit"
+      },
+      "effectAppGatewayZoneResilient": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Effect - [Preview]: Application Gateways should be Zone Resilient",
+          "description": "Application Gateways should be configured to be Zone Redundant."
+        },
+        "allowedValues": [
+          "Audit",
+          "Deny",
+          "Disabled"
+        ],
+        "defaultValue": "Audit"
+      },
+      "effectAppGatewayLoggingToEventHub": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Effect - Enable logging by category group for Application Gateways to Event Hub",
+          "description": "Enable logging by category group for Application Gateways to Event Hub."
+        },
+        "allowedValues": [
+          "DeployIfNotExists",
+          "Disabled"
+        ],
+        "defaultValue": "DeployIfNotExists"
+      },
+      "effectAppGatewayLoggingToLogAnalytics": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Effect - Enable logging by category group for Application Gateways to Log Analytics",
+          "description": "Enable logging by category group for Application Gateways to Log Analytics."
+        },
+        "allowedValues": [
+          "DeployIfNotExists",
+          "Disabled"
+        ],
+        "defaultValue": "DeployIfNotExists"
+      },
+      "effectAppGatewayLoggingToStorage": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Effect - Enable logging by category group for Application Gateways to Storage",
+          "description": "Enable logging by category group for Application Gateways to Storage."
+        },
+        "allowedValues": [
+          "DeployIfNotExists",
+          "Disabled"
+        ],
+        "defaultValue": "DeployIfNotExists"
+      },
+      "effectMlAllowedModuleAuthors": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Effect - [Preview]: Configure allowed module authors for ML computes",
+          "description": "Configure allowed module authors for Azure Machine Learning computes."
+        },
+        "allowedValues": [
+          "enforceSetting",
+          "disabled"
+        ],
+        "defaultValue": "enforceSetting"
+      },
+      "effectMlAllowedPythonPackages": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Effect - [Preview]: Configure allowed Python packages for ML computes",
+          "description": "Configure allowed Python packages for Azure Machine Learning computes."
+        },
+        "allowedValues": [
+          "enforceSetting",
+          "disabled"
+        ],
+        "defaultValue": "enforceSetting"
+      },
+      "effectMlAllowedRegistries": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Effect - [Preview]: Configure allowed registries for ML computes",
+          "description": "Configure allowed container registries for Azure Machine Learning computes."
+        },
+        "allowedValues": [
+          "enforceSetting",
+          "disabled"
+        ],
+        "defaultValue": "enforceSetting"
+      },
+      "logAnalyticsWorkspaceId": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Log Analytics Workspace ID",
+          "description": "The Log Analytics workspace resource ID for diagnostic logging. As per deployment/infra configuration of environment.",
+          "strongType": "omsWorkspace"
+        }
+      },
+      "storageAccountId": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Storage Account ID",
+          "description": "The storage account resource ID for diagnostic logging. As per deployment/infra configuration of environment.",
+          "strongType": "storageAccount"
+        }
+      },
+      "eventHubAuthorizationRuleId": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Event Hub Authorization Rule ID",
+          "description": "The Event Hub authorization rule resource ID for diagnostic logging. As per deployment/infra configuration of environment."
+        }
+      },
+      "eventHubName": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Event Hub Name",
+          "description": "The Event Hub name for diagnostic logging. As per deployment/infra configuration of environment."
+        }
+      },
+      "diagnosticSettingName": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Diagnostic Setting Name",
+          "description": "The name of the diagnostic setting."
+        },
+        "defaultValue": "setByPolicy"
+      },
+      "categoryGroup": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Category Group",
+          "description": "The diagnostic log category group."
+        },
+        "defaultValue": "allLogs"
+      },
+      "resourceLocation": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Resource Location",
+          "description": "The location of the resources for diagnostic logging."
+        }
+      },
+      "resourceLocationList": {
+        "type": "Array",
+        "metadata": {
+          "displayName": "Resource Location List",
+          "description": "The list of locations of the resources for diagnostic logging."
+        },
+        "defaultValue": ["*"]
+      },
+      "diagnosticProfileName": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Diagnostic Profile Name",
+          "description": "The name of the diagnostic settings profile."
+        },
+        "defaultValue": "setByPolicy"
+      },
+      "metricsEnabled": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Metrics Enabled",
+          "description": "Whether to enable metrics for diagnostic settings."
+        },
+        "allowedValues": [
+          "True",
+          "False"
+        ],
+        "defaultValue": "True"
+      },
+      "logsEnabled": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Logs Enabled",
+          "description": "Whether to enable logs for diagnostic settings (String type for Search diagnostics policies)."
+        },
+        "allowedValues": [
+          "True",
+          "False"
+        ],
+        "defaultValue": "True"
+      },
+      "mlMetricsEnabled": {
+        "type": "Boolean",
+        "metadata": {
+          "displayName": "ML Metrics Enabled",
+          "description": "Whether to enable metrics for ML diagnostic settings (Boolean type for ML diagnostics policy f59276f0)."
+        },
+        "allowedValues": [
+          true,
+          false
+        ],
+        "defaultValue": true
+      },
+      "mlLogsEnabled": {
+        "type": "Boolean",
+        "metadata": {
+          "displayName": "ML Logs Enabled",
+          "description": "Whether to enable logs for ML diagnostic settings (Boolean type for ML diagnostics policy f59276f0)."
+        },
+        "allowedValues": [
+          true,
+          false
+        ],
+        "defaultValue": true
+      },
+      "searchEventHubRuleId": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Event Hub Rule ID - Search Diagnostics",
+          "description": "The Event Hub authorization rule ID for Search Services diagnostics. As per deployment/infra configuration of environment."
+        }
+      },
+      "searchEventHubLocation": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Event Hub Location - Search Diagnostics",
+          "description": "The location for Search Services Event Hub diagnostics. As per deployment/infra configuration of environment."
+        }
+      },
+      "mlAllowedModuleAuthors": {
+        "type": "Array",
+        "metadata": {
+          "displayName": "Allowed Module Authors - ML Computes",
+          "description": "List of allowed module authors for ML computes."
+        },
+        "defaultValue": [
+          "Microsoft",
+          "AzureML"
+        ]
+      },
+      "mlAllowedPythonPackageChannels": {
+        "type": "Array",
+        "metadata": {
+          "displayName": "Allowed Python Package Channels - ML Computes",
+          "description": "List of allowed Python package channels for ML computes."
+        },
+        "defaultValue": []
+      },
+      "mlAllowedACRs": {
+        "type": "Array",
+        "metadata": {
+          "displayName": "Allowed Container Registries - ML Computes",
+          "description": "List of allowed Azure Container Registries for ML computes."
+        },
+        "defaultValue": []
+      }
+    },
+    "policyDefinitions": [
+      {
+        "policyDefinitionReferenceId": "MlApprovedOutboundManagedVnet",
+        "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/6ddb1705-c8cf-450e-aa4b-19ad6703c440",
+        "definitionVersion": "1.*.*",
+        "parameters": {
+          "effect": {
+            "value": "[parameters('effectMlApprovedOutboundManagedVnet')]"
+          },
+          "isolationMode": {
+            "value": "AllowOnlyApprovedOutbound"
+          }
+        },
+        "groupNames": []
+      },
+      {
+        "policyDefinitionReferenceId": "ConfigureMlPrivateEndpoints",
+        "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/7838fd83-5cbb-4b5d-888c-bfa240972597",
+        "definitionVersion": "1.*.*",
+        "parameters": {
+          "effect": {
+            "value": "[parameters('effectConfigureMlPrivateEndpoints')]"
+          },
+          "privateEndpointSubnetId": {
+            "value": "[parameters('configureMlPrivateEndpointsSubnetId')]"
+          }
+        },
+        "groupNames": []
+      },
+      {
+        "policyDefinitionReferenceId": "ConfigureMlPrivateDnsZones",
+        "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/ee40564d-486e-4f68-a5ca-7a621edae0fb",
+        "definitionVersion": "1.*.*",
+        "parameters": {
+          "effect": {
+            "value": "[parameters('effectConfigureMlPrivateDnsZones')]"
+          },
+          "privateDnsZoneId": {
+            "value": "[parameters('configureMlPrivateDnsZoneId')]"
+          },
+          "secondPrivateDnsZoneId": {
+            "value": "[parameters('configureMlSecondPrivateDnsZoneId')]"
+          }
+        },
+        "groupNames": []
+      },
+      {
+        "policyDefinitionReferenceId": "MlResourceLogsEnabled",
+        "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/afe0c3be-ba3b-4544-ba52-0c99672a8ad6",
+        "definitionVersion": "1.*.*",
+        "parameters": {
+          "effect": {
+            "value": "[parameters('effectMlResourceLogsEnabled')]"
+          },
+          "requiredRetentionDays": {
+            "value": "[parameters('mlResourceLogsRetentionDays')]"
+          }
+        },
+        "groupNames": []
+      },
+      {
+        "policyDefinitionReferenceId": "MlLoggingToLogAnalytics",
+        "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/90c90eda-bfe7-4c67-bf26-410420ed1047",
+        "definitionVersion": "1.*.*",
+        "parameters": {
+          "effect": {
+            "value": "[parameters('effectMlLoggingToLogAnalytics')]"
+          },
+          "diagnosticSettingName": {
+            "value": "[parameters('diagnosticSettingName')]"
+          },
+          "categoryGroup": {
+            "value": "[parameters('categoryGroup')]"
+          },
+          "resourceLocationList": {
+            "value": "[parameters('resourceLocationList')]"
+          },
+          "logAnalytics": {
+            "value": "[parameters('logAnalyticsWorkspaceId')]"
+          }
+        },
+        "groupNames": []
+      },
+      {
+        "policyDefinitionReferenceId": "MlLoggingToStorage",
+        "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/a8de4d0a-d637-4684-b70e-6df73b74d117",
+        "definitionVersion": "1.*.*",
+        "parameters": {
+          "effect": {
+            "value": "[parameters('effectMlLoggingToStorage')]"
+          },
+          "diagnosticSettingName": {
+            "value": "[parameters('diagnosticSettingName')]"
+          },
+          "categoryGroup": {
+            "value": "[parameters('categoryGroup')]"
+          },
+          "resourceLocation": {
+            "value": "[parameters('resourceLocation')]"
+          },
+          "storageAccount": {
+            "value": "[parameters('storageAccountId')]"
+          }
+        },
+        "groupNames": []
+      },
+      {
+        "policyDefinitionReferenceId": "MlLoggingToEventHub",
+        "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/ae48c709-d2b4-4fad-8c5c-838524130aa4",
+        "definitionVersion": "1.*.*",
+        "parameters": {
+          "effect": {
+            "value": "[parameters('effectMlLoggingToEventHub')]"
+          },
+          "diagnosticSettingName": {
+            "value": "[parameters('diagnosticSettingName')]"
+          },
+          "categoryGroup": {
+            "value": "[parameters('categoryGroup')]"
+          },
+          "resourceLocation": {
+            "value": "[parameters('resourceLocation')]"
+          },
+          "eventHubAuthorizationRuleId": {
+            "value": "[parameters('eventHubAuthorizationRuleId')]"
+          },
+          "eventHubName": {
+            "value": "[parameters('eventHubName')]"
+          }
+        },
+        "groupNames": []
+      },
+      {
+        "policyDefinitionReferenceId": "MlDiagnosticSettingsToLogAnalytics",
+        "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/f59276f0-5740-4aaf-821d-45d185aa210e",
+        "definitionVersion": "1.*.*",
+        "parameters": {
+          "effect": {
+            "value": "[parameters('effectMlDiagnosticSettingsToLogAnalytics')]"
+          },
+          "profileName": {
+            "value": "[parameters('diagnosticProfileName')]"
+          },
+          "logAnalytics": {
+            "value": "[parameters('logAnalyticsWorkspaceId')]"
+          },
+          "metricsEnabled": {
+            "value": "[parameters('mlMetricsEnabled')]"
+          },
+          "logsEnabled": {
+            "value": "[parameters('mlLogsEnabled')]"
+          }
+        },
+        "groupNames": []
+      },
+      {
+        "policyDefinitionReferenceId": "MlDeploymentsApprovedRegistryModels",
+        "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/12e5dd16-d201-47ff-849b-8454061c293d",
+        "definitionVersion": "1.*.*",
+        "parameters": {
+          "effect": {
+            "value": "[parameters('effectMlDeploymentsApprovedRegistryModels')]"
+          },
+          "allowedPublishers": {
+            "value": [
+              "Azure OpenAI",
+              "OpenAI"
+            ]
+          },
+          "allowedAssetIds": {
+            "value": []
+          }
+        },
+        "groupNames": []
+      },
+      {
+        "policyDefinitionReferenceId": "MlRestrictedRegistryDeployments",
+        "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/19539b54-c61e-4196-9a38-67598701be90",
+        "definitionVersion": "1.*.*",
+        "parameters": {
+          "effect": {
+            "value": "[parameters('effectMlRestrictedRegistryDeployments')]"
+          },
+          "allowedRegistryName": {
+            "value": "Azure OpenAI"
+          },
+          "restrictedModels": {
+            "value": []
+          }
+        },
+        "groupNames": []
+      },
+      {
+        "policyDefinitionReferenceId": "CsCompletionFilterProfanity",
+        "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/af253d37-136a-42f8-a1fc-30010c083d41",
+        "definitionVersion": "1.*.*",
+        "parameters": {
+          "effect": {
+            "value": "[parameters('effectCsCompletionContentFiltering')]"
+          },
+          "filterName": {
+            "value": "Profanity"
+          },
+          "allowedEnabledForCompletion": {
+            "value": [
+              "true"
+            ]
+          },
+          "allowedBlockingForCompletion": {
+            "value": [
+              "true"
+            ]
+          }
+        },
+        "groupNames": []
+      },
+      {
+        "policyDefinitionReferenceId": "CsCompletionFilterProtectedMaterialText",
+        "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/af253d37-136a-42f8-a1fc-30010c083d41",
+        "definitionVersion": "1.*.*",
+        "parameters": {
+          "effect": {
+            "value": "[parameters('effectCsCompletionContentFiltering')]"
+          },
+          "filterName": {
+            "value": "Protected Material Text"
+          },
+          "allowedEnabledForCompletion": {
+            "value": [
+              "true"
+            ]
+          },
+          "allowedBlockingForCompletion": {
+            "value": [
+              "true"
+            ]
+          }
+        },
+        "groupNames": []
+      },
+      {
+        "policyDefinitionReferenceId": "CsCompletionFilterProtectedMaterialCode",
+        "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/af253d37-136a-42f8-a1fc-30010c083d41",
+        "definitionVersion": "1.*.*",
+        "parameters": {
+          "effect": {
+            "value": "[parameters('effectCsCompletionContentFiltering')]"
+          },
+          "filterName": {
+            "value": "Protected Material Code"
+          },
+          "allowedEnabledForCompletion": {
+            "value": [
+              "true"
+            ]
+          },
+          "allowedBlockingForCompletion": {
+            "value": [
+              "true"
+            ]
+          }
+        },
+        "groupNames": []
+      },
+      {
+        "policyDefinitionReferenceId": "CsControlFilterHate",
+        "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/930f48f9-f07e-427c-9494-52603581c6a9",
+        "definitionVersion": "1.*.*",
+        "parameters": {
+          "effect": {
+            "value": "[parameters('effectCsControlFiltering')]"
+          },
+          "filterName": {
+            "value": "Hate"
+          },
+          "allowedSeveritiesForPrompt": {
+            "value": [
+              "Medium",
+              "High"
+            ]
+          },
+          "allowedEnabledForPrompt": {
+            "value": [
+              "true"
+            ]
+          },
+          "allowedBlockingForPrompt": {
+            "value": [
+              "true"
+            ]
+          },
+          "allowedSeveritiesForCompletion": {
+            "value": [
+              "Medium",
+              "High"
+            ]
+          },
+          "allowedEnabledForCompletion": {
+            "value": [
+              "true"
+            ]
+          },
+          "allowedBlockingForCompletion": {
+            "value": [
+              "true"
+            ]
+          }
+        },
+        "groupNames": []
+      },
+      {
+        "policyDefinitionReferenceId": "CsControlFilterSexual",
+        "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/930f48f9-f07e-427c-9494-52603581c6a9",
+        "definitionVersion": "1.*.*",
+        "parameters": {
+          "effect": {
+            "value": "[parameters('effectCsControlFiltering')]"
+          },
+          "filterName": {
+            "value": "Sexual"
+          },
+          "allowedSeveritiesForPrompt": {
+            "value": [
+              "Medium",
+              "High"
+            ]
+          },
+          "allowedEnabledForPrompt": {
+            "value": [
+              "true"
+            ]
+          },
+          "allowedBlockingForPrompt": {
+            "value": [
+              "true"
+            ]
+          },
+          "allowedSeveritiesForCompletion": {
+            "value": [
+              "Medium",
+              "High"
+            ]
+          },
+          "allowedEnabledForCompletion": {
+            "value": [
+              "true"
+            ]
+          },
+          "allowedBlockingForCompletion": {
+            "value": [
+              "true"
+            ]
+          }
+        },
+        "groupNames": []
+      },
+      {
+        "policyDefinitionReferenceId": "CsControlFilterViolence",
+        "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/930f48f9-f07e-427c-9494-52603581c6a9",
+        "definitionVersion": "1.*.*",
+        "parameters": {
+          "effect": {
+            "value": "[parameters('effectCsControlFiltering')]"
+          },
+          "filterName": {
+            "value": "Violence"
+          },
+          "allowedSeveritiesForPrompt": {
+            "value": [
+              "Medium",
+              "High"
+            ]
+          },
+          "allowedEnabledForPrompt": {
+            "value": [
+              "true"
+            ]
+          },
+          "allowedBlockingForPrompt": {
+            "value": [
+              "true"
+            ]
+          },
+          "allowedSeveritiesForCompletion": {
+            "value": [
+              "Medium",
+              "High"
+            ]
+          },
+          "allowedEnabledForCompletion": {
+            "value": [
+              "true"
+            ]
+          },
+          "allowedBlockingForCompletion": {
+            "value": [
+              "true"
+            ]
+          }
+        },
+        "groupNames": []
+      },
+      {
+        "policyDefinitionReferenceId": "CsControlFilterSelfharm",
+        "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/930f48f9-f07e-427c-9494-52603581c6a9",
+        "definitionVersion": "1.*.*",
+        "parameters": {
+          "effect": {
+            "value": "[parameters('effectCsControlFiltering')]"
+          },
+          "filterName": {
+            "value": "Selfharm"
+          },
+          "allowedSeveritiesForPrompt": {
+            "value": [
+              "Medium",
+              "High"
+            ]
+          },
+          "allowedEnabledForPrompt": {
+            "value": [
+              "true"
+            ]
+          },
+          "allowedBlockingForPrompt": {
+            "value": [
+              "true"
+            ]
+          },
+          "allowedSeveritiesForCompletion": {
+            "value": [
+              "Medium",
+              "High"
+            ]
+          },
+          "allowedEnabledForCompletion": {
+            "value": [
+              "true"
+            ]
+          },
+          "allowedBlockingForCompletion": {
+            "value": [
+              "true"
+            ]
+          }
+        },
+        "groupNames": []
+      },
+      {
+        "policyDefinitionReferenceId": "CsAllowedControlMode",
+        "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/c1ad46c6-37f8-4af0-9c71-c208375c87dd",
+        "definitionVersion": "1.*.*",
+        "parameters": {
+          "effect": {
+            "value": "[parameters('effectCsAllowedControlMode')]"
+          },
+          "raiPolicyMode": {
+            "value": [
+              "Default",
+              "Asynchronous_filter"
+            ]
+          }
+        },
+        "groupNames": []
+      },
+      {
+        "policyDefinitionReferenceId": "CsPromptFilterJailbreak",
+        "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/f3a9c2e0-7b4d-4d8f-9c3a-2e1f6b9a8d4e",
+        "definitionVersion": "1.*.*",
+        "parameters": {
+          "effect": {
+            "value": "[parameters('effectCsPromptContentFiltering')]"
+          },
+          "filterName": {
+            "value": "Jailbreak"
+          },
+          "allowedEnabledForPrompt": {
+            "value": [
+              "true"
+            ]
+          },
+          "allowedBlockingForPrompt": {
+            "value": [
+              "true"
+            ]
+          }
+        },
+        "groupNames": []
+      },
+      {
+        "policyDefinitionReferenceId": "CsPromptFilterProfanity",
+        "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/f3a9c2e0-7b4d-4d8f-9c3a-2e1f6b9a8d4e",
+        "definitionVersion": "1.*.*",
+        "parameters": {
+          "effect": {
+            "value": "[parameters('effectCsPromptContentFiltering')]"
+          },
+          "filterName": {
+            "value": "Profanity"
+          },
+          "allowedEnabledForPrompt": {
+            "value": [
+              "true"
+            ]
+          },
+          "allowedBlockingForPrompt": {
+            "value": [
+              "true"
+            ]
+          }
+        },
+        "groupNames": []
+      },
+      {
+        "policyDefinitionReferenceId": "CsPromptFilterIndirectAttack",
+        "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/f3a9c2e0-7b4d-4d8f-9c3a-2e1f6b9a8d4e",
+        "definitionVersion": "1.*.*",
+        "parameters": {
+          "effect": {
+            "value": "[parameters('effectCsPromptContentFiltering')]"
+          },
+          "filterName": {
+            "value": "Indirect Attack"
+          },
+          "allowedEnabledForPrompt": {
+            "value": [
+              "true"
+            ]
+          },
+          "allowedBlockingForPrompt": {
+            "value": [
+              "true"
+            ]
+          }
+        },
+        "groupNames": []
+      },
+      {
+        "policyDefinitionReferenceId": "CsPromptFilterIndirectAttackSpotlighting",
+        "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/f3a9c2e0-7b4d-4d8f-9c3a-2e1f6b9a8d4e",
+        "definitionVersion": "1.*.*",
+        "parameters": {
+          "effect": {
+            "value": "[parameters('effectCsPromptContentFiltering')]"
+          },
+          "filterName": {
+            "value": "Indirect Attack Spotlighting"
+          },
+          "allowedEnabledForPrompt": {
+            "value": [
+              "true"
+            ]
+          },
+          "allowedBlockingForPrompt": {
+            "value": [
+              "true"
+            ]
+          }
+        },
+        "groupNames": []
+      },
+      {
+        "policyDefinitionReferenceId": "AiServicesCmkEncryption",
+        "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/67121cc7-ff39-4ab8-b7e3-95b84dab487d",
+        "definitionVersion": "1.*.*",
+        "parameters": {
+          "effect": {
+            "value": "[parameters('effectAiServicesCmkEncryption')]"
+          },
+          "excludedKinds": {
+            "value": [
+              "CognitiveServices",
+              "ContentSafety",
+              "ImmersiveReader",
+              "HealthInsights",
+              "LUIS.Authoring",
+              "LUIS",
+              "QnAMaker",
+              "QnAMaker.V2",
+              "AIServices",
+              "MetricsAdvisor",
+              "SpeechTranslation",
+              "Internal.AllInOne",
+              "ConversationalLanguageUnderstanding",
+              "knowledge",
+              "TranscriptionIntelligence",
+              "HealthDecisionSupport"
+            ]
+          }
+        },
+        "groupNames": []
+      },
+      {
+        "policyDefinitionReferenceId": "CsDeploymentsApprovedRegistryModels",
+        "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/aafe3651-cb78-4f68-9f81-e7e41509110f",
+        "definitionVersion": "1.*.*",
+        "parameters": {
+          "effect": {
+            "value": "[parameters('effectCsDeploymentsApprovedRegistryModels')]"
+          },
+          "allowedPublishers": {
+            "value": [
+              "Azure OpenAI",
+              "OpenAI"
+            ]
+          },
+          "allowedAssetIds": {
+            "value": []
+          }
+        },
+        "groupNames": []
+      },
+      {
+        "policyDefinitionReferenceId": "ConfigureAiServicesDisableLocalKey",
+        "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/55eff01b-f2bd-4c32-9203-db285f709d30",
+        "definitionVersion": "1.*.*",
+        "parameters": {
+          "effect": {
+            "value": "[parameters('effectConfigureAiServicesDisableLocalKey')]"
+          },
+          "disableLocalAuth": {
+            "value": "true"
+          },
+          "publicNetworkAccess": {
+            "value": "Disabled"
+          }
+        },
+        "groupNames": []
+      },
+      {
+        "policyDefinitionReferenceId": "ConfigureCsPrivateEndpoints",
+        "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/db630ad5-52e9-4f4d-9c44-53912fe40053",
+        "definitionVersion": "1.*.*",
+        "parameters": {
+          "effect": {
+            "value": "[parameters('effectConfigureCsPrivateEndpoints')]"
+          },
+          "privateEndpointSubnetId": {
+            "value": "[parameters('configureCsPrivateEndpointsSubnetId')]"
+          }
+        },
+        "groupNames": []
+      },
+      {
+        "policyDefinitionReferenceId": "CsLoggingToEventHub",
+        "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/0628b917-d4b4-4af5-bc2b-b4f87cd173ab",
+        "definitionVersion": "1.*.*",
+        "parameters": {
+          "effect": {
+            "value": "[parameters('effectCsLoggingToEventHub')]"
+          },
+          "diagnosticSettingName": {
+            "value": "[parameters('diagnosticSettingName')]"
+          },
+          "categoryGroup": {
+            "value": "[parameters('categoryGroup')]"
+          },
+          "resourceLocation": {
+            "value": "[parameters('resourceLocation')]"
+          },
+          "eventHubAuthorizationRuleId": {
+            "value": "[parameters('eventHubAuthorizationRuleId')]"
+          },
+          "eventHubName": {
+            "value": "[parameters('eventHubName')]"
+          }
+        },
+        "groupNames": []
+      },
+      {
+        "policyDefinitionReferenceId": "CsLoggingToLogAnalytics",
+        "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/55d1f543-d1b0-4811-9663-d6d0dbc6326d",
+        "definitionVersion": "1.*.*",
+        "parameters": {
+          "effect": {
+            "value": "[parameters('effectCsLoggingToLogAnalytics')]"
+          },
+          "diagnosticSettingName": {
+            "value": "[parameters('diagnosticSettingName')]"
+          },
+          "categoryGroup": {
+            "value": "[parameters('categoryGroup')]"
+          },
+          "resourceLocationList": {
+            "value": "[parameters('resourceLocationList')]"
+          },
+          "logAnalytics": {
+            "value": "[parameters('logAnalyticsWorkspaceId')]"
+          }
+        },
+        "groupNames": []
+      },
+      {
+        "policyDefinitionReferenceId": "CsLoggingToStorage",
+        "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/14e81583-c89c-47db-af0d-f9ddddcccd9f",
+        "definitionVersion": "1.*.*",
+        "parameters": {
+          "effect": {
+            "value": "[parameters('effectCsLoggingToStorage')]"
+          },
+          "diagnosticSettingName": {
+            "value": "[parameters('diagnosticSettingName')]"
+          },
+          "categoryGroup": {
+            "value": "[parameters('categoryGroup')]"
+          },
+          "resourceLocation": {
+            "value": "[parameters('resourceLocation')]"
+          },
+          "storageAccount": {
+            "value": "[parameters('storageAccountId')]"
+          }
+        },
+        "groupNames": []
+      },
+      {
+        "policyDefinitionReferenceId": "ConfigureAiSearchPrivateEndpoints",
+        "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/b698b005-b660-4837-b833-a7aaab26ddba",
+        "definitionVersion": "1.*.*",
+        "parameters": {
+          "effect": {
+            "value": "[parameters('effectConfigureAiSearchPrivateEndpoints')]"
+          },
+          "privateEndpointSubnetId": {
+            "value": "[parameters('configureAiSearchPrivateEndpointsSubnetId')]"
+          }
+        },
+        "groupNames": []
+      },
+      {
+        "policyDefinitionReferenceId": "ConfigureAiServicesDisableLocalKeyV2",
+        "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/d45520cb-31ca-44ba-8da2-fcf914608544",
+        "definitionVersion": "1.*.*",
+        "parameters": {
+          "effect": {
+            "value": "[parameters('effectConfigureAiServicesDisableLocalKeyV2')]"
+          },
+          "disableLocalAuth": {
+            "value": "True"
+          }
+        },
+        "groupNames": []
+      },
+      {
+        "policyDefinitionReferenceId": "SearchDiagnosticsToEventHub",
+        "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/3d5da587-71bd-41f5-ac95-dd3330c2d58d",
+        "definitionVersion": "1.*.*",
+        "parameters": {
+          "effect": {
+            "value": "[parameters('effectSearchDiagnosticsToEventHub')]"
+          },
+          "profileName": {
+            "value": "[parameters('diagnosticProfileName')]"
+          },
+          "eventHubRuleId": {
+            "value": "[parameters('searchEventHubRuleId')]"
+          },
+          "eventHubLocation": {
+            "value": "[parameters('searchEventHubLocation')]"
+          },
+          "metricsEnabled": {
+            "value": "[parameters('metricsEnabled')]"
+          },
+          "logsEnabled": {
+            "value": "[parameters('logsEnabled')]"
+          }
+        },
+        "groupNames": []
+      },
+      {
+        "policyDefinitionReferenceId": "SearchDiagnosticsToLogAnalytics",
+        "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/08ba64b8-738f-4918-9686-730d2ed79c7d",
+        "definitionVersion": "1.*.*",
+        "parameters": {
+          "effect": {
+            "value": "[parameters('effectSearchDiagnosticsToLogAnalytics')]"
+          },
+          "profileName": {
+            "value": "[parameters('diagnosticProfileName')]"
+          },
+          "logAnalytics": {
+            "value": "[parameters('logAnalyticsWorkspaceId')]"
+          },
+          "metricsEnabled": {
+            "value": "[parameters('metricsEnabled')]"
+          },
+          "logsEnabled": {
+            "value": "[parameters('logsEnabled')]"
+          }
+        },
+        "groupNames": []
+      },
+      {
+        "policyDefinitionReferenceId": "SearchLoggingToEventHub",
+        "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/971199b6-1971-4d3e-85b0-fa7639044679",
+        "definitionVersion": "1.*.*",
+        "parameters": {
+          "effect": {
+            "value": "[parameters('effectSearchLoggingToEventHub')]"
+          },
+          "diagnosticSettingName": {
+            "value": "[parameters('diagnosticSettingName')]"
+          },
+          "categoryGroup": {
+            "value": "[parameters('categoryGroup')]"
+          },
+          "resourceLocation": {
+            "value": "[parameters('resourceLocation')]"
+          },
+          "eventHubAuthorizationRuleId": {
+            "value": "[parameters('eventHubAuthorizationRuleId')]"
+          },
+          "eventHubName": {
+            "value": "[parameters('eventHubName')]"
+          }
+        },
+        "groupNames": []
+      },
+      {
+        "policyDefinitionReferenceId": "SearchLoggingToLogAnalytics",
+        "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/8def4bdd-4362-4ed6-a26f-7bf8f2c58839",
+        "definitionVersion": "1.*.*",
+        "parameters": {
+          "effect": {
+            "value": "[parameters('effectSearchLoggingToLogAnalytics')]"
+          },
+          "diagnosticSettingName": {
+            "value": "[parameters('diagnosticSettingName')]"
+          },
+          "categoryGroup": {
+            "value": "[parameters('categoryGroup')]"
+          },
+          "resourceLocationList": {
+            "value": "[parameters('resourceLocationList')]"
+          },
+          "logAnalytics": {
+            "value": "[parameters('logAnalyticsWorkspaceId')]"
+          }
+        },
+        "groupNames": []
+      },
+      {
+        "policyDefinitionReferenceId": "SearchLoggingToStorage",
+        "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/480ee186-7504-48ac-b64e-af38673aa2c6",
+        "definitionVersion": "1.*.*",
+        "parameters": {
+          "effect": {
+            "value": "[parameters('effectSearchLoggingToStorage')]"
+          },
+          "diagnosticSettingName": {
+            "value": "[parameters('diagnosticSettingName')]"
+          },
+          "categoryGroup": {
+            "value": "[parameters('categoryGroup')]"
+          },
+          "resourceLocation": {
+            "value": "[parameters('resourceLocation')]"
+          },
+          "storageAccount": {
+            "value": "[parameters('storageAccountId')]"
+          }
+        },
+        "groupNames": []
+      },
+      {
+        "policyDefinitionReferenceId": "SearchResourceLogsEnabled",
+        "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/b4330a05-a843-4bc8-bf9a-cacce50c67f4",
+        "definitionVersion": "1.*.*",
+        "parameters": {
+          "effect": {
+            "value": "[parameters('effectSearchResourceLogsEnabled')]"
+          },
+          "requiredRetentionDays": {
+            "value": "[parameters('searchResourceLogsRetentionDays')]"
+          }
+        },
+        "groupNames": []
+      },
+      {
+        "policyDefinitionReferenceId": "WafSpecifiedModeAppGateway",
+        "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/12430be1-6cc8-4527-a9a8-e3d38f250096",
+        "definitionVersion": "1.*.*",
+        "parameters": {
+          "effect": {
+            "value": "[parameters('effectWafSpecifiedModeAppGateway')]"
+          },
+          "modeRequirement": {
+            "value": "Prevention"
+          }
+        },
+        "groupNames": []
+      },
+      {
+        "policyDefinitionReferenceId": "AppGatewayZoneResilient",
+        "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/493c215c-0553-4976-bc81-57d2c04fc8c1",
+        "definitionVersion": "1.*.*",
+        "parameters": {
+          "effect": {
+            "value": "[parameters('effectAppGatewayZoneResilient')]"
+          },
+          "allow": {
+            "value": "Redundant"
+          }
+        },
+        "groupNames": []
+      },
+      {
+        "policyDefinitionReferenceId": "AppGatewayLoggingToEventHub",
+        "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/11638078-a29c-4cf3-ad7f-775f78327425",
+        "definitionVersion": "1.*.*",
+        "parameters": {
+          "effect": {
+            "value": "[parameters('effectAppGatewayLoggingToEventHub')]"
+          },
+          "diagnosticSettingName": {
+            "value": "[parameters('diagnosticSettingName')]"
+          },
+          "categoryGroup": {
+            "value": "[parameters('categoryGroup')]"
+          },
+          "resourceLocation": {
+            "value": "[parameters('resourceLocation')]"
+          },
+          "eventHubAuthorizationRuleId": {
+            "value": "[parameters('eventHubAuthorizationRuleId')]"
+          },
+          "eventHubName": {
+            "value": "[parameters('eventHubName')]"
+          }
+        },
+        "groupNames": []
+      },
+      {
+        "policyDefinitionReferenceId": "AppGatewayLoggingToLogAnalytics",
+        "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/92012204-a7e4-4a95-bbe5-90d0d3e12735",
+        "definitionVersion": "1.*.*",
+        "parameters": {
+          "effect": {
+            "value": "[parameters('effectAppGatewayLoggingToLogAnalytics')]"
+          },
+          "diagnosticSettingName": {
+            "value": "[parameters('diagnosticSettingName')]"
+          },
+          "categoryGroup": {
+            "value": "[parameters('categoryGroup')]"
+          },
+          "resourceLocationList": {
+            "value": "[parameters('resourceLocationList')]"
+          },
+          "logAnalytics": {
+            "value": "[parameters('logAnalyticsWorkspaceId')]"
+          }
+        },
+        "groupNames": []
+      },
+      {
+        "policyDefinitionReferenceId": "AppGatewayLoggingToStorage",
+        "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/887d1795-3d3d-4859-9ef4-9447392db2ea",
+        "definitionVersion": "1.*.*",
+        "parameters": {
+          "effect": {
+            "value": "[parameters('effectAppGatewayLoggingToStorage')]"
+          },
+          "diagnosticSettingName": {
+            "value": "[parameters('diagnosticSettingName')]"
+          },
+          "categoryGroup": {
+            "value": "[parameters('categoryGroup')]"
+          },
+          "resourceLocation": {
+            "value": "[parameters('resourceLocation')]"
+          },
+          "storageAccount": {
+            "value": "[parameters('storageAccountId')]"
+          }
+        },
+        "groupNames": []
+      },
+      {
+        "policyDefinitionReferenceId": "MlAllowedModuleAuthors",
+        "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/53c70b02-63dd-11ea-bc55-0242ac130003",
+        "definitionVersion": "1.*.*",
+        "parameters": {
+          "effect": {
+            "value": "[parameters('effectMlAllowedModuleAuthors')]"
+          },
+          "computeNames": {
+            "value": []
+          },
+          "computeType": {
+            "value": "MachineLearningCompute"
+          },
+          "isIsolatedNetwork": {
+            "value": "Yes"
+          },
+          "trustIPProtectedComponent": {
+            "value": "Yes"
+          },
+          "allowedModuleAuthors": {
+            "value": "[parameters('mlAllowedModuleAuthors')]"
+          },
+          "tags": {
+            "value": []
+          }
+        },
+        "groupNames": []
+      },
+      {
+        "policyDefinitionReferenceId": "MlAllowedPythonPackages",
+        "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/77eeea86-7e81-4a7d-9067-de844d096752",
+        "definitionVersion": "1.*.*",
+        "parameters": {
+          "effect": {
+            "value": "[parameters('effectMlAllowedPythonPackages')]"
+          },
+          "computeNames": {
+            "value": []
+          },
+          "computeType": {
+            "value": "MachineLearningCompute"
+          },
+          "isIsolatedNetwork": {
+            "value": "Yes"
+          },
+          "allowedPythonPackageChannels": {
+            "value": "[parameters('mlAllowedPythonPackageChannels')]"
+          },
+          "tags": {
+            "value": []
+          }
+        },
+        "groupNames": []
+      },
+      {
+        "policyDefinitionReferenceId": "MlAllowedRegistries",
+        "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/5853517a-63de-11ea-bc55-0242ac130003",
+        "definitionVersion": "1.*.*",
+        "parameters": {
+          "effect": {
+            "value": "[parameters('effectMlAllowedRegistries')]"
+          },
+          "computeNames": {
+            "value": []
+          },
+          "computeType": {
+            "value": "MachineLearningCompute"
+          },
+          "isIsolatedNetwork": {
+            "value": "Yes"
+          },
+          "trustIPProtectedComponent": {
+            "value": "Yes"
+          },
+          "allowedACRs": {
+            "value": "[parameters('mlAllowedACRs')]"
+          },
+          "tags": {
+            "value": []
+          }
+        },
+        "groupNames": []
+      }
+    ]
+  }
+}

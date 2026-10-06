@@ -1,0 +1,32 @@
+{
+  "name": "test-subscription-policyset",
+  "properties": {
+    "displayName": "Test Subscription Initiative",
+    "description": "Sample initiative for testing at subscription scope.",
+    "metadata": {
+      "version": "1.0.0",
+      "category": "General"
+    },
+    "parameters": {
+      "tagName": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Tag Name",
+          "description": "Name of the tag to enforce on resources"
+        },
+        "defaultValue": "Environment"
+      }
+    },
+    "policyDefinitions": [
+      {
+        "policyDefinitionReferenceId": "require-tag-example",
+        "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/871b6d14-10aa-478d-b590-94f262ecfa99",
+        "parameters": {
+          "tagName": {
+            "value": "[parameters('tagName')]"
+          }
+        }
+      }
+    ]
+  }
+}

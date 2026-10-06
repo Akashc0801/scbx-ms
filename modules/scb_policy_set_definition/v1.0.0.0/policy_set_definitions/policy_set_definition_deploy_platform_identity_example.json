@@ -1,0 +1,99 @@
+{
+  "name": "SCB Enterprise Initiative \u2013 Production Identity",
+  "properties": {
+    "displayName": "SCB Enterprise Initiative Production-Identity",
+    "description": "This inlcudes all the policies related to Identity for the platform & LZ enterprise. ",
+    "metadata": {
+      "category": "Security Center"
+    },
+    "parameters": {
+      "Effect": {
+        "type": "String",
+        "defaultValue": "AuditIfNotExists",
+        "allowedValues": [
+          "AuditIfNotExists",
+          "Disabled"
+        ],
+        "metadata": {
+          "displayName": "Effect",
+          "description": "Enable or disable the execution of the policy"
+        }
+      },
+      "SQLEffect": {
+        "type": "String",
+        "defaultValue": "Audit",
+        "allowedValues": [
+          "Audit",
+          "Deny",
+          "Disabled"
+        ],
+        "metadata": {
+          "displayName": "Effect",
+          "description": "Enable or disable the execution of the policy"
+        }
+      }
+    },
+    "policyDefinitions": [
+      {
+        "policyDefinitionReferenceId": "Audit provisioning of an Azure Active Directory administrator for your MySQL server to enable Azure AD authentication. Azure AD authentication enables simplified permission management and centralized identity management of database users and other Microsoft services",
+        "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/146412e9-005c-472b-9e48-c87b72ac229e",
+        "parameters": {
+          "effect": {
+            "value": "[parameters('Effect')]"
+          }
+        },
+        "groupNames": []
+      },
+      {
+        "policyDefinitionReferenceId": "Disabling local authentication methods and allowing only Azure Active Directory Authentication improves security by ensuring that Azure SQL Managed Instances can exclusively be accessed by Azure Active Directory identities. Learn more at: aka.ms/adonlycreate.",
+        "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/78215662-041e-49ed-a9dd-5385911b3a1f",
+        "parameters": {
+          "effect": {
+            "value": "[parameters('SQLEffect')]"
+          }
+        },
+        "groupNames": []
+      },
+      {
+        "policyDefinitionReferenceId": "Disabling local authentication methods and allowing only Azure Active Directory Authentication improves security by ensuring that Azure SQL Databases can exclusively be accessed by Azure Active Directory identities. Learn more at: aka.ms/adonlycreate.",
+        "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/abda6d70-9778-44e7-84a8-06713e6db027",
+        "parameters": {
+          "effect": {
+            "value": "[parameters('SQLEffect')]"
+          }
+        },
+        "groupNames": []
+      },
+      {
+        "policyDefinitionReferenceId": "Disabling local authentication methods improves security by ensuring that App Configuration stores require Microsoft Entra identities exclusively for authentication. Learn more at: https://go.microsoft.com/fwlink/?linkid=2161954.",
+        "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/b08ab3ca-1062-4db3-8803-eec9cae605d6",
+        "parameters": {
+          "effect": {
+            "value": "[parameters('SQLEffect')]"
+          }
+        },
+        "groupNames": []
+      },
+      {
+        "policyDefinitionReferenceId": "Disable admin account for your registry so that it is not accessible by local admin. Disabling local authentication methods like admin user, repository scoped access tokens and anonymous pull improves security by ensuring that container registries exclusively require Azure Active Directory identities for authentication. Learn more at: https://aka.ms/acr/authentication.",
+        "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/dc921057-6b28-4fbe-9b83-f7bec05db6c2",
+        "parameters": {
+          "effect": {
+            "value": "[parameters('SQLEffect')]"
+          }
+        },
+        "groupNames": []
+      },
+      {
+        "policyDefinitionReferenceId": "Use a managed identity for enhanced authentication security",
+        "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/2b9ad585-36bc-4615-b300-fd4435808332",
+        "parameters": {
+          "effect": {
+            "value": "[parameters('Effect')]"
+          }
+        },
+        "groupNames": []
+      }
+    ]
+  }
+}

@@ -1,0 +1,128 @@
+{
+    "name": "SCB-Enterprise-Initiative-Platform-Identity",
+    "type": "Microsoft.Authorization/policySetDefinitions",
+    "apiVersion": "2021-06-01",
+    "scope": null,
+    "properties": {
+        "displayName": "SCB Enterprise Initiative Platform - Identity",
+        "policyType": "Custom",
+        "description": "This inlcudes all the policies related to Platform Identity Landing Zones.",
+        "metadata": {
+            "category": "Governance"
+        },
+        "parameters": {
+            "internetEffect": {
+                "type": "String",
+                "metadata": {
+                    "displayName": "Effect",
+                    "description": "Enable or disable the execution of the policy"
+                },
+                "allowedValues": [
+                    "Audit",
+                    "Deny",
+                    "Disabled"
+                ],
+                "defaultValue": "Deny"
+            },
+            "ports": {
+                "type": "Array",
+                "metadata": {
+                    "displayName": "Ports",
+                    "description": "Ports to be blocked"
+                },
+                "defaultValue": [
+                    "22",
+                    "3389"
+                ]
+            },
+            "SubnetEffect": {
+                "type": "String",
+                "allowedValues": [
+                    "Audit",
+                    "Deny",
+                    "Disabled"
+                ],
+                "defaultValue": "Deny",
+                "metadata": {
+                    "displayName": "Effect",
+                    "description": "Enable or disable the execution of the policy"
+                }
+            },
+            "excludedSubnets": {
+                "type": "Array",
+                "metadata": {
+                    "displayName": "Excluded Subnets",
+                    "description": "Array of subnet names that are excluded from this policy"
+                },
+                "defaultValue": [
+                    "GatewaySubnet",
+                    "AzureFirewallSubnet",
+                    "AzureFirewallManagementSubnet"
+                ]
+            },
+            "listOfResourceTypesNotAllowed": {
+                "type": "Array",
+                "metadata": {
+                    "description": "The list of resource types that cannot be deployed.",
+                    "displayName": "Not allowed resource types",
+                    "strongType": "resourceTypes"
+                }
+            },
+            "NotAllowedResourcesEffect": {
+                "type": "String",
+                "metadata": {
+                    "displayName": "Effect",
+                    "description": "Enable or disable the execution of the policy"
+                },
+                "allowedValues": [
+                    "Audit",
+                    "Deny",
+                    "Disabled"
+                ],
+                "defaultValue": "Deny"
+            }
+        },
+        "policyDefinitions": [
+            {
+                "policyDefinitionReferenceId": "Management port access from the Internet should be blocked_1",
+                "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/71223519-5c91-4236-9166-7a2d649563d0/providers/Microsoft.Authorization/policyDefinitions/Port-Block-From-Internet",
+                "parameters": {
+                    "effect": {
+                        "value": "[parameters('internetEffect')]"
+                    },
+                    "ports": {
+                        "value": "[parameters('ports')]"
+                    }
+                },
+                "groupNames": []
+            },
+            {
+                "policyDefinitionReferenceId": "Subnets should have a Network Security Group_1",
+                "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/71223519-5c91-4236-9166-7a2d649563d0/providers/Microsoft.Authorization/policyDefinitions/Subnets-Should-Have-NSG",
+                "parameters": {
+                    "effect": {
+                        "value": "[parameters('SubnetEffect')]"
+                    },
+                    "excludedSubnets": {
+                        "value": "[parameters('excludedSubnets')]"
+                    }
+                },
+                "groupNames": []
+            },
+            {
+                "policyDefinitionReferenceId": "Not allowed resource types_1",
+                "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/6c112d4e-5bc7-47ae-a041-ea2d9dccd749",
+                "parameters": {
+                    "effect": {
+                        "value": "[parameters('NotAllowedResourcesEffect')]"
+                    },
+                    "listOfResourceTypesNotAllowed": {
+                        "value": "[parameters('listOfResourceTypesNotAllowed')]"
+                    }
+                },
+                "groupNames": []
+            }
+        ],
+        "policyDefinitionGroups": []
+    }
+}
