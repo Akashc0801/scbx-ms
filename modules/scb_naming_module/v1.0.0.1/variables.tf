@@ -51,12 +51,37 @@ variable "org" {
 
 variable "region_code" {
   type        = string
-  description = "(Optional) scb region code.<br></br>&#8226; Value of `region_code` must be one of: `[ea,sea,eu,myw,sg,idc]`."
+  description = "(Optional) scb region code used in the resource name and, unless overridden, to select the Azure location. Must be one of: `[ea,sea,eu,myw,sg,idc]`."
+  default     = null
+  nullable    = true
+
   validation {
-    condition     = contains(["ea", "sea", "eu", "myw", "sg", "idc"], var.region_code)
+    condition     = var.region_code == null ? true : contains(["ea", "sea", "eu", "myw", "sg", "idc"], var.region_code)
     error_message = "Value of \"region_code\" must be one of: [ea,sea,eu,myw,sg,idc]."
   }
-  default = "sa"
+}
+
+variable "location_region_code" {
+  type        = string
+  description = "(Optional) SCB region code used only to select the Azure location when `region_code` is not set. Must be one of: `[ea,sea,eu,myw,sg,idc]`."
+  default     = null
+  nullable    = true
+
+  validation {
+    condition     = var.location_region_code == null ? true : contains(["ea", "sea", "eu", "myw", "sg", "idc"], var.location_region_code)
+    error_message = "Value of \"location_region_code\" must be one of: [ea,sea,eu,myw,sg,idc]."
+  }
+}
+
+variable "naming_format" {
+  type        = string
+  description = "Naming layout. `legacy` uses org-type-app_code-env-region-base_name; `workload` uses org-type-app_code-base_name-env-region."
+  default     = "legacy"
+
+  validation {
+    condition     = contains(["legacy", "workload"], var.naming_format)
+    error_message = "Value of \"naming_format\" must be either \"legacy\" or \"workload\"."
+  }
 }
 
 variable "additional_name" {

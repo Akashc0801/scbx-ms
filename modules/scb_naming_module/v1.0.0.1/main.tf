@@ -22,6 +22,7 @@ locals {
     "sg"  = "Singapore",
     "idc" = "Indonesia Central"
   }
+  effective_location_region_code = var.region_code != null ? var.region_code : var.location_region_code
 
   # -
   # - Generate name separator (dash or no dash)
@@ -37,17 +38,23 @@ locals {
   # - Cascade that generates the Resource name
   # -
 
-  # Build mandatory prefix
-  resource_name_pref1 = join(local.separator, [var.org, var.resource_type_code, var.app_code, var.env, var.region_code])
+  # Assemble the format-specific prefix, then append optional suffix components.
+  naming_prefix_parts = var.naming_format == "legacy" ? concat(
+    [var.org, var.resource_type_code, var.app_code, var.env],
+    var.region_code != null ? [var.region_code] : [],
+    var.base_name != null && var.base_name != "" ? [var.base_name] : []
+    ) : concat(
+    [var.org, var.resource_type_code, var.app_code],
+    var.base_name != null && var.base_name != "" ? [var.base_name] : [],
+    [var.env],
+    var.region_code != null ? [var.region_code] : []
+  )
 
-  # Add base name, if any
-  resource_name_pref2 = var.base_name != null && var.base_name != "" ? join(local.separator, [local.resource_name_pref1, var.base_name]) : local.resource_name_pref1
-
-  # Add additional name, if any
-  resource_name_pref3 = var.additional_name != null && var.additional_name != "" ? join(local.separator, [local.resource_name_pref2, var.additional_name]) : local.resource_name_pref2
-
-  # Add iterator, if any
-  resource_name_pref4 = var.iterator != null && var.iterator != "" ? join(local.separator, [local.resource_name_pref3, var.iterator]) : local.resource_name_pref3
+  resource_name_pref4 = join(local.separator, concat(
+    local.naming_prefix_parts,
+    var.additional_name != null && var.additional_name != "" ? [var.additional_name] : [],
+    var.iterator != null && var.iterator != "" ? [var.iterator] : []
+  ))
 
   # Ensure remove dashes (some may come from witihn the variables' values)
   resource_name_pref5 = var.no_dashes == true ? replace(local.resource_name_pref4, "-", "") : local.resource_name_pref4

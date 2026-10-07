@@ -16,6 +16,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Removed -->
 
+## [Unreleased]
+
+### Added
+
+- Added the opt-in `workload` naming format and independent `location_region_code`; the default `legacy` format remains available.
+- Made `region_code` nullable and omit absent region components from generated names.
+
 ## [1.0.0] - 2023-06-08 - Initial Handover
 
 ### Added
