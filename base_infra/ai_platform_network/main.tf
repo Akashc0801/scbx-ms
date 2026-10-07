@@ -256,3 +256,39 @@ module "route_tables" {
   enable_telemetry = each.value.enable_telemetry
   tags             = each.value.tags
 }
+
+module "private_dns_zones" {
+  for_each = var.private_dns_zones
+
+  source = "../../modules/scb_private_dns_zone/v1.0.0.0"
+
+  depends_on = [module.resource_groups]
+
+  domain_name = each.value.domain_name
+  parent_id   = module.resource_groups[each.value.resource_group_key].resource_id
+
+  # Mandatory Tags
+  app_name        = each.value.app_name
+  app_support     = each.value.app_support
+  business_unit   = each.value.business_unit
+  business_owner  = each.value.business_owner
+  product_name    = each.value.product_name
+  product_version = each.value.product_version
+  budget_id       = each.value.budget_id
+  criticality     = each.value.criticality
+  environment     = each.value.environment
+  owner           = each.value.owner
+  status          = each.value.status
+
+  # Links to the VNets, resolved from the VNet module outputs
+  virtual_network_links = {
+    for link_key, link in each.value.virtual_network_links : link_key => {
+      name                 = link.name
+      virtual_network_id   = module.virtual_networks[link.vnet_key].resource_id
+      registration_enabled = link.registration_enabled
+    }
+  }
+
+  enable_telemetry = each.value.enable_telemetry
+  tags             = each.value.tags
+}

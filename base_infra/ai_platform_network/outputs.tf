@@ -44,3 +44,16 @@ output "route_tables" {
     }
   }
 }
+
+output "private_dns_zones" {
+  description = "Private DNS zone names and IDs keyed by zone key."
+  value = {
+    for key, zone in module.private_dns_zones : key => {
+      name = zone.name
+      id   = zone.resource_id
+      virtual_network_links = {
+        for link_key, link in zone.virtual_network_link_outputs : link_key => link.id
+      }
+    }
+  }
+}

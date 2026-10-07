@@ -697,4 +697,371 @@ route_tables = {
   }
 }
 
+private_dns_zones = {
+  "ai_services" = {
+    domain_name        = "privatelink.services.ai.azure.com"
+    resource_group_key = "aigw_rg"
+
+    # Mandatory Tags
+    app_name        = "AI Platform Private DNS"
+    app_support     = ""
+    business_unit   = ""
+    business_owner  = ""
+    product_name    = "scb_private_dns_zone"
+    product_version = "1.0.0.0"
+    budget_id       = ""
+    criticality     = ""
+    environment     = "NPRD"
+    owner           = ""
+    status          = ""
+
+    virtual_network_links = {
+      aigw = {
+        name     = "aigw-vnet-link"
+        vnet_key = "aigw_vnet"
+      }
+      foundry = {
+        name     = "foundry-vnet-link"
+        vnet_key = "foundry_vnet"
+      }
+    }
+  }
+  "cognitive" = {
+    domain_name        = "privatelink.cognitiveservices.azure.com"
+    resource_group_key = "aigw_rg"
+
+    # Mandatory Tags
+    app_name        = "AI Platform Private DNS"
+    app_support     = ""
+    business_unit   = ""
+    business_owner  = ""
+    product_name    = "scb_private_dns_zone"
+    product_version = "1.0.0.0"
+    budget_id       = ""
+    criticality     = ""
+    environment     = "NPRD"
+    owner           = ""
+    status          = ""
+
+    virtual_network_links = {
+      aigw = {
+        name     = "aigw-vnet-link"
+        vnet_key = "aigw_vnet"
+      }
+      foundry = {
+        name     = "foundry-vnet-link"
+        vnet_key = "foundry_vnet"
+      }
+    }
+  }
+  "openai" = {
+    domain_name        = "privatelink.openai.azure.com"
+    resource_group_key = "aigw_rg"
+
+    # Mandatory Tags
+    app_name        = "AI Platform Private DNS"
+    app_support     = ""
+    business_unit   = ""
+    business_owner  = ""
+    product_name    = "scb_private_dns_zone"
+    product_version = "1.0.0.0"
+    budget_id       = ""
+    criticality     = ""
+    environment     = "NPRD"
+    owner           = ""
+    status          = ""
+
+    virtual_network_links = {
+      aigw = {
+        name     = "aigw-vnet-link"
+        vnet_key = "aigw_vnet"
+      }
+      foundry = {
+        name     = "foundry-vnet-link"
+        vnet_key = "foundry_vnet"
+      }
+    }
+  }
+  "blob" = {
+    domain_name        = "privatelink.blob.core.windows.net"
+    resource_group_key = "aigw_rg"
+
+    # Mandatory Tags
+    app_name        = "AI Platform Private DNS"
+    app_support     = ""
+    business_unit   = ""
+    business_owner  = ""
+    product_name    = "scb_private_dns_zone"
+    product_version = "1.0.0.0"
+    budget_id       = ""
+    criticality     = ""
+    environment     = "NPRD"
+    owner           = ""
+    status          = ""
+
+    virtual_network_links = {
+      aigw = {
+        name     = "aigw-vnet-link"
+        vnet_key = "aigw_vnet"
+      }
+      foundry = {
+        name     = "foundry-vnet-link"
+        vnet_key = "foundry_vnet"
+      }
+    }
+  }
+  "file" = {
+    domain_name        = "privatelink.file.core.windows.net"
+    resource_group_key = "aigw_rg"
+
+    # Mandatory Tags
+    app_name        = "AI Platform Private DNS"
+    app_support     = ""
+    business_unit   = ""
+    business_owner  = ""
+    product_name    = "scb_private_dns_zone"
+    product_version = "1.0.0.0"
+    budget_id       = ""
+    criticality     = ""
+    environment     = "NPRD"
+    owner           = ""
+    status          = ""
+
+    virtual_network_links = {
+      aigw = {
+        name     = "aigw-vnet-link"
+        vnet_key = "aigw_vnet"
+      }
+      foundry = {
+        name     = "foundry-vnet-link"
+        vnet_key = "foundry_vnet"
+      }
+    }
+  }
+  "cosmos_sql" = {
+    domain_name        = "privatelink.documents.azure.com"
+    resource_group_key = "aigw_rg"
+
+    # Mandatory Tags
+    app_name        = "AI Platform Private DNS"
+    app_support     = ""
+    business_unit   = ""
+    business_owner  = ""
+    product_name    = "scb_private_dns_zone"
+    product_version = "1.0.0.0"
+    budget_id       = ""
+    criticality     = ""
+    environment     = "NPRD"
+    owner           = ""
+    status          = ""
+
+    virtual_network_links = {
+      aigw = {
+        name     = "aigw-vnet-link"
+        vnet_key = "aigw_vnet"
+      }
+      foundry = {
+        name     = "foundry-vnet-link"
+        vnet_key = "foundry_vnet"
+      }
+    }
+  }
+  "search" = {
+    domain_name        = "privatelink.search.windows.net"
+    resource_group_key = "aigw_rg"
+
+    # Mandatory Tags
+    app_name        = "AI Platform Private DNS"
+    app_support     = ""
+    business_unit   = ""
+    business_owner  = ""
+    product_name    = "scb_private_dns_zone"
+    product_version = "1.0.0.0"
+    budget_id       = ""
+    criticality     = ""
+    environment     = "NPRD"
+    owner           = ""
+    status          = ""
+
+    virtual_network_links = {
+      aigw = {
+        name     = "aigw-vnet-link"
+        vnet_key = "aigw_vnet"
+      }
+      foundry = {
+        name     = "foundry-vnet-link"
+        vnet_key = "foundry_vnet"
+      }
+    }
+  }
+  "apim" = {
+    domain_name        = "privatelink.azure-api.net"
+    resource_group_key = "aigw_rg"
+
+    # Mandatory Tags
+    app_name        = "AI Platform Private DNS"
+    app_support     = ""
+    business_unit   = ""
+    business_owner  = ""
+    product_name    = "scb_private_dns_zone"
+    product_version = "1.0.0.0"
+    budget_id       = ""
+    criticality     = ""
+    environment     = "NPRD"
+    owner           = ""
+    status          = ""
+
+    virtual_network_links = {
+      aigw = {
+        name     = "aigw-vnet-link"
+        vnet_key = "aigw_vnet"
+      }
+      foundry = {
+        name     = "foundry-vnet-link"
+        vnet_key = "foundry_vnet"
+      }
+    }
+  }
+  "key_vault" = {
+    domain_name        = "privatelink.vaultcore.azure.net"
+    resource_group_key = "aigw_rg"
+
+    # Mandatory Tags
+    app_name        = "AI Platform Private DNS"
+    app_support     = ""
+    business_unit   = ""
+    business_owner  = ""
+    product_name    = "scb_private_dns_zone"
+    product_version = "1.0.0.0"
+    budget_id       = ""
+    criticality     = ""
+    environment     = "NPRD"
+    owner           = ""
+    status          = ""
+
+    virtual_network_links = {
+      aigw = {
+        name     = "aigw-vnet-link"
+        vnet_key = "aigw_vnet"
+      }
+      foundry = {
+        name     = "foundry-vnet-link"
+        vnet_key = "foundry_vnet"
+      }
+    }
+  }
+  "service_bus" = {
+    domain_name        = "privatelink.servicebus.windows.net"
+    resource_group_key = "aigw_rg"
+
+    # Mandatory Tags
+    app_name        = "AI Platform Private DNS"
+    app_support     = ""
+    business_unit   = ""
+    business_owner  = ""
+    product_name    = "scb_private_dns_zone"
+    product_version = "1.0.0.0"
+    budget_id       = ""
+    criticality     = ""
+    environment     = "NPRD"
+    owner           = ""
+    status          = ""
+
+    virtual_network_links = {
+      aigw = {
+        name     = "aigw-vnet-link"
+        vnet_key = "aigw_vnet"
+      }
+      foundry = {
+        name     = "foundry-vnet-link"
+        vnet_key = "foundry_vnet"
+      }
+    }
+  }
+  "app_config" = {
+    domain_name        = "privatelink.azconfig.io"
+    resource_group_key = "aigw_rg"
+
+    # Mandatory Tags
+    app_name        = "AI Platform Private DNS"
+    app_support     = ""
+    business_unit   = ""
+    business_owner  = ""
+    product_name    = "scb_private_dns_zone"
+    product_version = "1.0.0.0"
+    budget_id       = ""
+    criticality     = ""
+    environment     = "NPRD"
+    owner           = ""
+    status          = ""
+
+    virtual_network_links = {
+      aigw = {
+        name     = "aigw-vnet-link"
+        vnet_key = "aigw_vnet"
+      }
+      foundry = {
+        name     = "foundry-vnet-link"
+        vnet_key = "foundry_vnet"
+      }
+    }
+  }
+  "monitor" = {
+    domain_name        = "privatelink.monitor.azure.com"
+    resource_group_key = "aigw_rg"
+
+    # Mandatory Tags
+    app_name        = "AI Platform Private DNS"
+    app_support     = ""
+    business_unit   = ""
+    business_owner  = ""
+    product_name    = "scb_private_dns_zone"
+    product_version = "1.0.0.0"
+    budget_id       = ""
+    criticality     = ""
+    environment     = "NPRD"
+    owner           = ""
+    status          = ""
+
+    virtual_network_links = {
+      aigw = {
+        name     = "aigw-vnet-link"
+        vnet_key = "aigw_vnet"
+      }
+      foundry = {
+        name     = "foundry-vnet-link"
+        vnet_key = "foundry_vnet"
+      }
+    }
+  }
+  "container_registry" = {
+    domain_name        = "privatelink.azurecr.io"
+    resource_group_key = "aigw_rg"
+
+    # Mandatory Tags
+    app_name        = "AI Platform Private DNS"
+    app_support     = ""
+    business_unit   = ""
+    business_owner  = ""
+    product_name    = "scb_private_dns_zone"
+    product_version = "1.0.0.0"
+    budget_id       = ""
+    criticality     = ""
+    environment     = "NPRD"
+    owner           = ""
+    status          = ""
+
+    virtual_network_links = {
+      aigw = {
+        name     = "aigw-vnet-link"
+        vnet_key = "aigw_vnet"
+      }
+      foundry = {
+        name     = "foundry-vnet-link"
+        vnet_key = "foundry_vnet"
+      }
+    }
+  }
+}
+
 nprd_values_verified = false

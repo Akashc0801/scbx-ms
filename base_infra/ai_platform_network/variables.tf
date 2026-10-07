@@ -262,6 +262,36 @@ variable "route_tables" {
   }))
 }
 
+variable "private_dns_zones" {
+  description = "Map of private DNS zones. Each zone is linked to the VNets listed in virtual_network_links."
+  type = map(object({
+    domain_name        = string
+    resource_group_key = string
+
+    # Mandatory Tags
+    app_name        = string
+    app_support     = string
+    business_unit   = string
+    business_owner  = string
+    product_name    = optional(string, "scb_private_dns_zone")
+    product_version = string
+    budget_id       = string
+    criticality     = string
+    environment     = string
+    owner           = string
+    status          = string
+
+    virtual_network_links = map(object({
+      name                 = string
+      vnet_key             = string
+      registration_enabled = optional(bool, false)
+    }))
+
+    enable_telemetry = optional(bool, true)
+    tags             = optional(map(string), {})
+  }))
+}
+
 variable "nprd_values_verified" {
   description = "Set true only after the blank values in variables.tfvars are completed and the plan is reviewed."
   type        = bool
