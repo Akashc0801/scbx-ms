@@ -11,7 +11,8 @@ Deploy the SCB AI landing-zone Azure Policy assignments to management group
 
 ## Planned Artifacts
 
-- `terraform/bootstrap/` creates a dedicated Azure Storage state backend.
+- `terraform/bootstrap/` documents the dedicated Azure Storage state backend,
+  which was provisioned manually through Azure Cloud Shell.
 - `terraform/` calls the existing `scb_policy_assignment` module for all 57
   policies cataloged from `SCB_Policies.xlsx`.
 - `.github/workflows/azure-deploy.yml` uses GitHub OIDC, runs formatting and

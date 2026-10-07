@@ -99,78 +99,29 @@ jobs:
           }, indent=2))
           PY
 
-      - name: Ensure Terraform state backend
+      - name: Verify Terraform state backend
         if: github.event_name != 'pull_request'
         shell: bash
         run: |
           set -euo pipefail
 
-          resource_group="rg-scbx-terraform-state"
           storage_account="stscbxtf3471ad5a"
           container="tfstate"
 
-          az group create \
-            --subscription "$ARM_SUBSCRIPTION_ID" \
-            --name "$resource_group" \
-            --location southeastasia \
-            --tags environment=shared workload=terraform-state managed-by=github-actions \
-            --output none
-
-          if ! az storage account show \
-            --subscription "$ARM_SUBSCRIPTION_ID" \
-            --resource-group "$resource_group" \
-            --name "$storage_account" \
-            --output none 2>/dev/null; then
-            az storage account create \
-              --subscription "$ARM_SUBSCRIPTION_ID" \
-              --resource-group "$resource_group" \
-              --name "$storage_account" \
-              --location southeastasia \
-              --sku Standard_ZRS \
-              --kind StorageV2 \
-              --min-tls-version TLS1_2 \
-              --allow-shared-key-access false \
-              --https-only true \
-              --output none
-          fi
-
-          storage_scope=$(az storage account show \
-            --subscription "$ARM_SUBSCRIPTION_ID" \
-            --resource-group "$resource_group" \
-            --name "$storage_account" \
-            --query id \
-            --output tsv)
-          principal_id=$(az ad sp show \
-            --id "$ARM_CLIENT_ID" \
-            --query id \
-            --output tsv)
-
-          if [[ $(az role assignment list \
-            --assignee-object-id "$principal_id" \
-            --scope "$storage_scope" \
-            --role "Storage Blob Data Contributor" \
-            --query "length(@)" \
-            --output tsv) == "0" ]]; then
-            az role assignment create \
-              --assignee-object-id "$principal_id" \
-              --assignee-principal-type ServicePrincipal \
-              --scope "$storage_scope" \
-              --role "Storage Blob Data Contributor" \
-              --output none
-          fi
-
           for attempt in {1..12}; do
-            if az storage container create \
+            if [[ $(az storage container exists \
               --name "$container" \
               --account-name "$storage_account" \
               --auth-mode login \
-              --output none 2>/dev/null; then
+              --query exists \
+              --output tsv 2>/dev/null) == "true" ]]; then
+              echo "Terraform state backend is accessible."
               exit 0
             fi
             sleep 10
           done
 
-          echo "Timed out waiting for Storage Blob Data Contributor propagation." >&2
+          echo "Terraform state container is missing or inaccessible." >&2
           exit 1
 
       - name: Check formatting
