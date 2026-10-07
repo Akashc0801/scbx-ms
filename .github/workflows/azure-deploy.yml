@@ -44,7 +44,6 @@ env:
 jobs:
   terraform:
     runs-on: ubuntu-latest
-    environment: ${{ github.event_name == 'workflow_dispatch' && inputs.action == 'apply' && 'azure-policy-production' || '' }}
     defaults:
       run:
         working-directory: terraform
