@@ -7,7 +7,7 @@ output "policy_assignment_ids" {
 }
 
 output "policy_assignment_principal_ids" {
-  description = "Managed identity principal IDs for enabled DeployIfNotExists and Modify assignments."
+  description = "Managed identity principal IDs for DeployIfNotExists and Modify policy definitions."
   value = {
     for definition_id, assignment in module.ai_landing_zone_policy_assignment :
     definition_id => assignment.principal_id

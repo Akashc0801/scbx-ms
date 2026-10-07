@@ -8,20 +8,20 @@ locals {
   required_parameter_defaults = {
     "/providers/Microsoft.Authorization/policyDefinitions/595f98a5-b562-4ab6-b9c8-2ff9f39a3f7c" = {
       entityKind = { value = [] }
-      filterName = { value = "" }
+      filterName = { value = "Hate" }
     }
     "/providers/Microsoft.Authorization/policyDefinitions/9224c1cc-34fc-44f1-ad08-5c4b079c9ce6" = {
       entityKind = { value = [] }
-      filterName = { value = "" }
+      filterName = { value = "Profanity" }
     }
     "/providers/Microsoft.Authorization/policyDefinitions/af253d37-136a-42f8-a1fc-30010c083d41" = {
-      filterName = { value = "" }
+      filterName = { value = "Profanity" }
     }
     "/providers/Microsoft.Authorization/policyDefinitions/930f48f9-f07e-427c-9494-52603581c6a9" = {
-      filterName = { value = "" }
+      filterName = { value = "Hate" }
     }
     "/providers/Microsoft.Authorization/policyDefinitions/f3a9c2e0-7b4d-4d8f-9c3a-2e1f6b9a8d4e" = {
-      filterName = { value = "" }
+      filterName = { value = "Profanity" }
     }
     "/providers/Microsoft.Authorization/policyDefinitions/db630ad5-52e9-4f4d-9c44-53912fe40053" = {
       privateEndpointSubnetId = { value = "" }
@@ -70,15 +70,21 @@ locals {
 
   policy_parameters = {
     for definition_id, policy in local.policies :
-    definition_id => merge(
-      {
-        effect = {
-          value = policy.effective_effect
-        }
-      },
-      lookup(local.required_parameter_defaults, definition_id, {}),
-      lookup(var.policy_parameter_overrides, definition_id, {})
-    )
+    definition_id => {
+      for parameter_name, parameter in merge(
+        {
+          effect = {
+            value = policy.effective_effect
+          }
+        },
+        lookup(local.required_parameter_defaults, definition_id, {}),
+        lookup(var.policy_parameter_overrides, definition_id, {})
+      ) : parameter_name => parameter
+      if !(
+        definition_id == "/providers/Microsoft.Authorization/policyDefinitions/f110a506-2dcb-422e-bcea-d533fc8c35e2" &&
+        parameter_name == "effect"
+      )
+    }
   }
 }
 
@@ -93,7 +99,7 @@ module "ai_landing_zone_policy_assignment" {
   scope                = local.management_group_scope
   enforcement_mode     = "Default"
   location             = var.assignment_location
-  assign_identity      = contains(["DeployIfNotExists", "Modify"], each.value.effective_effect)
+  assign_identity      = contains(["DeployIfNotExists", "Modify"], each.value.workbook_default_effect)
   parameters           = local.policy_parameters[each.key]
 
   metadata = {
