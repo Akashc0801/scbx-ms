@@ -74,3 +74,40 @@ run "bad_lock_kind_rejected" {
   }
   expect_failures = [var.ai_foundry_accounts]
 }
+
+run "connection_with_secret_and_role_without_description" {
+  command = plan
+
+  variables {
+    ai_foundry_projects = {
+      p1 = {
+        account_key   = "shared"
+        sku_name      = "S0"
+        identity_type = "SystemAssigned"
+      }
+    }
+    # A connection that carries a credential makes the whole map sensitive.
+    ai_foundry_project_connections = {
+      appi = {
+        name            = "appi"
+        project_key     = "p1"
+        category        = "AppInsights"
+        target          = "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg/providers/Microsoft.Insights/components/appi"
+        auth_type       = "ApiKey"
+        credentials_key = sensitive("InstrumentationKey=00000000-0000-0000-0000-000000000000")
+      }
+    }
+    project_role_assignments = {
+      r1 = {
+        scope                = "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg"
+        role_definition_name = "Reader"
+        principal_id         = "00000000-0000-0000-0000-000000000001"
+      }
+    }
+  }
+
+  assert {
+    condition     = length(module.project_connection.connection_ids) == 1
+    error_message = "Expected one project connection."
+  }
+}

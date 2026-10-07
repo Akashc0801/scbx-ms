@@ -13,6 +13,8 @@
 - Diagnostic settings on the Foundry account (`ai_foundry_accounts[*].diagnostic_settings`).
 - Management lock on the Foundry account (`ai_foundry_accounts[*].lock`).
 - Corrected `ProductName` and `ProductVersion` tags.
+- Fixed connections that carry credentials (sensitive `for_each`) and role assignments with an empty description.
+- Set `resource_type_code = "aif"` and `max_length = 64` when calling the module; the defaults (`kv`, 24) do not suit a Foundry account.
 
 ## Upgrade Path
 

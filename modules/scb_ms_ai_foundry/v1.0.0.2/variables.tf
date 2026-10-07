@@ -602,7 +602,7 @@ variable "role_assignments" {
     scope                = string
     role_definition_name = string
     principal_id         = string
-    description          = optional(string, "")
+    description          = optional(string, null)
   }))
   default = {}
 }
@@ -631,7 +631,7 @@ variable "project_role_assignments" {
     scope                = string
     role_definition_name = string
     principal_id         = string
-    description          = optional(string, "")
+    description          = optional(string, null)
   }))
   default = {}
 }
