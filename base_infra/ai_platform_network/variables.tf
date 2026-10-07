@@ -2,21 +2,23 @@ variable "resource_groups" {
   description = "Map of resource group definitions. The key is referenced by the other resources."
   type = map(object({
     # Naming module variables
-    env                = string
-    org                = string
-    region_code        = string
-    base_name          = optional(string, "")
-    additional_name    = optional(string, "")
-    iterator           = string
-    au                 = string
-    app_code           = string
-    bu                 = string
-    owner              = string
-    resource_type_code = string
-    max_length         = optional(number, 90)
-    no_dashes          = optional(bool, false)
-    add_random         = optional(bool, false)
-    rnd_length         = optional(number, 4)
+    env                  = string
+    org                  = string
+    region_code          = optional(string, null)
+    location_region_code = optional(string, null)
+    naming_format        = optional(string, "legacy")
+    base_name            = optional(string, "")
+    additional_name      = optional(string, "")
+    iterator             = string
+    au                   = string
+    app_code             = string
+    bu                   = string
+    owner                = string
+    resource_type_code   = string
+    max_length           = optional(number, 90)
+    no_dashes            = optional(bool, false)
+    add_random           = optional(bool, false)
+    rnd_length           = optional(number, 4)
 
     # Mandatory Tags
     environment         = string
@@ -56,17 +58,19 @@ variable "network_security_groups" {
     resource_group_key = string
 
     # Naming module variables
-    env                = string
-    org                = string
-    region_code        = string
-    base_name          = optional(string, "")
-    additional_name    = optional(string, "")
-    iterator           = string
-    au                 = string
-    app_code           = string
-    bu                 = string
-    owner              = string
-    resource_type_code = string
+    env                  = string
+    org                  = string
+    region_code          = optional(string)
+    location_region_code = optional(string)
+    naming_format        = optional(string, "legacy")
+    base_name            = optional(string, "")
+    additional_name      = optional(string, "")
+    iterator             = string
+    au                   = string
+    app_code             = string
+    bu                   = string
+    owner                = string
+    resource_type_code   = string
 
     # Mandatory Tags
     environment         = string
@@ -124,21 +128,23 @@ variable "virtual_networks" {
     resource_group_key = string
 
     # Naming module variables
-    env                = string
-    org                = string
-    region_code        = string
-    base_name          = optional(string, "")
-    additional_name    = optional(string, "")
-    iterator           = string
-    au                 = string
-    app_code           = string
-    bu                 = string
-    owner              = string
-    resource_type_code = string
-    max_length         = optional(number, 63)
-    no_dashes          = optional(bool, false)
-    add_random         = optional(bool, false)
-    rnd_length         = optional(number, 4)
+    env                  = string
+    org                  = string
+    region_code          = optional(string, null)
+    location_region_code = optional(string, null)
+    naming_format        = optional(string, "legacy")
+    base_name            = optional(string, "")
+    additional_name      = optional(string, "")
+    iterator             = string
+    au                   = string
+    app_code             = string
+    bu                   = string
+    owner                = string
+    resource_type_code   = string
+    max_length           = optional(number, 63)
+    no_dashes            = optional(bool, false)
+    add_random           = optional(bool, false)
+    rnd_length           = optional(number, 4)
 
     # Mandatory Tags
     environment         = string
@@ -202,17 +208,19 @@ variable "route_tables" {
     resource_group_key = string
 
     # Naming module variables
-    env                = string
-    org                = string
-    region_code        = string
-    base_name          = optional(string, "")
-    additional_name    = optional(string, "")
-    iterator           = string
-    au                 = string
-    app_code           = string
-    bu                 = string
-    owner              = string
-    resource_type_code = string
+    env                  = string
+    org                  = string
+    region_code          = optional(string)
+    location_region_code = optional(string)
+    naming_format        = optional(string, "legacy")
+    base_name            = optional(string, "")
+    additional_name      = optional(string, "")
+    iterator             = string
+    au                   = string
+    app_code             = string
+    bu                   = string
+    owner                = string
+    resource_type_code   = string
 
     # Mandatory Tags
     environment         = string
@@ -290,10 +298,4 @@ variable "private_dns_zones" {
     enable_telemetry = optional(bool, true)
     tags             = optional(map(string), {})
   }))
-}
-
-variable "nprd_values_verified" {
-  description = "Set true only after the blank values in variables.tfvars are completed and the plan is reviewed."
-  type        = bool
-  default     = false
 }

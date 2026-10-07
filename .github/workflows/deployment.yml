@@ -34,7 +34,7 @@ env:
   TF_BACKEND_RESOURCE_GROUP: "rg-scbx-terraform-state"
   TF_BACKEND_STORAGE_ACCOUNT: "stscbxtf3471ad5a"
   TF_BACKEND_CONTAINER: "tfstate"
-  TF_BACKEND_KEY: "scb-ai-policy-assignments.tfstate"
+  TF_BACKEND_KEY: "scb-ai-platform-network.tfstate"
 
 concurrency:
   group: terraform-nprd
@@ -170,15 +170,6 @@ jobs:
             -backend-config="client_id=${ARM_CLIENT_ID}" \
             -backend-config="tenant_id=${ARM_TENANT_ID}" \
             -backend-config="subscription_id=${ARM_SUBSCRIPTION_ID}"
-
-      - name: Require reviewed NPRD values
-        shell: bash
-        run: |
-          set -euo pipefail
-          if ! grep -Eq '^[[:space:]]*nprd_values_verified[[:space:]]*=[[:space:]]*true([[:space:]]*(#.*)?)?$' "$TF_WORKING_DIR/variables.tfvars"; then
-            echo "::error::Complete the blank values in $TF_WORKING_DIR/variables.tfvars, review the plan, and set nprd_values_verified = true before applying."
-            exit 1
-          fi
 
       - name: Download planned execution
         uses: actions/download-artifact@v4

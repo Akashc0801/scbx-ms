@@ -378,12 +378,26 @@ variable "org" {
 
 variable "region_code" {
   type        = string
-  description = "(Optional) scb region code.<br></br>&#8226; Value of `region_code` must be one of: `[sea,ea,eu,sg,idc]`."
+  description = "(Optional) SCB region code included in naming and used for location unless location_region_code is set."
+  default     = null
+  nullable    = true
+
   validation {
-    condition     = contains(["ea", "sea", "eu", "myw", "sg", "idc"], var.region_code)
+    condition     = var.region_code == null ? true : contains(["ea", "sea", "eu", "myw", "sg", "idc"], var.region_code)
     error_message = "Value of \"region_code\" must be one of: [ea,sea,eu,myw,sg,idc]."
   }
-  default = "sa"
+}
+
+variable "location_region_code" {
+  type        = string
+  description = "(Optional) SCB region code used only to select the Azure location when region_code is not set."
+  default     = null
+}
+
+variable "naming_format" {
+  type        = string
+  description = "Naming layout passed to the SCB naming module: legacy or workload."
+  default     = "legacy"
 }
 variable "additional_name" {
   type        = string

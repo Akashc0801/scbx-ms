@@ -16,8 +16,8 @@
 This scb module provides the following features:
 
 - From a scb `region_code`, the module gives the Azure `location name` to use in resource's creation,
-- From the scb inputs (org, country, env, base\_name, etc.) and an Azure resource abbreviation ([Recommended abbreviations for Azure resource types](https://docs.microsoft.com/en-us/azure/cloud-adoption-framework/ready/azure-best-practices/resource-abbreviations)), the module generates the resource name, according to this scb Naming Standard:
-  - [`resource_type_code`]`-`[`env`]`-`[`region_code`]`-`[`base_name`][(optional)`-additional_name`][(optional)`-iterator`][(optional - see below)`-random_number`]
+- From the SCB inputs and an Azure resource abbreviation ([Recommended abbreviations for Azure resource types](https://docs.microsoft.com/en-us/azure/cloud-adoption-framework/ready/azure-best-practices/resource-abbreviations)), the module generates resource names. `naming_format` defaults to `legacy`, preserving the existing `org-type-app_code-env-region_code-base_name-additional_name-iterator` order. Set it to `workload` to use `org-type-app_code-base_name-env-region_code-additional_name-iterator`; omitted optional components, including `region_code`, are excluded.
+- `region_code` controls the name and selects the Azure location when provided. When naming without a region, set `location_region_code` if the resource still needs a location. No location is assumed; requesting the `location` output without either code fails with a clear error.
 - Some resources require their **name to be globally unique**:
   - To support that case, the option to set `add_random = true` is available. When activated, a `random_number`, padding 0, is added to the resource name generated. The length of the numbers added is set by the variable `rnd_length`.
 - Some resources require a **maximum name length** ([Naming rules and restrictions for Azure resources](https://docs.microsoft.com/en-us/azure/azure-resource-manager/management/resource-name-rules)):
@@ -68,6 +68,7 @@ module "scb_module_rg" {
   # org           = ""
   # country       = ""
   env             = "core"
+  naming_format   = "legacy"
   region_code     = "sea"
   base_name       = "scbmodule"
   additional_name = ""
@@ -132,8 +133,10 @@ No modules.
 | <a name="input_iterator"></a> [iterator](#input\_iterator) | (Optional) Iterator to create resource uniqueness. It will be separated by a `'-'` from the "name's generated + additional\_name" concatenation. Example: `001`. | `string` | `null` | no |
 | <a name="input_max_length"></a> [max\_length](#input\_max\_length) | (Optional) Set the maximum length of the generated name. If over, the name will be trimmed to the `max_length`, considering the eventual `random_number` suffix. See this link for reference: [Resource name rules](https://docs.microsoft.com/en-us/azure/azure-resource-manager/management/resource-name-rules) | `number` | `63` | no |
 | <a name="input_no_dashes"></a> [no\_dashes](#input\_no\_dashes) | (Optional) When set to `true`, it will remove all `'-'` separators from the generated name. | `bool` | `false` | no |
+| <a name="input_naming_format"></a> [naming\_format](#input\_naming\_format) | Naming layout: `legacy` (default) or `workload`. | `string` | `"legacy"` | no |
 | <a name="input_org"></a> [org](#input\_org) | (Optional) scb organization code. Example: `scb`. | `string` | `"scb"` | no |
-| <a name="input_region_code"></a> [region\_code](#input\_region\_code) | (Optional) scb region code.<br></br>&#8226; Value of `region_code` must be one of: `[sea,ea,eu,myw,sg]`. | `string` | `"sa"` | no |
+| <a name="input_location_region_code"></a> [location\_region\_code](#input\_location\_region\_code) | Optional SCB region code used only to resolve location when `region_code` is omitted. | `string` | `null` | no |
+| <a name="input_region_code"></a> [region\_code](#input\_region\_code) | Optional SCB region code used in the name and as the location code unless overridden. Must be one of `[ea,sea,eu,myw,sg,idc]`. | `string` | `null` | no |
 | <a name="input_rnd_length"></a> [rnd\_length](#input\_rnd\_length) | (Optional) Set the length of the `random_number` generated. | `number` | `2` | no |
 
 ### Resources

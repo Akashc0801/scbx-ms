@@ -4,21 +4,23 @@ module "resource_groups" {
   source = "../../modules/scb_resource_group/v1.0.0.1"
 
   # Naming and tag variables
-  env                = each.value.env
-  org                = each.value.org
-  region_code        = each.value.region_code
-  base_name          = each.value.base_name
-  additional_name    = each.value.additional_name
-  iterator           = each.value.iterator
-  au                 = each.value.au
-  app_code           = each.value.app_code
-  bu                 = each.value.bu
-  owner              = each.value.owner
-  resource_type_code = each.value.resource_type_code
-  max_length         = each.value.max_length
-  no_dashes          = each.value.no_dashes
-  add_random         = each.value.add_random
-  rnd_length         = each.value.rnd_length
+  env                  = each.value.env
+  org                  = each.value.org
+  region_code          = each.value.region_code
+  location_region_code = each.value.location_region_code
+  naming_format        = each.value.naming_format
+  base_name            = each.value.base_name
+  additional_name      = each.value.additional_name
+  iterator             = each.value.iterator
+  au                   = each.value.au
+  app_code             = each.value.app_code
+  bu                   = each.value.bu
+  owner                = each.value.owner
+  resource_type_code   = each.value.resource_type_code
+  max_length           = each.value.max_length
+  no_dashes            = each.value.no_dashes
+  add_random           = each.value.add_random
+  rnd_length           = each.value.rnd_length
 
   # Mandatory Tags
   environment         = each.value.environment
@@ -70,11 +72,13 @@ module "network_security_groups" {
   resource_type_code = each.value.resource_type_code
 
   # Optional naming variables
-  org             = each.value.org
-  region_code     = each.value.region_code
-  base_name       = each.value.base_name
-  additional_name = each.value.additional_name
-  iterator        = each.value.iterator
+  org                  = each.value.org
+  region_code          = each.value.region_code
+  location_region_code = each.value.location_region_code
+  naming_format        = each.value.naming_format
+  base_name            = each.value.base_name
+  additional_name      = each.value.additional_name
+  iterator             = each.value.iterator
 
   # Mandatory Tags
   environment         = each.value.environment
@@ -117,21 +121,23 @@ module "virtual_networks" {
   depends_on = [module.resource_groups, module.network_security_groups]
 
   # Naming and tag variables
-  env                = each.value.env
-  org                = each.value.org
-  region_code        = each.value.region_code
-  base_name          = each.value.base_name
-  additional_name    = each.value.additional_name
-  iterator           = each.value.iterator
-  au                 = each.value.au
-  app_code           = each.value.app_code
-  bu                 = each.value.bu
-  owner              = each.value.owner
-  resource_type_code = each.value.resource_type_code
-  max_length         = each.value.max_length
-  no_dashes          = each.value.no_dashes
-  add_random         = each.value.add_random
-  rnd_length         = each.value.rnd_length
+  env                  = each.value.env
+  org                  = each.value.org
+  region_code          = each.value.region_code
+  location_region_code = each.value.location_region_code
+  naming_format        = each.value.naming_format
+  base_name            = each.value.base_name
+  additional_name      = each.value.additional_name
+  iterator             = each.value.iterator
+  au                   = each.value.au
+  app_code             = each.value.app_code
+  bu                   = each.value.bu
+  owner                = each.value.owner
+  resource_type_code   = each.value.resource_type_code
+  max_length           = each.value.max_length
+  no_dashes            = each.value.no_dashes
+  add_random           = each.value.add_random
+  rnd_length           = each.value.rnd_length
 
   # Mandatory Tags
   environment         = each.value.environment
@@ -207,11 +213,13 @@ module "route_tables" {
   resource_type_code = each.value.resource_type_code
 
   # Optional naming variables
-  org             = each.value.org
-  region_code     = each.value.region_code
-  base_name       = each.value.base_name
-  additional_name = each.value.additional_name
-  iterator        = each.value.iterator
+  org                  = each.value.org
+  region_code          = each.value.region_code
+  location_region_code = each.value.location_region_code
+  naming_format        = each.value.naming_format
+  base_name            = each.value.base_name
+  additional_name      = each.value.additional_name
+  iterator             = each.value.iterator
 
   # Mandatory Tags
   environment         = each.value.environment

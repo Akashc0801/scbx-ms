@@ -355,10 +355,30 @@ variable "region_code" {
   type        = string
   description = "(Optional) scb region code.<br></br>&#8226; Value of `region_code` must be one of: `[ea,sea,eu,myw,sg,idc]`."
   validation {
-    condition     = contains(["ea", "sea", "eu", "myw", "sg", "idc"], var.region_code)
+    condition     = var.region_code == null ? true : contains(["ea", "sea", "eu", "myw", "sg", "idc"], var.region_code)
     error_message = "Value of \"region_code\" must be one of: [ea,sea,eu,myw,sg,idc]."
   }
-  default = "sa"
+  default = null
+}
+
+variable "location_region_code" {
+  type        = string
+  description = "Azure location region code when region_code is omitted from the name."
+  default     = null
+  validation {
+    condition     = var.location_region_code == null ? true : contains(["ea", "sea", "eu", "myw", "sg", "idc"], var.location_region_code)
+    error_message = "location_region_code must be one of: ea,sea,eu,myw,sg,idc."
+  }
+}
+
+variable "naming_format" {
+  type        = string
+  description = "Naming format: legacy or workload."
+  default     = "legacy"
+  validation {
+    condition     = contains(["legacy", "workload"], var.naming_format)
+    error_message = "naming_format must be legacy or workload."
+  }
 }
 variable "additional_name" {
   type        = string
@@ -478,4 +498,3 @@ variable "last_vm_accessed" {
   description = "(Optional) Last VM access timestamp."
   default     = ""
 }
-

@@ -1,27 +1,29 @@
-# Naming follows the SCB naming module: org-type-app_code-env-region_code-base_name-iterator.
-# Values that are not yet known are left blank and must be completed before apply.
+# RGs, VNets, NSGs, and route tables use the SCB workload naming format:
+# org-type-app_code-base_name-env-iterator.
+# Other unknown values are blank; complete required values before plan/apply.
 
 resource_groups = {
   "aigw_rg" = {
     # Naming module variables
-    env                = "np"
-    org                = "scb"
-    region_code        = "sea"
-    base_name          = "aigw"
-    additional_name    = ""
-    iterator           = "001"
-    au                 = ""
-    app_code           = "aiplatform"
-    bu                 = ""
-    owner              = ""
-    resource_type_code = "rg"
-    max_length         = 90
-    no_dashes          = false
-    add_random         = false
-    rnd_length         = 4
+    env                  = "dev"
+    org                  = "az"
+    naming_format        = "workload"
+    location_region_code = "sea"
+    base_name            = "aigw"
+    additional_name      = ""
+    iterator             = "001"
+    au                   = "12345"
+    app_code             = "dtx-aiplatform"
+    bu                   = ""
+    owner                = ""
+    resource_type_code   = "rg"
+    max_length           = 90
+    no_dashes            = false
+    add_random           = false
+    rnd_length           = 4
 
     # Mandatory Tags
-    environment         = "NPRD"
+    environment         = "DEV"
     business_owner      = ""
     business_unit       = ""
     criticality         = ""
@@ -30,14 +32,14 @@ resource_groups = {
     compliance          = ""
     app_name            = "AI Platform AIGW"
     budget_id           = ""
-    status              = ""
+    status              = "Live"
     product_name        = "scb_resource_group"
     product_version     = "1.0.0.1"
-    app_support         = ""
+    app_support         = "abc@xyz.com"
 
     # Optional Tags
     region               = ""
-    description          = "Resource group for the AI Platform AIGW NPRD network"
+    description          = "Resource group for the AI Platform AIGW dev network"
     notification_emails  = []
     automation_policy    = ""
     review_required      = ""
@@ -49,24 +51,25 @@ resource_groups = {
 
   "foundry_rg" = {
     # Naming module variables
-    env                = "np"
-    org                = "scb"
-    region_code        = "sea"
-    base_name          = "foundry"
-    additional_name    = ""
-    iterator           = "001"
-    au                 = ""
-    app_code           = "aiplatform"
-    bu                 = ""
-    owner              = ""
-    resource_type_code = "rg"
-    max_length         = 90
-    no_dashes          = false
-    add_random         = false
-    rnd_length         = 4
+    env                  = "dev"
+    org                  = "az"
+    naming_format        = "workload"
+    location_region_code = "sea"
+    base_name            = "foundry"
+    additional_name      = ""
+    iterator             = "001"
+    au                   = "12345"
+    app_code             = "dtx-aiplatform"
+    bu                   = ""
+    owner                = ""
+    resource_type_code   = "rg"
+    max_length           = 90
+    no_dashes            = false
+    add_random           = false
+    rnd_length           = 4
 
     # Mandatory Tags
-    environment         = "NPRD"
+    environment         = "DEV"
     business_owner      = ""
     business_unit       = ""
     criticality         = ""
@@ -75,14 +78,14 @@ resource_groups = {
     compliance          = ""
     app_name            = "AI Platform Foundry"
     budget_id           = ""
-    status              = ""
+    status              = "Live"
     product_name        = "scb_resource_group"
     product_version     = "1.0.0.1"
-    app_support         = ""
+    app_support         = "abc@xyz.com"
 
     # Optional Tags
     region               = ""
-    description          = "Resource group for the AI Platform Foundry NPRD network"
+    description          = "Resource group for the AI Platform Foundry dev network"
     notification_emails  = []
     automation_policy    = ""
     review_required      = ""
@@ -98,20 +101,21 @@ network_security_groups = {
     resource_group_key = "aigw_rg"
 
     # Naming module variables
-    env                = "np"
-    org                = "scb"
-    region_code        = "sea"
-    base_name          = "apim"
-    additional_name    = ""
-    iterator           = "001"
-    au                 = ""
-    app_code           = "aiplatform"
-    bu                 = ""
-    owner              = ""
-    resource_type_code = "nsg"
+    env                  = "dev"
+    org                  = "az"
+    naming_format        = "workload"
+    location_region_code = "sea"
+    base_name            = "apim"
+    additional_name      = ""
+    iterator             = "001"
+    au                   = "12345"
+    app_code             = "dtx-aiplatform"
+    bu                   = ""
+    owner                = ""
+    resource_type_code   = "nsg"
 
     # Mandatory Tags
-    environment         = "NPRD"
+    environment         = "DEV"
     business_owner      = ""
     business_unit       = ""
     criticality         = ""
@@ -120,7 +124,7 @@ network_security_groups = {
     compliance          = ""
     app_name            = "AI Platform AIGW"
     budget_id           = ""
-    status              = ""
+    status              = "Live"
     service             = ""
 
     # Optional Tags
@@ -147,20 +151,21 @@ network_security_groups = {
     resource_group_key = "aigw_rg"
 
     # Naming module variables
-    env                = "np"
-    org                = "scb"
-    region_code        = "sea"
-    base_name          = "pe"
-    additional_name    = ""
-    iterator           = "001"
-    au                 = ""
-    app_code           = "aiplatform"
-    bu                 = ""
-    owner              = ""
-    resource_type_code = "nsg"
+    env                  = "dev"
+    org                  = "az"
+    naming_format        = "workload"
+    location_region_code = "sea"
+    base_name            = "pe"
+    additional_name      = ""
+    iterator             = "001"
+    au                   = "12345"
+    app_code             = "dtx-aiplatform"
+    bu                   = ""
+    owner                = ""
+    resource_type_code   = "nsg"
 
     # Mandatory Tags
-    environment         = "NPRD"
+    environment         = "DEV"
     business_owner      = ""
     business_unit       = ""
     criticality         = ""
@@ -169,7 +174,7 @@ network_security_groups = {
     compliance          = ""
     app_name            = "AI Platform AIGW"
     budget_id           = ""
-    status              = ""
+    status              = "Live"
     service             = ""
 
     # Optional Tags
@@ -196,20 +201,21 @@ network_security_groups = {
     resource_group_key = "aigw_rg"
 
     # Naming module variables
-    env                = "np"
-    org                = "scb"
-    region_code        = "sea"
-    base_name          = "logicapp"
-    additional_name    = ""
-    iterator           = "001"
-    au                 = ""
-    app_code           = "aiplatform"
-    bu                 = ""
-    owner              = ""
-    resource_type_code = "nsg"
+    env                  = "dev"
+    org                  = "az"
+    naming_format        = "workload"
+    location_region_code = "sea"
+    base_name            = "logicapp"
+    additional_name      = ""
+    iterator             = "001"
+    au                   = "12345"
+    app_code             = "dtx-aiplatform"
+    bu                   = ""
+    owner                = ""
+    resource_type_code   = "nsg"
 
     # Mandatory Tags
-    environment         = "NPRD"
+    environment         = "DEV"
     business_owner      = ""
     business_unit       = ""
     criticality         = ""
@@ -218,7 +224,7 @@ network_security_groups = {
     compliance          = ""
     app_name            = "AI Platform AIGW"
     budget_id           = ""
-    status              = ""
+    status              = "Live"
     service             = ""
 
     # Optional Tags
@@ -245,20 +251,21 @@ network_security_groups = {
     resource_group_key = "foundry_rg"
 
     # Naming module variables
-    env                = "np"
-    org                = "scb"
-    region_code        = "sea"
-    base_name          = "agent"
-    additional_name    = ""
-    iterator           = "001"
-    au                 = ""
-    app_code           = "aiplatform"
-    bu                 = ""
-    owner              = ""
-    resource_type_code = "nsg"
+    env                  = "dev"
+    org                  = "az"
+    naming_format        = "workload"
+    location_region_code = "sea"
+    base_name            = "foundryagent"
+    additional_name      = ""
+    iterator             = "001"
+    au                   = "12345"
+    app_code             = "dtx-aiplatform"
+    bu                   = ""
+    owner                = ""
+    resource_type_code   = "nsg"
 
     # Mandatory Tags
-    environment         = "NPRD"
+    environment         = "DEV"
     business_owner      = ""
     business_unit       = ""
     criticality         = ""
@@ -267,7 +274,7 @@ network_security_groups = {
     compliance          = ""
     app_name            = "AI Platform Foundry"
     budget_id           = ""
-    status              = ""
+    status              = "Live"
     service             = ""
 
     # Optional Tags
@@ -294,20 +301,21 @@ network_security_groups = {
     resource_group_key = "foundry_rg"
 
     # Naming module variables
-    env                = "np"
-    org                = "scb"
-    region_code        = "sea"
-    base_name          = "foundrype"
-    additional_name    = ""
-    iterator           = "001"
-    au                 = ""
-    app_code           = "aiplatform"
-    bu                 = ""
-    owner              = ""
-    resource_type_code = "nsg"
+    env                  = "dev"
+    org                  = "az"
+    naming_format        = "workload"
+    location_region_code = "sea"
+    base_name            = "foundrype"
+    additional_name      = ""
+    iterator             = "001"
+    au                   = "12345"
+    app_code             = "dtx-aiplatform"
+    bu                   = ""
+    owner                = ""
+    resource_type_code   = "nsg"
 
     # Mandatory Tags
-    environment         = "NPRD"
+    environment         = "DEV"
     business_owner      = ""
     business_unit       = ""
     criticality         = ""
@@ -316,7 +324,7 @@ network_security_groups = {
     compliance          = ""
     app_name            = "AI Platform Foundry"
     budget_id           = ""
-    status              = ""
+    status              = "Live"
     service             = ""
 
     # Optional Tags
@@ -343,20 +351,21 @@ network_security_groups = {
     resource_group_key = "foundry_rg"
 
     # Naming module variables
-    env                = "np"
-    org                = "scb"
-    region_code        = "sea"
-    base_name          = "build"
-    additional_name    = ""
-    iterator           = "001"
-    au                 = ""
-    app_code           = "aiplatform"
-    bu                 = ""
-    owner              = ""
-    resource_type_code = "nsg"
+    env                  = "dev"
+    org                  = "az"
+    naming_format        = "workload"
+    location_region_code = "sea"
+    base_name            = "build"
+    additional_name      = ""
+    iterator             = "001"
+    au                   = "12345"
+    app_code             = "dtx-aiplatform"
+    bu                   = ""
+    owner                = ""
+    resource_type_code   = "nsg"
 
     # Mandatory Tags
-    environment         = "NPRD"
+    environment         = "DEV"
     business_owner      = ""
     business_unit       = ""
     criticality         = ""
@@ -365,7 +374,7 @@ network_security_groups = {
     compliance          = ""
     app_name            = "AI Platform Foundry"
     budget_id           = ""
-    status              = ""
+    status              = "Live"
     service             = ""
 
     # Optional Tags
@@ -394,24 +403,25 @@ virtual_networks = {
     resource_group_key = "aigw_rg"
 
     # Naming module variables
-    env                = "np"
-    org                = "scb"
-    region_code        = "sea"
-    base_name          = "aigw"
-    additional_name    = ""
-    iterator           = "001"
-    au                 = ""
-    app_code           = "aiplatform"
-    bu                 = ""
-    owner              = ""
-    resource_type_code = "vnet"
-    max_length         = 63
-    no_dashes          = false
-    add_random         = false
-    rnd_length         = 4
+    env                  = "dev"
+    org                  = "az"
+    naming_format        = "workload"
+    location_region_code = "sea"
+    base_name            = "aigw"
+    additional_name      = ""
+    iterator             = "001"
+    au                   = "12345"
+    app_code             = "dtx-aiplatform"
+    bu                   = ""
+    owner                = ""
+    resource_type_code   = "vnet"
+    max_length           = 63
+    no_dashes            = false
+    add_random           = false
+    rnd_length           = 4
 
     # Mandatory Tags
-    environment         = "NPRD"
+    environment         = "DEV"
     business_owner      = ""
     business_unit       = ""
     criticality         = ""
@@ -420,13 +430,13 @@ virtual_networks = {
     compliance          = ""
     app_name            = "AI Platform AIGW"
     budget_id           = ""
-    status              = ""
+    status              = "Live"
     service             = ""
-    app_support         = ""
+    app_support         = "abc@xyz.com"
 
     # Optional Tags
     region              = ""
-    description         = "VNet for the AI Platform AIGW NPRD network"
+    description         = "VNet for the AI Platform AIGW dev network"
     notification_emails = []
     app_id              = ""
     auto_delete         = ""
@@ -445,21 +455,21 @@ virtual_networks = {
 
     subnets = {
       apim = {
-        name           = "az-snet-sbx-aiplatform-apim-nprd-001"
+        name           = "az-snet-dtx-aiplatform-apim-dev-001"
         address_prefix = "10.0.0.0/24"
         network_security_group = {
           id = "aigw_apim_nsg" # Reference to NSG module key
         }
       }
       pe = {
-        name           = "az-snet-sbx-aiplatform-pe-nprd-001"
+        name           = "az-snet-dtx-aiplatform-pe-dev-001"
         address_prefix = "10.0.1.0/26"
         network_security_group = {
           id = "aigw_pe_nsg" # Reference to NSG module key
         }
       }
       logicapp = {
-        name           = "az-snet-sbx-aiplatform-logicapp-nprd-001"
+        name           = "az-snet-dtx-aiplatform-logicapp-dev-001"
         address_prefix = "10.0.1.64/26"
         network_security_group = {
           id = "aigw_logicapp_nsg" # Reference to NSG module key
@@ -472,24 +482,25 @@ virtual_networks = {
     resource_group_key = "foundry_rg"
 
     # Naming module variables
-    env                = "np"
-    org                = "scb"
-    region_code        = "sea"
-    base_name          = "foundry"
-    additional_name    = ""
-    iterator           = "001"
-    au                 = ""
-    app_code           = "aiplatform"
-    bu                 = ""
-    owner              = ""
-    resource_type_code = "vnet"
-    max_length         = 63
-    no_dashes          = false
-    add_random         = false
-    rnd_length         = 4
+    env                  = "dev"
+    org                  = "az"
+    naming_format        = "workload"
+    location_region_code = "sea"
+    base_name            = "foundry"
+    additional_name      = ""
+    iterator             = "001"
+    au                   = "12345"
+    app_code             = "dtx-aiplatform"
+    bu                   = ""
+    owner                = ""
+    resource_type_code   = "vnet"
+    max_length           = 63
+    no_dashes            = false
+    add_random           = false
+    rnd_length           = 4
 
     # Mandatory Tags
-    environment         = "NPRD"
+    environment         = "DEV"
     business_owner      = ""
     business_unit       = ""
     criticality         = ""
@@ -498,13 +509,13 @@ virtual_networks = {
     compliance          = ""
     app_name            = "AI Platform Foundry"
     budget_id           = ""
-    status              = ""
+    status              = "Live"
     service             = ""
-    app_support         = ""
+    app_support         = "abc@xyz.com"
 
     # Optional Tags
     region              = ""
-    description         = "VNet for the AI Platform Foundry NPRD network"
+    description         = "VNet for the AI Platform Foundry dev network"
     notification_emails = []
     app_id              = ""
     auto_delete         = ""
@@ -523,21 +534,21 @@ virtual_networks = {
 
     subnets = {
       agent = {
-        name           = "az-snet-sbx-aiplatform-agent-nprd-001"
+        name           = "az-snet-dtx-aiplatform-foundryagent-dev-001"
         address_prefix = "10.0.4.0/24"
         network_security_group = {
           id = "foundry_agent_nsg" # Reference to NSG module key
         }
       }
       foundrype = {
-        name           = "az-snet-sbx-aiplatform-foundrype-nprd-001"
+        name           = "az-snet-dtx-aiplatform-foundrype-dev-001"
         address_prefix = "10.0.5.0/26"
         network_security_group = {
           id = "foundry_foundrype_nsg" # Reference to NSG module key
         }
       }
       build = {
-        name           = "az-snet-sbx-aiplatform-build-nprd-001"
+        name           = "az-snet-dtx-aiplatform-build-dev-001"
         address_prefix = "10.0.5.64/27"
         network_security_group = {
           id = "foundry_build_nsg" # Reference to NSG module key
@@ -552,20 +563,21 @@ route_tables = {
     resource_group_key = "aigw_rg"
 
     # Naming module variables
-    env                = "np"
-    org                = "scb"
-    region_code        = "sea"
-    base_name          = "aigw"
-    additional_name    = ""
-    iterator           = "001"
-    au                 = ""
-    app_code           = "aiplatform"
-    bu                 = ""
-    owner              = ""
-    resource_type_code = "rt"
+    env                  = "dev"
+    org                  = "az"
+    naming_format        = "workload"
+    location_region_code = "sea"
+    base_name            = "aigw"
+    additional_name      = ""
+    iterator             = "001"
+    au                   = "12345"
+    app_code             = "dtx-aiplatform"
+    bu                   = ""
+    owner                = ""
+    resource_type_code   = "rt"
 
     # Mandatory Tags
-    environment         = "NPRD"
+    environment         = "DEV"
     business_owner      = ""
     business_unit       = ""
     criticality         = ""
@@ -574,13 +586,13 @@ route_tables = {
     compliance          = ""
     app_name            = "AI Platform AIGW"
     budget_id           = ""
-    status              = ""
+    status              = "Live"
     service             = ""
-    app_support         = ""
+    app_support         = "abc@xyz.com"
 
     # Optional Tags
     region              = ""
-    description         = "Route table for the AI Platform AIGW NPRD subnets"
+    description         = "Route table for the AI Platform AIGW dev subnets"
     notification_emails = []
     app_id              = ""
     auto_delete         = ""
@@ -626,20 +638,21 @@ route_tables = {
     resource_group_key = "foundry_rg"
 
     # Naming module variables
-    env                = "np"
-    org                = "scb"
-    region_code        = "sea"
-    base_name          = "foundry"
-    additional_name    = ""
-    iterator           = "001"
-    au                 = ""
-    app_code           = "aiplatform"
-    bu                 = ""
-    owner              = ""
-    resource_type_code = "rt"
+    env                  = "dev"
+    org                  = "az"
+    naming_format        = "workload"
+    location_region_code = "sea"
+    base_name            = "foundry"
+    additional_name      = ""
+    iterator             = "001"
+    au                   = "12345"
+    app_code             = "dtx-aiplatform"
+    bu                   = ""
+    owner                = ""
+    resource_type_code   = "rt"
 
     # Mandatory Tags
-    environment         = "NPRD"
+    environment         = "DEV"
     business_owner      = ""
     business_unit       = ""
     criticality         = ""
@@ -648,13 +661,13 @@ route_tables = {
     compliance          = ""
     app_name            = "AI Platform Foundry"
     budget_id           = ""
-    status              = ""
+    status              = "Live"
     service             = ""
-    app_support         = ""
+    app_support         = "abc@xyz.com"
 
     # Optional Tags
     region              = ""
-    description         = "Route table for the AI Platform Foundry NPRD subnets"
+    description         = "Route table for the AI Platform Foundry dev subnets"
     notification_emails = []
     app_id              = ""
     auto_delete         = ""
@@ -704,16 +717,16 @@ private_dns_zones = {
 
     # Mandatory Tags
     app_name        = "AI Platform Private DNS"
-    app_support     = ""
+    app_support     = "abc@xyz.com"
     business_unit   = ""
     business_owner  = ""
     product_name    = "scb_private_dns_zone"
     product_version = "1.0.0.0"
     budget_id       = ""
     criticality     = ""
-    environment     = "NPRD"
+    environment     = "DEV"
     owner           = ""
-    status          = ""
+    status          = "Live"
 
     virtual_network_links = {
       aigw = {
@@ -732,16 +745,16 @@ private_dns_zones = {
 
     # Mandatory Tags
     app_name        = "AI Platform Private DNS"
-    app_support     = ""
+    app_support     = "abc@xyz.com"
     business_unit   = ""
     business_owner  = ""
     product_name    = "scb_private_dns_zone"
     product_version = "1.0.0.0"
     budget_id       = ""
     criticality     = ""
-    environment     = "NPRD"
+    environment     = "DEV"
     owner           = ""
-    status          = ""
+    status          = "Live"
 
     virtual_network_links = {
       aigw = {
@@ -760,16 +773,16 @@ private_dns_zones = {
 
     # Mandatory Tags
     app_name        = "AI Platform Private DNS"
-    app_support     = ""
+    app_support     = "abc@xyz.com"
     business_unit   = ""
     business_owner  = ""
     product_name    = "scb_private_dns_zone"
     product_version = "1.0.0.0"
     budget_id       = ""
     criticality     = ""
-    environment     = "NPRD"
+    environment     = "DEV"
     owner           = ""
-    status          = ""
+    status          = "Live"
 
     virtual_network_links = {
       aigw = {
@@ -788,16 +801,16 @@ private_dns_zones = {
 
     # Mandatory Tags
     app_name        = "AI Platform Private DNS"
-    app_support     = ""
+    app_support     = "abc@xyz.com"
     business_unit   = ""
     business_owner  = ""
     product_name    = "scb_private_dns_zone"
     product_version = "1.0.0.0"
     budget_id       = ""
     criticality     = ""
-    environment     = "NPRD"
+    environment     = "DEV"
     owner           = ""
-    status          = ""
+    status          = "Live"
 
     virtual_network_links = {
       aigw = {
@@ -816,16 +829,16 @@ private_dns_zones = {
 
     # Mandatory Tags
     app_name        = "AI Platform Private DNS"
-    app_support     = ""
+    app_support     = "abc@xyz.com"
     business_unit   = ""
     business_owner  = ""
     product_name    = "scb_private_dns_zone"
     product_version = "1.0.0.0"
     budget_id       = ""
     criticality     = ""
-    environment     = "NPRD"
+    environment     = "DEV"
     owner           = ""
-    status          = ""
+    status          = "Live"
 
     virtual_network_links = {
       aigw = {
@@ -844,16 +857,16 @@ private_dns_zones = {
 
     # Mandatory Tags
     app_name        = "AI Platform Private DNS"
-    app_support     = ""
+    app_support     = "abc@xyz.com"
     business_unit   = ""
     business_owner  = ""
     product_name    = "scb_private_dns_zone"
     product_version = "1.0.0.0"
     budget_id       = ""
     criticality     = ""
-    environment     = "NPRD"
+    environment     = "DEV"
     owner           = ""
-    status          = ""
+    status          = "Live"
 
     virtual_network_links = {
       aigw = {
@@ -872,16 +885,16 @@ private_dns_zones = {
 
     # Mandatory Tags
     app_name        = "AI Platform Private DNS"
-    app_support     = ""
+    app_support     = "abc@xyz.com"
     business_unit   = ""
     business_owner  = ""
     product_name    = "scb_private_dns_zone"
     product_version = "1.0.0.0"
     budget_id       = ""
     criticality     = ""
-    environment     = "NPRD"
+    environment     = "DEV"
     owner           = ""
-    status          = ""
+    status          = "Live"
 
     virtual_network_links = {
       aigw = {
@@ -900,16 +913,16 @@ private_dns_zones = {
 
     # Mandatory Tags
     app_name        = "AI Platform Private DNS"
-    app_support     = ""
+    app_support     = "abc@xyz.com"
     business_unit   = ""
     business_owner  = ""
     product_name    = "scb_private_dns_zone"
     product_version = "1.0.0.0"
     budget_id       = ""
     criticality     = ""
-    environment     = "NPRD"
+    environment     = "DEV"
     owner           = ""
-    status          = ""
+    status          = "Live"
 
     virtual_network_links = {
       aigw = {
@@ -928,16 +941,16 @@ private_dns_zones = {
 
     # Mandatory Tags
     app_name        = "AI Platform Private DNS"
-    app_support     = ""
+    app_support     = "abc@xyz.com"
     business_unit   = ""
     business_owner  = ""
     product_name    = "scb_private_dns_zone"
     product_version = "1.0.0.0"
     budget_id       = ""
     criticality     = ""
-    environment     = "NPRD"
+    environment     = "DEV"
     owner           = ""
-    status          = ""
+    status          = "Live"
 
     virtual_network_links = {
       aigw = {
@@ -956,16 +969,16 @@ private_dns_zones = {
 
     # Mandatory Tags
     app_name        = "AI Platform Private DNS"
-    app_support     = ""
+    app_support     = "abc@xyz.com"
     business_unit   = ""
     business_owner  = ""
     product_name    = "scb_private_dns_zone"
     product_version = "1.0.0.0"
     budget_id       = ""
     criticality     = ""
-    environment     = "NPRD"
+    environment     = "DEV"
     owner           = ""
-    status          = ""
+    status          = "Live"
 
     virtual_network_links = {
       aigw = {
@@ -984,16 +997,16 @@ private_dns_zones = {
 
     # Mandatory Tags
     app_name        = "AI Platform Private DNS"
-    app_support     = ""
+    app_support     = "abc@xyz.com"
     business_unit   = ""
     business_owner  = ""
     product_name    = "scb_private_dns_zone"
     product_version = "1.0.0.0"
     budget_id       = ""
     criticality     = ""
-    environment     = "NPRD"
+    environment     = "DEV"
     owner           = ""
-    status          = ""
+    status          = "Live"
 
     virtual_network_links = {
       aigw = {
@@ -1012,16 +1025,16 @@ private_dns_zones = {
 
     # Mandatory Tags
     app_name        = "AI Platform Private DNS"
-    app_support     = ""
+    app_support     = "abc@xyz.com"
     business_unit   = ""
     business_owner  = ""
     product_name    = "scb_private_dns_zone"
     product_version = "1.0.0.0"
     budget_id       = ""
     criticality     = ""
-    environment     = "NPRD"
+    environment     = "DEV"
     owner           = ""
-    status          = ""
+    status          = "Live"
 
     virtual_network_links = {
       aigw = {
@@ -1040,16 +1053,16 @@ private_dns_zones = {
 
     # Mandatory Tags
     app_name        = "AI Platform Private DNS"
-    app_support     = ""
+    app_support     = "abc@xyz.com"
     business_unit   = ""
     business_owner  = ""
     product_name    = "scb_private_dns_zone"
     product_version = "1.0.0.0"
     budget_id       = ""
     criticality     = ""
-    environment     = "NPRD"
+    environment     = "DEV"
     owner           = ""
-    status          = ""
+    status          = "Live"
 
     virtual_network_links = {
       aigw = {
@@ -1063,5 +1076,3 @@ private_dns_zones = {
     }
   }
 }
-
-nprd_values_verified = false
