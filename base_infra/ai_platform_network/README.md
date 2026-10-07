@@ -55,25 +55,54 @@ After completing the values and reviewing the plan, set
 `.github/workflows/deployment.yml` performs Terraform formatting, backend-free
 initialization and validation, Checkov scanning, an OIDC-authenticated
 remote-state plan, and an apply of the exact saved plan. Apply runs only for
-`main` through the protected GitHub Environment `nprd`.
+pushes to `main` or manual runs on `main`, after validation, planning, and the
+`nprd_values_verified` check pass. No GitHub Environment approval gate is used.
 
-Configure these GitHub Actions variables:
+Pull requests targeting `main` and pushes to `main` trigger the workflow only
+when `.github/workflows/deployment.yml`, `base_infra/ai_platform_network/**`,
+or `modules/**` changes. The module filter includes nested and shared module
+dependencies. Manual runs remain available regardless of changed paths.
 
-| Variable | Purpose |
+Configure these repository-level GitHub Actions secrets so both plan and apply
+can access them:
+
+| Secret | Purpose |
 | --- | --- |
 | `AZURE_CLIENT_ID` | Entra application/client ID with GitHub workload identity federation |
 | `AZURE_TENANT_ID` | Entra tenant ID |
-| `AZURE_SUBSCRIPTION_ID` | Target Azure subscription |
-| `TF_BACKEND_RESOURCE_GROUP` | Resource group containing the Terraform state storage account |
-| `TF_BACKEND_STORAGE_ACCOUNT` | Terraform state storage account |
-| `TF_BACKEND_CONTAINER` | Blob container for Terraform state |
-| `TF_BACKEND_KEY` | Unique state blob key for this NPRD stack |
 
-Configure an Entra federated credential for
-`repo:Akashc0801/scbx-ms:environment:nprd`, grant the identity only the
+The workflow sets `ARM_SUBSCRIPTION_ID` directly to
+`3471ad5a-d8a8-4a80-b30b-668798733c14`. Both Azure login steps use the same
+`ARM_*` values as Terraform.
+
+The workflow defines the remote backend directly; no `TF_BACKEND_*` GitHub
+Actions variables are required:
+
+| Backend setting | Value |
+| --- | --- |
+| `resource_group_name` | `rg-scbx-terraform-state` |
+| `storage_account_name` | `stscbxtf3471ad5a` |
+| `container_name` | `tfstate` |
+| `key` | `scb-ai-policy-assignments.tfstate` |
+| `use_azuread_auth` | `true` |
+| `use_oidc` | `true` |
+
+Configure Entra federated credentials with audience `api://AzureADTokenExchange`
+for each job context:
+
+| Job context | Federated credential subject |
+| --- | --- |
+| Plan and apply on `main` pushes or manual runs | `repo:Akashc0801/scbx-ms:ref:refs/heads/main` |
+| Plan on same-repository pull requests | `repo:Akashc0801/scbx-ms:pull_request` |
+
+Manual plans on other branches require corresponding branch subjects. Fork
+pull requests run validation only and do not receive Azure secrets.
+
+Grant the identity only the
 permissions needed for resource-group and network management, and grant
-`Storage Blob Data Contributor` on the state container. Configure required
-reviewers and restrict deployment branches on the `nprd` GitHub Environment.
+`Storage Blob Data Contributor` on the state container. Both plan and apply
+use repository-level secrets and branch-based OIDC on `main`; an environment
+federated credential alone is not sufficient.
 The workflow uses OIDC and Azure AD backend authentication; it does not use
 client secrets or storage account keys.
 

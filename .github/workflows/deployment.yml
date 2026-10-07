@@ -4,9 +4,17 @@ on:
   pull_request:
     branches:
       - main
+    paths:
+      - ".github/workflows/deployment.yml"
+      - "base_infra/ai_platform_network/**"
+      - "modules/**"
   push:
     branches:
       - main
+    paths:
+      - ".github/workflows/deployment.yml"
+      - "base_infra/ai_platform_network/**"
+      - "modules/**"
   workflow_dispatch:
 
 permissions:
@@ -20,13 +28,13 @@ env:
   TF_INPUT: "false"
   ARM_USE_OIDC: "true"
   ARM_USE_AZUREAD: "true"
-  ARM_CLIENT_ID: ${{ vars.AZURE_CLIENT_ID }}
-  ARM_TENANT_ID: ${{ vars.AZURE_TENANT_ID }}
-  ARM_SUBSCRIPTION_ID: ${{ vars.AZURE_SUBSCRIPTION_ID }}
-  TF_BACKEND_RESOURCE_GROUP: ${{ vars.TF_BACKEND_RESOURCE_GROUP }}
-  TF_BACKEND_STORAGE_ACCOUNT: ${{ vars.TF_BACKEND_STORAGE_ACCOUNT }}
-  TF_BACKEND_CONTAINER: ${{ vars.TF_BACKEND_CONTAINER }}
-  TF_BACKEND_KEY: ${{ vars.TF_BACKEND_KEY }}
+  ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
+  ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
+  ARM_SUBSCRIPTION_ID: 3471ad5a-d8a8-4a80-b30b-668798733c14
+  TF_BACKEND_RESOURCE_GROUP: "rg-scbx-terraform-state"
+  TF_BACKEND_STORAGE_ACCOUNT: "stscbxtf3471ad5a"
+  TF_BACKEND_CONTAINER: "tfstate"
+  TF_BACKEND_KEY: "scb-ai-policy-assignments.tfstate"
 
 concurrency:
   group: terraform-nprd
@@ -87,18 +95,14 @@ jobs:
       - name: Azure login with OIDC
         uses: azure/login@v2
         with:
-          client-id: ${{ vars.AZURE_CLIENT_ID }}
-          tenant-id: ${{ vars.AZURE_TENANT_ID }}
-          subscription-id: ${{ vars.AZURE_SUBSCRIPTION_ID }}
+          client-id: ${{ env.ARM_CLIENT_ID }}
+          tenant-id: ${{ env.ARM_TENANT_ID }}
+          subscription-id: ${{ env.ARM_SUBSCRIPTION_ID }}
 
       - name: Initialize remote state
         shell: bash
         run: |
           set -euo pipefail
-          : "${TF_BACKEND_RESOURCE_GROUP:?Set GitHub variable TF_BACKEND_RESOURCE_GROUP}"
-          : "${TF_BACKEND_STORAGE_ACCOUNT:?Set GitHub variable TF_BACKEND_STORAGE_ACCOUNT}"
-          : "${TF_BACKEND_CONTAINER:?Set GitHub variable TF_BACKEND_CONTAINER}"
-          : "${TF_BACKEND_KEY:?Set GitHub variable TF_BACKEND_KEY}"
           terraform -chdir="$TF_WORKING_DIR" init -input=false -reconfigure \
             -backend-config="resource_group_name=${TF_BACKEND_RESOURCE_GROUP}" \
             -backend-config="storage_account_name=${TF_BACKEND_STORAGE_ACCOUNT}" \
@@ -135,8 +139,6 @@ jobs:
     if: >-
       (github.event_name == 'push' && github.ref == 'refs/heads/main') ||
       (github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main')
-    environment:
-      name: nprd
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -150,18 +152,14 @@ jobs:
       - name: Azure login with OIDC
         uses: azure/login@v2
         with:
-          client-id: ${{ vars.AZURE_CLIENT_ID }}
-          tenant-id: ${{ vars.AZURE_TENANT_ID }}
-          subscription-id: ${{ vars.AZURE_SUBSCRIPTION_ID }}
+          client-id: ${{ env.ARM_CLIENT_ID }}
+          tenant-id: ${{ env.ARM_TENANT_ID }}
+          subscription-id: ${{ env.ARM_SUBSCRIPTION_ID }}
 
       - name: Initialize remote state
         shell: bash
         run: |
           set -euo pipefail
-          : "${TF_BACKEND_RESOURCE_GROUP:?Set GitHub variable TF_BACKEND_RESOURCE_GROUP}"
-          : "${TF_BACKEND_STORAGE_ACCOUNT:?Set GitHub variable TF_BACKEND_STORAGE_ACCOUNT}"
-          : "${TF_BACKEND_CONTAINER:?Set GitHub variable TF_BACKEND_CONTAINER}"
-          : "${TF_BACKEND_KEY:?Set GitHub variable TF_BACKEND_KEY}"
           terraform -chdir="$TF_WORKING_DIR" init -input=false -reconfigure \
             -backend-config="resource_group_name=${TF_BACKEND_RESOURCE_GROUP}" \
             -backend-config="storage_account_name=${TF_BACKEND_STORAGE_ACCOUNT}" \
