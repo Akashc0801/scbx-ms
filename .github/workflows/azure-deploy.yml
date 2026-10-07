@@ -1,0 +1,153 @@
+name: Terraform Azure Policy Deployment
+
+on:
+  pull_request:
+    paths:
+      - ".github/workflows/azure-deploy.yml"
+      - "terraform/**"
+      - "modules/scb_policy_assignment/**"
+      - "modules/scb_role_assignments/**"
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/azure-deploy.yml"
+      - "terraform/**"
+      - "modules/scb_policy_assignment/**"
+      - "modules/scb_role_assignments/**"
+  workflow_dispatch:
+    inputs:
+      action:
+        description: Terraform action
+        required: true
+        default: plan
+        type: choice
+        options:
+          - plan
+          - apply
+
+permissions:
+  id-token: write
+  contents: read
+
+concurrency:
+  group: scb-ai-policy-assignments
+  cancel-in-progress: false
+
+env:
+  ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
+  ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
+  ARM_SUBSCRIPTION_ID: 3471ad5a-d8a8-4a80-b30b-668798733c14
+  ARM_USE_OIDC: true
+  TF_IN_AUTOMATION: true
+
+jobs:
+  terraform:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: terraform
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Login to Azure with OIDC
+        if: github.event_name != 'pull_request'
+        uses: azure/login@v2
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: 3471ad5a-d8a8-4a80-b30b-668798733c14
+
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: "1.16.4"
+
+      - name: Verify Azure context
+        if: github.event_name != 'pull_request'
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          az account show \
+            --query "{subscriptionId:id,subscriptionName:name,state:state,tenantId:tenantId}" \
+            --output json
+          az account list \
+            --all \
+            --query "[].{subscriptionId:id,subscriptionName:name,state:state,tenantId:tenantId}" \
+            --output table
+
+          access_token=$(az account get-access-token \
+            --resource https://management.azure.com/ \
+            --query accessToken \
+            --output tsv)
+          ACCESS_TOKEN="$access_token" python - <<'PY'
+          import base64
+          import json
+          import os
+
+          payload = os.environ["ACCESS_TOKEN"].split(".")[1]
+          payload += "=" * (-len(payload) % 4)
+          claims = json.loads(base64.urlsafe_b64decode(payload))
+          print(json.dumps({
+              "appid": claims.get("appid"),
+              "oid": claims.get("oid"),
+              "tid": claims.get("tid"),
+          }, indent=2))
+          PY
+
+      - name: Verify Terraform state backend
+        if: github.event_name != 'pull_request'
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          storage_account="stscbxtf3471ad5a"
+          container="tfstate"
+
+          for attempt in {1..12}; do
+            if [[ $(az storage container exists \
+              --name "$container" \
+              --account-name "$storage_account" \
+              --auth-mode login \
+              --query exists \
+              --output tsv 2>/dev/null) == "true" ]]; then
+              echo "Terraform state backend is accessible."
+              exit 0
+            fi
+            sleep 10
+          done
+
+          echo "Terraform state container is missing or inaccessible." >&2
+          exit 1
+
+      - name: Check formatting
+        run: terraform fmt -check -recursive
+
+      - name: Initialize Terraform without backend
+        if: github.event_name == 'pull_request'
+        run: terraform init -backend=false -input=false
+
+      - name: Initialize Terraform with remote backend
+        if: github.event_name != 'pull_request'
+        run: >-
+          terraform init -input=false
+          -backend-config="resource_group_name=rg-scbx-terraform-state"
+          -backend-config="storage_account_name=stscbxtf3471ad5a"
+          -backend-config="container_name=tfstate"
+          -backend-config="key=scb-ai-policy-assignments.tfstate"
+          -backend-config="use_azuread_auth=true"
+          -backend-config="use_oidc=true"
+
+      - name: Validate Terraform
+        run: terraform validate
+
+      - name: Create Terraform plan
+        if: github.event_name != 'pull_request'
+        run: terraform plan -input=false -out=scb-policies.tfplan
+
+      - name: Apply Terraform plan
+        if: github.event_name == 'workflow_dispatch' && inputs.action == 'apply'
+        run: terraform apply -input=false -auto-approve scb-policies.tfplan

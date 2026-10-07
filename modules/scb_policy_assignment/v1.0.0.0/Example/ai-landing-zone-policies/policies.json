@@ -1,0 +1,401 @@
+[
+    {
+        "definition_id":  "/providers/Microsoft.Authorization/policyDefinitions/71ef260a-8f18-47b7-abcb-62d0673d94dc",
+        "display_name":  "Azure AI Services resources should have key access disabled (disable local authentication)",
+        "workbook_default_effect":  "Audit",
+        "effective_effect":  "Audit",
+        "requires_environment_parameters":  false
+    },
+    {
+        "definition_id":  "/providers/Microsoft.Authorization/policyDefinitions/037eea7a-bd0a-46c5-9a66-03aea78705d3",
+        "display_name":  "Azure AI Services resources should restrict network access",
+        "workbook_default_effect":  "Audit",
+        "effective_effect":  "Audit",
+        "requires_environment_parameters":  false
+    },
+    {
+        "definition_id":  "/providers/Microsoft.Authorization/policyDefinitions/d6759c02-b87f-42b7-892e-71b3f471d782",
+        "display_name":  "Azure AI Services resources should use Azure Private Link",
+        "workbook_default_effect":  "Audit",
+        "effective_effect":  "Audit",
+        "requires_environment_parameters":  false
+    },
+    {
+        "definition_id":  "/providers/Microsoft.Authorization/policyDefinitions/d45520cb-31ca-44ba-8da2-fcf914608544",
+        "display_name":  "Configure Azure AI Services resources  to disable local key access (disable local authentication)",
+        "workbook_default_effect":  "DeployIfNotExists",
+        "effective_effect":  "DeployIfNotExists",
+        "requires_environment_parameters":  false
+    },
+    {
+        "definition_id":  "/providers/Microsoft.Authorization/policyDefinitions/55eff01b-f2bd-4c32-9203-db285f709d30",
+        "display_name":  "Configure Azure AI Services resources to disable local key access (disable local authentication)",
+        "workbook_default_effect":  "DeployIfNotExists",
+        "effective_effect":  "DeployIfNotExists",
+        "requires_environment_parameters":  false
+    },
+    {
+        "definition_id":  "/providers/Microsoft.Authorization/policyDefinitions/1b4d1c4e-934c-4703-944c-27c82c06bebb",
+        "display_name":  "Diagnostic logs in Azure AI services resources should be enabled",
+        "workbook_default_effect":  "AuditIfNotExists",
+        "effective_effect":  "AuditIfNotExists",
+        "requires_environment_parameters":  false
+    },
+    {
+        "definition_id":  "/providers/Microsoft.Authorization/policyDefinitions/595f98a5-b562-4ab6-b9c8-2ff9f39a3f7c",
+        "display_name":  "[Preview]: Cognitive Services Agents should only use allowed control",
+        "workbook_default_effect":  "Audit",
+        "effective_effect":  "Disabled",
+        "requires_environment_parameters":  true
+    },
+    {
+        "definition_id":  "/providers/Microsoft.Authorization/policyDefinitions/9224c1cc-34fc-44f1-ad08-5c4b079c9ce6",
+        "display_name":  "[Preview]: Cognitive Services Agents should only use allowed prompt content filtering",
+        "workbook_default_effect":  "Audit",
+        "effective_effect":  "Disabled",
+        "requires_environment_parameters":  true
+    },
+    {
+        "definition_id":  "/providers/Microsoft.Authorization/policyDefinitions/af253d37-136a-42f8-a1fc-30010c083d41",
+        "display_name":  "[Preview]: Cognitive Services Deployments should only use allowed completion content filtering",
+        "workbook_default_effect":  "Audit",
+        "effective_effect":  "Disabled",
+        "requires_environment_parameters":  true
+    },
+    {
+        "definition_id":  "/providers/Microsoft.Authorization/policyDefinitions/930f48f9-f07e-427c-9494-52603581c6a9",
+        "display_name":  "[Preview]: Cognitive Services Deployments should only use allowed control",
+        "workbook_default_effect":  "Audit",
+        "effective_effect":  "Disabled",
+        "requires_environment_parameters":  true
+    },
+    {
+        "definition_id":  "/providers/Microsoft.Authorization/policyDefinitions/c1ad46c6-37f8-4af0-9c71-c208375c87dd",
+        "display_name":  "[Preview]: Cognitive Services Deployments Should Only Use Allowed Control Mode",
+        "workbook_default_effect":  "Audit",
+        "effective_effect":  "Audit",
+        "requires_environment_parameters":  false
+    },
+    {
+        "definition_id":  "/providers/Microsoft.Authorization/policyDefinitions/f3a9c2e0-7b4d-4d8f-9c3a-2e1f6b9a8d4e",
+        "display_name":  "[Preview]: Cognitive Services Deployments should only use allowed prompt content filtering",
+        "workbook_default_effect":  "Audit",
+        "effective_effect":  "Disabled",
+        "requires_environment_parameters":  true
+    },
+    {
+        "definition_id":  "/providers/Microsoft.Authorization/policyDefinitions/8791d062-ba96-4c34-b604-8538f7e30ca0",
+        "display_name":  "[Preview]: Foundry model deployments should meet eligibility requirements",
+        "workbook_default_effect":  "Audit",
+        "effective_effect":  "Audit",
+        "requires_environment_parameters":  false
+    },
+    {
+        "definition_id":  "/providers/Microsoft.Authorization/policyDefinitions/67121cc7-ff39-4ab8-b7e3-95b84dab487d",
+        "display_name":  "Azure AI Services resources should encrypt data at rest with a customer-managed key (CMK)",
+        "workbook_default_effect":  "Audit",
+        "effective_effect":  "Audit",
+        "requires_environment_parameters":  false
+    },
+    {
+        "definition_id":  "/providers/Microsoft.Authorization/policyDefinitions/fe3fd216-4f83-4fc1-8984-2bbec80a3418",
+        "display_name":  "Cognitive Services accounts should use a managed identity",
+        "workbook_default_effect":  "Audit",
+        "effective_effect":  "Audit",
+        "requires_environment_parameters":  false
+    },
+    {
+        "definition_id":  "/providers/Microsoft.Authorization/policyDefinitions/46aa9b05-0e60-4eae-a88b-1e9d374fa515",
+        "display_name":  "Cognitive Services accounts should use customer owned storage",
+        "workbook_default_effect":  "Audit",
+        "effective_effect":  "Audit",
+        "requires_environment_parameters":  false
+    },
+    {
+        "definition_id":  "/providers/Microsoft.Authorization/policyDefinitions/14de9e63-1b31-492e-a5a3-c3f7fd57f555",
+        "display_name":  "Configure Cognitive Services accounts to disable local authentication methods",
+        "workbook_default_effect":  "Modify",
+        "effective_effect":  "Modify",
+        "requires_environment_parameters":  false
+    },
+    {
+        "definition_id":  "/providers/Microsoft.Authorization/policyDefinitions/47ba1dd7-28d9-4b07-a8d5-9813bed64e0c",
+        "display_name":  "Configure Cognitive Services accounts to disable public network access",
+        "workbook_default_effect":  "Modify",
+        "effective_effect":  "Modify",
+        "requires_environment_parameters":  false
+    },
+    {
+        "definition_id":  "/providers/Microsoft.Authorization/policyDefinitions/db630ad5-52e9-4f4d-9c44-53912fe40053",
+        "display_name":  "Configure Cognitive Services accounts with private endpoints",
+        "workbook_default_effect":  "DeployIfNotExists",
+        "effective_effect":  "Disabled",
+        "requires_environment_parameters":  true
+    },
+    {
+        "definition_id":  "/providers/Microsoft.Authorization/policyDefinitions/aafe3651-cb78-4f68-9f81-e7e41509110f",
+        "display_name":  "Foundry model deployments should only use approved models",
+        "workbook_default_effect":  "Audit",
+        "effective_effect":  "Audit",
+        "requires_environment_parameters":  false
+    },
+    {
+        "definition_id":  "/providers/Microsoft.Authorization/policyDefinitions/12e5dd16-d201-47ff-849b-8454061c293d",
+        "display_name":  "[Preview]: Azure Machine Learning Deployments should only use approved Registry Models",
+        "workbook_default_effect":  "Audit",
+        "effective_effect":  "Audit",
+        "requires_environment_parameters":  false
+    },
+    {
+        "definition_id":  "/providers/Microsoft.Authorization/policyDefinitions/19539b54-c61e-4196-9a38-67598701be90",
+        "display_name":  "[Preview]: Azure Machine Learning Model Registry Deployments are restricted except for the allowed Registry",
+        "workbook_default_effect":  "Not specified",
+        "effective_effect":  "Disabled",
+        "requires_environment_parameters":  false
+    },
+    {
+        "definition_id":  "/providers/Microsoft.Authorization/policyDefinitions/6ddb1705-c8cf-450e-aa4b-19ad6703c440",
+        "display_name":  "Azure Machine Learning and Ai Studio should use Allow Only Approved Outbound Managed Vnet mode",
+        "workbook_default_effect":  "Audit",
+        "effective_effect":  "Audit",
+        "requires_environment_parameters":  false
+    },
+    {
+        "definition_id":  "/providers/Microsoft.Authorization/policyDefinitions/679ddf89-ab8f-48a5-9029-e76054077449",
+        "display_name":  "Azure Machine Learning Compute Instance should have idle shutdown.",
+        "workbook_default_effect":  "Audit",
+        "effective_effect":  "Audit",
+        "requires_environment_parameters":  false
+    },
+    {
+        "definition_id":  "/providers/Microsoft.Authorization/policyDefinitions/f110a506-2dcb-422e-bcea-d533fc8c35e2",
+        "display_name":  "Azure Machine Learning compute instances should be recreated to get the latest software updates",
+        "workbook_default_effect":  "Audit",
+        "effective_effect":  "Audit",
+        "requires_environment_parameters":  false
+    },
+    {
+        "definition_id":  "/providers/Microsoft.Authorization/policyDefinitions/7804b5c7-01dc-4723-969b-ae300cc07ff1",
+        "display_name":  "Azure Machine Learning Computes should be in a virtual network",
+        "workbook_default_effect":  "Audit",
+        "effective_effect":  "Audit",
+        "requires_environment_parameters":  false
+    },
+    {
+        "definition_id":  "/providers/Microsoft.Authorization/policyDefinitions/e96a9a5f-07ca-471b-9bc5-6a0f33cbd68f",
+        "display_name":  "Azure Machine Learning Computes should have local authentication methods disabled",
+        "workbook_default_effect":  "Audit",
+        "effective_effect":  "Audit",
+        "requires_environment_parameters":  false
+    },
+    {
+        "definition_id":  "/providers/Microsoft.Authorization/policyDefinitions/ba769a63-b8cc-4b2d-abf6-ac33c7204be8",
+        "display_name":  "Azure Machine Learning workspaces should be encrypted with a customer-managed key",
+        "workbook_default_effect":  "Audit",
+        "effective_effect":  "Audit",
+        "requires_environment_parameters":  false
+    },
+    {
+        "definition_id":  "/providers/Microsoft.Authorization/policyDefinitions/7f40cee6-e933-4d0f-a782-b96615e0f4a6",
+        "display_name":  "Azure Machine Learning workspaces should be encrypted with the use of a customer-managed key",
+        "workbook_default_effect":  "AuditIfNotExists",
+        "effective_effect":  "AuditIfNotExists",
+        "requires_environment_parameters":  false
+    },
+    {
+        "definition_id":  "/providers/Microsoft.Authorization/policyDefinitions/438c38d2-3772-465a-a9cc-7a6666a275ce",
+        "display_name":  "Azure Machine Learning Workspaces should disable public network access",
+        "workbook_default_effect":  "Audit",
+        "effective_effect":  "Audit",
+        "requires_environment_parameters":  false
+    },
+    {
+        "definition_id":  "/providers/Microsoft.Authorization/policyDefinitions/e413671a-dd10-4cc1-a943-45b598596cb7",
+        "display_name":  "Azure Machine Learning workspaces should enable V1LegacyMode to support network isolation backward compatibility",
+        "workbook_default_effect":  "Audit",
+        "effective_effect":  "Audit",
+        "requires_environment_parameters":  false
+    },
+    {
+        "definition_id":  "/providers/Microsoft.Authorization/policyDefinitions/45e05259-1eb5-4f70-9574-baf73e9d219b",
+        "display_name":  "Azure Machine Learning workspaces should use private link",
+        "workbook_default_effect":  "Audit",
+        "effective_effect":  "Audit",
+        "requires_environment_parameters":  false
+    },
+    {
+        "definition_id":  "/providers/Microsoft.Authorization/policyDefinitions/5f0c7d88-c7de-45b8-ac49-db49e72eaa78",
+        "display_name":  "Azure Machine Learning workspaces should use user-assigned managed identity",
+        "workbook_default_effect":  "Audit",
+        "effective_effect":  "Audit",
+        "requires_environment_parameters":  false
+    },
+    {
+        "definition_id":  "/providers/Microsoft.Authorization/policyDefinitions/a6f9a2d0-cff7-4855-83ad-4cd750666512",
+        "display_name":  "Configure Azure Machine Learning Computes to disable local authentication methods",
+        "workbook_default_effect":  "Modify",
+        "effective_effect":  "Modify",
+        "requires_environment_parameters":  false
+    },
+    {
+        "definition_id":  "/providers/Microsoft.Authorization/policyDefinitions/ee40564d-486e-4f68-a5ca-7a621edae0fb",
+        "display_name":  "Configure Azure Machine Learning workspace to use private DNS zones",
+        "workbook_default_effect":  "DeployIfNotExists",
+        "effective_effect":  "Disabled",
+        "requires_environment_parameters":  true
+    },
+    {
+        "definition_id":  "/providers/Microsoft.Authorization/policyDefinitions/a10ee784-7409-4941-b091-663697637c0f",
+        "display_name":  "Configure Azure Machine Learning Workspaces to disable public network access",
+        "workbook_default_effect":  "Modify",
+        "effective_effect":  "Modify",
+        "requires_environment_parameters":  false
+    },
+    {
+        "definition_id":  "/providers/Microsoft.Authorization/policyDefinitions/7838fd83-5cbb-4b5d-888c-bfa240972597",
+        "display_name":  "Configure Azure Machine Learning workspaces with private endpoints",
+        "workbook_default_effect":  "DeployIfNotExists",
+        "effective_effect":  "Disabled",
+        "requires_environment_parameters":  true
+    },
+    {
+        "definition_id":  "/providers/Microsoft.Authorization/policyDefinitions/f59276f0-5740-4aaf-821d-45d185aa210e",
+        "display_name":  "Configure diagnostic settings for Azure Machine Learning Workspaces to Log Analytics workspace",
+        "workbook_default_effect":  "DeployIfNotExists",
+        "effective_effect":  "Disabled",
+        "requires_environment_parameters":  true
+    },
+    {
+        "definition_id":  "/providers/Microsoft.Authorization/policyDefinitions/afe0c3be-ba3b-4544-ba52-0c99672a8ad6",
+        "display_name":  "Resource logs in Azure Machine Learning Workspaces should be enabled",
+        "workbook_default_effect":  "AuditIfNotExists",
+        "effective_effect":  "AuditIfNotExists",
+        "requires_environment_parameters":  false
+    },
+    {
+        "definition_id":  "/providers/Microsoft.Authorization/policyDefinitions/3d5da587-71bd-41f5-ac95-dd3330c2d58d",
+        "display_name":  "Deploy Diagnostic Settings for Search Services to Event Hub",
+        "workbook_default_effect":  "DeployIfNotExists",
+        "effective_effect":  "Disabled",
+        "requires_environment_parameters":  true
+    },
+    {
+        "definition_id":  "/providers/Microsoft.Authorization/policyDefinitions/08ba64b8-738f-4918-9686-730d2ed79c7d",
+        "display_name":  "Deploy Diagnostic Settings for Search Services to Log Analytics workspace",
+        "workbook_default_effect":  "DeployIfNotExists",
+        "effective_effect":  "Disabled",
+        "requires_environment_parameters":  true
+    },
+    {
+        "definition_id":  "/providers/Microsoft.Authorization/policyDefinitions/0628b917-d4b4-4af5-bc2b-b4f87cd173ab",
+        "display_name":  "Enable logging by category group for Cognitive Services (microsoft.cognitiveservices/accounts) to Event Hub",
+        "workbook_default_effect":  "DeployIfNotExists",
+        "effective_effect":  "Disabled",
+        "requires_environment_parameters":  true
+    },
+    {
+        "definition_id":  "/providers/Microsoft.Authorization/policyDefinitions/55d1f543-d1b0-4811-9663-d6d0dbc6326d",
+        "display_name":  "Enable logging by category group for Cognitive Services (microsoft.cognitiveservices/accounts) to Log Analytics",
+        "workbook_default_effect":  "DeployIfNotExists",
+        "effective_effect":  "Disabled",
+        "requires_environment_parameters":  true
+    },
+    {
+        "definition_id":  "/providers/Microsoft.Authorization/policyDefinitions/14e81583-c89c-47db-af0d-f9ddddcccd9f",
+        "display_name":  "Enable logging by category group for Cognitive Services (microsoft.cognitiveservices/accounts) to Storage",
+        "workbook_default_effect":  "DeployIfNotExists",
+        "effective_effect":  "Disabled",
+        "requires_environment_parameters":  true
+    },
+    {
+        "definition_id":  "/providers/Microsoft.Authorization/policyDefinitions/971199b6-1971-4d3e-85b0-fa7639044679",
+        "display_name":  "Enable logging by category group for Search services (microsoft.search/searchservices) to Event Hub",
+        "workbook_default_effect":  "DeployIfNotExists",
+        "effective_effect":  "Disabled",
+        "requires_environment_parameters":  true
+    },
+    {
+        "definition_id":  "/providers/Microsoft.Authorization/policyDefinitions/8def4bdd-4362-4ed6-a26f-7bf8f2c58839",
+        "display_name":  "Enable logging by category group for Search services (microsoft.search/searchservices) to Log Analytics",
+        "workbook_default_effect":  "DeployIfNotExists",
+        "effective_effect":  "Disabled",
+        "requires_environment_parameters":  true
+    },
+    {
+        "definition_id":  "/providers/Microsoft.Authorization/policyDefinitions/480ee186-7504-48ac-b64e-af38673aa2c6",
+        "display_name":  "Enable logging by category group for Search services (microsoft.search/searchservices) to Storage",
+        "workbook_default_effect":  "DeployIfNotExists",
+        "effective_effect":  "Disabled",
+        "requires_environment_parameters":  true
+    },
+    {
+        "definition_id":  "/providers/Microsoft.Authorization/policyDefinitions/90bc8109-d21a-4692-88fc-51419391da3d",
+        "display_name":  "[Preview]: Azure AI Search Service should be Zone Redundant",
+        "workbook_default_effect":  "Audit",
+        "effective_effect":  "Audit",
+        "requires_environment_parameters":  false
+    },
+    {
+        "definition_id":  "/providers/Microsoft.Authorization/policyDefinitions/a049bf77-880b-470f-ba6d-9f21c530cf83",
+        "display_name":  "Azure AI Search service should use a SKU that supports private link",
+        "workbook_default_effect":  "Audit",
+        "effective_effect":  "Audit",
+        "requires_environment_parameters":  false
+    },
+    {
+        "definition_id":  "/providers/Microsoft.Authorization/policyDefinitions/ee980b6d-0eca-4501-8d54-f6290fd512c3",
+        "display_name":  "Azure AI Search services should disable public network access",
+        "workbook_default_effect":  "Audit",
+        "effective_effect":  "Audit",
+        "requires_environment_parameters":  false
+    },
+    {
+        "definition_id":  "/providers/Microsoft.Authorization/policyDefinitions/6300012e-e9a4-4649-b41f-a85f5c43be91",
+        "display_name":  "Azure AI Search services should have local authentication methods disabled",
+        "workbook_default_effect":  "Audit",
+        "effective_effect":  "Audit",
+        "requires_environment_parameters":  false
+    },
+    {
+        "definition_id":  "/providers/Microsoft.Authorization/policyDefinitions/76a56461-9dc0-40f0-82f5-2453283afa2f",
+        "display_name":  "Azure AI Search services should use customer-managed keys to encrypt data at rest",
+        "workbook_default_effect":  "AuditIfNotExists",
+        "effective_effect":  "AuditIfNotExists",
+        "requires_environment_parameters":  false
+    },
+    {
+        "definition_id":  "/providers/Microsoft.Authorization/policyDefinitions/4eb216f2-9dba-4979-86e6-5d7e63ce3b75",
+        "display_name":  "Configure Azure AI Search services to disable local authentication",
+        "workbook_default_effect":  "Modify",
+        "effective_effect":  "Modify",
+        "requires_environment_parameters":  false
+    },
+    {
+        "definition_id":  "/providers/Microsoft.Authorization/policyDefinitions/9cee519f-d9c1-4fd9-9f79-24ec3449ed30",
+        "display_name":  "Configure Azure AI Search services to disable public network access",
+        "workbook_default_effect":  "Modify",
+        "effective_effect":  "Modify",
+        "requires_environment_parameters":  false
+    },
+    {
+        "definition_id":  "/providers/Microsoft.Authorization/policyDefinitions/356da939-f20a-4bb9-86f8-5db445b0e354",
+        "display_name":  "Configure Azure AI Search services to enforce customer-managed keys to encrypt data at rest",
+        "workbook_default_effect":  "Deny",
+        "effective_effect":  "Deny",
+        "requires_environment_parameters":  false
+    },
+    {
+        "definition_id":  "/providers/Microsoft.Authorization/policyDefinitions/b698b005-b660-4837-b833-a7aaab26ddba",
+        "display_name":  "Configure Azure AI Search services with private endpoints",
+        "workbook_default_effect":  "DeployIfNotExists",
+        "effective_effect":  "Disabled",
+        "requires_environment_parameters":  true
+    },
+    {
+        "definition_id":  "/providers/Microsoft.Authorization/policyDefinitions/b4330a05-a843-4bc8-bf9a-cacce50c67f4",
+        "display_name":  "Resource logs in Search services should be enabled",
+        "workbook_default_effect":  "AuditIfNotExists",
+        "effective_effect":  "AuditIfNotExists",
+        "requires_environment_parameters":  false
+    }
+]
