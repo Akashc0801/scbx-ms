@@ -2,7 +2,7 @@
 
 ## Status
 
-Ready for Validation
+Validated
 
 ## Objective
 
@@ -71,15 +71,43 @@ folder and GitHub Actions workflow for an existing module repository.
 
 ## Validation Checklist
 
-- [ ] All validation checks pass
-  - [ ] Terraform is installed.
-  - [ ] Azure CLI is installed and authenticated to the confirmed subscription.
-  - [ ] Terraform initialization succeeds.
-  - [ ] Terraform formatting check succeeds.
-  - [ ] Terraform validation succeeds.
-  - [ ] Terraform plan succeeds.
-  - [ ] Terraform state is accessible.
-  - [ ] No unresolved Go-style environment templates exist.
-  - [ ] Terraform variable JSON syntax is valid when applicable.
-  - [ ] Existing Azure Policy assignments do not conflict with the deployment.
-  - [ ] Static RBAC review confirms least-privilege role assignments.
+- [x] All validation checks pass
+  - [x] Terraform is installed.
+  - [x] Azure CLI is installed and authenticated to the confirmed subscription.
+  - [x] Terraform initialization succeeds.
+  - [x] Terraform formatting check succeeds.
+  - [x] Terraform validation succeeds.
+  - [x] Terraform plan succeeds.
+  - [x] Terraform state is accessible.
+  - [x] No unresolved Go-style environment templates exist.
+  - [x] Terraform variable JSON syntax is valid when applicable.
+  - [x] Existing Azure Policy assignments do not conflict with the deployment.
+  - [x] Static RBAC review confirms least-privilege role assignments.
+
+## Role Assignment Verification
+
+- Status: Verified
+- Deployment identity:
+  `ad3ac83f-7b06-49db-b6dd-429ea44e5f87`
+- Subscription roles: `Contributor`, `User Access Administrator`
+- Management-group roles: `Resource Policy Contributor`,
+  `User Access Administrator`
+- State role: `Storage Blob Data Contributor`
+- Planned remediation assignments: 12, scoped by the policy-assignment module.
+
+## Section 7: Validation Proof
+
+- GitHub Actions run:
+  `https://github.com/Akashc0801/scbx-ms/actions/runs/37580670505`
+- OIDC authentication: Passed
+- Azure subscription and tenant context: Passed
+- Existing remote-state container access: Passed
+- `terraform fmt -check -recursive`: Passed
+- `terraform init` with Azure Storage backend: Passed
+- `terraform validate`: Passed
+- `terraform plan`: Passed
+- Plan result: 85 additions, 0 changes, 0 destroys
+  - 57 management-group policy assignments
+  - 12 remediation role assignments
+  - 8 module telemetry resources
+  - 8 UUID resources
