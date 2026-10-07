@@ -80,6 +80,11 @@ when `.github/workflows/deployment.yml`, `base_infra/ai_platform_network/**`,
 or `modules/**` changes. The module filter includes nested and shared module
 dependencies. Manual runs remain available regardless of changed paths.
 
+All pull requests run formatting, backend-free initialization and validation,
+and Checkov only. Azure login, remote-state initialization, planning, and plan
+artifact upload are skipped on pull requests, including same-repository PRs.
+Push and manual events run the remote-state plan after validation succeeds.
+
 Configure these repository-level GitHub Actions secrets so both plan and apply
 can access them:
 
@@ -108,16 +113,19 @@ This network stack uses a separate state key from the policy deployment.
 Changing the key does not migrate existing state; if this stack was already
 applied using another key, review and migrate its state before applying again.
 
-Configure Entra federated credentials with audience `api://AzureADTokenExchange`
-for each job context:
+Configure Entra federated credentials with issuer
+`https://token.actions.githubusercontent.com` and audience
+`api://AzureADTokenExchange`. This repository uses GitHub immutable subjects,
+which include the owner and repository IDs:
 
 | Job context | Federated credential subject |
 | --- | --- |
-| Plan and apply on `main` pushes or manual runs | `repo:Akashc0801/scbx-ms:ref:refs/heads/main` |
-| Plan on same-repository pull requests | `repo:Akashc0801/scbx-ms:pull_request` |
+| Plan and apply on `main` pushes or manual runs | `repo:Akashc0801@125369880/scbx-ms@1405194317:ref:refs/heads/main` |
 
-Manual plans on other branches require corresponding branch subjects. Fork
-pull requests run validation only and do not receive Azure secrets.
+The subject must match exactly; the plain-name subject without numeric IDs
+does not match this repository's tokens. Manual plans on other branches require
+corresponding branch subjects. Pull requests do not request Azure OIDC tokens
+and do not require a pull-request federated credential for this workflow.
 
 Grant the identity only the
 permissions needed for resource-group and network management, and grant
