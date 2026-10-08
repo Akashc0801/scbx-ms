@@ -25,7 +25,7 @@ data "azapi_client_config" "telemetry" {
 }
 
 locals {
-  main_location = var.location
+  main_location = coalesce(var.location, module.scb_module_afw.location)
 }
 
 locals {

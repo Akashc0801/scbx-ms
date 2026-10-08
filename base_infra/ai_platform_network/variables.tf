@@ -184,6 +184,12 @@ variable "virtual_networks" {
       network_security_group = optional(object({
         id = string
       }))
+      delegations = optional(list(object({
+        name = string
+        service_delegation = object({
+          name = string
+        })
+      })))
     }))
 
     lock             = optional(any)
@@ -297,5 +303,239 @@ variable "private_dns_zones" {
 
     enable_telemetry = optional(bool, true)
     tags             = optional(map(string), {})
+  }))
+}
+
+variable "public_ips" {
+  description = "Map of public IPs, typically used by the firewall ip_configuration."
+  type = map(object({
+    resource_group_key = string
+
+    # Naming module variables
+    env                  = string
+    org                  = string
+    region_code          = optional(string)
+    location_region_code = optional(string)
+    naming_format        = optional(string, "legacy")
+    base_name            = optional(string, "")
+    additional_name      = optional(string, "")
+    iterator             = string
+    au                   = string
+    app_code             = string
+    bu                   = string
+    owner                = string
+    resource_type_code   = optional(string, "pip")
+
+    # Mandatory Tags
+    environment         = string
+    business_owner      = string
+    business_unit       = string
+    criticality         = string
+    cost_center         = string
+    data_classification = string
+    compliance          = string
+    app_name            = string
+    app_support         = string
+    budget_id           = string
+    status              = string
+    service             = string
+
+    # Optional Tags
+    region              = optional(string, "")
+    description         = optional(string, "")
+    notification_emails = optional(list(string), [])
+
+    # Public IP specific
+    allocation_method = optional(string, "Static")
+    sku               = optional(string, "Standard")
+    sku_tier          = optional(string, "Regional")
+    zones             = optional(set(number), [1, 2, 3])
+
+    enable_telemetry = optional(bool, true)
+    tags             = optional(map(string), {})
+  }))
+}
+
+variable "firewall_policies" {
+  description = "Map of Azure Firewall policies."
+  type = map(object({
+    resource_group_key = string
+
+    # Naming module variables
+    env                  = string
+    org                  = string
+    region_code          = optional(string)
+    location_region_code = optional(string)
+    naming_format        = optional(string, "legacy")
+    base_name            = optional(string, "")
+    additional_name      = optional(string, "")
+    iterator             = string
+    au                   = string
+    app_code             = string
+    bu                   = string
+    owner                = string
+    resource_type_code   = optional(string, "fwp")
+
+    # Mandatory Tags
+    environment         = string
+    business_owner      = string
+    business_unit       = string
+    criticality         = string
+    cost_center         = string
+    data_classification = string
+    compliance          = string
+    app_name            = string
+    app_support         = string
+    product_name        = optional(string, "scb_firewall_policy")
+    product_version     = optional(string, "1.0.0.1")
+    budget_id           = string
+    status              = string
+    service             = optional(string, "")
+
+    # Optional Tags
+    region              = optional(string, "")
+    description         = optional(string, "")
+    notification_emails = optional(list(string), [])
+
+    # Firewall policy specific
+    sku                      = optional(string, "Standard")
+    threat_intelligence_mode = optional(string, "Deny")
+    dns_proxy_enabled        = optional(bool, true)
+    dns_servers              = optional(list(string))
+
+    enable_telemetry = optional(bool, true)
+    tags             = optional(map(string), {})
+  }))
+}
+
+variable "firewalls" {
+  description = "Map of Azure Firewalls. Policy, public IP, and subnet are referenced by module keys."
+  type = map(object({
+    resource_group_key = string
+
+    # Naming module variables
+    env                  = string
+    org                  = string
+    region_code          = optional(string)
+    location_region_code = optional(string)
+    naming_format        = optional(string, "legacy")
+    base_name            = optional(string, "")
+    additional_name      = optional(string, "")
+    iterator             = string
+    au                   = string
+    app_code             = string
+    bu                   = string
+    owner                = string
+    resource_type_code   = optional(string, "afw")
+
+    # Mandatory Tags
+    environment         = string
+    business_owner      = string
+    business_unit       = string
+    criticality         = string
+    cost_center         = string
+    data_classification = string
+    compliance          = string
+    app_name            = string
+    app_support         = string
+    budget_id           = string
+    status              = string
+    service             = optional(string, "")
+
+    # Optional Tags
+    region              = optional(string, "")
+    description         = optional(string, "")
+    notification_emails = optional(list(string), [])
+
+    # Firewall specific
+    firewall_sku_name   = optional(string, "AZFW_VNet")
+    firewall_sku_tier   = optional(string, "Standard")
+    firewall_zones      = optional(set(string), ["1", "2", "3"])
+    firewall_policy_key = string
+    # Exactly one configuration must reference the AzureFirewallSubnet (vnet_key + subnet_key)
+    ip_configurations = map(object({
+      name          = string
+      public_ip_key = string
+      vnet_key      = optional(string)
+      subnet_key    = optional(string)
+    }))
+
+    enable_telemetry = optional(bool, true)
+    tags             = optional(map(string), {})
+  }))
+}
+variable "private_dns_resolvers" {
+  description = "Map of private DNS resolvers with inbound and outbound endpoints placed in delegated subnets of the referenced VNet."
+  type = map(object({
+    name               = string
+    resource_group_key = string
+    vnet_key           = string
+
+    # Mandatory Tags
+    app_name        = string
+    app_support     = string
+    business_unit   = string
+    business_owner  = string
+    product_name    = optional(string, "scb_dnsresolver")
+    product_version = string
+    budget_id       = string
+    criticality     = string
+    environment     = string
+    owner           = string
+    status          = string
+
+    inbound_endpoints = optional(map(object({
+      name                         = string
+      subnet_key                   = string
+      private_ip_allocation_method = optional(string, "Dynamic")
+      private_ip_address           = optional(string)
+    })), {})
+    outbound_endpoints = optional(map(object({
+      name       = string
+      subnet_key = string
+    })), {})
+
+    enable_telemetry = optional(bool, true)
+    tags             = optional(map(string), {})
+  }))
+}
+
+variable "firewall_policy_rule_collection_groups" {
+  description = "Map of firewall policy rule collection groups with network and application rule collections."
+  type = map(object({
+    firewall_policy_key = string
+    name                = string
+    priority            = number
+
+    network_rule_collections = optional(list(object({
+      name     = string
+      action   = string
+      priority = number
+      rules = list(object({
+        name                  = string
+        description           = optional(string)
+        protocols             = list(string)
+        source_addresses      = optional(list(string), [])
+        destination_addresses = optional(list(string), [])
+        destination_fqdns     = optional(list(string), [])
+        destination_ports     = list(string)
+      }))
+    })), [])
+
+    application_rule_collections = optional(list(object({
+      name     = string
+      action   = string
+      priority = number
+      rules = list(object({
+        name              = string
+        description       = optional(string)
+        source_addresses  = optional(list(string), [])
+        destination_fqdns = optional(list(string), [])
+        protocols = list(object({
+          type = string
+          port = number
+        }))
+      }))
+    })), [])
   }))
 }

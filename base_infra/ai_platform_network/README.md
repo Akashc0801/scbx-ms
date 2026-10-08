@@ -8,7 +8,7 @@ modules with `for_each`.
 
 | File | Purpose |
 | --- | --- |
-| `main.tf` | Resource group, NSG, VNet, and route-table module calls |
+| `main.tf` | Resource group, NSG, VNet, route-table, private DNS, public IP, firewall policy, and firewall module calls |
 | `variables.tf` | Typed input variables |
 | `variables.tfvars` | One block per resource |
 | `outputs.tf` | Names and IDs keyed by resource key |
@@ -26,6 +26,46 @@ modules with `for_each`.
 Each route table has `default-to-internet` (`0.0.0.0/0`, next hop `Internet`).
 No custom NSG rules are defined; `security_rules` stays empty until rules are
 approved.
+
+## Firewall (AIGW)
+
+| Resource | Key | Deployed name |
+| --- | --- | --- |
+| Firewall policy | `aigw_firewall_policy` | `az-fwp-dtx-aiplatform-aigw-dev-001` |
+| Firewall | `aigw_firewall` | `az-afw-dtx-aiplatform-aigw-dev-001` |
+| Public IP | `aigw_firewall_pip` | `az-pip-dtx-aiplatform-aigw-dev-afw-001` |
+| Subnet | `firewall` in `aigw_vnet` | `AzureFirewallSubnet` (`10.0.1.128/26`, name mandated by Azure) |
+
+All are created in `az-rg-dtx-aiplatform-aigw-dev-001` using the workload
+naming format. The firewall is `AZFW_VNet` / `Standard` and uses the policy
+(`Standard`, threat intelligence `Deny`, DNS proxy enabled). The policy has no
+rule collection groups yet, so the firewall denies all traffic until rules are
+added. The firewall subnet has no NSG or route table. The existing
+`default-to-internet` route table is not applied to it.
+
+## Firewall rules (AIGW)
+
+Rule collection group `az-rcg-dtx-aiplatform-aigw-dev-001` (priority 200) is
+attached to `aigw_firewall_policy`. It holds placeholder rules only; replace
+them with approved rules before production use.
+
+| Collection | Priority | Dummy rule |
+| --- | --- | --- |
+| `az-nrc-dtx-aiplatform-aigw-dev-001` (network, Allow) | 1000 | `dummy-allow-aigw-to-foundry-https`: TCP 443 from `10.0.0.0/22` to `10.0.4.0/22` |
+| `az-arc-dtx-aiplatform-aigw-dev-001` (application, Allow) | 2000 | `dummy-allow-microsoft-https`: HTTPS 443 from `10.0.0.0/22` to `www.microsoft.com` |
+
+## Private DNS resolver (AIGW)
+
+| Resource | Name | Subnet |
+| --- | --- | --- |
+| Resolver (`aigw_dns_resolver`) | `az-dnspr-dtx-aiplatform-aigw-dev-001` | `aigw_vnet` |
+| Inbound endpoint | `az-in-dtx-aiplatform-aigw-dev-001` | `az-snet-dtx-aiplatform-dnsin-dev-001` (`10.0.1.192/28`) |
+| Outbound endpoint | `az-out-dtx-aiplatform-aigw-dev-001` | `az-snet-dtx-aiplatform-dnsout-dev-001` (`10.0.1.208/28`) |
+
+Both subnets are delegated to `Microsoft.Network/dnsResolvers`, with no NSG or
+route table. The `scb_dnsresolver` module does not use the naming module, so the
+names are set explicitly in `variables.tfvars`. No forwarding ruleset is defined
+yet, so the outbound endpoint forwards nothing until one is added.
 
 ## Naming
 
