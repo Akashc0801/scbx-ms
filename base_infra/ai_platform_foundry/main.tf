@@ -96,7 +96,7 @@ module "log_analytics_workspace" {
 }
 
 module "application_insights" {
-  source = "../../modules/scb_app_insights/v1.0.0.1"
+  source = "../../modules/scb_app_insights/v1.0.0.0"
 
   resource_group_name = data.azurerm_resource_group.foundry.name
   workspace_id        = module.log_analytics_workspace.resource_id
@@ -266,7 +266,7 @@ module "storage_account" {
 }
 
 module "cosmosdb_account" {
-  source = "../../modules/scb_cosmosdb_account/v1.0.0.1"
+  source = "../../modules/scb_cosmosdb_account/v1.0.0.0"
 
   resource_group_name = data.azurerm_resource_group.foundry.name
 
@@ -451,7 +451,7 @@ module "container_registry" {
 ## Microsoft Foundry account, projects, connections, capability hosts
 #################################
 module "foundry" {
-  source = "../../modules/scb_ms_ai_foundry/v1.0.0.2"
+  source = "../../modules/scb_ms_ai_foundry/v1.0.0.1"
 
   # Naming module variables
   org                  = local.c.org

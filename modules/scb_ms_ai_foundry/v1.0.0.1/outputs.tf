@@ -58,3 +58,16 @@ output "ai_foundry_project_diagnostic_setting_ids" {
     for k, v in module.project.diagnostic_setting_ids : k => v
   }
 }
+output "ai_foundry_account_diagnostic_setting_ids" {
+  description = "Map of AI Foundry account diagnostic setting IDs, keyed by \"<account_key>.<diag_key>\""
+  value = {
+    for k, v in azurerm_monitor_diagnostic_setting.ai_foundry_account : k => v.id
+  }
+}
+
+output "ai_foundry_account_lock_ids" {
+  description = "Map of AI Foundry account management lock IDs, keyed by account key"
+  value = {
+    for k, v in azurerm_management_lock.ai_foundry_account : k => v.id
+  }
+}

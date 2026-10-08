@@ -8,7 +8,7 @@ resource "azurerm_role_assignment" "foundry_account" {
   scope                = each.value.scope
   role_definition_name = each.value.role_definition_name
   principal_id         = each.value.principal_id
-  description          = try(each.value.description, "")
+  description          = try(each.value.description, null)
 }
 
 ########################################
@@ -49,7 +49,7 @@ resource "azurerm_role_assignment" "project" {
   scope                = each.value.scope
   role_definition_name = each.value.role_definition_name
   principal_id         = each.value.principal_id
-  description          = try(each.value.description, "")
+  description          = try(each.value.description, null)
 }
 
 ########################################

@@ -57,8 +57,8 @@ run "lock_and_diag_planned" {
   }
 
   assert {
-    condition     = azurerm_cosmosdb_account.this.tags["ProductVersion"] == "1.0.0.1"
-    error_message = "Expected ProductVersion tag 1.0.0.1."
+    condition     = azurerm_cosmosdb_account.this.tags["ProductVersion"] == "1.0.0.0"
+    error_message = "Expected ProductVersion tag 1.0.0.0."
   }
 }
 

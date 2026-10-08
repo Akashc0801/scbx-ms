@@ -3,24 +3,26 @@ module "scb_module_app_insights" {
   source = "../../scb_naming_module/v1.0.0.1"
 
   # Basic naming parameters
-  env                = var.env
-  org                = var.org
-  region_code        = var.region_code
-  base_name          = var.base_name
-  additional_name    = var.additional_name
-  iterator           = var.iterator
-  au                 = var.au
-  app_code           = var.app_code
-  bu                 = var.bu
-  owner              = var.owner
-  resource_type_code = var.resource_type_code
-  max_length         = var.max_length
-  no_dashes          = var.no_dashes
-  add_random         = var.add_random
-  rnd_length         = var.rnd_length
+  env                  = var.env
+  org                  = var.org
+  region_code          = var.region_code
+  location_region_code = var.location_region_code
+  naming_format        = var.naming_format
+  base_name            = var.base_name
+  additional_name      = var.additional_name
+  iterator             = var.iterator
+  au                   = var.au
+  app_code             = var.app_code
+  bu                   = var.bu
+  owner                = var.owner
+  resource_type_code   = var.resource_type_code
+  max_length           = var.max_length
+  no_dashes            = var.no_dashes
+  add_random           = var.add_random
+  rnd_length           = var.rnd_length
 
   # Use v1.0.0.1 naming module interface
-  product_version = "1.0.0.1"
+  product_version = "1.0.0.0"
 
   # Pass mandatory tags to naming module (8 mandatory tags)
   environment         = var.environment
@@ -46,7 +48,7 @@ module "scb_module_app_insights" {
       BudgetID       = var.budget_id
       Status         = var.status
       ProductName    = "scb_app_insights"
-      ProductVersion = "1.0.0.1"
+      ProductVersion = "1.0.0.0"
       Service        = var.service
 
       # Legacy tags maintained for compatibility
@@ -100,6 +102,14 @@ resource "azurerm_management_lock" "this" {
   lock_level = var.lock.kind
   name       = coalesce(var.lock.name, "lock-${module.scb_module_app_insights.name}")
   scope      = azurerm_application_insights.this.id
+
+  # Created last and removed first so Terraform can still change child and
+  # extension resources of the component.
+  depends_on = [
+    azurerm_monitor_diagnostic_setting.this,
+    azapi_resource.monitor_private_link_scope,
+    azapi_resource.linked_storage_account,
+  ]
 }
 
 resource "azapi_resource" "monitor_private_link_scope" {
@@ -130,4 +140,42 @@ resource "azapi_resource" "linked_storage_account" {
     }
   }
   ignore_casing = true
+}
+
+# Exports Application Insights telemetry (requests, dependencies, traces,
+# exceptions, ...) to Event Hubs, Storage or another Log Analytics workspace.
+# Workspace-based components already store telemetry in `workspace_id`.
+resource "azurerm_monitor_diagnostic_setting" "this" {
+  for_each = var.diagnostic_settings
+
+  name                           = each.value.name != null ? each.value.name : "diag-${module.scb_module_app_insights.name}"
+  target_resource_id             = azurerm_application_insights.this.id
+  eventhub_authorization_rule_id = each.value.event_hub_authorization_rule_resource_id
+  eventhub_name                  = each.value.event_hub_name
+  log_analytics_destination_type = each.value.workspace_resource_id != null ? each.value.log_analytics_destination_type : null
+  log_analytics_workspace_id     = each.value.workspace_resource_id
+  partner_solution_id            = each.value.marketplace_partner_resource_id
+  storage_account_id             = each.value.storage_account_resource_id
+
+  dynamic "enabled_log" {
+    for_each = each.value.log_categories
+
+    content {
+      category = enabled_log.value
+    }
+  }
+  dynamic "enabled_log" {
+    for_each = each.value.log_groups
+
+    content {
+      category_group = enabled_log.value
+    }
+  }
+  dynamic "metric" {
+    for_each = each.value.metric_categories
+
+    content {
+      category = metric.value
+    }
+  }
 }

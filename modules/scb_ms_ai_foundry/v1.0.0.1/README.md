@@ -8,7 +8,7 @@
 
 ## Notable changes in this version
 
-### v1.0.0.2
+### v1.0.0.1 (updated 2026-10-08)
 
 - Diagnostic settings on the Foundry account (`ai_foundry_accounts[*].diagnostic_settings`).
 - Management lock on the Foundry account (`ai_foundry_accounts[*].lock`).
@@ -18,7 +18,7 @@
 
 ## Upgrade Path
 
-- From v1.0.0.1: change `source` to `v1.0.0.2`. No input was removed. Tag values `ProductName` and `ProductVersion` change on every resource that uses the naming module tags.
+- Not deployed before these changes; no upgrade path needed.
 
 # Product Description
 
@@ -41,7 +41,7 @@ Deploys Microsoft Foundry (`Microsoft.CognitiveServices/accounts`, kind `AIServi
 
 ```hcl
 module "foundry" {
-  source = "../../modules/scb_ms_ai_foundry/v1.0.0.2"
+  source = "../../modules/scb_ms_ai_foundry/v1.0.0.1"
 
   ai_foundry_accounts = {
     shared = {
@@ -78,14 +78,14 @@ module "foundry" {
 
 ## Terraform Module Documentation
 
-### Inputs added in v1.0.0.2 (inside each `ai_foundry_accounts` entry)
+### Account inputs added 2026-10-08 (inside each `ai_foundry_accounts` entry)
 
 | Name | Description | Type | Default |
 |------|-------------|------|---------|
 | diagnostic_settings | Map of diagnostic settings. Each entry needs at least one of `workspace_resource_id`, `storage_account_resource_id`, `event_hub_authorization_rule_resource_id`, `marketplace_partner_resource_id`. Defaults: `log_groups = ["allLogs"]`, `metric_categories = ["AllMetrics"]`, `log_analytics_destination_type = "Dedicated"`. | `map(object)` | `{}` |
 | lock | `{ kind = "CanNotDelete" \| "ReadOnly", name = optional(string) }` | `object` | `null` |
 
-### Resources added in v1.0.0.2
+### Resources added 2026-10-08
 
 | Name | Type |
 |------|------|

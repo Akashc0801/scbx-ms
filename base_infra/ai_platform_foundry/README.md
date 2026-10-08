@@ -21,14 +21,14 @@ state.
 
 | Build sheet | Resource | Module | Generated name |
 | --- | --- | --- | --- |
-| FD-N-001 | Foundry account (agent network injection, private endpoint, local auth off, public access off) | `scb_ms_ai_foundry/v1.0.0.2` | `az-aif-dtx-aiplatform-foundry-dev-001` |
-| FD-N-002 | Foundry project per use case, with Cosmos DB, Storage, AI Search and App Insights connections and a capability host | `scb_ms_ai_foundry/v1.0.0.2` | project key, e.g. `usecase-001` |
+| FD-N-001 | Foundry account (agent network injection, private endpoint, local auth off, public access off) | `scb_ms_ai_foundry/v1.0.0.1` | `az-aif-dtx-aiplatform-foundry-dev-001` |
+| FD-N-002 | Foundry project per use case, with Cosmos DB, Storage, AI Search and App Insights connections and a capability host | `scb_ms_ai_foundry/v1.0.0.1` | project key, e.g. `usecase-001` |
 | FD-N-003 | Key Vault | `scb_key_vault/v1.0.0.3` | `az-kv-dtx-aip-fd-dev-001` |
 | FD-N-004 | Storage account (blob and file private endpoints, shared keys off) | `scb_storage_account/v1.0.0.1` | `azstdtxaipfoundrydev001` |
-| FD-N-005 | Cosmos DB for NoSQL (serverless, continuous backup) | `scb_cosmosdb_account/v1.0.0.1` | `az-cosmos-dtx-aiplatform-foundry-dev-001` |
+| FD-N-005 | Cosmos DB for NoSQL (serverless, continuous backup) | `scb_cosmosdb_account/v1.0.0.0` | `az-cosmos-dtx-aiplatform-foundry-dev-001` |
 | FD-N-006 | AI Search | `scb_ai_search/v1.0.0.1` | `az-srch-dtx-aiplatform-foundry-dev-001` |
 | FD-N-007 | Container registry (Premium) | `scb_azure_container_registry/v1.0.0.0` | `azacrdtxaiplatformfoundrydev001` |
-| FD-N-008 | Application Insights (workspace-based) | `scb_app_insights/v1.0.0.1` | `az-appi-dtx-aiplatform-foundry-dev-001` |
+| FD-N-008 | Application Insights (workspace-based) | `scb_app_insights/v1.0.0.0` | `az-appi-dtx-aiplatform-foundry-dev-001` |
 | — | Log Analytics workspace | `scb_log_analytics_workspace/v1.0.0.1` | `az-log-dtx-aiplatform-foundry-dev-001` |
 | — | User-assigned identities (Foundry account, one per project) | `scb_user_managed_identity/v1.0.0.1` | `az-id-dtx-aiplatform-<base>-dev-001` |
 | RBAC-006 | Project developer group roles | `scb_role_assignments/v1.0.0.0` | — |
