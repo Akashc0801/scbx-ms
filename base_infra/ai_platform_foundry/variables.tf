@@ -153,10 +153,13 @@ variable "foundry" {
     sku_name     = optional(string, "S0")
 
     projects = map(object({
-      display_name               = string
-      identity_key               = string
-      user_group_object_ids      = optional(list(string), [])
-      user_role_definition       = optional(string, "Azure AI User")
+      display_name          = string
+      identity_key          = string
+      user_group_object_ids = optional(list(string), [])
+      user_object_ids       = optional(list(string), [])
+      # Built-in "Foundry User" (formerly "Azure AI User"). The ID is used
+      # because Microsoft renames Foundry roles.
+      user_role_definition_id    = optional(string, "53ca6127-db72-4b80-b1b0-d745d6d5456d")
       vector_store_with_aisearch = optional(bool, true)
     }))
 

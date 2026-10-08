@@ -144,7 +144,8 @@ foundry = {
       display_name          = "Use case 001"
       identity_key          = "usecase_001"
       user_group_object_ids = [] # Entra group object IDs for project developers
-      user_role_definition  = "Azure AI User"
+      # Sandbox: Deepu@ravijayoutlook060.onmicrosoft.com
+      user_object_ids = ["e9853fbd-927f-4144-8d86-b87dd1bbd5fe"]
     }
   }
 

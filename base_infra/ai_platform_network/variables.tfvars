@@ -1361,6 +1361,38 @@ firewall_policy_rule_collection_groups = {
               type = "Https"
               port = 443
             }]
+          },
+          {
+            # Jump box (snet-build) needs the Azure / Foundry portals, Microsoft
+            # sign-in and package feeds to test agents from inside the VNet.
+            name             = "allow-jumpbox-portals"
+            description      = "Jump box subnet to Azure and Foundry portals, Microsoft Entra sign-in, Windows Update and Python/GitHub packages over HTTPS"
+            source_addresses = ["10.0.5.64/27"]
+            destination_fqdns = [
+              "*.azure.com",
+              "*.azure.net",
+              "*.azurefd.net",
+              "*.azureedge.net",
+              "*.microsoft.com",
+              "*.microsoftonline.com",
+              "*.microsoftonline-p.com",
+              "*.msauth.net",
+              "*.msftauth.net",
+              "*.msidentity.com",
+              "*.msecnd.net",
+              "*.windows.net",
+              "*.windowsupdate.com",
+              "*.live.com",
+              "aka.ms",
+              "pypi.org",
+              "files.pythonhosted.org",
+              "github.com",
+              "*.githubusercontent.com",
+            ]
+            protocols = [{
+              type = "Https"
+              port = 443
+            }]
           }
         ]
       }

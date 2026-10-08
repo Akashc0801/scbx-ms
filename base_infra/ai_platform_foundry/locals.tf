@@ -151,16 +151,28 @@ locals {
     }
   }
 
-  # Human access to projects (RBAC-006).
+  # Human access to projects (RBAC-006): Entra groups and, for the sandbox,
+  # individual users.
   project_user_role_assignments = merge([
-    for pk, p in var.foundry.projects : {
-      for gid in p.user_group_object_ids :
-      "${pk}-${gid}" => {
-        role_definition_name = p.user_role_definition
-        principal_id         = gid
-        principal_type       = "Group"
-        scope                = module.foundry.ai_foundry_project_ids[pk]
+    for pk, p in var.foundry.projects : merge(
+      {
+        for gid in p.user_group_object_ids :
+        "${pk}-group-${gid}" => {
+          role_definition_id = "/subscriptions/${data.azurerm_client_config.current.subscription_id}/providers/Microsoft.Authorization/roleDefinitions/${p.user_role_definition_id}"
+          principal_id       = gid
+          principal_type     = "Group"
+          scope              = module.foundry.ai_foundry_project_ids[pk]
+        }
+      },
+      {
+        for uid in p.user_object_ids :
+        "${pk}-user-${uid}" => {
+          role_definition_id = "/subscriptions/${data.azurerm_client_config.current.subscription_id}/providers/Microsoft.Authorization/roleDefinitions/${p.user_role_definition_id}"
+          principal_id       = uid
+          principal_type     = "User"
+          scope              = module.foundry.ai_foundry_project_ids[pk]
+        }
       }
-    }
+    )
   ]...)
 }
