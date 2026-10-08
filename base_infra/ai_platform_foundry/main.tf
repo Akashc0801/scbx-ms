@@ -9,16 +9,18 @@ module "user_assigned_identities" {
   resource_group_name = data.azurerm_resource_group.foundry.name
 
   # Naming module variables
-  org                = local.c.org
-  env                = local.c.env
-  region_code        = local.c.region_code
-  app_code           = local.c.app_code
-  au                 = local.c.au
-  bu                 = local.c.bu
-  owner              = local.c.owner
-  resource_type_code = "id"
-  base_name          = each.value.base_name
-  iterator           = each.value.iterator
+  org                  = local.c.org
+  env                  = local.c.env
+  region_code          = local.c.region_code
+  location_region_code = local.c.location_region_code
+  naming_format        = local.c.naming_format
+  app_code             = local.c.app_code
+  au                   = local.c.au
+  bu                   = local.c.bu
+  owner                = local.c.owner
+  resource_type_code   = "id"
+  base_name            = each.value.base_name
+  iterator             = each.value.iterator
 
   # Mandatory Tags
   environment         = local.c.environment
@@ -52,16 +54,18 @@ module "log_analytics_workspace" {
   resource_group_name = data.azurerm_resource_group.foundry.name
 
   # Naming module variables
-  org                = local.c.org
-  env                = local.c.env
-  region_code        = local.c.region_code
-  app_code           = local.c.app_code
-  au                 = local.c.au
-  bu                 = local.c.bu
-  owner              = local.c.owner
-  resource_type_code = "log"
-  base_name          = var.log_analytics_workspace.base_name
-  iterator           = var.log_analytics_workspace.iterator
+  org                  = local.c.org
+  env                  = local.c.env
+  region_code          = local.c.region_code
+  location_region_code = local.c.location_region_code
+  naming_format        = local.c.naming_format
+  app_code             = local.c.app_code
+  au                   = local.c.au
+  bu                   = local.c.bu
+  owner                = local.c.owner
+  resource_type_code   = "log"
+  base_name            = var.log_analytics_workspace.base_name
+  iterator             = var.log_analytics_workspace.iterator
 
   # Mandatory Tags
   environment         = local.c.environment
@@ -98,16 +102,18 @@ module "application_insights" {
   workspace_id        = module.log_analytics_workspace.resource_id
 
   # Naming module variables
-  org                = local.c.org
-  env                = local.c.env
-  region_code        = local.c.region_code
-  app_code           = local.c.app_code
-  au                 = local.c.au
-  bu                 = local.c.bu
-  owner              = local.c.owner
-  resource_type_code = "appi"
-  base_name          = var.application_insights.base_name
-  iterator           = var.application_insights.iterator
+  org                  = local.c.org
+  env                  = local.c.env
+  region_code          = local.c.region_code
+  location_region_code = local.c.location_region_code
+  naming_format        = local.c.naming_format
+  app_code             = local.c.app_code
+  au                   = local.c.au
+  bu                   = local.c.bu
+  owner                = local.c.owner
+  resource_type_code   = "appi"
+  base_name            = var.application_insights.base_name
+  iterator             = var.application_insights.iterator
 
   # Mandatory Tags
   environment         = local.c.environment
@@ -147,17 +153,19 @@ module "key_vault" {
   tenant_id           = data.azurerm_client_config.current.tenant_id
 
   # Naming module variables
-  org                = local.c.org
-  env                = local.c.env
-  region_code        = local.c.region_code
-  app_code           = var.key_vault.app_code
-  au                 = local.c.au
-  bu                 = local.c.bu
-  owner              = local.c.owner
-  resource_type_code = "kv"
-  base_name          = var.key_vault.base_name
-  iterator           = var.key_vault.iterator
-  no_dashes          = false
+  org                  = local.c.org
+  env                  = local.c.env
+  region_code          = local.c.region_code
+  location_region_code = local.c.location_region_code
+  naming_format        = local.c.naming_format
+  app_code             = var.key_vault.app_code
+  au                   = local.c.au
+  bu                   = local.c.bu
+  owner                = local.c.owner
+  resource_type_code   = "kv"
+  base_name            = var.key_vault.base_name
+  iterator             = var.key_vault.iterator
+  no_dashes            = false
 
   # Mandatory Tags
   environment         = local.c.environment
@@ -199,16 +207,18 @@ module "storage_account" {
   resource_group_name = data.azurerm_resource_group.foundry.name
 
   # Naming module variables
-  org                = local.c.org
-  env                = local.c.env
-  region_code        = local.c.region_code
-  app_code           = var.storage_account.app_code
-  au                 = local.c.au
-  bu                 = local.c.bu
-  owner              = local.c.owner
-  resource_type_code = "st"
-  base_name          = var.storage_account.base_name
-  iterator           = var.storage_account.iterator
+  org                  = local.c.org
+  env                  = local.c.env
+  region_code          = local.c.region_code
+  location_region_code = local.c.location_region_code
+  naming_format        = local.c.naming_format
+  app_code             = var.storage_account.app_code
+  au                   = local.c.au
+  bu                   = local.c.bu
+  owner                = local.c.owner
+  resource_type_code   = "st"
+  base_name            = var.storage_account.base_name
+  iterator             = var.storage_account.iterator
 
   # Mandatory Tags
   environment         = local.c.environment
@@ -261,16 +271,18 @@ module "cosmosdb_account" {
   resource_group_name = data.azurerm_resource_group.foundry.name
 
   # Naming module variables
-  org                = local.c.org
-  env                = local.c.env
-  region_code        = local.c.region_code
-  app_code           = local.c.app_code
-  au                 = local.c.au
-  bu                 = local.c.bu
-  owner              = local.c.owner
-  resource_type_code = "cosmos"
-  base_name          = var.cosmosdb_account.base_name
-  iterator           = var.cosmosdb_account.iterator
+  org                  = local.c.org
+  env                  = local.c.env
+  region_code          = local.c.region_code
+  location_region_code = local.c.location_region_code
+  naming_format        = local.c.naming_format
+  app_code             = local.c.app_code
+  au                   = local.c.au
+  bu                   = local.c.bu
+  owner                = local.c.owner
+  resource_type_code   = "cosmos"
+  base_name            = var.cosmosdb_account.base_name
+  iterator             = var.cosmosdb_account.iterator
 
   # Mandatory Tags
   environment         = local.c.environment
@@ -324,18 +336,20 @@ module "ai_search" {
   resource_group_name = data.azurerm_resource_group.foundry.name
 
   # Naming module variables
-  org                = local.c.org
-  env                = local.c.env
-  region_code        = local.c.region_code
-  app_code           = local.c.app_code
-  au                 = local.c.au
-  bu                 = local.c.bu
-  owner              = local.c.owner
-  resource_type_code = "srch"
-  base_name          = var.ai_search.base_name
-  iterator           = var.ai_search.iterator
-  max_length         = 60
-  no_dashes          = false
+  org                  = local.c.org
+  env                  = local.c.env
+  region_code          = local.c.region_code
+  location_region_code = local.c.location_region_code
+  naming_format        = local.c.naming_format
+  app_code             = local.c.app_code
+  au                   = local.c.au
+  bu                   = local.c.bu
+  owner                = local.c.owner
+  resource_type_code   = "srch"
+  base_name            = var.ai_search.base_name
+  iterator             = var.ai_search.iterator
+  max_length           = 60
+  no_dashes            = false
 
   # Mandatory Tags
   environment         = local.c.environment
@@ -383,17 +397,19 @@ module "container_registry" {
   resource_group_name = data.azurerm_resource_group.foundry.name
 
   # Naming module variables
-  org                = local.c.org
-  env                = local.c.env
-  region_code        = local.c.region_code
-  app_code           = var.container_registry.app_code
-  au                 = local.c.au
-  bu                 = local.c.bu
-  owner              = local.c.owner
-  resource_type_code = "acr"
-  base_name          = var.container_registry.base_name
-  iterator           = var.container_registry.iterator
-  max_length         = 50
+  org                  = local.c.org
+  env                  = local.c.env
+  region_code          = local.c.region_code
+  location_region_code = local.c.location_region_code
+  naming_format        = local.c.naming_format
+  app_code             = var.container_registry.app_code
+  au                   = local.c.au
+  bu                   = local.c.bu
+  owner                = local.c.owner
+  resource_type_code   = "acr"
+  base_name            = var.container_registry.base_name
+  iterator             = var.container_registry.iterator
+  max_length           = 50
 
   # Mandatory Tags
   environment         = local.c.environment
@@ -438,17 +454,20 @@ module "foundry" {
   source = "../../modules/scb_ms_ai_foundry/v1.0.0.2"
 
   # Naming module variables
-  org                = local.c.org
-  env                = local.c.env
-  region_code        = local.c.region_code
-  app_code           = local.c.app_code
-  au                 = local.c.au
-  bu                 = local.c.bu
-  owner              = local.c.owner
-  resource_type_code = "aif"
-  base_name          = var.foundry.base_name
-  iterator           = var.foundry.iterator
-  max_length         = 64
+  org                  = local.c.org
+  env                  = local.c.env
+  region_code          = local.c.region_code
+  location_region_code = local.c.location_region_code
+  naming_format        = local.c.naming_format
+  app_code             = local.c.app_code
+  au                   = local.c.au
+  bu                   = local.c.bu
+  owner                = local.c.owner
+  resource_type_code   = "aif"
+  base_name            = var.foundry.base_name
+  iterator             = var.foundry.iterator
+  max_length           = 64
+  no_dashes            = false # module default strips dashes; customSubDomainName must equal the name
 
   # Mandatory Tags
   environment         = local.c.environment

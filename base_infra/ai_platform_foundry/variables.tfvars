@@ -1,27 +1,31 @@
-# Naming follows the SCB naming module: org-type-app_code-env-region_code-base_name-iterator.
-# Values that are not yet known are left blank and must be completed before apply.
+# Naming follows the SCB naming module "workload" format, as in
+# base_infra/ai_platform_network: org-type-app_code-base_name-env-iterator.
 # Generated names (length-checked in checks.tf):
-#   Foundry account   scb-aif-aiplatform-np-sea-foundry-001
-#   Key Vault         scb-kv-aip-np-sea-fd-001            (24-character limit)
-#   Storage account   scbstaipnpseafoundry001              (24-character limit, no dashes)
-#   Cosmos DB         scb-cosmos-aiplatform-np-sea-foundry-001
-#   AI Search         scb-srch-aiplatform-np-sea-foundry-001
-#   Container reg.    scbacraiplatformnpseafoundry001
-#   App Insights      scb-appi-aiplatform-np-sea-foundry-001
-#   Log Analytics     scb-log-aiplatform-np-sea-foundry-001
+#   Foundry account   az-aif-dtx-aiplatform-foundry-dev-001
+#   Key Vault         az-kv-dtx-aip-fd-dev-001                 (24-character limit)
+#   Storage account   azstdtxaipfoundrydev001                  (24-character limit, no dashes)
+#   Cosmos DB         az-cosmos-dtx-aiplatform-foundry-dev-001
+#   AI Search         az-srch-dtx-aiplatform-foundry-dev-001
+#   Container reg.    azacrdtxaiplatformfoundrydev001
+#   App Insights      az-appi-dtx-aiplatform-foundry-dev-001
+#   Log Analytics     az-log-dtx-aiplatform-foundry-dev-001
+#   Identities        az-id-dtx-aiplatform-<base_name>-dev-001
+# Values copied from base_infra/ai_platform_network (au, app_support) are
+# placeholders and must be confirmed.
 
 common = {
   # Naming module variables
-  org         = "scb"
-  env         = "np"
-  region_code = "sea"
-  app_code    = "aiplatform"
-  au          = "" # numeric accounting unit (required before plan)
-  bu          = ""
-  owner       = ""
+  org                  = "az"
+  env                  = "dev"
+  app_code             = "dtx-aiplatform"
+  naming_format        = "workload"
+  location_region_code = "sea" # location only; no region in names
+  au                   = "12345"
+  bu                   = ""
+  owner                = ""
 
   # Mandatory Tags
-  environment         = "NPRD"
+  environment         = "DEV"
   business_owner      = ""
   business_unit       = ""
   criticality         = ""
@@ -29,26 +33,26 @@ common = {
   data_classification = ""
   compliance          = ""
   app_name            = "AI Platform Foundry"
-  app_support         = "" # valid email address (required by Cosmos DB module)
+  app_support         = "abc@xyz.com"
   budget_id           = ""
-  status              = "" # Live, Non-Operational or Decommissioned
+  status              = "Live"
   service             = "foundry"
 
   # Optional Tags
   region              = "southeastasia"
-  description         = "AI Platform Foundry landing zone NPRD"
+  description         = "AI Platform Foundry landing zone (dev)"
   notification_emails = []
   additional_tags     = {}
 }
 
 # Created by base_infra/ai_platform_network.
 network = {
-  resource_group_name                  = "scb-rg-aiplatform-np-sea-foundry-001"
-  virtual_network_name                 = "scb-vnet-aiplatform-np-sea-foundry-001"
-  virtual_network_resource_group_name  = "scb-rg-aiplatform-np-sea-foundry-001"
-  agent_subnet_name                    = "az-snet-sbx-aiplatform-agent-nprd-001"
-  private_endpoint_subnet_name         = "az-snet-sbx-aiplatform-foundrype-nprd-001"
-  private_dns_zone_resource_group_name = "scb-rg-aiplatform-np-sea-aigw-001"
+  resource_group_name                  = "az-rg-dtx-aiplatform-foundry-dev-001"
+  virtual_network_name                 = "az-vnet-dtx-aiplatform-foundry-dev-001"
+  virtual_network_resource_group_name  = "az-rg-dtx-aiplatform-foundry-dev-001"
+  agent_subnet_name                    = "az-snet-dtx-aiplatform-foundryagent-dev-001"
+  private_endpoint_subnet_name         = "az-snet-dtx-aiplatform-foundrype-dev-001"
+  private_dns_zone_resource_group_name = "az-rg-dtx-aiplatform-aigw-dev-001"
 }
 
 # Build sheet: CanNotDelete on every resource. Set to null for a sandbox that
@@ -91,14 +95,14 @@ application_insights = {
 }
 
 key_vault = {
-  app_code  = "aip"
+  app_code  = "dtx-aip"
   base_name = "fd"
   iterator  = "001"
   sku_name  = "standard"
 }
 
 storage_account = {
-  app_code                 = "aip"
+  app_code                 = "dtx-aip"
   base_name                = "foundry"
   iterator                 = "001"
   account_replication_type = "ZRS"
@@ -122,7 +126,7 @@ ai_search = {
 }
 
 container_registry = {
-  app_code                = "aiplatform"
+  app_code                = "dtx-aiplatform"
   base_name               = "foundry"
   iterator                = "001"
   zone_redundancy_enabled = true
@@ -134,7 +138,7 @@ foundry = {
   identity_key = "foundry"
   sku_name     = "S0"
 
-  # Shared NPRD account, one project per use case.
+  # Shared dev account, one project per use case.
   projects = {
     "usecase-001" = {
       display_name          = "Use case 001"
@@ -179,4 +183,3 @@ foundry = {
   deployments = {}
 }
 
-nprd_values_verified = false

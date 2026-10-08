@@ -1,14 +1,16 @@
 variable "common" {
-  description = "Naming-module inputs and tags shared by every resource in this stack. Per-resource blocks set only base_name, iterator and, where a name length limit applies, app_code."
+  description = "Naming-module inputs and tags shared by every resource in this stack. Per-resource blocks set only base_name, iterator and, where a name length limit applies, app_code. Default naming_format is workload: org-type-app_code-base_name-env[-region]-iterator."
   type = object({
     # Naming module variables
-    org         = string
-    env         = string
-    region_code = string
-    app_code    = string
-    au          = string
-    bu          = string
-    owner       = string
+    org                  = string
+    env                  = string
+    app_code             = string
+    naming_format        = optional(string, "workload")
+    region_code          = optional(string) # included in names when set
+    location_region_code = optional(string, "sea")
+    au                   = string
+    bu                   = string
+    owner                = string
 
     # Mandatory Tags
     environment         = string
@@ -181,10 +183,4 @@ variable "foundry" {
       rai_policy_name = optional(string)
     })), {})
   })
-}
-
-variable "nprd_values_verified" {
-  description = "Set true only after the blank values in variables.tfvars are completed and the plan is reviewed."
-  type        = bool
-  default     = false
 }

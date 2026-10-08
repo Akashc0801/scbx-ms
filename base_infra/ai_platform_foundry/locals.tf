@@ -23,12 +23,21 @@ locals {
 
   # Names the naming module should produce. Checked against Azure length
   # limits in checks.tf.
+  name_parts = {
+    key_vault          = { type = "kv", app_code = var.key_vault.app_code, base = var.key_vault.base_name, iterator = var.key_vault.iterator, sep = "-" }
+    storage_account    = { type = "st", app_code = var.storage_account.app_code, base = var.storage_account.base_name, iterator = var.storage_account.iterator, sep = "" }
+    container_registry = { type = "acr", app_code = var.container_registry.app_code, base = var.container_registry.base_name, iterator = var.container_registry.iterator, sep = "" }
+    ai_search          = { type = "srch", app_code = local.c.app_code, base = var.ai_search.base_name, iterator = var.ai_search.iterator, sep = "-" }
+    foundry            = { type = "aif", app_code = local.c.app_code, base = var.foundry.base_name, iterator = var.foundry.iterator, sep = "-" }
+  }
+
   expected_names = {
-    key_vault          = join("-", [local.c.org, "kv", var.key_vault.app_code, local.c.env, local.c.region_code, var.key_vault.base_name, var.key_vault.iterator])
-    storage_account    = join("", [local.c.org, "st", var.storage_account.app_code, local.c.env, local.c.region_code, var.storage_account.base_name, var.storage_account.iterator])
-    container_registry = join("", [local.c.org, "acr", var.container_registry.app_code, local.c.env, local.c.region_code, var.container_registry.base_name, var.container_registry.iterator])
-    ai_search          = join("-", [local.c.org, "srch", local.c.app_code, local.c.env, local.c.region_code, var.ai_search.base_name, var.ai_search.iterator])
-    foundry            = join("-", [local.c.org, "aif", local.c.app_code, local.c.env, local.c.region_code, var.foundry.base_name, var.foundry.iterator])
+    for k, p in local.name_parts : k => replace(join("-", concat(
+      local.c.naming_format == "legacy"
+      ? concat([local.c.org, p.type, p.app_code, local.c.env], local.c.region_code != null ? [local.c.region_code] : [], [p.base])
+      : concat([local.c.org, p.type, p.app_code, p.base, local.c.env], local.c.region_code != null ? [local.c.region_code] : []),
+      [p.iterator]
+    )), "-", p.sep)
   }
 
   foundry_account_key = "foundry"
