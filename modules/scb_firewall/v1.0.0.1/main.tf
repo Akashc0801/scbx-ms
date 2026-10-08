@@ -74,6 +74,7 @@ module "scb_module_afw" {
 
 # trunk-ignore(checkov/CKV_AZURE_216)
 resource "azurerm_firewall" "this" {
+  #checkov:skip=CKV_AZURE_216:Threat intelligence mode is set on the attached firewall policy (Deny in this stack), which Checkov cannot resolve from the policy ID.
   location            = module.scb_module_afw.location
   name                = module.scb_module_afw.name
   resource_group_name = var.resource_group_name
