@@ -1312,6 +1312,16 @@ firewall_policy_rule_collection_groups = {
             source_addresses      = ["10.0.0.0/22"]
             destination_addresses = ["10.0.4.0/22"]
             destination_ports     = ["443"]
+          },
+          {
+            # Foundry Agent Service: agent subnet needs Microsoft Entra ID.
+            # https://learn.microsoft.com/azure/foundry/agents/how-to/virtual-networks#limitations
+            name                  = "allow-foundry-agent-entra-id"
+            description           = "Foundry agent subnet to Microsoft Entra ID (AzureActiveDirectory service tag) over HTTPS"
+            protocols             = ["TCP"]
+            source_addresses      = ["10.0.4.0/24"]
+            destination_addresses = ["AzureActiveDirectory"]
+            destination_ports     = ["443"]
           }
         ]
       }
@@ -1328,6 +1338,25 @@ firewall_policy_rule_collection_groups = {
             description       = "Dummy application rule: AIGW and Foundry VNets to www.microsoft.com over HTTPS"
             source_addresses  = ["10.0.0.0/22", "10.0.4.0/22"]
             destination_fqdns = ["www.microsoft.com"]
+            protocols = [{
+              type = "Https"
+              port = 443
+            }]
+          },
+          {
+            # Foundry Agent Service egress allow list (no TLS inspection).
+            # https://learn.microsoft.com/azure/foundry/agents/how-to/virtual-networks#limitations
+            name             = "allow-foundry-agent-identity"
+            description      = "Foundry agent subnet to managed identity and Microsoft Entra ID endpoints over HTTPS"
+            source_addresses = ["10.0.4.0/24"]
+            destination_fqdns = [
+              "control-southeastasia.identity.azure.net",
+              "*.identity.azure.net",
+              "southeastasia.login.microsoft.com",
+              "*.login.microsoft.com",
+              "login.microsoftonline.com",
+              "*.login.microsoftonline.com",
+            ]
             protocols = [{
               type = "Https"
               port = 443
