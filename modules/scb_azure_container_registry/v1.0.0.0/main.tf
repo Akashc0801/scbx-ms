@@ -5,21 +5,23 @@ module "scb_module_container_registry" {
   source = "../../scb_naming_module/v1.0.0.1"
 
   # Basic naming parameters
-  env                = var.env
-  org                = var.org
-  region_code        = var.region_code
-  base_name          = var.base_name
-  additional_name    = var.additional_name
-  iterator           = var.iterator
-  au                 = var.au
-  app_code           = var.app_code
-  bu                 = var.bu
-  owner              = var.owner
-  resource_type_code = var.resource_type_code
-  max_length         = var.max_length
-  no_dashes          = var.no_dashes
-  add_random         = var.add_random
-  rnd_length         = var.rnd_length
+  env                  = var.env
+  org                  = var.org
+  region_code          = var.region_code
+  location_region_code = var.location_region_code
+  naming_format        = var.naming_format
+  base_name            = var.base_name
+  additional_name      = var.additional_name
+  iterator             = var.iterator
+  au                   = var.au
+  app_code             = var.app_code
+  bu                   = var.bu
+  owner                = var.owner
+  resource_type_code   = var.resource_type_code
+  max_length           = var.max_length
+  no_dashes            = var.no_dashes
+  add_random           = var.add_random
+  rnd_length           = var.rnd_length
 
   # Use v1.0.0.1 naming module interface
   product_version = "1.0.0.0"
@@ -215,6 +217,24 @@ resource "azurerm_monitor_diagnostic_setting" "this" {
 
     content {
       category = metric.value
+    }
+  }
+}
+
+# azurerm_container_registry does not expose the Entra-authentication-as-ARM
+# policy, so it is pinned with azapi when requested.
+resource "azapi_update_resource" "entra_authentication_as_arm" {
+  count = var.entra_authentication_as_arm_enabled == null ? 0 : 1
+
+  type        = "Microsoft.ContainerRegistry/registries@2023-11-01-preview"
+  resource_id = azurerm_container_registry.this.id
+  body = {
+    properties = {
+      policies = {
+        azureADAuthenticationAsArmPolicy = {
+          status = var.entra_authentication_as_arm_enabled ? "enabled" : "disabled"
+        }
+      }
     }
   }
 }

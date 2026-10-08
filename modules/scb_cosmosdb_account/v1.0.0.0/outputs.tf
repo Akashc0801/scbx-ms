@@ -42,3 +42,13 @@ output "sql_containers" {
   description = "A map of SQL containers created."
   value       = azurerm_cosmosdb_sql_container.this
 }
+
+output "diagnostic_setting_ids" {
+  description = "Map of diagnostic setting IDs keyed by diagnostic setting key."
+  value       = { for k, v in azurerm_monitor_diagnostic_setting.this : k => v.id }
+}
+
+output "lock_id" {
+  description = "The ID of the management lock, if created."
+  value       = try(azurerm_management_lock.this[0].id, null)
+}

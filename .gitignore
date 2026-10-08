@@ -2,4 +2,8 @@
 *.tfstate
 *.tfstate.*
 tfplan
+*.tfplan
 crash.log
+
+# Personal Claude Code settings
+.claude/settings.local.json

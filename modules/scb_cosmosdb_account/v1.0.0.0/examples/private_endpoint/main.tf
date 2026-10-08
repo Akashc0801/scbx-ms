@@ -114,6 +114,18 @@ module "cosmos_with_pe" {
   # Manage DNS zone groups (set to false if using Azure Policy)
   private_endpoints_manage_dns_zone_group = true
 
+  # Send logs and metrics to the operations Log Analytics workspace
+  diagnostic_settings = {
+    operations = {
+      workspace_resource_id = "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-monitor-dev/providers/Microsoft.OperationalInsights/workspaces/law-operations-dev"
+    }
+  }
+
+  # Protect the account from deletion
+  lock = {
+    kind = "CanNotDelete"
+  }
+
   tags = {
     Example = "PrivateEndpoint"
   }

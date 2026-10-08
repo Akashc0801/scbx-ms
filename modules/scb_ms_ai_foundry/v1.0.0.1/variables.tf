@@ -52,7 +52,56 @@ variable "ai_foundry_accounts" {
       identity_client_id = optional(string)
     })), [])
 
+    # Diagnostic settings on the account (Audit, RequestResponse, Trace, AllMetrics)
+    diagnostic_settings = optional(map(object({
+      name                                     = optional(string, null)
+      log_categories                           = optional(set(string), [])
+      log_groups                               = optional(set(string), ["allLogs"])
+      metric_categories                        = optional(set(string), ["AllMetrics"])
+      log_analytics_destination_type           = optional(string, "Dedicated")
+      workspace_resource_id                    = optional(string, null)
+      storage_account_resource_id              = optional(string, null)
+      event_hub_authorization_rule_resource_id = optional(string, null)
+      event_hub_name                           = optional(string, null)
+      marketplace_partner_resource_id          = optional(string, null)
+    })), {})
+
+    # Management lock on the account. A lock on the account also applies to its
+    # projects, deployments and connections.
+    lock = optional(object({
+      kind = string
+      name = optional(string, null)
+    }), null)
+
   }))
+
+  validation {
+    condition = alltrue([
+      for _, acct in var.ai_foundry_accounts : alltrue([
+        for _, ds in acct.diagnostic_settings :
+        ds.workspace_resource_id != null || ds.storage_account_resource_id != null || ds.event_hub_authorization_rule_resource_id != null || ds.marketplace_partner_resource_id != null
+      ])
+    ])
+    error_message = "Each account diagnostic setting must set at least one of `workspace_resource_id`, `storage_account_resource_id`, `event_hub_authorization_rule_resource_id`, or `marketplace_partner_resource_id`."
+  }
+
+  validation {
+    condition = alltrue([
+      for _, acct in var.ai_foundry_accounts : alltrue([
+        for _, ds in acct.diagnostic_settings :
+        contains(["Dedicated", "AzureDiagnostics"], ds.log_analytics_destination_type)
+      ])
+    ])
+    error_message = "Account diagnostic setting `log_analytics_destination_type` must be one of: 'Dedicated', 'AzureDiagnostics'."
+  }
+
+  validation {
+    condition = alltrue([
+      for _, acct in var.ai_foundry_accounts :
+      acct.lock == null ? true : contains(["CanNotDelete", "ReadOnly"], acct.lock.kind)
+    ])
+    error_message = "Account lock kind must be either `\"CanNotDelete\"` or `\"ReadOnly\"`."
+  }
 }
 
 #######################################
@@ -314,10 +363,32 @@ variable "region_code" {
   type        = string
   description = "(Optional) Region code."
   validation {
-    condition     = contains(["ea", "sea", "eu", "myw"], var.region_code)
+    condition     = var.region_code == null ? true : contains(["ea", "sea", "eu", "myw"], var.region_code)
     error_message = "Value of \"region_code\" must be one of: [ea,sea,eu,myw]."
   }
   default = "sea"
+}
+
+variable "location_region_code" {
+  type        = string
+  description = "(Optional) SCB region code used only to select the Azure location when region_code is null. Must be one of: `[ea,sea,eu,myw,sg,idc]`."
+  default     = null
+
+  validation {
+    condition     = var.location_region_code == null ? true : contains(["ea", "sea", "eu", "myw", "sg", "idc"], var.location_region_code)
+    error_message = "Value of \"location_region_code\" must be one of: [ea,sea,eu,myw,sg,idc]."
+  }
+}
+
+variable "naming_format" {
+  type        = string
+  description = "(Optional) Naming layout passed to the SCB naming module: `legacy` (org-type-app_code-env-region-base_name) or `workload` (org-type-app_code-base_name-env-region)."
+  default     = "legacy"
+
+  validation {
+    condition     = contains(["legacy", "workload"], var.naming_format)
+    error_message = "Value of \"naming_format\" must be either \"legacy\" or \"workload\"."
+  }
 }
 
 variable "additional_name" {
@@ -553,7 +624,7 @@ variable "role_assignments" {
     scope                = string
     role_definition_name = string
     principal_id         = string
-    description          = optional(string, "")
+    description          = optional(string, null)
   }))
   default = {}
 }
@@ -582,7 +653,7 @@ variable "project_role_assignments" {
     scope                = string
     role_definition_name = string
     principal_id         = string
-    description          = optional(string, "")
+    description          = optional(string, null)
   }))
   default = {}
 }

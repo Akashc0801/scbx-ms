@@ -2,65 +2,69 @@ module "scb_module_cosmos" {
   source = "../../scb_naming_module/v1.0.0.1"
 
   # Basic naming parameters
-  env                = var.env
-  org                = var.org
-  region_code        = var.region_code
-  base_name          = var.base_name
-  additional_name    = var.additional_name
-  iterator           = var.iterator
-  au                 = var.au
-  app_code           = var.app_code
-  bu                 = var.bu
-  owner              = var.owner
-  resource_type_code = var.resource_type_code
-  max_length         = var.max_length
-  no_dashes          = var.no_dashes
-  add_random         = var.add_random
-  rnd_length         = var.rnd_length
+  env                  = var.env
+  org                  = var.org
+  region_code          = var.region_code
+  location_region_code = var.location_region_code
+  naming_format        = var.naming_format
+  base_name            = var.base_name
+  additional_name      = var.additional_name
+  iterator             = var.iterator
+  au                   = var.au
+  app_code             = var.app_code
+  bu                   = var.bu
+  owner                = var.owner
+  resource_type_code   = var.resource_type_code
+  max_length           = var.max_length
+  no_dashes            = var.no_dashes
+  add_random           = var.add_random
+  rnd_length           = var.rnd_length
 
-  # Mandatory Business Tags
-  app_name       = var.app_name
-  app_support    = var.app_support
-  business_unit  = var.business_unit
-  country        = var.country
-  business_owner = var.business_owner
-  type           = var.type
-
-  # Mandatory DevOps Tags
-  product_name    = var.product_name
   product_version = var.product_version
 
-  # Mandatory Finance Tags
-  cost_center          = var.cost_center
-  cost_allocation_unit = var.cost_allocation_unit
-  budget_id            = var.budget_id
-  budget_limit         = var.budget_limit
-  cost_alert_threshold = var.cost_alert_threshold
-
-  # Mandatory Governance Tags
+  # Pass mandatory tags to naming module (8 mandatory tags)
+  environment         = var.environment
+  business_owner      = var.business_owner
+  business_unit       = var.business_unit
+  criticality         = var.criticality
+  cost_center         = var.cost_center
   data_classification = var.data_classification
-  compliance_required = var.compliance_required
   compliance          = var.compliance
 
-  # Mandatory Operation Tags
-  criticality = var.criticality
-  environment = var.environment
-  status      = var.status
-
-  # Optional Tags (pass through if provided)
-  delete_after        = var.delete_after
-  tier                = var.tier
-  app_id              = var.app_id
-  auto_delete         = var.auto_delete
-  auto_shutdown       = var.auto_shutdown
-  description         = var.description
-  backup_policy       = var.backup_policy
-  disaster_recovery   = var.disaster_recovery
-  notification_emails = var.notification_emails
+  # Pass optional tags to naming module (3 optional tags)
   region              = var.region
+  description         = var.description
+  notification_emails = var.notification_emails
 
-  # Additional custom tags
-  additional_tags = var.additional_tags
+  # Additional custom tags with ProductName and ProductVersion
+  additional_tags = merge(
+    var.additional_tags != null ? var.additional_tags : {},
+    {
+      # Mandatory tags passed as additional_tags
+      Owner          = var.owner
+      AppName        = var.app_name
+      BudgetID       = var.budget_id
+      Status         = var.status
+      ProductName    = var.product_name
+      ProductVersion = var.product_version
+
+      # Legacy tags maintained for compatibility
+      AppSupport         = var.app_support
+      Type               = var.type
+      Country            = var.country
+      CostAllocationUnit = var.cost_allocation_unit
+      BudgetLimit        = var.budget_limit
+      CostAlertThreshold = var.cost_alert_threshold
+      ComplianceRequired = var.compliance_required
+    },
+    var.delete_after != "" ? { DeleteAfter = var.delete_after } : {},
+    var.tier != "" ? { Tier = var.tier } : {},
+    var.app_id != "" ? { AppId = var.app_id } : {},
+    var.auto_delete != "" ? { AutoDelete = var.auto_delete } : {},
+    var.auto_shutdown != "" ? { AutoShutdown = var.auto_shutdown } : {},
+    var.backup_policy != "" ? { BackupPolicy = var.backup_policy } : {},
+    var.disaster_recovery != "" ? { DisasterRecovery = var.disaster_recovery } : {}
+  )
 }
 
 resource "azurerm_cosmosdb_account" "this" {

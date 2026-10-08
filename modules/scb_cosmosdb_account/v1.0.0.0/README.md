@@ -18,9 +18,12 @@
 
 ## Notable changes in this version
 
-### v1
+### v1.0.0
 
-- Initial version to deploy Cosmos DB account with SQL databases/containers, private endpoints, and enterprise tagging.
+- Deploys a Cosmos DB account with SQL databases/containers, private endpoints, and enterprise tagging.
+- `diagnostic_settings` input sends Cosmos DB logs and metrics to Log Analytics, Storage or Event Hubs (added 2026-10-08, before first deployment).
+- `lock` input creates a `CanNotDelete` or `ReadOnly` management lock on the account (added 2026-10-08).
+- Naming module call fixed to validate against `scb_naming_module/v1.0.0.1`; optional `naming_format` and `location_region_code` pass-through (2026-10-08).
 
 ## Upgrade Path
 
@@ -137,7 +140,16 @@ module "cosmosdb_account" {
   cost_center         = var.cost_center
   criticality         = var.criticality
   environment         = var.environment
-  service             = var.service
+
+  diagnostic_settings = {
+    operations = {
+      workspace_resource_id = var.log_analytics_workspace_id
+    }
+  }
+
+  lock = {
+    kind = "CanNotDelete"
+  }
 }
 ```
 
@@ -145,6 +157,7 @@ module "cosmosdb_account" {
 resource_group_name = "rg-data-prod"
 pe_subnet_id        = "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-network/providers/Microsoft.Network/virtualNetworks/vnet-hub/subnets/snet-pe"
 private_dns_zone_id = "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-dns/providers/Microsoft.Network/privateDnsZones/privatelink.documents.azure.com"
+log_analytics_workspace_id = "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-monitor/providers/Microsoft.OperationalInsights/workspaces/law-operations"
 ```
 
 ## Terraform Module Documentation
@@ -182,7 +195,8 @@ private_dns_zone_id = "/subscriptions/00000000-0000-0000-0000-000000000000/resou
 | cost_center | Mandatory cost center tag | `string` | module-defined | no |
 | criticality | Mandatory criticality tag | `string` | module-defined | no |
 | environment | Mandatory environment tag | `string` | module-defined | no |
-| service | Mandatory service tag value | `string` | n/a | yes |
+| diagnostic_settings | Map of diagnostic settings (Log Analytics, Storage, Event Hubs or partner destination) | `map(object)` | `{}` | no |
+| lock | Management lock (`CanNotDelete` or `ReadOnly`) | `object` | `null` | no |
 
 ### Resources
 
@@ -194,6 +208,8 @@ private_dns_zone_id = "/subscriptions/00000000-0000-0000-0000-000000000000/resou
 | azurerm_private_endpoint.this | resource |
 | azurerm_private_endpoint.this_unmanaged_dns_zone_groups | resource |
 | azurerm_private_endpoint_application_security_group_association.this | resource |
+| azurerm_monitor_diagnostic_setting.this | resource |
+| azurerm_management_lock.this | resource |
 | modtm_telemetry.telemetry | resource |
 | random_uuid.telemetry | resource |
 
@@ -210,3 +226,5 @@ private_dns_zone_id = "/subscriptions/00000000-0000-0000-0000-000000000000/resou
 | private_endpoints | Map of private endpoint resources |
 | sql_databases | Map of SQL database resources |
 | sql_containers | Map of SQL container resources |
+| diagnostic_setting_ids | Map of diagnostic setting IDs |
+| lock_id | Management lock ID, if created |

@@ -565,6 +565,13 @@ virtual_networks = {
         network_security_group = {
           id = "foundry_agent_nsg" # Reference to NSG module key
         }
+        # Foundry agent network injection requires this delegation.
+        delegations = [{
+          name = "foundry-agents"
+          service_delegation = {
+            name = "Microsoft.App/environments"
+          }
+        }]
       }
       foundrype = {
         name           = "az-snet-dtx-aiplatform-foundrype-dev-001"
@@ -1305,6 +1312,16 @@ firewall_policy_rule_collection_groups = {
             source_addresses      = ["10.0.0.0/22"]
             destination_addresses = ["10.0.4.0/22"]
             destination_ports     = ["443"]
+          },
+          {
+            # Foundry Agent Service: agent subnet needs Microsoft Entra ID.
+            # https://learn.microsoft.com/azure/foundry/agents/how-to/virtual-networks#limitations
+            name                  = "allow-foundry-agent-entra-id"
+            description           = "Foundry agent subnet to Microsoft Entra ID (AzureActiveDirectory service tag) over HTTPS"
+            protocols             = ["TCP"]
+            source_addresses      = ["10.0.4.0/24"]
+            destination_addresses = ["AzureActiveDirectory"]
+            destination_ports     = ["443"]
           }
         ]
       }
@@ -1321,6 +1338,57 @@ firewall_policy_rule_collection_groups = {
             description       = "Dummy application rule: AIGW and Foundry VNets to www.microsoft.com over HTTPS"
             source_addresses  = ["10.0.0.0/22", "10.0.4.0/22"]
             destination_fqdns = ["www.microsoft.com"]
+            protocols = [{
+              type = "Https"
+              port = 443
+            }]
+          },
+          {
+            # Foundry Agent Service egress allow list (no TLS inspection).
+            # https://learn.microsoft.com/azure/foundry/agents/how-to/virtual-networks#limitations
+            name             = "allow-foundry-agent-identity"
+            description      = "Foundry agent subnet to managed identity and Microsoft Entra ID endpoints over HTTPS"
+            source_addresses = ["10.0.4.0/24"]
+            destination_fqdns = [
+              "control-southeastasia.identity.azure.net",
+              "*.identity.azure.net",
+              "southeastasia.login.microsoft.com",
+              "*.login.microsoft.com",
+              "login.microsoftonline.com",
+              "*.login.microsoftonline.com",
+            ]
+            protocols = [{
+              type = "Https"
+              port = 443
+            }]
+          },
+          {
+            # Jump box (snet-build) needs the Azure / Foundry portals, Microsoft
+            # sign-in and package feeds to test agents from inside the VNet.
+            name             = "allow-jumpbox-portals"
+            description      = "Jump box subnet to Azure and Foundry portals, Microsoft Entra sign-in, Windows Update and Python/GitHub packages over HTTPS"
+            source_addresses = ["10.0.5.64/27"]
+            destination_fqdns = [
+              "*.azure.com",
+              "*.azure.net",
+              "*.azurefd.net",
+              "*.azureedge.net",
+              "*.microsoft.com",
+              "*.microsoftonline.com",
+              "*.microsoftonline-p.com",
+              "*.msauth.net",
+              "*.msftauth.net",
+              "*.msidentity.com",
+              "*.msecnd.net",
+              "*.windows.net",
+              "*.windowsupdate.com",
+              "*.live.com",
+              "aka.ms",
+              "pypi.org",
+              "files.pythonhosted.org",
+              "github.com",
+              "*.githubusercontent.com",
+            ]
             protocols = [{
               type = "Https"
               port = 443

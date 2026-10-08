@@ -2,21 +2,23 @@ module "scb_module_kv" {
   source = "../../scb_naming_module/v1.0.0.1"
 
   # Basic naming parameters
-  env                = var.env
-  org                = var.org
-  region_code        = var.region_code
-  base_name          = var.base_name
-  additional_name    = var.additional_name
-  iterator           = var.iterator
-  au                 = var.au
-  app_code           = var.app_code
-  bu                 = var.bu
-  owner              = var.owner
-  resource_type_code = var.resource_type_code
-  max_length         = var.max_length
-  no_dashes          = var.no_dashes
-  add_random         = var.add_random
-  rnd_length         = var.rnd_length
+  env                  = var.env
+  org                  = var.org
+  region_code          = var.region_code
+  location_region_code = var.location_region_code
+  naming_format        = var.naming_format
+  base_name            = var.base_name
+  additional_name      = var.additional_name
+  iterator             = var.iterator
+  au                   = var.au
+  app_code             = var.app_code
+  bu                   = var.bu
+  owner                = var.owner
+  resource_type_code   = var.resource_type_code
+  max_length           = var.max_length
+  no_dashes            = var.no_dashes
+  add_random           = var.add_random
+  rnd_length           = var.rnd_length
 
   # Use v1.0.0.1 naming module interface
   product_version = "1.0.0.1"

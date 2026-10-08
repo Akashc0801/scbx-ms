@@ -12,6 +12,7 @@ output "connection_string" {
 
 output "instrumentation_key" {
   description = "Instrumentation Key of the Application Insights"
+  sensitive   = true
   value       = azurerm_application_insights.this.instrumentation_key
 }
 
@@ -24,10 +25,16 @@ output "name" {
 # https://azure.github.io/Azure-Verified-Modules/specs/terraform/#id-tffr2---category-outputs---additional-terraform-outputs
 output "resource" {
   description = "This is the full output for the resource."
+  sensitive   = true
   value       = azurerm_application_insights.this
 }
 
 output "resource_id" {
   description = "The ID of the Application Insights"
   value       = azurerm_application_insights.this.id
+}
+
+output "diagnostic_setting_ids" {
+  description = "Map of diagnostic setting IDs keyed by diagnostic setting key."
+  value       = { for k, v in azurerm_monitor_diagnostic_setting.this : k => v.id }
 }

@@ -31,6 +31,7 @@ The following resources are used by this module:
 - [azapi_resource.linked_storage_account](https://registry.terraform.io/providers/Azure/azapi/latest/docs/resources/resource) (resource)
 - [azapi_resource.monitor_private_link_scope](https://registry.terraform.io/providers/Azure/azapi/latest/docs/resources/resource) (resource)
 - [azurerm_application_insights.this](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/application_insights) (resource)
+- [azurerm_monitor_diagnostic_setting.this](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/monitor_diagnostic_setting) (resource)
 - [azurerm_management_lock.this](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/management_lock) (resource)
 - [modtm_telemetry.telemetry](https://registry.terraform.io/providers/azure/modtm/latest/docs/resources/telemetry) (resource)
 - [random_uuid.telemetry](https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/uuid) (resource)
@@ -101,6 +102,27 @@ Description: (Optional) Disables IP masking. Defaults to false. For more informa
 Type: `bool`
 
 Default: `false`
+
+### <a name="input_diagnostic_settings"></a> [diagnostic\_settings](#input\_diagnostic\_settings)
+
+Description: A map of diagnostic settings to create on the Application Insights component. Use it to export telemetry to Event Hubs (for example, onward to Kafka), Storage or another Log Analytics workspace. Workspace-based components already store telemetry in `workspace_id`.
+
+- `name` - (Optional) Name of the diagnostic setting. Generated if not set.
+- `log_categories` - (Optional) Log categories. Defaults to `[]`.
+- `log_groups` - (Optional) Log category groups. Defaults to `["allLogs"]`.
+- `metric_categories` - (Optional) Metric categories. Defaults to `["AllMetrics"]`.
+- `log_analytics_destination_type` - (Optional) `Dedicated` or `AzureDiagnostics`. Defaults to `Dedicated`.
+- `workspace_resource_id` - (Optional) Log Analytics workspace resource ID.
+- `storage_account_resource_id` - (Optional) Storage account resource ID.
+- `event_hub_authorization_rule_resource_id` - (Optional) Event Hubs namespace authorization rule resource ID.
+- `event_hub_name` - (Optional) Event hub name.
+- `marketplace_partner_resource_id` - (Optional) Marketplace partner resource ID.
+
+At least one destination must be set.
+
+Type: `map(object({...}))`
+
+Default: `{}`
 
 ### <a name="input_enable_telemetry"></a> [enable\_telemetry](#input\_enable\_telemetry)
 
@@ -249,6 +271,10 @@ The following outputs are exported:
 ### <a name="output_app_id"></a> [app\_id](#output\_app\_id)
 
 Description: App ID of the Application Insights
+
+### <a name="output_diagnostic_setting_ids"></a> [diagnostic\_setting\_ids](#output\_diagnostic\_setting\_ids)
+
+Description: Map of diagnostic setting IDs keyed by diagnostic setting key.
 
 ### <a name="output_connection_string"></a> [connection\_string](#output\_connection\_string)
 

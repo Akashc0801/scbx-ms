@@ -16,10 +16,32 @@ variable "region_code" {
   type        = string
   description = "(Optional) Region code. Example: `sea`."
   validation {
-    condition     = contains(["ea", "sea", "eu", "myw"], var.region_code)
+    condition     = var.region_code == null ? true : contains(["ea", "sea", "eu", "myw"], var.region_code)
     error_message = "Value must be one of: [ea,sea,eu,myw]."
   }
   default = "sea"
+}
+
+variable "location_region_code" {
+  type        = string
+  description = "(Optional) SCB region code used only to select the Azure location when region_code is null. Must be one of: `[ea,sea,eu,myw,sg,idc]`."
+  default     = null
+
+  validation {
+    condition     = var.location_region_code == null ? true : contains(["ea", "sea", "eu", "myw", "sg", "idc"], var.location_region_code)
+    error_message = "Value of \"location_region_code\" must be one of: [ea,sea,eu,myw,sg,idc]."
+  }
+}
+
+variable "naming_format" {
+  type        = string
+  description = "(Optional) Naming layout passed to the SCB naming module: `legacy` (org-type-app_code-env-region-base_name) or `workload` (org-type-app_code-base_name-env-region)."
+  default     = "legacy"
+
+  validation {
+    condition     = contains(["legacy", "workload"], var.naming_format)
+    error_message = "Value of \"naming_format\" must be either \"legacy\" or \"workload\"."
+  }
 }
 
 variable "base_name" {
@@ -138,12 +160,14 @@ variable "type" {
 # -
 variable "product_name" {
   type        = string
-  description = "(Required) Terraform Module name."
+  description = "(Optional) Terraform Module name."
+  default     = "scb_cosmosdb_account"
 }
 
 variable "product_version" {
   type        = string
-  description = "(Required) scb product version. Example: `1.0.0`."
+  description = "(Optional) scb product version. Example: `1.0.0`."
+  default     = "1.0.0.0"
 }
 
 # -
