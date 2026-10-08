@@ -246,12 +246,16 @@ module "storage_account" {
   default_to_oauth_authentication = true
 
   private_endpoints = {
+    # The module names every endpoint "pe-<account>" unless a name is given,
+    # so blob and file would collide.
     blob = {
+      name                          = "pe-${local.expected_names.storage_account}-blob"
       subnet_resource_id            = data.azurerm_subnet.private_endpoint.id
       subresource_name              = "blob"
       private_dns_zone_resource_ids = [local.dns_zone_ids.blob]
     }
     file = {
+      name                          = "pe-${local.expected_names.storage_account}-file"
       subnet_resource_id            = data.azurerm_subnet.private_endpoint.id
       subresource_name              = "file"
       private_dns_zone_resource_ids = [local.dns_zone_ids.file]
@@ -375,6 +379,11 @@ module "ai_search" {
   partition_count               = var.ai_search.partition_count
   public_network_access_enabled = false
   local_authentication_enabled  = false
+
+  # Required by the SCB AI policy "Configure Azure AI Search services to
+  # enforce customer-managed keys" (Deny): Search then rejects any index or
+  # synonym map that is not encrypted with a customer-managed key.
+  customer_managed_key_enforcement_enabled = true
 
   managed_identities = {
     system_assigned = true
