@@ -565,6 +565,13 @@ virtual_networks = {
         network_security_group = {
           id = "foundry_agent_nsg" # Reference to NSG module key
         }
+        # Foundry agent network injection requires this delegation.
+        delegations = [{
+          name = "foundry-agents"
+          service_delegation = {
+            name = "Microsoft.App/environments"
+          }
+        }]
       }
       foundrype = {
         name           = "az-snet-dtx-aiplatform-foundrype-dev-001"
