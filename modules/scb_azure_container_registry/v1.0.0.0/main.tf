@@ -220,3 +220,21 @@ resource "azurerm_monitor_diagnostic_setting" "this" {
     }
   }
 }
+
+# azurerm_container_registry does not expose the Entra-authentication-as-ARM
+# policy, so it is pinned with azapi when requested.
+resource "azapi_update_resource" "entra_authentication_as_arm" {
+  count = var.entra_authentication_as_arm_enabled == null ? 0 : 1
+
+  type        = "Microsoft.ContainerRegistry/registries@2023-11-01-preview"
+  resource_id = azurerm_container_registry.this.id
+  body = {
+    properties = {
+      policies = {
+        azureADAuthenticationAsArmPolicy = {
+          status = var.entra_authentication_as_arm_enabled ? "enabled" : "disabled"
+        }
+      }
+    }
+  }
+}

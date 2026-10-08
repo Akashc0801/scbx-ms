@@ -443,7 +443,21 @@ module "container_registry" {
   public_network_access_enabled = false
   admin_enabled                 = false
   data_endpoint_enabled         = true
-  zone_redundancy_enabled       = var.container_registry.zone_redundancy_enabled
+
+  # Foundry hosted agents authenticate to the registry with Entra tokens.
+  entra_authentication_as_arm_enabled = true
+
+  # Project identities pull images (the registry uses classic registry
+  # permissions, so AcrPull rather than Container Registry Repository Reader).
+  # Per-agent identities get AcrPull from the agent deployment pipeline.
+  role_assignments = {
+    for pk, p in var.foundry.projects : "acrpull-${pk}" => {
+      role_definition_id_or_name = "AcrPull"
+      principal_id               = module.user_assigned_identities[p.identity_key].principal_id
+      principal_type             = "ServicePrincipal"
+    }
+  }
+  zone_redundancy_enabled = var.container_registry.zone_redundancy_enabled
 
   private_endpoints = {
     registry = {

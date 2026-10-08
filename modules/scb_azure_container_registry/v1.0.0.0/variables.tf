@@ -602,3 +602,11 @@ variable "maintenance_window" {
   default     = ""
 }
 
+
+variable "entra_authentication_as_arm_enabled" {
+  type        = bool
+  default     = null
+  description = <<DESCRIPTION
+(Optional) Sets the registry policy `azureADAuthenticationAsArmPolicy`. When `true`, Microsoft Entra tokens issued for Azure Resource Manager are accepted for registry authentication, which Foundry hosted agents rely on to pull images. `null` (default) leaves the registry setting unmanaged.
+DESCRIPTION
+}
