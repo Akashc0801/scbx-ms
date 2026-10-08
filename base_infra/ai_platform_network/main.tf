@@ -185,6 +185,9 @@ module "virtual_networks" {
         network_security_group = {
           id = module.network_security_groups[subnet_config.network_security_group.id].resource_id
         }
+      } : {},
+      subnet_config.delegations != null ? {
+        delegations = subnet_config.delegations
       } : {}
     )
   }
@@ -299,4 +302,264 @@ module "private_dns_zones" {
 
   enable_telemetry = each.value.enable_telemetry
   tags             = each.value.tags
+}
+
+
+module "public_ips" {
+  for_each = var.public_ips
+
+  source = "../../modules/scb_public_ip/v1.0.0.1"
+
+  depends_on = [module.resource_groups]
+
+  resource_group_name = module.resource_groups[each.value.resource_group_key].name
+
+  # Naming module variables
+  env                  = each.value.env
+  org                  = each.value.org
+  region_code          = each.value.region_code
+  location_region_code = each.value.location_region_code
+  naming_format        = each.value.naming_format
+  base_name            = each.value.base_name
+  additional_name      = each.value.additional_name
+  iterator             = each.value.iterator
+  au                   = each.value.au
+  app_code             = each.value.app_code
+  bu                   = each.value.bu
+  owner                = each.value.owner
+  resource_type_code   = each.value.resource_type_code
+
+  # Mandatory Tags
+  environment         = each.value.environment
+  business_owner      = each.value.business_owner
+  business_unit       = each.value.business_unit
+  criticality         = each.value.criticality
+  cost_center         = each.value.cost_center
+  data_classification = each.value.data_classification
+  compliance          = each.value.compliance
+  app_name            = each.value.app_name
+  app_support         = each.value.app_support
+  budget_id           = each.value.budget_id
+  status              = each.value.status
+  service             = each.value.service
+
+  # Optional Tags
+  region              = each.value.region
+  description         = each.value.description
+  notification_emails = each.value.notification_emails
+
+  # Public IP specific
+  allocation_method = each.value.allocation_method
+  sku               = each.value.sku
+  sku_tier          = each.value.sku_tier
+  zones             = each.value.zones
+
+  enable_telemetry = each.value.enable_telemetry
+  tags             = each.value.tags
+}
+
+module "firewall_policies" {
+  for_each = var.firewall_policies
+
+  source = "../../modules/scb_firewall_policy/v1.0.0.1"
+
+  depends_on = [module.resource_groups]
+
+  resource_group_name = module.resource_groups[each.value.resource_group_key].name
+
+  # Naming module variables
+  env                  = each.value.env
+  org                  = each.value.org
+  region_code          = each.value.region_code
+  location_region_code = each.value.location_region_code
+  naming_format        = each.value.naming_format
+  base_name            = each.value.base_name
+  additional_name      = each.value.additional_name
+  iterator             = each.value.iterator
+  au                   = each.value.au
+  app_code             = each.value.app_code
+  bu                   = each.value.bu
+  owner                = each.value.owner
+  resource_type_code   = each.value.resource_type_code
+
+  # Mandatory Tags
+  environment         = each.value.environment
+  business_owner      = each.value.business_owner
+  business_unit       = each.value.business_unit
+  criticality         = each.value.criticality
+  cost_center         = each.value.cost_center
+  data_classification = each.value.data_classification
+  compliance          = each.value.compliance
+  app_name            = each.value.app_name
+  app_support         = each.value.app_support
+  product_name        = each.value.product_name
+  product_version     = each.value.product_version
+  budget_id           = each.value.budget_id
+  status              = each.value.status
+
+  # Optional Tags. The module merges these into tags when not null, so blanks are explicit.
+  service             = each.value.service
+  region              = each.value.region
+  description         = each.value.description
+  notification_emails = each.value.notification_emails
+  delete_after        = ""
+  tier                = ""
+  app_id              = ""
+  auto_delete         = ""
+  auto_shutdown       = ""
+  disaster_recovery   = ""
+  integration_id      = ""
+  experiment_phase    = ""
+  os                  = ""
+  last_vm_accessed    = ""
+  retention           = ""
+
+  # Firewall policy specific
+  firewall_policy_sku                      = each.value.sku
+  firewall_policy_threat_intelligence_mode = each.value.threat_intelligence_mode
+  firewall_policy_dns = {
+    proxy_enabled = each.value.dns_proxy_enabled
+    servers       = each.value.dns_servers
+  }
+
+  enable_telemetry = each.value.enable_telemetry
+  tags             = each.value.tags
+}
+
+module "firewalls" {
+  for_each = var.firewalls
+
+  source = "../../modules/scb_firewall/v1.0.0.1"
+
+  depends_on = [module.resource_groups, module.virtual_networks]
+
+  resource_group_name = module.resource_groups[each.value.resource_group_key].name
+
+  # Naming module variables
+  env                  = each.value.env
+  org                  = each.value.org
+  region_code          = each.value.region_code
+  location_region_code = each.value.location_region_code
+  naming_format        = each.value.naming_format
+  base_name            = each.value.base_name
+  additional_name      = each.value.additional_name
+  iterator             = each.value.iterator
+  au                   = each.value.au
+  app_code             = each.value.app_code
+  bu                   = each.value.bu
+  owner                = each.value.owner
+  resource_type_code   = each.value.resource_type_code
+
+  # Mandatory Tags
+  environment         = each.value.environment
+  business_owner      = each.value.business_owner
+  business_unit       = each.value.business_unit
+  criticality         = each.value.criticality
+  cost_center         = each.value.cost_center
+  data_classification = each.value.data_classification
+  compliance          = each.value.compliance
+  app_name            = each.value.app_name
+  app_support         = each.value.app_support
+  budget_id           = each.value.budget_id
+  status              = each.value.status
+  service             = each.value.service
+
+  # Optional Tags
+  region              = each.value.region
+  description         = each.value.description
+  notification_emails = each.value.notification_emails
+
+  # Firewall specific
+  firewall_sku_name  = each.value.firewall_sku_name
+  firewall_sku_tier  = each.value.firewall_sku_tier
+  firewall_zones     = each.value.firewall_zones
+  firewall_policy_id = module.firewall_policies[each.value.firewall_policy_key].resource_id
+
+  # Public IPs and the AzureFirewallSubnet resolved from module outputs
+  ip_configurations = {
+    for ip_key, ip_config in each.value.ip_configurations : ip_key => {
+      name                 = ip_config.name
+      public_ip_address_id = module.public_ips[ip_config.public_ip_key].resource_id
+      subnet_id = (
+        ip_config.vnet_key != null && ip_config.subnet_key != null
+        ? module.virtual_networks[ip_config.vnet_key].subnets[ip_config.subnet_key].resource_id
+        : null
+      )
+    }
+  }
+
+  enable_telemetry = each.value.enable_telemetry
+  tags             = each.value.tags
+}
+
+module "private_dns_resolvers" {
+  for_each = var.private_dns_resolvers
+
+  source = "../../modules/scb_dnsresolver/v1.0.0.0"
+
+  depends_on = [module.resource_groups, module.virtual_networks]
+
+  name                        = each.value.name
+  resource_group_name         = module.resource_groups[each.value.resource_group_key].name
+  location                    = module.resource_groups[each.value.resource_group_key].resource.location
+  virtual_network_resource_id = module.virtual_networks[each.value.vnet_key].resource_id
+
+  # Mandatory Tags
+  app_name        = each.value.app_name
+  app_support     = each.value.app_support
+  business_unit   = each.value.business_unit
+  business_owner  = each.value.business_owner
+  product_name    = each.value.product_name
+  product_version = each.value.product_version
+  budget_id       = each.value.budget_id
+  criticality     = each.value.criticality
+  environment     = each.value.environment
+  owner           = each.value.owner
+  status          = each.value.status
+
+  # Subnet names resolved from the VNet module outputs
+  inbound_endpoints = {
+    for key, endpoint in each.value.inbound_endpoints : key => {
+      name                         = endpoint.name
+      subnet_name                  = module.virtual_networks[each.value.vnet_key].subnets[endpoint.subnet_key].name
+      private_ip_allocation_method = endpoint.private_ip_allocation_method
+      private_ip_address           = endpoint.private_ip_address
+    }
+  }
+  outbound_endpoints = {
+    for key, endpoint in each.value.outbound_endpoints : key => {
+      name        = endpoint.name
+      subnet_name = module.virtual_networks[each.value.vnet_key].subnets[endpoint.subnet_key].name
+    }
+  }
+
+  enable_telemetry = each.value.enable_telemetry
+  tags             = each.value.tags
+}
+
+module "firewall_policy_rule_collection_groups" {
+  for_each = var.firewall_policy_rule_collection_groups
+
+  source = "../../modules/scb_firewall_policy/v1.0.0.1/modules/rule_collection_groups"
+
+  firewall_policy_rule_collection_group_firewall_policy_id = module.firewall_policies[each.value.firewall_policy_key].resource_id
+  firewall_policy_rule_collection_group_name               = each.value.name
+  firewall_policy_rule_collection_group_priority           = each.value.priority
+
+  firewall_policy_rule_collection_group_network_rule_collection = [
+    for collection in each.value.network_rule_collections : {
+      name     = collection.name
+      action   = collection.action
+      priority = collection.priority
+      rule     = collection.rules
+    }
+  ]
+  firewall_policy_rule_collection_group_application_rule_collection = [
+    for collection in each.value.application_rule_collections : {
+      name     = collection.name
+      action   = collection.action
+      priority = collection.priority
+      rule     = collection.rules
+    }
+  ]
 }

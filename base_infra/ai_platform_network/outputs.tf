@@ -57,3 +57,55 @@ output "private_dns_zones" {
     }
   }
 }
+
+output "public_ips" {
+  description = "Public IP names, IDs, and addresses keyed by public IP key."
+  value = {
+    for key, public_ip in module.public_ips : key => {
+      name       = public_ip.name
+      id         = public_ip.resource_id
+      ip_address = public_ip.public_ip_address
+    }
+  }
+}
+
+output "firewall_policies" {
+  description = "Firewall policy names and IDs keyed by policy key."
+  value = {
+    for key, policy in module.firewall_policies : key => {
+      name = policy.resource.name
+      id   = policy.resource_id
+    }
+  }
+}
+
+output "firewalls" {
+  description = "Firewall names and IDs keyed by firewall key."
+  value = {
+    for key, firewall in module.firewalls : key => {
+      name = firewall.resource.name
+      id   = firewall.resource_id
+    }
+  }
+}
+
+output "private_dns_resolvers" {
+  description = "Private DNS resolver names, IDs, and inbound endpoint IPs keyed by resolver key."
+  value = {
+    for key, resolver in module.private_dns_resolvers : key => {
+      name                 = resolver.name
+      id                   = resolver.resource_id
+      inbound_endpoint_ips = resolver.inbound_endpoint_ips
+    }
+  }
+}
+
+output "firewall_policy_rule_collection_groups" {
+  description = "Firewall policy rule collection group names and IDs keyed by group key."
+  value = {
+    for key, group in module.firewall_policy_rule_collection_groups : key => {
+      name = group.resource.name
+      id   = group.resource_id
+    }
+  }
+}

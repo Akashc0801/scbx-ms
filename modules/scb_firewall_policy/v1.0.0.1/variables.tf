@@ -16,12 +16,32 @@ variable "org" {
 
 variable "region_code" {
   type        = string
-  description = "(Optional) Region code. Example: `sea`."
+  description = "(Optional) Region code. Example: `sea`. Set to null to omit it from the name."
   validation {
-    condition     = contains(["ea", "sea", "eu", "myw", "idc"], var.region_code)
-    error_message = "Value must be one of: [ea,sea,eu,myw,idc]."
+    condition     = var.region_code == null ? true : contains(["ea", "sea", "eu", "myw", "sg", "idc"], var.region_code)
+    error_message = "Value must be one of: [ea,sea,eu,myw,sg,idc]."
   }
   default = "sa"
+}
+
+variable "location_region_code" {
+  type        = string
+  description = "(Optional) Azure location region code used when region_code is omitted from the name."
+  default     = null
+  validation {
+    condition     = var.location_region_code == null ? true : contains(["ea", "sea", "eu", "myw", "sg", "idc"], var.location_region_code)
+    error_message = "location_region_code must be one of: ea,sea,eu,myw,sg,idc."
+  }
+}
+
+variable "naming_format" {
+  type        = string
+  description = "(Optional) Naming format: legacy or workload."
+  default     = "legacy"
+  validation {
+    condition     = contains(["legacy", "workload"], var.naming_format)
+    error_message = "naming_format must be legacy or workload."
+  }
 }
 
 variable "base_name" {
