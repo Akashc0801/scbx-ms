@@ -23,7 +23,9 @@ modules with `for_each`.
 | NSGs | One per subnet: `aigw_apim_nsg`, `aigw_pe_nsg`, `aigw_logicapp_nsg` | One per subnet: `foundry_agent_nsg`, `foundry_foundrype_nsg`, `foundry_build_nsg` |
 | Route table | `aigw_route_table`, associated with all three subnets | `foundry_route_table`, associated with all three subnets |
 
-Each route table has `default-to-internet` (`0.0.0.0/0`, next hop `Internet`).
+Each route table sends `0.0.0.0/0` to the AIGW Azure Firewall private IP using
+next hop `VirtualAppliance`. The AIGW and Foundry VNets are peered in both
+directions with forwarded traffic enabled so Foundry can reach the firewall.
 No custom NSG rules are defined; `security_rules` stays empty until rules are
 approved.
 
@@ -38,10 +40,13 @@ approved.
 
 All are created in `az-rg-dtx-aiplatform-aigw-dev-001` using the workload
 naming format. The firewall is `AZFW_VNet` / `Standard` and uses the policy
-(`Standard`, threat intelligence `Deny`, DNS proxy enabled). The policy has no
-rule collection groups yet, so the firewall denies all traffic until rules are
-added. The firewall subnet has no NSG or route table. The existing
-`default-to-internet` route table is not applied to it.
+(`Standard`, threat intelligence `Deny`, DNS proxy enabled). The firewall
+subnet has no NSG or route table.
+
+| VNet peering | Name |
+| --- | --- |
+| AIGW to Foundry | `az-peer-dtx-aiplatform-aigw-to-foundry-dev-001` |
+| Foundry to AIGW | `az-peer-dtx-aiplatform-foundry-to-aigw-dev-001` |
 
 ## Firewall rules (AIGW)
 
@@ -52,7 +57,7 @@ them with approved rules before production use.
 | Collection | Priority | Dummy rule |
 | --- | --- | --- |
 | `az-nrc-dtx-aiplatform-aigw-dev-001` (network, Allow) | 1000 | `dummy-allow-aigw-to-foundry-https`: TCP 443 from `10.0.0.0/22` to `10.0.4.0/22` |
-| `az-arc-dtx-aiplatform-aigw-dev-001` (application, Allow) | 2000 | `dummy-allow-microsoft-https`: HTTPS 443 from `10.0.0.0/22` to `www.microsoft.com` |
+| `az-arc-dtx-aiplatform-aigw-dev-001` (application, Allow) | 2000 | `dummy-allow-microsoft-https`: HTTPS 443 from `10.0.0.0/22` and `10.0.4.0/22` to `www.microsoft.com` |
 
 ## Private DNS resolver (AIGW)
 

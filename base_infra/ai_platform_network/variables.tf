@@ -265,6 +265,7 @@ variable "route_tables" {
       address_prefix         = string
       next_hop_type          = string
       next_hop_in_ip_address = optional(string)
+      firewall_key           = optional(string)
     }))
     subnet_associations = map(object({
       vnet_key   = string
