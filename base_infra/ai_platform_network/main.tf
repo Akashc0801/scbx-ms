@@ -202,7 +202,12 @@ module "route_tables" {
 
   source = "../../modules/scb_route_tables/v1.0.0.1"
 
-  depends_on = [module.resource_groups]
+  depends_on = [
+    module.resource_groups,
+    module.firewalls,
+    azurerm_virtual_network_peering.aigw_to_foundry,
+    azurerm_virtual_network_peering.foundry_to_aigw,
+  ]
 
   # Required variables
   resource_group_name = module.resource_groups[each.value.resource_group_key].name
@@ -256,7 +261,14 @@ module "route_tables" {
 
   # Route table specific variables
   bgp_route_propagation_enabled = each.value.bgp_route_propagation_enabled
-  routes                        = each.value.routes
+  routes = {
+    for route_key, route in each.value.routes : route_key => merge(
+      route,
+      route.firewall_key != null ? {
+        next_hop_in_ip_address = module.firewalls[route.firewall_key].resource.ip_configuration[0].private_ip_address
+      } : {}
+    )
+  }
 
   # Subnet associations resolved from the VNet module outputs
   subnet_resource_ids = {
@@ -562,4 +574,28 @@ module "firewall_policy_rule_collection_groups" {
       rule     = collection.rules
     }
   ]
+}
+
+resource "azurerm_virtual_network_peering" "aigw_to_foundry" {
+  name                      = "az-peer-dtx-aiplatform-aigw-to-foundry-dev-001"
+  resource_group_name       = module.resource_groups["aigw_rg"].name
+  virtual_network_name      = module.virtual_networks["aigw_vnet"].name
+  remote_virtual_network_id = module.virtual_networks["foundry_vnet"].resource_id
+
+  allow_virtual_network_access = true
+  allow_forwarded_traffic      = true
+  allow_gateway_transit        = false
+  use_remote_gateways          = false
+}
+
+resource "azurerm_virtual_network_peering" "foundry_to_aigw" {
+  name                      = "az-peer-dtx-aiplatform-foundry-to-aigw-dev-001"
+  resource_group_name       = module.resource_groups["foundry_rg"].name
+  virtual_network_name      = module.virtual_networks["foundry_vnet"].name
+  remote_virtual_network_id = module.virtual_networks["aigw_vnet"].resource_id
+
+  allow_virtual_network_access = true
+  allow_forwarded_traffic      = true
+  allow_gateway_transit        = false
+  use_remote_gateways          = false
 }

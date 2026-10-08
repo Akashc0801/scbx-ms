@@ -109,3 +109,17 @@ output "firewall_policy_rule_collection_groups" {
     }
   }
 }
+
+output "virtual_network_peerings" {
+  description = "AIGW and Foundry VNet peering names and IDs."
+  value = {
+    aigw_to_foundry = {
+      name = azurerm_virtual_network_peering.aigw_to_foundry.name
+      id   = azurerm_virtual_network_peering.aigw_to_foundry.id
+    }
+    foundry_to_aigw = {
+      name = azurerm_virtual_network_peering.foundry_to_aigw.name
+      id   = azurerm_virtual_network_peering.foundry_to_aigw.id
+    }
+  }
+}

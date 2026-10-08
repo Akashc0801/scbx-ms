@@ -639,7 +639,8 @@ route_tables = {
       default_to_internet = {
         name           = "default-to-internet"
         address_prefix = "0.0.0.0/0"
-        next_hop_type  = "Internet"
+        next_hop_type  = "VirtualAppliance"
+        firewall_key   = "aigw_firewall"
       }
     }
 
@@ -714,7 +715,8 @@ route_tables = {
       default_to_internet = {
         name           = "default-to-internet"
         address_prefix = "0.0.0.0/0"
-        next_hop_type  = "Internet"
+        next_hop_type  = "VirtualAppliance"
+        firewall_key   = "aigw_firewall"
       }
     }
 
@@ -1316,8 +1318,8 @@ firewall_policy_rule_collection_groups = {
         rules = [
           {
             name              = "dummy-allow-microsoft-https"
-            description       = "Dummy application rule: AIGW VNet to www.microsoft.com over HTTPS"
-            source_addresses  = ["10.0.0.0/22"]
+            description       = "Dummy application rule: AIGW and Foundry VNets to www.microsoft.com over HTTPS"
+            source_addresses  = ["10.0.0.0/22", "10.0.4.0/22"]
             destination_fqdns = ["www.microsoft.com"]
             protocols = [{
               type = "Https"
