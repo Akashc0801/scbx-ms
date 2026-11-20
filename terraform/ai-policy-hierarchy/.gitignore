@@ -1,0 +1,7 @@
+.terraform/
+terraform.tfvars
+*.tfplan
+*.tfstate
+*.tfstate.*
+policy-role-report.json
+crash.log

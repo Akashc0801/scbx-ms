@@ -1,0 +1,139 @@
+<mxfile host="app.diagrams.net" type="device">
+  <diagram id="azure-foundry-apim-multiregion-v3" name="Foundry Agent - Multi-region APIM Model Access v3">
+    <mxGraphModel dx="2760" dy="1700" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="2760" pageHeight="1700" math="0" shadow="0" background="#0B1220" adaptiveColors="none">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" value="Azure AI Foundry Agent Architecture" style="text;html=1;whiteSpace=wrap;fontFamily=Arial;fontSize=34;fontStyle=1;fontColor=#FFFFFF;align=left;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="50" y="35" width="2600" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="subtitle" value="Model Access Through API Management - Multi-region Architecture v3" style="text;html=1;whiteSpace=wrap;fontFamily=Arial;fontSize=23;fontColor=#FFFFFF;align=left;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="50" y="90" width="2600" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="intent" value="Southeast Asia agent environment | East US2 model deployment | APIM-only inference | Private cross-region model backend connectivity" style="text;html=1;whiteSpace=wrap;fontFamily=Arial;fontSize=16;fontColor=#FFFFFF;align=left;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="50" y="140" width="2600" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="foundry" value="Southeast Asia - Primary AI Foundry Environment" style="rounded=1;arcSize=5;container=1;collapsible=0;recursiveResize=0;whiteSpace=wrap;html=1;fillColor=#16172E;strokeColor=#A78BFA;strokeWidth=2;dashed=1;dashPattern=6 4;fontFamily=Arial;fontSize=21;fontStyle=1;fontColor=#FFFFFF;align=left;verticalAlign=top;spacingLeft=20;spacingTop=18;" vertex="1" parent="1">
+          <mxGeometry x="680" y="190" width="760" height="830" as="geometry" />
+        </mxCell>
+        <mxCell id="foundry-scope" value="Azure AI Foundry - primary managed service environment&lt;br&gt;Agent execution and AI Gateway connection source; outside the customer VNet" style="text;html=1;whiteSpace=wrap;fontFamily=Arial;fontSize=15;fontColor=#FFFFFF;align=left;verticalAlign=middle;" vertex="1" parent="foundry">
+          <mxGeometry x="20" y="70" width="710" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="caller" value="&lt;b&gt;Caller&lt;/b&gt;&lt;br&gt;&lt;br&gt;Application / Client&lt;br&gt;&lt;br&gt;Initiates agent requests" style="rounded=1;arcSize=8;whiteSpace=wrap;html=1;fillColor=#1E293B;strokeColor=#94A3B8;strokeWidth=2;fontFamily=Arial;fontSize=16;fontColor=#FFFFFF;align=left;verticalAlign=top;spacing=18;" vertex="1" parent="1">
+          <mxGeometry x="50" y="350" width="210" height="240" as="geometry" />
+        </mxCell>
+        <mxCell id="apim-agents" value="&lt;b&gt;APIM (agents API)&lt;/b&gt;&lt;br&gt;&lt;br&gt;Agent API entry point&lt;br&gt;&lt;br&gt;Authentication and&lt;br&gt;authorization&lt;br&gt;&lt;br&gt;Rate limiting and policies" style="rounded=1;arcSize=8;whiteSpace=wrap;html=1;fillColor=#0C3B68;strokeColor=#38A3FF;strokeWidth=2;fontFamily=Arial;fontSize=15;fontColor=#FFFFFF;align=left;verticalAlign=top;spacing=18;" vertex="1" parent="1">
+          <mxGeometry x="350" y="350" width="260" height="240" as="geometry" />
+        </mxCell>
+        <mxCell id="agent" value="&lt;b&gt;Hosted / Prompt Agent&lt;/b&gt;&lt;br&gt;&lt;br&gt;Agent execution and orchestration&lt;br&gt;Processes prompts and context&lt;br&gt;&lt;br&gt;Foundry Project Managed Identity&lt;br&gt;Microsoft Entra ID token to APIM&lt;br&gt;&lt;br&gt;Model inference uses the configured APIM endpoint only" style="rounded=1;arcSize=8;whiteSpace=wrap;html=1;fillColor=#362254;strokeColor=#B49AFF;strokeWidth=2;fontFamily=Arial;fontSize=16;fontColor=#FFFFFF;align=left;verticalAlign=top;spacing=18;" vertex="1" parent="foundry">
+          <mxGeometry x="20" y="160" width="680" height="240" as="geometry" />
+        </mxCell>
+        <mxCell id="connected-models" value="&lt;b&gt;Foundry Connected Model Configuration&lt;/b&gt;&lt;br&gt;Source: Azure API Management / AI Gateway&lt;br&gt;&lt;br&gt;APIM gateway base URL / model API endpoint&lt;br&gt;Model/deployment mapping and routing configuration&lt;br&gt;Authentication configuration&lt;br&gt;Connected model available to agent&lt;br&gt;&lt;br&gt;No direct model endpoint exposed to agent" style="rounded=1;arcSize=8;whiteSpace=wrap;html=1;fillColor=#103F32;strokeColor=#4ADE80;strokeWidth=2;fontFamily=Arial;fontSize=16;fontColor=#FFFFFF;align=left;verticalAlign=top;spacing=18;" vertex="1" parent="foundry">
+          <mxGeometry x="20" y="550" width="680" height="240" as="geometry" />
+        </mxCell>
+        <mxCell id="config-note" value="Logical configuration only - not a runtime hop" style="text;html=1;whiteSpace=wrap;fontFamily=Arial;fontSize=14;fontColor=#FFFFFF;align=center;verticalAlign=middle;" vertex="1" parent="foundry">
+          <mxGeometry x="20" y="795" width="680" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="apim-model" value="&lt;b&gt;APIM (model API)&lt;/b&gt;&lt;br&gt;Single Governed Model Access Layer&lt;br&gt;&lt;br&gt;Exposes model inference APIs&lt;br&gt;Validates Foundry project identity/token&lt;br&gt;Centralized model access policies&lt;br&gt;Token limits and quotas&lt;br&gt;Model routing&lt;br&gt;Monitoring and observability&lt;br&gt;&lt;br&gt;APIM Managed Identity for backend auth&lt;br&gt;Microsoft Entra ID + model inference RBAC" style="rounded=1;arcSize=8;whiteSpace=wrap;html=1;fillColor=#0C3B68;strokeColor=#38A3FF;strokeWidth=3;fontFamily=Arial;fontSize=15;fontColor=#FFFFFF;align=left;verticalAlign=top;spacing=18;" vertex="1" parent="1">
+          <mxGeometry x="1650" y="350" width="400" height="300" as="geometry" />
+        </mxCell>
+        <mxCell id="model-api-badge" value="ALL AGENT MODEL INFERENCE PASSES THROUGH APIM" style="rounded=1;arcSize=30;whiteSpace=wrap;html=1;fillColor=#123253;strokeColor=#38A3FF;fontFamily=Arial;fontSize=12;fontStyle=1;fontColor=#FFFFFF;align=center;verticalAlign=middle;spacing=5;" vertex="1" parent="1">
+          <mxGeometry x="1650" y="290" width="400" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="apim-scope" value="The two APIM boxes are logical API surfaces&lt;br&gt;of the same APIM instance; not separate resources.&lt;br&gt;APIM region / network placement: to be confirmed." style="text;html=1;whiteSpace=wrap;fontFamily=Arial;fontSize=14;fontColor=#FFFFFF;align=left;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="50" y="640" width="550" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="vnet" value="Customer Azure VNet&lt;br&gt;(Region to be confirmed)" style="rounded=1;arcSize=5;container=1;collapsible=0;recursiveResize=0;whiteSpace=wrap;html=1;fillColor=#102331;strokeColor=#22D3EE;strokeWidth=2;dashed=1;dashPattern=6 4;fontFamily=Arial;fontSize=20;fontStyle=1;fontColor=#FFFFFF;align=left;verticalAlign=top;spacingLeft=20;spacingTop=18;" vertex="1" parent="1">
+          <mxGeometry x="1660" y="760" width="460" height="530" as="geometry" />
+        </mxCell>
+        <mxCell id="endpoint-subnet" value="Private Endpoint subnet" style="rounded=1;arcSize=5;container=1;collapsible=0;recursiveResize=0;whiteSpace=wrap;html=1;fillColor=#102331;strokeColor=#278C9A;strokeWidth=1;fontFamily=Arial;fontSize=15;fontStyle=1;fontColor=#FFFFFF;align=left;verticalAlign=top;spacingLeft=16;spacingTop=15;" vertex="1" parent="vnet">
+          <mxGeometry x="30" y="100" width="400" height="350" as="geometry" />
+        </mxCell>
+        <mxCell id="private-endpoint" value="&lt;b&gt;Foundry Private Endpoint&lt;/b&gt;&lt;br&gt;&lt;br&gt;Private Endpoint IP in customer subnet&lt;br&gt;IP assigned by actual deployment&lt;br&gt;&lt;br&gt;Network interface / Private Link&lt;br&gt;Not an application or inference proxy&lt;br&gt;&lt;br&gt;Target: East US2 Foundry resource" style="rounded=1;arcSize=8;whiteSpace=wrap;html=1;fillColor=#073E4B;strokeColor=#22D3EE;strokeWidth=2;fontFamily=Arial;fontSize=15;fontColor=#FFFFFF;align=left;verticalAlign=top;spacing=16;" vertex="1" parent="endpoint-subnet">
+          <mxGeometry x="30" y="90" width="340" height="210" as="geometry" />
+        </mxCell>
+        <mxCell id="endpoint-location-note" value="Endpoint location follows the customer VNet/subnet;&lt;br&gt;it is not assumed to be East US2." style="text;html=1;whiteSpace=wrap;fontFamily=Arial;fontSize=13;fontColor=#FFFFFF;align=left;verticalAlign=middle;" vertex="1" parent="vnet">
+          <mxGeometry x="20" y="465" width="420" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="private-dns" value="&lt;b&gt;Private DNS Zone&lt;/b&gt; (logical VNet association)&lt;br&gt;&lt;br&gt;East US2 backend FQDN resolves to Private Endpoint IP.&lt;br&gt;Zone name depends on Foundry resource type and endpoint.&lt;br&gt;Confirm the zone, VNet links and DNS forwarding configuration." style="rounded=1;arcSize=8;whiteSpace=wrap;html=1;fillColor=#102331;strokeColor=#94A3B8;strokeWidth=2;fontFamily=Arial;fontSize=15;fontColor=#FFFFFF;align=left;verticalAlign=top;spacing=18;" vertex="1" parent="1">
+          <mxGeometry x="1660" y="1370" width="460" height="180" as="geometry" />
+        </mxCell>
+        <mxCell id="eastus2-region" value="East US2 - Foundry Model Deployment" style="rounded=1;arcSize=5;container=1;collapsible=0;recursiveResize=0;whiteSpace=wrap;html=1;fillColor=#16172E;strokeColor=#A78BFA;strokeWidth=2;dashed=1;dashPattern=6 4;fontFamily=Arial;fontSize=21;fontStyle=1;fontColor=#FFFFFF;align=left;verticalAlign=top;spacingLeft=20;spacingTop=18;" vertex="1" parent="1">
+          <mxGeometry x="2170" y="760" width="530" height="530" as="geometry" />
+        </mxCell>
+        <mxCell id="eastus2-resource" value="Azure AI Foundry Resource" style="rounded=1;arcSize=5;container=1;collapsible=0;recursiveResize=0;whiteSpace=wrap;html=1;fillColor=#201B35;strokeColor=#A78BFA;strokeWidth=1;fontFamily=Arial;fontSize=19;fontStyle=1;fontColor=#FFFFFF;align=left;verticalAlign=top;spacingLeft=18;spacingTop=16;" vertex="1" parent="eastus2-region">
+          <mxGeometry x="20" y="90" width="490" height="420" as="geometry" />
+        </mxCell>
+        <mxCell id="regional-scope" value="Separate from the Southeast Asia Foundry resource.&lt;br&gt;Managed service remains outside the customer VNet." style="text;html=1;whiteSpace=wrap;fontFamily=Arial;fontSize=14;fontColor=#FFFFFF;align=left;verticalAlign=middle;" vertex="1" parent="eastus2-resource">
+          <mxGeometry x="20" y="45" width="450" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="eastus2-models" value="&lt;b&gt;East US2 Foundry Models&lt;/b&gt;&lt;br&gt;&lt;br&gt;Model Deployment - hosted in East US2&lt;br&gt;Model inference endpoint&lt;br&gt;&lt;br&gt;Accessible through APIM only&lt;br&gt;Private backend connectivity&lt;br&gt;APIM Managed Identity authorized by inference RBAC" style="rounded=1;arcSize=8;whiteSpace=wrap;html=1;fillColor=#362254;strokeColor=#B49AFF;strokeWidth=2;fontFamily=Arial;fontSize=15;fontColor=#FFFFFF;align=left;verticalAlign=top;spacing=16;" vertex="1" parent="eastus2-resource">
+          <mxGeometry x="20" y="100" width="450" height="210" as="geometry" />
+        </mxCell>
+        <mxCell id="backend-security" value="Public network access disabled/restricted.&lt;br&gt;This inference path uses Private Link, not public internet.&lt;br&gt;Private connectivity does not replace identity / RBAC." style="text;html=1;whiteSpace=wrap;fontFamily=Arial;fontSize=14;fontColor=#FFFFFF;align=left;verticalAlign=middle;" vertex="1" parent="eastus2-resource">
+          <mxGeometry x="20" y="325" width="450" height="75" as="geometry" />
+        </mxCell>
+        <mxCell id="cross-region-note" value="Private Link supports a resource in another region.&lt;br&gt;VNet/Private Endpoint region and Foundry resource region&lt;br&gt;are independent deployment locations." style="text;html=1;whiteSpace=wrap;fontFamily=Arial;fontSize=15;fontColor=#FFFFFF;align=left;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="2170" y="1370" width="530" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="design-notes" value="&lt;b&gt;Architecture guardrails and network prerequisites&lt;/b&gt;&lt;br&gt;&lt;br&gt;All agent model inference passes through APIM. Connected Model Configuration references APIM; no direct agent-to-model access.&lt;br&gt;&lt;br&gt;&lt;b&gt;Identity A:&lt;/b&gt; Foundry Project Managed Identity sends a Microsoft Entra ID token to APIM. APIM validates and authorizes the project identity.&lt;br&gt;&lt;b&gt;Identity B:&lt;/b&gt; APIM Managed Identity authenticates to East US2 Foundry with Microsoft Entra ID; assign required model inference RBAC permissions. These are distinct identities.&lt;br&gt;&lt;br&gt;APIM requires private outbound network reachability to the Private Endpoint. Outbound VNet integration / injection is SKU-dependent.&lt;br&gt;If APIM and the endpoint use different VNets, provide VNet peering or equivalent private routing, appropriate DNS links/forwarding, and required NSG/firewall rules.&lt;br&gt;&lt;br&gt;Private DNS resolves the East US2 backend FQDN to the Private Endpoint IP. Confirm the DNS zone for the actual resource type and endpoint.&lt;br&gt;Backend public network access is disabled/restricted. No public internet path is used for model backend inference.&lt;br&gt;&lt;br&gt;APIM's agent-facing and model-facing APIs can share one APIM instance. Foundry managed services are outside the customer VNet.&lt;br&gt;Responses return through the corresponding runtime request path. Configuration and DNS association lines are not inference hops." style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;fillColor=#111E31;strokeColor=#334155;strokeWidth=1;fontFamily=Arial;fontSize=16;fontColor=#FFFFFF;align=left;verticalAlign=top;spacing=22;" vertex="1" parent="1">
+          <mxGeometry x="50" y="1080" width="1510" height="475" as="geometry" />
+        </mxCell>
+        <mxCell id="e-caller-agents" value="Agent request" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#38A3FF;strokeWidth=3;endArrow=block;endFill=1;fontFamily=Arial;fontSize=12;fontColor=#FFFFFF;labelBackgroundColor=#0B1220;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="caller" target="apim-agents">
+          <mxGeometry relative="1" as="geometry"><mxPoint x="0" y="-25" as="offset" /></mxGeometry>
+        </mxCell>
+        <mxCell id="e-agents-agent" value="Invoke agent" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#38A3FF;strokeWidth=3;endArrow=block;endFill=1;fontFamily=Arial;fontSize=12;fontColor=#FFFFFF;labelBackgroundColor=#0B1220;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="apim-agents" target="agent">
+          <mxGeometry relative="1" as="geometry"><mxPoint x="0" y="-25" as="offset" /></mxGeometry>
+        </mxCell>
+        <mxCell id="e-agent-config" value="Uses connected model" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#4ADE80;strokeWidth=2;dashed=1;dashPattern=1 4;endArrow=block;endFill=1;fontFamily=Arial;fontSize=14;fontColor=#FFFFFF;labelBackgroundColor=#16172E;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="foundry" source="agent" target="connected-models">
+          <mxGeometry relative="1" as="geometry"><mxPoint x="110" y="0" as="offset" /></mxGeometry>
+        </mxCell>
+        <mxCell id="e-config-apim" value="Configured Gateway Endpoint (APIM)" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;whiteSpace=wrap;labelWidth=250;strokeColor=#4ADE80;strokeWidth=3;dashed=1;dashPattern=1 4;endArrow=block;endFill=1;fontFamily=Arial;fontSize=14;fontColor=#FFFFFF;labelBackgroundColor=#0B1220;exitX=1;exitY=0.5;entryX=0.2;entryY=1;" edge="1" parent="1" source="connected-models" target="apim-model">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points"><mxPoint x="1730" y="860" /></Array>
+            <mxPoint x="-140" y="-30" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e-agent-model-runtime" value="Runtime model inference via configured APIM endpoint&lt;br&gt;Foundry Project MI / Entra ID token" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;whiteSpace=wrap;labelWidth=230;strokeColor=#38A3FF;strokeWidth=3;endArrow=block;endFill=1;fontFamily=Arial;fontSize=14;fontColor=#FFFFFF;labelBackgroundColor=#0B1220;exitX=1;exitY=0.5;entryX=0;entryY=0.4;" edge="1" parent="1" source="agent" target="apim-model">
+          <mxGeometry relative="1" as="geometry"><mxPoint x="0" y="-60" as="offset" /></mxGeometry>
+        </mxCell>
+        <mxCell id="e-apim-private-endpoint" value="Private model backend connectivity&lt;br&gt;APIM Managed Identity / Entra ID" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;whiteSpace=wrap;labelWidth=250;strokeColor=#22D3EE;strokeWidth=3;endArrow=block;endFill=1;fontFamily=Arial;fontSize=14;fontColor=#FFFFFF;labelBackgroundColor=#0B1220;exitX=0.6;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="apim-model" target="private-endpoint">
+          <mxGeometry relative="1" as="geometry"><mxPoint x="150" y="-100" as="offset" /></mxGeometry>
+        </mxCell>
+        <mxCell id="e-private-eastus2" value="Cross-region&lt;br&gt;Private Link" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#22D3EE;strokeWidth=3;endArrow=block;endFill=1;fontFamily=Arial;fontSize=13;fontColor=#FFFFFF;labelBackgroundColor=#0B1220;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="private-endpoint" target="eastus2-models">
+          <mxGeometry relative="1" as="geometry"><mxPoint x="0" y="-35" as="offset" /></mxGeometry>
+        </mxCell>
+        <mxCell id="e-dns-vnet" value="VNet link / DNS resolution" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#94A3B8;strokeWidth=2;dashed=1;dashPattern=6 4;endArrow=none;fontFamily=Arial;fontSize=13;fontColor=#FFFFFF;labelBackgroundColor=#0B1220;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="vnet" target="private-dns">
+          <mxGeometry relative="1" as="geometry"><mxPoint x="120" y="0" as="offset" /></mxGeometry>
+        </mxCell>
+        <mxCell id="legend-title" value="LEGEND" style="text;html=1;fontFamily=Arial;fontSize=13;fontStyle=1;fontColor=#FFFFFF;align=left;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="50" y="1610" width="90" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="legend-runtime-arrow" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#38A3FF;strokeWidth=3;endArrow=block;endFill=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry"><mxPoint x="160" y="1625" as="sourcePoint" /><mxPoint x="240" y="1625" as="targetPoint" /></mxGeometry>
+        </mxCell>
+        <mxCell id="legend-runtime-text" value="Solid Blue = Runtime API / Model Inference" style="text;html=1;whiteSpace=wrap;fontFamily=Arial;fontSize=15;fontColor=#FFFFFF;align=left;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="260" y="1605" width="460" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="legend-logical-arrow" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#4ADE80;strokeWidth=3;dashed=1;dashPattern=1 4;endArrow=block;endFill=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry"><mxPoint x="750" y="1625" as="sourcePoint" /><mxPoint x="830" y="1625" as="targetPoint" /></mxGeometry>
+        </mxCell>
+        <mxCell id="legend-logical-text" value="Dotted Green = Logical Configuration" style="text;html=1;whiteSpace=wrap;fontFamily=Arial;fontSize=15;fontColor=#FFFFFF;align=left;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="850" y="1605" width="420" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="legend-private-arrow" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#22D3EE;strokeWidth=3;endArrow=block;endFill=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry"><mxPoint x="1300" y="1625" as="sourcePoint" /><mxPoint x="1380" y="1625" as="targetPoint" /></mxGeometry>
+        </mxCell>
+        <mxCell id="legend-private-text" value="Solid Cyan = Private Backend Connectivity" style="text;html=1;whiteSpace=wrap;fontFamily=Arial;fontSize=15;fontColor=#FFFFFF;align=left;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="1400" y="1605" width="470" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="legend-dns-line" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#94A3B8;strokeWidth=2;dashed=1;dashPattern=6 4;endArrow=none;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry"><mxPoint x="1900" y="1625" as="sourcePoint" /><mxPoint x="1980" y="1625" as="targetPoint" /></mxGeometry>
+        </mxCell>
+        <mxCell id="legend-dns-text" value="Dashed Gray = DNS / VNet Association" style="text;html=1;whiteSpace=wrap;fontFamily=Arial;fontSize=15;fontColor=#FFFFFF;align=left;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="2000" y="1605" width="640" height="40" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

@@ -201,3 +201,14 @@ module "individual_policy" {
 | <a name="output_role_assignment_ids"></a> [role\_assignment\_ids](#output\_role\_assignment\_ids) | The ID(s) of the Role Assignment(s). |
 
 <!-- END_TF_DOCS -->
+
+## Detailed identity role reporting
+
+`identity_role_assignments` reports the actual ARM remediation grants with their
+role assignment IDs, role definition IDs, principal IDs, and scopes. It is empty
+when `assign_identity` is false. Existing outputs remain unchanged.
+
+`enable_role_assignment_telemetry` controls the nested role module's telemetry
+and defaults to true for compatibility; set it to false to disable telemetry.
+Policy identity grants specify `ServicePrincipal` and skip the Entra principal
+replication check so a newly created system identity can receive its roles.

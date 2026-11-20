@@ -1,0 +1,286 @@
+<mxfile host="app.diagrams.net" version="24.7.17" type="device">
+  <diagram id="centralized-docs" name="Centralized Documentation Portal">
+    <mxGraphModel dx="2550" dy="1480" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="2550" pageHeight="1480" math="0" shadow="0" background="#FFFFFF" adaptiveColors="auto">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        <mxCell id="title" value="Centralized Documentation Portal — Distributed Contribution, Centralized Publishing" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontFamily=Segoe UI;fontSize=30;fontStyle=1;fontColor=#172B4D;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="35" y="24" width="2470" height="48" as="geometry"/>
+        </mxCell>
+        <mxCell id="subtitle" value="One repository, multiple team contributors, governed pull requests, and a single centrally managed publishing pipeline." style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontFamily=Segoe UI;fontSize=18;fontColor=#57677D;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="35" y="76" width="2470" height="34" as="geometry"/>
+        </mxCell>
+        <mxCell id="principle" value="DISTRIBUTED CONTENT OWNERSHIP  +  CENTRALIZED REPOSITORY GOVERNANCE  +  CENTRALIZED PUBLISHING" style="rounded=1;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;fontFamily=Segoe UI;fontSize=18;fontStyle=1;fontColor=#FFFFFF;fillColor=#243B63;strokeColor=#243B63;strokeWidth=1.5;spacing=8;" vertex="1" parent="1">
+          <mxGeometry x="35" y="122" width="2470" height="42" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="github" value="DATAX GITHUB ORGANIZATION  |  CENTRAL DOCUMENTATION" style="swimlane;html=1;startSize=42;horizontal=1;whiteSpace=wrap;rounded=1;arcSize=12;fillColor=#F0F3FF;swimlaneFillColor=#DCE3FA;strokeColor=#6254B5;strokeWidth=1.6;fontFamily=Segoe UI;fontSize=17;fontStyle=1;fontColor=#303276;align=left;spacingLeft=14;collapsible=0;" vertex="1" parent="1">
+          <mxGeometry x="30" y="190" width="1080" height="770" as="geometry"/>
+        </mxCell>
+        <mxCell id="gh-datax" value="DataX Contributors&lt;br&gt;&lt;font color=&quot;#6254B5&quot;&gt; /datax/ &lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;fontFamily=Segoe UI;fontSize=15;fontStyle=1;fontColor=#172B4D;fillColor=#FFFFFF;strokeColor=#6254B5;strokeWidth=1.3;spacing=7;" vertex="1" parent="github">
+          <mxGeometry x="22" y="62" width="248" height="64" as="geometry"/>
+        </mxCell>
+        <mxCell id="gh-scb" value="SCB Contributors&lt;br&gt;&lt;font color=&quot;#6254B5&quot;&gt; /scb/ &lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;fontFamily=Segoe UI;fontSize=15;fontStyle=1;fontColor=#172B4D;fillColor=#FFFFFF;strokeColor=#6254B5;strokeWidth=1.3;spacing=7;" vertex="1" parent="github">
+          <mxGeometry x="280" y="62" width="248" height="64" as="geometry"/>
+        </mxCell>
+        <mxCell id="gh-cardx" value="CardX Contributors&lt;br&gt;&lt;font color=&quot;#6254B5&quot;&gt; /cardx/ &lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;fontFamily=Segoe UI;fontSize=15;fontStyle=1;fontColor=#172B4D;fillColor=#FFFFFF;strokeColor=#6254B5;strokeWidth=1.3;spacing=7;" vertex="1" parent="github">
+          <mxGeometry x="538" y="62" width="248" height="64" as="geometry"/>
+        </mxCell>
+        <mxCell id="gh-other" value="Other PortCo Contributors&lt;br&gt;&lt;font color=&quot;#6254B5&quot;&gt; /&amp;lt;portco&amp;gt;/ &lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;fontFamily=Segoe UI;fontSize=15;fontStyle=1;fontColor=#172B4D;fillColor=#FFFFFF;strokeColor=#6254B5;strokeWidth=1.3;spacing=7;" vertex="1" parent="github">
+          <mxGeometry x="796" y="62" width="260" height="64" as="geometry"/>
+        </mxCell>
+        <mxCell id="gh-authorized" value="Only nominated / authorized contributors receive access to the central repository. GitHub permissions only — no Azure Storage permissions." style="rounded=1;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;fontFamily=Segoe UI;fontSize=14;fontStyle=1;fontColor=#4A2869;fillColor=#F6F1FF;strokeColor=#9B80C5;strokeWidth=1.2;dashed=1;spacing=8;" vertex="1" parent="github">
+          <mxGeometry x="22" y="138" width="1034" height="42" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="repo-frame" value="ONE CENTRAL DOCUMENTATION REPOSITORY" style="swimlane;html=1;startSize=36;horizontal=1;whiteSpace=wrap;rounded=1;arcSize=8;fillColor=#FFFFFF;swimlaneFillColor=#EEF1FF;strokeColor=#6254B5;strokeWidth=1.4;fontFamily=Segoe UI;fontSize=15;fontStyle=1;fontColor=#303276;align=left;spacingLeft=10;collapsible=0;" vertex="1" parent="github">
+          <mxGeometry x="22" y="198" width="410" height="500" as="geometry"/>
+        </mxCell>
+        <mxCell id="repo-main" value="Zudoku Documentation Portal&lt;br&gt;&lt;br&gt;/  landing page&lt;br&gt;/datax/  |  /scb/&lt;br&gt;/cardx/  |  /autox/&lt;br&gt;/other-portco/&lt;br&gt;&lt;br&gt;Shared assets&lt;br&gt;Shared navigation  |  shared theme&lt;br&gt;Common documentation configuration" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;fontFamily=Segoe UI;fontSize=14;fontColor=#172B4D;fillColor=#FFFFFF;strokeColor=#8C9ADD;strokeWidth=1.2;spacing=12;" vertex="1" parent="repo-frame">
+          <mxGeometry x="16" y="50" width="378" height="250" as="geometry"/>
+        </mxCell>
+        <mxCell id="repo-policy" value="CODEOWNERS  |  Branch protection&lt;br&gt;Required reviewers&lt;br&gt;Central Platform Team ownership" style="rounded=1;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;fontFamily=Segoe UI;fontSize=13;fontColor=#303276;fillColor=#EEF1FF;strokeColor=#8C9ADD;strokeWidth=1.1;spacing=8;" vertex="1" parent="repo-frame">
+          <mxGeometry x="16" y="308" width="378" height="68" as="geometry"/>
+        </mxCell>
+        <mxCell id="repo-workflow" value="TEAM CONTRIBUTION WORKFLOW&lt;br&gt;Feature branch → Update team folder → Create Pull Request&lt;br&gt;DataX → /datax/  |  SCB → /scb/&lt;br&gt;CardX → /cardx/  |  AutoX → /autox/" style="rounded=1;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;fontFamily=Segoe UI;fontSize=13;fontStyle=1;fontColor=#4A2869;fillColor=#F6F1FF;strokeColor=#9B80C5;strokeWidth=1.2;spacing=8;" vertex="1" parent="repo-frame">
+          <mxGeometry x="16" y="388" width="378" height="88" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="gates-frame" value="PR GOVERNANCE &amp; QUALITY GATES" style="swimlane;html=1;startSize=36;horizontal=1;whiteSpace=wrap;rounded=1;arcSize=8;fillColor=#FFF9F1;swimlaneFillColor=#F8E8CF;strokeColor=#CB852F;strokeWidth=1.4;fontFamily=Segoe UI;fontSize=14;fontStyle=1;fontColor=#75430F;align=left;spacingLeft=9;collapsible=0;" vertex="1" parent="github">
+          <mxGeometry x="452" y="198" width="274" height="500" as="geometry"/>
+        </mxCell>
+        <mxCell id="gate-pr" value="Pull Request" style="rounded=1;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;fontFamily=Segoe UI;fontSize=14;fontStyle=1;fontColor=#75430F;fillColor=#FFFFFF;strokeColor=#D6A261;strokeWidth=1.1;spacing=7;" vertex="1" parent="gates-frame">
+          <mxGeometry x="14" y="52" width="246" height="44" as="geometry"/>
+        </mxCell>
+        <mxCell id="gate-checks" value="Automated validation&lt;br&gt;Zudoku build  |  Link check&lt;br&gt;Optional security scan" style="rounded=1;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;fontFamily=Segoe UI;fontSize=12;fontColor=#75430F;fillColor=#FFFFFF;strokeColor=#D6A261;strokeWidth=1.1;spacing=6;" vertex="1" parent="gates-frame">
+          <mxGeometry x="14" y="108" width="246" height="68" as="geometry"/>
+        </mxCell>
+        <mxCell id="gate-codeowners" value="CODEOWNERS review" style="rounded=1;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;fontFamily=Segoe UI;fontSize=13;fontColor=#75430F;fillColor=#FFFFFF;strokeColor=#D6A261;strokeWidth=1.1;spacing=7;" vertex="1" parent="gates-frame">
+          <mxGeometry x="14" y="188" width="246" height="46" as="geometry"/>
+        </mxCell>
+        <mxCell id="gate-approval" value="Central team approval&lt;br&gt;Required reviewers + branch protection" style="rounded=1;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;fontFamily=Segoe UI;fontSize=12;fontStyle=1;fontColor=#75430F;fillColor=#FFF1D8;strokeColor=#CB852F;strokeWidth=1.2;spacing=6;" vertex="1" parent="gates-frame">
+          <mxGeometry x="14" y="246" width="246" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="gate-merge" value="MERGE TO MAIN&lt;br&gt;Only after required checks pass" style="rounded=1;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;fontFamily=Segoe UI;fontSize=13;fontStyle=1;fontColor=#FFFFFF;fillColor=#CB852F;strokeColor=#A76B22;strokeWidth=1.2;spacing=7;" vertex="1" parent="gates-frame">
+          <mxGeometry x="14" y="318" width="246" height="58" as="geometry"/>
+        </mxCell>
+        <mxCell id="gate-callout" value="Reviewed + validated changes only" style="rounded=1;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;fontFamily=Segoe UI;fontSize=12;fontStyle=1;fontColor=#75430F;fillColor=#FFFFFF;strokeColor=#D6A261;strokeWidth=1;dashed=1;spacing=7;" vertex="1" parent="gates-frame">
+          <mxGeometry x="14" y="406" width="246" height="46" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="pipeline-frame" value="ONE CENTRAL GITHUB ACTIONS PIPELINE" style="swimlane;html=1;startSize=36;horizontal=1;whiteSpace=wrap;rounded=1;arcSize=8;fillColor=#F3F7FF;swimlaneFillColor=#DCE8F9;strokeColor=#3972B5;strokeWidth=1.4;fontFamily=Segoe UI;fontSize=13;fontStyle=1;fontColor=#17365D;align=left;spacingLeft=8;collapsible=0;" vertex="1" parent="github">
+          <mxGeometry x="746" y="198" width="310" height="500" as="geometry"/>
+        </mxCell>
+        <mxCell id="p-trigger" value="Trigger: merge to main" style="rounded=1;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;fontFamily=Segoe UI;fontSize=12;fontStyle=1;fontColor=#17365D;fillColor=#FFFFFF;strokeColor=#6D95C8;strokeWidth=1.1;spacing=6;" vertex="1" parent="pipeline-frame">
+          <mxGeometry x="14" y="50" width="282" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="p-build" value="Build complete Zudoku site" style="rounded=1;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;fontFamily=Segoe UI;fontSize=12;fontColor=#17365D;fillColor=#FFFFFF;strokeColor=#6D95C8;strokeWidth=1.1;spacing=6;" vertex="1" parent="pipeline-frame">
+          <mxGeometry x="14" y="98" width="282" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="p-validate" value="Validate site" style="rounded=1;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;fontFamily=Segoe UI;fontSize=12;fontColor=#17365D;fillColor=#FFFFFF;strokeColor=#6D95C8;strokeWidth=1.1;spacing=6;" vertex="1" parent="pipeline-frame">
+          <mxGeometry x="14" y="146" width="282" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="p-package" value="Package static content" style="rounded=1;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;fontFamily=Segoe UI;fontSize=12;fontColor=#17365D;fillColor=#FFFFFF;strokeColor=#6D95C8;strokeWidth=1.1;spacing=6;" vertex="1" parent="pipeline-frame">
+          <mxGeometry x="14" y="194" width="282" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="p-auth" value="Authenticate to Azure&lt;br&gt;GitHub OIDC token — no stored secrets" style="rounded=1;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;fontFamily=Segoe UI;fontSize=12;fontColor=#75430F;fillColor=#FFF3E8;strokeColor=#D49356;strokeWidth=1.1;spacing=6;" vertex="1" parent="pipeline-frame">
+          <mxGeometry x="14" y="242" width="282" height="52" as="geometry"/>
+        </mxCell>
+        <mxCell id="p-publish" value="PUBLISH COMPLETE DOCUMENTATION PORTAL" style="rounded=1;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;fontFamily=Segoe UI;fontSize=12;fontStyle=1;fontColor=#FFFFFF;fillColor=#3972B5;strokeColor=#28588F;strokeWidth=1.2;spacing=6;" vertex="1" parent="pipeline-frame">
+          <mxGeometry x="14" y="302" width="282" height="48" as="geometry"/>
+        </mxCell>
+        <mxCell id="p-owner" value="Owner: Central Documentation / Platform Team&lt;br&gt;ONLY pipeline with Azure Storage write access" style="rounded=1;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;fontFamily=Segoe UI;fontSize=11;fontStyle=1;fontColor=#17365D;fillColor=#E8F0FB;strokeColor=#6D95C8;strokeWidth=1.1;spacing=7;" vertex="1" parent="pipeline-frame">
+          <mxGeometry x="14" y="366" width="282" height="70" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="gh-edge1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#8E65B5;strokeWidth=2;dashed=1;dashPattern=7 5;endArrow=block;endFill=1;" edge="1" parent="github" source="gh-authorized" target="repo-workflow">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="gh-edge2" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#8E65B5;strokeWidth=2;dashed=1;dashPattern=7 5;endArrow=block;endFill=1;" edge="1" parent="github" source="repo-workflow" target="gate-pr">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="g-edge1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#CB852F;strokeWidth=1.7;endArrow=block;endFill=1;" edge="1" parent="gates-frame" source="gate-pr" target="gate-checks">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="g-edge2" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#CB852F;strokeWidth=1.7;endArrow=block;endFill=1;" edge="1" parent="gates-frame" source="gate-checks" target="gate-codeowners">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="g-edge3" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#CB852F;strokeWidth=1.7;endArrow=block;endFill=1;" edge="1" parent="gates-frame" source="gate-codeowners" target="gate-approval">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="g-edge4" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#CB852F;strokeWidth=1.7;endArrow=block;endFill=1;" edge="1" parent="gates-frame" source="gate-approval" target="gate-merge">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="p-edge1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#3972B5;strokeWidth=1.8;endArrow=block;endFill=1;" edge="1" parent="pipeline-frame" source="p-trigger" target="p-build">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="p-edge2" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#3972B5;strokeWidth=1.8;endArrow=block;endFill=1;" edge="1" parent="pipeline-frame" source="p-build" target="p-validate">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="p-edge3" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#3972B5;strokeWidth=1.8;endArrow=block;endFill=1;" edge="1" parent="pipeline-frame" source="p-validate" target="p-package">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="p-edge4" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#3972B5;strokeWidth=1.8;endArrow=block;endFill=1;" edge="1" parent="pipeline-frame" source="p-package" target="p-auth">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="p-edge5" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#3972B5;strokeWidth=1.8;endArrow=block;endFill=1;" edge="1" parent="pipeline-frame" source="p-auth" target="p-publish">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="p-main-edge" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#3972B5;strokeWidth=2;endArrow=block;endFill=1;" edge="1" parent="github" source="gate-merge" target="p-trigger">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="azure" value="DATAX TENANT  |  DOCUMENTATION HOSTING — AI PLATFORM SPOKE" style="swimlane;html=1;startSize=42;horizontal=1;whiteSpace=wrap;rounded=1;arcSize=12;fillColor=#F7F9FB;swimlaneFillColor=#E5EBF1;strokeColor=#52677D;strokeWidth=1.6;fontFamily=Segoe UI;fontSize=16;fontStyle=1;fontColor=#273B50;align=left;spacingLeft=14;collapsible=0;" vertex="1" parent="1">
+          <mxGeometry x="1130" y="190" width="760" height="770" as="geometry"/>
+        </mxCell>
+        <mxCell id="az-entra" value="MICROSOFT ENTRA ID  |  FEDERATED CREDENTIAL&lt;br&gt;Trusts the central repository's GitHub OIDC token — no stored secrets&lt;br&gt;Federated identity authentication" style="rounded=1;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;fontFamily=Segoe UI;fontSize=14;fontColor=#75430F;fillColor=#FFF8EE;strokeColor=#D57A22;strokeWidth=1.4;spacing=8;" vertex="1" parent="azure">
+          <mxGeometry x="24" y="62" width="712" height="82" as="geometry"/>
+        </mxCell>
+        <mxCell id="az-storage-frame" value="AZURE STORAGE ACCOUNT  |  STATIC WEBSITE  |  $web" style="swimlane;html=1;startSize=38;horizontal=1;whiteSpace=wrap;rounded=1;arcSize=8;fillColor=#FFFFFF;swimlaneFillColor=#F0F3F7;strokeColor=#52677D;strokeWidth=1.5;fontFamily=Segoe UI;fontSize=15;fontStyle=1;fontColor=#273B50;align=left;spacingLeft=10;collapsible=0;" vertex="1" parent="azure">
+          <mxGeometry x="24" y="170" width="712" height="442" as="geometry"/>
+        </mxCell>
+        <mxCell id="az-folders" value="$web CONTENTS&lt;br&gt;&lt;br&gt;/                 Landing page&lt;br&gt;/datax/       DataX documentation&lt;br&gt;/scb/           SCB documentation&lt;br&gt;/cardx/         CardX documentation&lt;br&gt;/autox/         AutoX documentation&lt;br&gt;/other-portco/  Other team documentation" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;fontFamily=Segoe UI;fontSize=13;fontColor=#273B50;fillColor=#F1F3FF;strokeColor=#7E8DE0;strokeWidth=1.2;spacing=10;" vertex="1" parent="az-storage-frame">
+          <mxGeometry x="14" y="50" width="350" height="276" as="geometry"/>
+        </mxCell>
+        <mxCell id="az-hardening" value="STORAGE HARDENING&lt;br&gt;&lt;br&gt;Public network access disabled&lt;br&gt;Shared key access disabled&lt;br&gt;Private Endpoint only&lt;br&gt;Defender for Storage&lt;br&gt;Soft Delete  |  Blob Versioning&lt;br&gt;Diagnostic Settings" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;fontFamily=Segoe UI;fontSize=12;fontColor=#273B50;fillColor=#FFFFFF;strokeColor=#97A6B6;strokeWidth=1.1;spacing=9;" vertex="1" parent="az-storage-frame">
+          <mxGeometry x="380" y="50" width="318" height="276" as="geometry"/>
+        </mxCell>
+        <mxCell id="az-publish-note" value="ONE central publishing identity has Storage Blob Data Contributor via least-privilege Azure RBAC. No per-team or per-folder write grants." style="rounded=1;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;fontFamily=Segoe UI;fontSize=12;fontStyle=1;fontColor=#245331;fillColor=#EAF5EC;strokeColor=#6FA37B;strokeWidth=1.2;spacing=8;" vertex="1" parent="az-storage-frame">
+          <mxGeometry x="14" y="340" width="684" height="76" as="geometry"/>
+        </mxCell>
+        <mxCell id="az-rbac" value="AZURE RBAC&lt;br&gt;Least privilege&lt;br&gt;Storage Blob Data Contributor&lt;br&gt;Central publishing identity only" style="rounded=1;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;fontFamily=Segoe UI;fontSize=12;fontStyle=1;fontColor=#75430F;fillColor=#FFF3E8;strokeColor=#D57A22;strokeWidth=1.2;spacing=7;" vertex="1" parent="azure">
+          <mxGeometry x="422" y="636" width="314" height="82" as="geometry"/>
+        </mxCell>
+        <mxCell id="az-private-endpoint" value="PRIVATE ENDPOINT (web)&lt;br&gt;Private Link FQDN&lt;br&gt;privatelink.web.core.windows.net" style="rounded=1;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;fontFamily=Segoe UI;fontSize=13;fontStyle=1;fontColor=#155B53;fillColor=#EAF7F3;strokeColor=#258276;strokeWidth=1.3;spacing=7;" vertex="1" parent="azure">
+          <mxGeometry x="24" y="654" width="370" height="76" as="geometry"/>
+        </mxCell>
+        <mxCell id="az-logs" value="LOG ANALYTICS&lt;br&gt;Storage diagnostic settings&lt;br&gt;Reads  |  Writes  |  Publishing operations" style="rounded=1;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;fontFamily=Segoe UI;fontSize=12;fontColor=#4B5563;fillColor=#F3F4F6;strokeColor=#9CA3AF;strokeWidth=1.1;spacing=7;" vertex="1" parent="azure">
+          <mxGeometry x="422" y="756" width="314" height="54" as="geometry"/>
+        </mxCell>
+        <mxCell id="az-deploy-edge" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#3972B5;strokeWidth=3;endArrow=block;endFill=1;" edge="1" parent="1" source="p-publish" target="az-folders">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="az-oidc-edge" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#D57A22;strokeWidth=2;dashed=1;dashPattern=7 5;endArrow=block;endFill=1;" edge="1" parent="1" source="p-auth" target="az-entra">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="az-entra-rbac" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#D57A22;strokeWidth=2;dashed=1;dashPattern=7 5;endArrow=block;endFill=1;" edge="1" parent="azure" source="az-entra" target="az-rbac">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="az-rbac-storage" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#D57A22;strokeWidth=2;dashed=1;dashPattern=7 5;endArrow=block;endFill=1;" edge="1" parent="azure" source="az-rbac" target="az-folders">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="az-pe-storage" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#3A9D63;strokeWidth=2.5;endArrow=block;endFill=1;" edge="1" parent="azure" source="az-private-endpoint" target="az-folders">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="az-diagnostics" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#8B929B;strokeWidth=1.8;dashed=1;dashPattern=5 5;endArrow=block;endFill=1;" edge="1" parent="azure" source="az-folders" target="az-logs">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="access" value="ACCESS PATH  |  INTERNAL NETWORK ONLY" style="swimlane;html=1;startSize=42;horizontal=1;whiteSpace=wrap;rounded=1;arcSize=12;fillColor=#EFF9FF;swimlaneFillColor=#D9EFFB;strokeColor=#1689B5;strokeWidth=1.6;fontFamily=Segoe UI;fontSize=16;fontStyle=1;fontColor=#08618A;align=left;spacingLeft=14;collapsible=0;" vertex="1" parent="1">
+          <mxGeometry x="1910" y="190" width="610" height="770" as="geometry"/>
+        </mxCell>
+        <mxCell id="r-readers" value="READERS&lt;br&gt;DataX, SCB, CardX and other internal staff&lt;br&gt;Corporate network" style="rounded=1;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;fontFamily=Segoe UI;fontSize=14;fontStyle=1;fontColor=#155B53;fillColor=#FFFFFF;strokeColor=#258276;strokeWidth=1.3;spacing=7;" vertex="1" parent="access">
+          <mxGeometry x="24" y="66" width="562" height="68" as="geometry"/>
+        </mxCell>
+        <mxCell id="r-vwan" value="vWAN SECURED HUB&lt;br&gt;Azure Firewall  |  DNS Private Resolver" style="rounded=1;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;fontFamily=Segoe UI;fontSize=14;fontColor=#155B53;fillColor=#FFFFFF;strokeColor=#258276;strokeWidth=1.3;spacing=7;" vertex="1" parent="access">
+          <mxGeometry x="24" y="178" width="562" height="74" as="geometry"/>
+        </mxCell>
+        <mxCell id="r-appgw" value="APPLICATION GATEWAY + WAF&lt;br&gt;docs.&amp;lt;domain&amp;gt;  |  Internal TLS certificate&lt;br&gt;Optional Entra sign-in" style="rounded=1;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;fontFamily=Segoe UI;fontSize=14;fontStyle=1;fontColor=#155B53;fillColor=#FFFFFF;strokeColor=#258276;strokeWidth=1.4;spacing=7;" vertex="1" parent="access">
+          <mxGeometry x="24" y="298" width="562" height="90" as="geometry"/>
+        </mxCell>
+        <mxCell id="r-privatelink" value="PRIVATE LINK&lt;br&gt;HTTPS via the Storage Account Private Endpoint" style="rounded=1;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;fontFamily=Segoe UI;fontSize=14;fontColor=#155B53;fillColor=#EAF7F3;strokeColor=#65A99E;strokeWidth=1.2;spacing=7;" vertex="1" parent="access">
+          <mxGeometry x="24" y="442" width="562" height="72" as="geometry"/>
+        </mxCell>
+        <mxCell id="r-static-site" value="STATIC DOCUMENTATION PORTAL&lt;br&gt;Served from the $web static website" style="rounded=1;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;fontFamily=Segoe UI;fontSize=14;fontStyle=1;fontColor=#FFFFFF;fillColor=#258276;strokeColor=#155B53;strokeWidth=1.4;spacing=7;" vertex="1" parent="access">
+          <mxGeometry x="24" y="566" width="562" height="70" as="geometry"/>
+        </mxCell>
+        <mxCell id="r-internal-only" value="INTERNAL NETWORK ACCESS ONLY" style="rounded=1;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;fontFamily=Segoe UI;fontSize=14;fontStyle=1;fontColor=#155B53;fillColor=#D5EEE8;strokeColor=#65A99E;strokeWidth=1.2;spacing=7;" vertex="1" parent="access">
+          <mxGeometry x="24" y="686" width="562" height="46" as="geometry"/>
+        </mxCell>
+        <mxCell id="r-edge1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#3A9D63;strokeWidth=2.3;endArrow=block;endFill=1;" edge="1" parent="access" source="r-readers" target="r-vwan">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="r-edge2" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#3A9D63;strokeWidth=2.3;endArrow=block;endFill=1;" edge="1" parent="access" source="r-vwan" target="r-appgw">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="r-edge3" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#3A9D63;strokeWidth=2.3;endArrow=block;endFill=1;" edge="1" parent="access" source="r-appgw" target="r-privatelink">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="r-edge4" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#3A9D63;strokeWidth=2.3;endArrow=block;endFill=1;" edge="1" parent="access" source="r-privatelink" target="r-static-site">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="r-to-pe" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#3A9D63;strokeWidth=2.8;endArrow=block;endFill=1;" edge="1" parent="1" source="r-privatelink" target="az-private-endpoint">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="ownership" value="OWNERSHIP&lt;br&gt;&lt;br&gt;PortCo teams own their documentation content and contribute changes through Pull Requests.&lt;br&gt;&lt;br&gt;The Central Documentation / Platform Team owns repository governance, shared configuration, publishing automation, and Azure hosting." style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;fontFamily=Segoe UI;fontSize=14;fontColor=#172B4D;fillColor=#F2F4F7;strokeColor=#AEB8C5;strokeWidth=1.2;spacing=12;" vertex="1" parent="1">
+          <mxGeometry x="30" y="990" width="480" height="220" as="geometry"/>
+        </mxCell>
+        <mxCell id="contribution" value="CONTRIBUTION&lt;br&gt;&lt;br&gt;Authorized contributors from multiple teams update their respective documentation folders through feature branches and Pull Requests.&lt;br&gt;&lt;br&gt;Teams do not publish directly to Azure." style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;fontFamily=Segoe UI;fontSize=14;fontColor=#4A2869;fillColor=#F7F1FF;strokeColor=#B596D0;strokeWidth=1.2;spacing=12;" vertex="1" parent="1">
+          <mxGeometry x="530" y="990" width="480" height="220" as="geometry"/>
+        </mxCell>
+        <mxCell id="governance-model" value="GOVERNANCE&lt;br&gt;&lt;br&gt;CODEOWNERS, branch protection, required reviewers, automated validation, and central approval ensure documentation quality and consistency.&lt;br&gt;&lt;br&gt;Merge to main only after required checks pass." style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;fontFamily=Segoe UI;fontSize=14;fontColor=#75430F;fillColor=#FFF8EE;strokeColor=#D9A15F;strokeWidth=1.2;spacing=12;" vertex="1" parent="1">
+          <mxGeometry x="1030" y="990" width="480" height="220" as="geometry"/>
+        </mxCell>
+        <mxCell id="publishing-model" value="PUBLISHING&lt;br&gt;&lt;br&gt;Only the Central Documentation / Platform Team publishing pipeline deploys the complete documentation portal to Azure Storage after approved changes are merged into main.&lt;br&gt;&lt;br&gt;One repository. One publishing pipeline." style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;fontFamily=Segoe UI;fontSize=14;fontColor=#17365D;fillColor=#EFF5FF;strokeColor=#6D95C8;strokeWidth=1.2;spacing=12;" vertex="1" parent="1">
+          <mxGeometry x="1530" y="990" width="480" height="220" as="geometry"/>
+        </mxCell>
+        <mxCell id="security-model" value="SECURITY&lt;br&gt;&lt;br&gt;Team contributors require no Azure Storage access. GitHub Actions uses OIDC and least-privilege Azure RBAC.&lt;br&gt;&lt;br&gt;The documentation portal remains accessible only through the internal network and Private Link." style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;fontFamily=Segoe UI;fontSize=14;fontColor=#245331;fillColor=#F1F8F3;strokeColor=#8FB69A;strokeWidth=1.2;spacing=12;" vertex="1" parent="1">
+          <mxGeometry x="2030" y="990" width="490" height="220" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="legend-title" value="LEGEND" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontFamily=Segoe UI;fontSize=15;fontStyle=1;fontColor=#172B4D;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="32" y="1242" width="100" height="28" as="geometry"/>
+        </mxCell>
+        <mxCell id="legend-contribution-line" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#8E65B5;strokeWidth=2;dashed=1;dashPattern=7 5;endArrow=block;endFill=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="150" y="1285" as="sourcePoint"/>
+            <mxPoint x="240" y="1285" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="legend-contribution-text" value="Team contribution / Pull Request" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontFamily=Segoe UI;fontSize=13;fontColor=#374151;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="252" y="1272" width="300" height="26" as="geometry"/>
+        </mxCell>
+        <mxCell id="legend-publish-line" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#3972B5;strokeWidth=3;endArrow=block;endFill=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="600" y="1285" as="sourcePoint"/>
+            <mxPoint x="690" y="1285" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="legend-publish-text" value="Build and central publishing" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontFamily=Segoe UI;fontSize=13;fontColor=#374151;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="702" y="1272" width="270" height="26" as="geometry"/>
+        </mxCell>
+        <mxCell id="legend-oidc-line" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#D57A22;strokeWidth=2;dashed=1;dashPattern=7 5;endArrow=block;endFill=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1010" y="1285" as="sourcePoint"/>
+            <mxPoint x="1100" y="1285" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="legend-oidc-text" value="GitHub OIDC / identity authentication" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontFamily=Segoe UI;fontSize=13;fontColor=#374151;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="1112" y="1272" width="330" height="26" as="geometry"/>
+        </mxCell>
+        <mxCell id="legend-reader-line" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#3A9D63;strokeWidth=2.4;endArrow=block;endFill=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1480" y="1285" as="sourcePoint"/>
+            <mxPoint x="1570" y="1285" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="legend-reader-text" value="Reader HTTPS / Private Link traffic" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontFamily=Segoe UI;fontSize=13;fontColor=#374151;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="1582" y="1272" width="325" height="26" as="geometry"/>
+        </mxCell>
+        <mxCell id="legend-logs-line" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#8B929B;strokeWidth=1.8;dashed=1;dashPattern=5 5;endArrow=block;endFill=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1940" y="1285" as="sourcePoint"/>
+            <mxPoint x="2030" y="1285" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="legend-logs-text" value="Diagnostic logging" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontFamily=Segoe UI;fontSize=13;fontColor=#374151;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="2042" y="1272" width="220" height="26" as="geometry"/>
+        </mxCell>
+        <mxCell id="footer" value="Teams contribute centrally through Pull Requests. Only the Central Documentation / Platform Team publishes." style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontFamily=Segoe UI;fontSize=14;fontStyle=1;fontColor=#57677D;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="35" y="1350" width="2470" height="30" as="geometry"/>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

@@ -1591,3 +1591,11 @@ No modules.
 
 The software may collect information about you and your use of the software and send it to Microsoft. Microsoft may use this information to provide services and improve our products and services. You may turn off the telemetry as described in the repository. There are also some features in the software that may enable you and Microsoft to collect data from users of your applications. If you use these features, you must comply with applicable law, including providing appropriate notices to users of your applications together with a copy of Microsoft’s privacy statement. Our privacy statement is located at <https://go.microsoft.com/fwlink/?LinkID=824704>. You can learn more about data collection and use in the help documentation and our privacy statement. Your use of the software operates as your consent to these practices.
 <!-- END_TF_DOCS -->
+
+## Basic ARM role grant reporting
+
+`azure_resource_manager_role_assignments` reports the actual role grants created
+from `role_assignments_azure_resource_manager`, keyed by the supplied map keys.
+Each entry contains `id`, `role_definition_id`, `principal_id`, and `scope`.
+It complements the legacy `role_assignments` output, which reports the
+module's advanced principal-resolution path.

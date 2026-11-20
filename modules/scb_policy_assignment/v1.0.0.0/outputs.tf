@@ -27,3 +27,8 @@ output "role_assignment_ids" {
   value       = length(module.scb_role_assignments) > 0 ? module.scb_role_assignments[0].role_assignments : {}
   description = "The Role Assignment(s) created for policy remediation."
 }
+
+output "identity_role_assignments" {
+  value       = var.assign_identity ? module.scb_role_assignments[0].azure_resource_manager_role_assignments : {}
+  description = "Actual remediation grants, including role assignment ID, role definition ID, identity and scope."
+}

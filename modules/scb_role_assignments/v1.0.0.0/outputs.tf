@@ -35,6 +35,18 @@ output "resource_id" {
   value       = null
 }
 
+output "azure_resource_manager_role_assignments" {
+  description = "Actual basic ARM role grants, including IDs, principals and scopes."
+  value = {
+    for key, assignment in azurerm_role_assignment.basic : key => {
+      id                 = assignment.id
+      role_definition_id = assignment.role_definition_id
+      principal_id       = assignment.principal_id
+      scope              = assignment.scope
+    }
+  }
+}
+
 output "role_assignments" {
   description = <<DESCRIPTION
 A map of Azure Resource Manager role assignments. The key is the key you supplied and the value is the role assignment details:

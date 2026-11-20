@@ -68,6 +68,13 @@ variable "assign_identity" {
   description = "(Optional) Whether or not to assign System Assigned Identity to the Policy Assignment. It is required to enable this for enabling role assignments on Managed Identity."
   default     = false
 }
+
+variable "enable_role_assignment_telemetry" {
+  type        = bool
+  description = "Whether to enable telemetry in the nested role-assignment module."
+  default     = true
+  nullable    = false
+}
 variable "management_group_set_definition" {
   type        = string
   description = "(Optional) Name of management group from which policy set definition will be fetched. If not provided, will attempt to extract from policy_definition_id for custom initiatives."

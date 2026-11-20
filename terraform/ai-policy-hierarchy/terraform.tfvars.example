@@ -1,0 +1,166 @@
+subscription_id = "REPLACE_WITH_SUBSCRIPTION_GUID"
+assignment_location = "southeastasia"
+management_group_ids = {
+  ai_nonprod = "REPLACE_WITH_AI_NONPROD_MG_ID"
+  ai_gateway = "REPLACE_WITH_AI_GATEWAY_MG_ID"
+  ai_agent   = "REPLACE_WITH_AI_AGENT_MG_ID"
+}
+policy_parameter_overrides = {
+  "ai_nonprod-0884adba-2312-4468-abeb-5422caed1038": {
+    "logAnalytics": {
+      "value": "REPLACE_WITH_LOGANALYTICS"
+    }
+  },
+  "ai_nonprod-68ba9fc9-71b9-4e6f-9cf5-ecc07722324c": {
+    "logAnalytics": {
+      "value": "REPLACE_WITH_LOGANALYTICS"
+    }
+  },
+  "ai_nonprod-55d1f543-d1b0-4811-9663-d6d0dbc6326d": {
+    "logAnalytics": {
+      "value": "REPLACE_WITH_LOGANALYTICS"
+    }
+  },
+  "ai_nonprod-f5b29bc4-feca-4cc6-a58a-772dd5e290a5": {
+    "logAnalytics": {
+      "value": "REPLACE_WITH_LOGANALYTICS"
+    }
+  },
+  "ai_nonprod-79494980-ea12-4ca1-8cca-317e942b6da2": {
+    "logAnalytics": {
+      "value": "REPLACE_WITH_LOGANALYTICS"
+    }
+  },
+  "ai_nonprod-6b359d8f-f88d-4052-aa7c-32015963ecc1": {
+    "logAnalytics": {
+      "value": "REPLACE_WITH_LOGANALYTICS"
+    }
+  },
+  "ai_nonprod-818719e5-1338-4776-9a9d-3c31e4df5986": {
+    "logAnalytics": {
+      "value": "REPLACE_WITH_LOGANALYTICS"
+    }
+  },
+  "ai_nonprod-9d4fad1f-5189-4a42-b29e-cf7929c6b6df": {
+    "privateEndpointSubnetId": {
+      "value": "REPLACE_WITH_PRIVATEENDPOINTSUBNETID"
+    }
+  },
+  "ai_nonprod-ac673a9a-f77d-4846-b2d8-a57f8e1c01d4": {
+    "privateDnsZoneId": {
+      "value": "REPLACE_WITH_PRIVATEDNSZONEID"
+    }
+  },
+  "ai_nonprod-e8185402-357b-4768-8058-f620bc0ae6b5": {
+    "privateEndpointSubnetId": {
+      "value": "REPLACE_WITH_PRIVATEENDPOINTSUBNETID"
+    }
+  },
+  "ai_nonprod-437914ee-c176-4fff-8986-7e05eb971365": {
+    "privateDnsZoneId1": {
+      "value": "REPLACE_WITH_PRIVATEDNSZONEID1"
+    },
+    "privateDnsZoneId2": {
+      "value": "REPLACE_WITH_PRIVATEDNSZONEID2"
+    },
+    "privateDnsZoneId3": {
+      "value": "REPLACE_WITH_PRIVATEDNSZONEID3"
+    },
+    "privateDnsZoneId4": {
+      "value": "REPLACE_WITH_PRIVATEDNSZONEID4"
+    },
+    "privateDnsZoneId5": {
+      "value": "REPLACE_WITH_PRIVATEDNSZONEID5"
+    }
+  },
+  "ai_nonprod-db630ad5-52e9-4f4d-9c44-53912fe40053": {
+    "privateEndpointSubnetId": {
+      "value": "REPLACE_WITH_PRIVATEENDPOINTSUBNETID"
+    }
+  },
+  "ai_nonprod-af253d37-136a-42f8-a1fc-30010c083d41": {
+    "filterName": {
+      "value": "REPLACE_WITH_FILTERNAME"
+    }
+  },
+  "ai_nonprod-930f48f9-f07e-427c-9494-52603581c6a9": {
+    "filterName": {
+      "value": "REPLACE_WITH_FILTERNAME"
+    }
+  },
+  "ai_nonprod-f3a9c2e0-7b4d-4d8f-9c3a-2e1f6b9a8d4e": {
+    "filterName": {
+      "value": "REPLACE_WITH_FILTERNAME"
+    }
+  },
+  "ai_gateway-fa570aa1-acca-4eea-8e5a-233cf2c5e4c2": {
+    "logAnalytics": {
+      "value": "REPLACE_WITH_LOGANALYTICS"
+    }
+  },
+  "ai_gateway-441af8bf-7c88-4efc-bd24-b7be28d4acce": {
+    "logAnalytics": {
+      "value": "REPLACE_WITH_LOGANALYTICS"
+    }
+  },
+  "ai_gateway-63d1a629-735c-448b-b45f-5e3865e84cf5": {
+    "logAnalytics": {
+      "value": "REPLACE_WITH_LOGANALYTICS"
+    }
+  },
+  "ai_gateway-567c93f7-3661-494f-a30f-0a94d9bfebf8": {
+    "logAnalytics": {
+      "value": "REPLACE_WITH_LOGANALYTICS"
+    }
+  },
+  "ai_gateway-91678b7c-d721-4fc5-b179-3cdf74e96b1c": {
+    "privateEndpointSubnetId": {
+      "value": "REPLACE_WITH_PRIVATEENDPOINTSUBNETID"
+    }
+  },
+  "ai_agent-b698b005-b660-4837-b833-a7aaab26ddba": {
+    "privateEndpointSubnetId": {
+      "value": "REPLACE_WITH_PRIVATEENDPOINTSUBNETID"
+    }
+  },
+  "ai_agent-56288eb2-4350-461d-9ece-2bb242269dce": {
+    "logAnalytics": {
+      "value": "REPLACE_WITH_LOGANALYTICS"
+    }
+  },
+  "ai_agent-8def4bdd-4362-4ed6-a26f-7bf8f2c58839": {
+    "logAnalytics": {
+      "value": "REPLACE_WITH_LOGANALYTICS"
+    }
+  },
+  "ai_agent-4b05de63-3ad2-4f6d-b421-da21f1328f3b": {
+    "logAnalytics": {
+      "value": "REPLACE_WITH_LOGANALYTICS"
+    }
+  },
+  "ai_agent-6a664864-e2b5-413e-b930-f11caa132f16": {
+    "logAnalytics": {
+      "value": "REPLACE_WITH_LOGANALYTICS"
+    }
+  },
+  "ai_agent-595f98a5-b562-4ab6-b9c8-2ff9f39a3f7c": {
+    "entityKind": {
+      "value": [
+        "REPLACE_WITH_APPROVED_VALUE"
+      ]
+    },
+    "filterName": {
+      "value": "REPLACE_WITH_FILTERNAME"
+    }
+  },
+  "ai_agent-9224c1cc-34fc-44f1-ad08-5c4b079c9ce6": {
+    "entityKind": {
+      "value": [
+        "REPLACE_WITH_APPROVED_VALUE"
+      ]
+    },
+    "filterName": {
+      "value": "REPLACE_WITH_FILTERNAME"
+    }
+  }
+}

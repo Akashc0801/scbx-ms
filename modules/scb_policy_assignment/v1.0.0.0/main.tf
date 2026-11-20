@@ -331,7 +331,8 @@ resource "azurerm_resource_policy_assignment" "this" {
 #
 module "scb_role_assignments" {
 
-  source = "../../scb_role_assignments/v1.0.0.0"
+  source           = "../../scb_role_assignments/v1.0.0.0"
+  enable_telemetry = var.enable_role_assignment_telemetry
   depends_on = [
     azurerm_resource_group_policy_assignment.this,
     azurerm_subscription_policy_assignment.this,
@@ -343,9 +344,11 @@ module "scb_role_assignments" {
 
   role_assignments_azure_resource_manager = {
     for role_id in keys(local.role_assignments) : role_id => {
-      principal_id       = local.policy_assignment[0].identity[0].principal_id
-      role_definition_id = role_id
-      scope              = var.scope
+      principal_id                     = local.policy_assignment[0].identity[0].principal_id
+      principal_type                   = "ServicePrincipal"
+      skip_service_principal_aad_check = true
+      role_definition_id               = role_id
+      scope                            = var.scope
     }
   }
 }

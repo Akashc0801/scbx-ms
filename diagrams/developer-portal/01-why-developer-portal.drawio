@@ -1,0 +1,212 @@
+<mxfile host="app.diagrams.net" version="24.7.17" type="device">
+  <diagram id="01" name="why-developer-portal">
+    <mxGraphModel dx="1600" dy="900" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="900" math="0" shadow="0" background="#FFFFFF" adaptiveColors="auto">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="e12" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;html=1;fontFamily=Segoe UI;fontSize=18;fontColor=#57677D;strokeColor=#8C9EB2;strokeWidth=2;endArrow=block;endFill=1;labelBackgroundColor=#FFFFFF;;" edge="1" parent="n5" source="n11" target="n10">
+          <mxGeometry relative="1" as="geometry">
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e15" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;html=1;fontFamily=Segoe UI;fontSize=18;fontColor=#57677D;strokeColor=#8C9EB2;strokeWidth=2;endArrow=block;endFill=1;labelBackgroundColor=#FFFFFF;;" edge="1" parent="n5" source="n14" target="n13">
+          <mxGeometry relative="1" as="geometry">
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e16" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;html=1;fontFamily=Segoe UI;fontSize=18;fontColor=#57677D;strokeColor=#8C9EB2;strokeWidth=2;endArrow=none;endFill=1;labelBackgroundColor=#FFFFFF;;" edge="1" parent="n5" source="n11" target="n14">
+          <mxGeometry relative="1" as="geometry">
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e19" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;html=1;fontFamily=Segoe UI;fontSize=18;fontColor=#57677D;strokeColor=#8C9EB2;strokeWidth=2;endArrow=block;endFill=1;labelBackgroundColor=#FFFFFF;;" edge="1" parent="n5" source="n18" target="n17">
+          <mxGeometry relative="1" as="geometry">
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e20" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;html=1;fontFamily=Segoe UI;fontSize=18;fontColor=#57677D;strokeColor=#8C9EB2;strokeWidth=2;endArrow=none;endFill=1;labelBackgroundColor=#FFFFFF;;" edge="1" parent="n5" source="n14" target="n18">
+          <mxGeometry relative="1" as="geometry">
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e23" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;html=1;fontFamily=Segoe UI;fontSize=18;fontColor=#57677D;strokeColor=#8C9EB2;strokeWidth=2;endArrow=block;endFill=1;labelBackgroundColor=#FFFFFF;;" edge="1" parent="n5" source="n22" target="n21">
+          <mxGeometry relative="1" as="geometry">
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e24" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;html=1;fontFamily=Segoe UI;fontSize=18;fontColor=#57677D;strokeColor=#8C9EB2;strokeWidth=2;endArrow=none;endFill=1;labelBackgroundColor=#FFFFFF;;" edge="1" parent="n5" source="n18" target="n22">
+          <mxGeometry relative="1" as="geometry">
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e27" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;html=1;fontFamily=Segoe UI;fontSize=18;fontColor=#57677D;strokeColor=#8C9EB2;strokeWidth=2;endArrow=block;endFill=1;labelBackgroundColor=#FFFFFF;;" edge="1" parent="n5" source="n26" target="n25">
+          <mxGeometry relative="1" as="geometry">
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e28" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;html=1;fontFamily=Segoe UI;fontSize=18;fontColor=#57677D;strokeColor=#8C9EB2;strokeWidth=2;endArrow=none;endFill=1;labelBackgroundColor=#FFFFFF;;" edge="1" parent="n5" source="n22" target="n26">
+          <mxGeometry relative="1" as="geometry">
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e31" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;html=1;fontFamily=Segoe UI;fontSize=18;fontColor=#57677D;strokeColor=#8C9EB2;strokeWidth=2;endArrow=block;endFill=1;labelBackgroundColor=#FFFFFF;;" edge="1" parent="n5" source="n30" target="n29">
+          <mxGeometry relative="1" as="geometry">
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e32" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;html=1;fontFamily=Segoe UI;fontSize=18;fontColor=#57677D;strokeColor=#8C9EB2;strokeWidth=2;endArrow=none;endFill=1;labelBackgroundColor=#FFFFFF;;" edge="1" parent="n5" source="n26" target="n30">
+          <mxGeometry relative="1" as="geometry">
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e35" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;html=1;fontFamily=Segoe UI;fontSize=18;fontColor=#57677D;strokeColor=#8C9EB2;strokeWidth=2;endArrow=block;endFill=1;labelBackgroundColor=#FFFFFF;;" edge="1" parent="n5" source="n34" target="n33">
+          <mxGeometry relative="1" as="geometry">
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e36" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;html=1;fontFamily=Segoe UI;fontSize=18;fontColor=#57677D;strokeColor=#8C9EB2;strokeWidth=2;endArrow=none;endFill=1;labelBackgroundColor=#FFFFFF;;" edge="1" parent="n5" source="n30" target="n34">
+          <mxGeometry relative="1" as="geometry">
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e39" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;html=1;fontFamily=Segoe UI;fontSize=18;fontColor=#57677D;strokeColor=#8C9EB2;strokeWidth=2;endArrow=block;endFill=1;labelBackgroundColor=#FFFFFF;;" edge="1" parent="n5" source="n38" target="n37">
+          <mxGeometry relative="1" as="geometry">
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e40" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;html=1;fontFamily=Segoe UI;fontSize=18;fontColor=#57677D;strokeColor=#8C9EB2;strokeWidth=2;endArrow=none;endFill=1;labelBackgroundColor=#FFFFFF;;" edge="1" parent="n5" source="n34" target="n38">
+          <mxGeometry relative="1" as="geometry">
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e43" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;html=1;fontFamily=Segoe UI;fontSize=18;fontColor=#57677D;strokeColor=#8C9EB2;strokeWidth=2;endArrow=block;endFill=1;labelBackgroundColor=#FFFFFF;;" edge="1" parent="n5" source="n42" target="n41">
+          <mxGeometry relative="1" as="geometry">
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e44" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;html=1;fontFamily=Segoe UI;fontSize=18;fontColor=#57677D;strokeColor=#8C9EB2;strokeWidth=2;endArrow=none;endFill=1;labelBackgroundColor=#FFFFFF;;" edge="1" parent="n5" source="n38" target="n42">
+          <mxGeometry relative="1" as="geometry">
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e45" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;html=1;fontFamily=Segoe UI;fontSize=18;fontColor=#57677D;strokeColor=#8C9EB2;strokeWidth=2;endArrow=none;endFill=1;labelBackgroundColor=#FFFFFF;;" edge="1" parent="n5" source="n9" target="n26">
+          <mxGeometry relative="1" as="geometry">
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e49" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;html=1;fontFamily=Segoe UI;fontSize=18;fontColor=#57677D;strokeColor=#8C9EB2;strokeWidth=2;endArrow=block;endFill=1;labelBackgroundColor=#FFFFFF;;" edge="1" parent="n7" source="n47" target="n48">
+          <mxGeometry relative="1" as="geometry">
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="n1" value="Why we need a Developer Portal" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fontFamily=Segoe UI;fontSize=36;fontColor=#172B4D;fillColor=#FFFFFF;strokeColor=#CCD5E0;strokeWidth=1.5;align=center;verticalAlign=middle;spacing=10;shadow=0;shape=text;fillColor=none;strokeColor=none;rounded=0;align=left;spacing=0;fontStyle=1;;" vertex="1" parent="1">
+          <mxGeometry x="40" y="28" width="1520" height="52" as="geometry" />
+        </mxCell>
+        <mxCell id="n2" value="From fragmented knowledge to one front door for the Agentic AI Platform" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fontFamily=Segoe UI;fontSize=21;fontColor=#57677D;fillColor=#FFFFFF;strokeColor=#CCD5E0;strokeWidth=1.5;align=center;verticalAlign=middle;spacing=10;shadow=0;shape=text;fillColor=none;strokeColor=none;rounded=0;align=left;spacing=0;fontStyle=0;;" vertex="1" parent="1">
+          <mxGeometry x="40" y="87" width="1520" height="32" as="geometry" />
+        </mxCell>
+        <mxCell id="n3" value="AGENTIC AI PLATFORM  /  DEVELOPER EXPERIENCE" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fontFamily=Segoe UI;fontSize=15;fontColor=#57677D;fillColor=#FFFFFF;strokeColor=#CCD5E0;strokeWidth=1.5;align=center;verticalAlign=middle;spacing=10;shadow=0;shape=text;fillColor=none;strokeColor=none;rounded=0;align=left;spacing=0;fontStyle=0;;" vertex="1" parent="1">
+          <mxGeometry x="40" y="865" width="1420" height="23" as="geometry" />
+        </mxCell>
+        <mxCell id="n4" value="1 / 6" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fontFamily=Segoe UI;fontSize=15;fontColor=#57677D;fillColor=#FFFFFF;strokeColor=#CCD5E0;strokeWidth=1.5;align=center;verticalAlign=middle;spacing=10;shadow=0;shape=text;fillColor=none;strokeColor=none;rounded=0;align=right;spacing=0;fontStyle=0;;" vertex="1" parent="1">
+          <mxGeometry x="1475" y="865" width="85" height="23" as="geometry" />
+        </mxCell>
+        <mxCell id="n5" value="" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fontFamily=Segoe UI;fontSize=23;fontColor=#172B4D;fillColor=#FBF7F3;strokeColor=#E1C8B6;strokeWidth=1.5;align=center;verticalAlign=middle;spacing=10;shadow=0;container=1;collapsible=0;recursiveResize=0;;" vertex="1" parent="1">
+          <mxGeometry x="40" y="145" width="650" height="615" as="geometry" />
+        </mxCell>
+        <mxCell id="n6" value="TODAY / FRAGMENTED" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fontFamily=Segoe UI;fontSize=22;fontColor=#172B4D;fillColor=#FFFFFF;strokeColor=#CCD5E0;strokeWidth=1.5;align=center;verticalAlign=middle;spacing=10;shadow=0;shape=text;fillColor=none;strokeColor=none;rounded=0;align=left;spacing=0;fontStyle=1;;" vertex="1" parent="n5">
+          <mxGeometry x="22" y="14" width="606" height="32" as="geometry" />
+        </mxCell>
+        <mxCell id="n7" value="" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fontFamily=Segoe UI;fontSize=23;fontColor=#172B4D;fillColor=#F8FAFC;strokeColor=#CCD5E0;strokeWidth=1.5;align=center;verticalAlign=middle;spacing=10;shadow=0;container=1;collapsible=0;recursiveResize=0;;" vertex="1" parent="1">
+          <mxGeometry x="730" y="145" width="830" height="615" as="geometry" />
+        </mxCell>
+        <mxCell id="n8" value="TARGET EXPERIENCE" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fontFamily=Segoe UI;fontSize=22;fontColor=#172B4D;fillColor=#FFFFFF;strokeColor=#CCD5E0;strokeWidth=1.5;align=center;verticalAlign=middle;spacing=10;shadow=0;shape=text;fillColor=none;strokeColor=none;rounded=0;align=left;spacing=0;fontStyle=1;;" vertex="1" parent="n7">
+          <mxGeometry x="22" y="14" width="786" height="32" as="geometry" />
+        </mxCell>
+        <mxCell id="n9" value="Developer" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fontFamily=Segoe UI;fontSize=23;fontColor=#172B4D;fillColor=#F2F4F7;strokeColor=#CCD5E0;strokeWidth=1.5;align=center;verticalAlign=middle;spacing=10;shadow=0;;" vertex="1" parent="n5">
+          <mxGeometry x="30" y="283" width="180" height="72" as="geometry" />
+        </mxCell>
+        <mxCell id="n10" value="SDK Documentation" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fontFamily=Segoe UI;fontSize=20;fontColor=#172B4D;fillColor=#FFF4E8;strokeColor=#D9BDA9;strokeWidth=1.5;align=center;verticalAlign=middle;spacing=10;shadow=0;;" vertex="1" parent="n5">
+          <mxGeometry x="310" y="72" width="290" height="43" as="geometry" />
+        </mxCell>
+        <mxCell id="n11" value="" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fontFamily=Segoe UI;fontSize=23;fontColor=#172B4D;fillColor=#FFFFFF;strokeColor=#CCD5E0;strokeWidth=1.5;align=center;verticalAlign=middle;spacing=10;shadow=0;fillColor=none;strokeColor=none;spacing=0;;" vertex="1" parent="n5">
+          <mxGeometry x="259.5" y="93" width="1" height="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n13" value="APIs" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fontFamily=Segoe UI;fontSize=20;fontColor=#172B4D;fillColor=#FFFFFF;strokeColor=#D9BDA9;strokeWidth=1.5;align=center;verticalAlign=middle;spacing=10;shadow=0;;" vertex="1" parent="n5">
+          <mxGeometry x="322" y="127" width="278" height="43" as="geometry" />
+        </mxCell>
+        <mxCell id="n14" value="" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fontFamily=Segoe UI;fontSize=23;fontColor=#172B4D;fillColor=#FFFFFF;strokeColor=#CCD5E0;strokeWidth=1.5;align=center;verticalAlign=middle;spacing=10;shadow=0;fillColor=none;strokeColor=none;spacing=0;;" vertex="1" parent="n5">
+          <mxGeometry x="259.5" y="148" width="1" height="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n17" value="Agent Information" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fontFamily=Segoe UI;fontSize=20;fontColor=#172B4D;fillColor=#FFFFFF;strokeColor=#D9BDA9;strokeWidth=1.5;align=center;verticalAlign=middle;spacing=10;shadow=0;;" vertex="1" parent="n5">
+          <mxGeometry x="310" y="182" width="290" height="43" as="geometry" />
+        </mxCell>
+        <mxCell id="n18" value="" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fontFamily=Segoe UI;fontSize=23;fontColor=#172B4D;fillColor=#FFFFFF;strokeColor=#CCD5E0;strokeWidth=1.5;align=center;verticalAlign=middle;spacing=10;shadow=0;fillColor=none;strokeColor=none;spacing=0;;" vertex="1" parent="n5">
+          <mxGeometry x="259.5" y="203" width="1" height="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n21" value="Model Information" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fontFamily=Segoe UI;fontSize=20;fontColor=#172B4D;fillColor=#FFF4E8;strokeColor=#D9BDA9;strokeWidth=1.5;align=center;verticalAlign=middle;spacing=10;shadow=0;;" vertex="1" parent="n5">
+          <mxGeometry x="322" y="237" width="278" height="43" as="geometry" />
+        </mxCell>
+        <mxCell id="n22" value="" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fontFamily=Segoe UI;fontSize=23;fontColor=#172B4D;fillColor=#FFFFFF;strokeColor=#CCD5E0;strokeWidth=1.5;align=center;verticalAlign=middle;spacing=10;shadow=0;fillColor=none;strokeColor=none;spacing=0;;" vertex="1" parent="n5">
+          <mxGeometry x="259.5" y="258" width="1" height="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n25" value="MCP / Tools" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fontFamily=Segoe UI;fontSize=20;fontColor=#172B4D;fillColor=#FFFFFF;strokeColor=#D9BDA9;strokeWidth=1.5;align=center;verticalAlign=middle;spacing=10;shadow=0;;" vertex="1" parent="n5">
+          <mxGeometry x="310" y="292" width="290" height="43" as="geometry" />
+        </mxCell>
+        <mxCell id="n26" value="" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fontFamily=Segoe UI;fontSize=23;fontColor=#172B4D;fillColor=#FFFFFF;strokeColor=#CCD5E0;strokeWidth=1.5;align=center;verticalAlign=middle;spacing=10;shadow=0;fillColor=none;strokeColor=none;spacing=0;;" vertex="1" parent="n5">
+          <mxGeometry x="259.5" y="313" width="1" height="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n29" value="Reference Architectures" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fontFamily=Segoe UI;fontSize=20;fontColor=#172B4D;fillColor=#FFFFFF;strokeColor=#D9BDA9;strokeWidth=1.5;align=center;verticalAlign=middle;spacing=10;shadow=0;;" vertex="1" parent="n5">
+          <mxGeometry x="322" y="347" width="278" height="43" as="geometry" />
+        </mxCell>
+        <mxCell id="n30" value="" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fontFamily=Segoe UI;fontSize=23;fontColor=#172B4D;fillColor=#FFFFFF;strokeColor=#CCD5E0;strokeWidth=1.5;align=center;verticalAlign=middle;spacing=10;shadow=0;fillColor=none;strokeColor=none;spacing=0;;" vertex="1" parent="n5">
+          <mxGeometry x="259.5" y="368" width="1" height="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n33" value="Governance Guidance" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fontFamily=Segoe UI;fontSize=20;fontColor=#172B4D;fillColor=#FFF4E8;strokeColor=#D9BDA9;strokeWidth=1.5;align=center;verticalAlign=middle;spacing=10;shadow=0;;" vertex="1" parent="n5">
+          <mxGeometry x="310" y="402" width="290" height="43" as="geometry" />
+        </mxCell>
+        <mxCell id="n34" value="" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fontFamily=Segoe UI;fontSize=23;fontColor=#172B4D;fillColor=#FFFFFF;strokeColor=#CCD5E0;strokeWidth=1.5;align=center;verticalAlign=middle;spacing=10;shadow=0;fillColor=none;strokeColor=none;spacing=0;;" vertex="1" parent="n5">
+          <mxGeometry x="259.5" y="423" width="1" height="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n37" value="Security Checklists" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fontFamily=Segoe UI;fontSize=20;fontColor=#172B4D;fillColor=#FFFFFF;strokeColor=#D9BDA9;strokeWidth=1.5;align=center;verticalAlign=middle;spacing=10;shadow=0;;" vertex="1" parent="n5">
+          <mxGeometry x="322" y="457" width="278" height="43" as="geometry" />
+        </mxCell>
+        <mxCell id="n38" value="" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fontFamily=Segoe UI;fontSize=23;fontColor=#172B4D;fillColor=#FFFFFF;strokeColor=#CCD5E0;strokeWidth=1.5;align=center;verticalAlign=middle;spacing=10;shadow=0;fillColor=none;strokeColor=none;spacing=0;;" vertex="1" parent="n5">
+          <mxGeometry x="259.5" y="478" width="1" height="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n41" value="Code Samples" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fontFamily=Segoe UI;fontSize=20;fontColor=#172B4D;fillColor=#FFFFFF;strokeColor=#D9BDA9;strokeWidth=1.5;align=center;verticalAlign=middle;spacing=10;shadow=0;;" vertex="1" parent="n5">
+          <mxGeometry x="310" y="512" width="290" height="43" as="geometry" />
+        </mxCell>
+        <mxCell id="n42" value="" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fontFamily=Segoe UI;fontSize=23;fontColor=#172B4D;fillColor=#FFFFFF;strokeColor=#CCD5E0;strokeWidth=1.5;align=center;verticalAlign=middle;spacing=10;shadow=0;fillColor=none;strokeColor=none;spacing=0;;" vertex="1" parent="n5">
+          <mxGeometry x="259.5" y="533" width="1" height="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n46" value="Multiple places to search" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fontFamily=Segoe UI;fontSize=24;fontColor=#B75C12;fillColor=#FFFFFF;strokeColor=#CCD5E0;strokeWidth=1.5;align=center;verticalAlign=middle;spacing=10;shadow=0;shape=text;fillColor=none;strokeColor=none;rounded=0;align=center;spacing=0;fontStyle=1;;" vertex="1" parent="n5">
+          <mxGeometry x="28" y="565" width="590" height="28" as="geometry" />
+        </mxCell>
+        <mxCell id="n47" value="Developer" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fontFamily=Segoe UI;fontSize=23;fontColor=#172B4D;fillColor=#F2F4F7;strokeColor=#CCD5E0;strokeWidth=1.5;align=center;verticalAlign=middle;spacing=10;shadow=0;;" vertex="1" parent="n7">
+          <mxGeometry x="300" y="62" width="230" height="58" as="geometry" />
+        </mxCell>
+        <mxCell id="n48" value="&lt;div style=&quot;font-size:27px;line-height:1.3&quot;&gt;&lt;b&gt;DEVELOPER PORTAL&lt;/b&gt;&lt;br&gt;Direct access to any capability&lt;/div&gt;" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fontFamily=Segoe UI;fontSize=23;fontColor=#FFFFFF;fillColor=#153B65;strokeColor=#153B65;strokeWidth=1.5;align=center;verticalAlign=middle;spacing=10;shadow=0;;" vertex="1" parent="n7">
+          <mxGeometry x="155" y="154" width="520" height="96" as="geometry" />
+        </mxCell>
+        <mxCell id="n69" value="One Developer Portal with multiple independent capability entry points. No predefined portal journey." style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fontFamily=Segoe UI;fontSize=25;fontColor=#172B4D;fillColor=#EAF3FF;strokeColor=none;strokeWidth=1.5;align=center;verticalAlign=middle;spacing=10;shadow=0;;" vertex="1" parent="1">
+          <mxGeometry x="40" y="790" width="1520" height="56" as="geometry" />
+        </mxCell>
+        <mxCell value="&lt;b&gt;Get Started&lt;/b&gt;" parent="n7" id="cap-get-started" vertex="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;fontFamily=Segoe UI;fontSize=18;fontColor=#153B65;fillColor=#EDF5FD;strokeColor=#C7DCF0;strokeWidth=1;spacing=6;">
+          <mxGeometry as="geometry" y="282" width="246" height="60" x="28" />
+        </mxCell>
+        <mxCell value="&lt;b&gt;SDK&lt;/b&gt;" parent="n7" id="cap-sdk" vertex="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;fontFamily=Segoe UI;fontSize=18;fontColor=#153B65;fillColor=#EDF5FD;strokeColor=#C7DCF0;strokeWidth=1;spacing=6;">
+          <mxGeometry as="geometry" y="282" width="246" height="60" x="292" />
+        </mxCell>
+        <mxCell value="&lt;b&gt;APIs&lt;/b&gt;" parent="n7" id="cap-apis" vertex="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;fontFamily=Segoe UI;fontSize=18;fontColor=#153B65;fillColor=#EDF5FD;strokeColor=#C7DCF0;strokeWidth=1;spacing=6;">
+          <mxGeometry as="geometry" y="282" width="246" height="60" x="556" />
+        </mxCell>
+        <mxCell value="&lt;b&gt;Agents&lt;/b&gt;" parent="n7" id="cap-agents" vertex="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;fontFamily=Segoe UI;fontSize=18;fontColor=#153B65;fillColor=#EDF5FD;strokeColor=#C7DCF0;strokeWidth=1;spacing=6;">
+          <mxGeometry as="geometry" y="358" width="246" height="60" x="28" />
+        </mxCell>
+        <mxCell value="&lt;b&gt;Models&lt;/b&gt;" parent="n7" id="cap-models" vertex="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;fontFamily=Segoe UI;fontSize=18;fontColor=#153B65;fillColor=#EDF5FD;strokeColor=#C7DCF0;strokeWidth=1;spacing=6;">
+          <mxGeometry as="geometry" y="358" width="246" height="60" x="292" />
+        </mxCell>
+        <mxCell value="&lt;b&gt;MCP &amp;amp; Tools&lt;/b&gt;" parent="n7" id="cap-mcp-tools" vertex="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;fontFamily=Segoe UI;fontSize=18;fontColor=#153B65;fillColor=#EDF5FD;strokeColor=#C7DCF0;strokeWidth=1;spacing=6;">
+          <mxGeometry as="geometry" y="358" width="246" height="60" x="556" />
+        </mxCell>
+        <mxCell value="&lt;b&gt;Reference Architectures&lt;/b&gt;" parent="n7" id="cap-reference-architectures" vertex="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;fontFamily=Segoe UI;fontSize=18;fontColor=#153B65;fillColor=#EDF5FD;strokeColor=#C7DCF0;strokeWidth=1;spacing=6;">
+          <mxGeometry as="geometry" y="434" width="246" height="60" x="28" />
+        </mxCell>
+        <mxCell value="&lt;b&gt;Governance&lt;/b&gt;" parent="n7" id="cap-governance" vertex="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;fontFamily=Segoe UI;fontSize=18;fontColor=#153B65;fillColor=#EDF5FD;strokeColor=#C7DCF0;strokeWidth=1;spacing=6;">
+          <mxGeometry as="geometry" y="434" width="246" height="60" x="292" />
+        </mxCell>
+        <mxCell value="&lt;b&gt;Security&lt;/b&gt;" parent="n7" id="cap-security" vertex="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;fontFamily=Segoe UI;fontSize=18;fontColor=#153B65;fillColor=#EDF5FD;strokeColor=#C7DCF0;strokeWidth=1;spacing=6;">
+          <mxGeometry as="geometry" y="434" width="246" height="60" x="556" />
+        </mxCell>
+        <mxCell value="&lt;b&gt;Samples&lt;/b&gt;" parent="n7" id="cap-samples" vertex="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;fontFamily=Segoe UI;fontSize=18;fontColor=#153B65;fillColor=#EDF5FD;strokeColor=#C7DCF0;strokeWidth=1;spacing=6;">
+          <mxGeometry as="geometry" y="510" width="246" height="60" x="28" />
+        </mxCell>
+        <mxCell value="&lt;b&gt;Help &amp;amp; Support&lt;/b&gt;" parent="n7" id="cap-help-support" vertex="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;fontFamily=Segoe UI;fontSize=18;fontColor=#153B65;fillColor=#EDF5FD;strokeColor=#C7DCF0;strokeWidth=1;spacing=6;">
+          <mxGeometry as="geometry" y="510" width="246" height="60" x="292" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

@@ -1,0 +1,586 @@
+[
+  {
+    "changedTime": "2026-10-20T16:16:00.863898+07:00",
+    "createdTime": "2026-10-20T16:06:00.228782+07:00",
+    "extendedLocation": null,
+    "id": "/subscriptions/00b79ef9-128a-48a5-8f05-59ea20c06513/resourceGroups/RG-SEA-SCBAI-DEV-002/providers/Microsoft.ManagedIdentity/userAssignedIdentities/SCBAIAppRole_DEV",
+    "identity": null,
+    "kind": null,
+    "location": "southeastasia",
+    "managedBy": null,
+    "name": "SCBAIAppRole_DEV",
+    "plan": null,
+    "properties": null,
+    "provisioningState": "Succeeded",
+    "resourceGroup": "RG-SEA-SCBAI-DEV-002",
+    "sku": null,
+    "tags": {
+      "adminname": "siwadhol.kanlapakdee@scb.co.th_pinit.chonvithayasitikul@scb.co.th",
+      "appid": "ap2511",
+      "appname": "scbai",
+      "business_criticality": "3",
+      "company": "scb",
+      "data_classification": "internal",
+      "environment": "dev",
+      "internet_facing": "false",
+      "occode": "3246",
+      "provisioner": "gui",
+      "region": "southeastasia",
+      "regulator": "none",
+      "security_protection": "true"
+    },
+    "type": "Microsoft.ManagedIdentity/userAssignedIdentities"
+  },
+  {
+    "changedTime": "2026-10-20T16:16:02.327332+07:00",
+    "createdTime": "2026-10-20T16:06:02.186391+07:00",
+    "extendedLocation": null,
+    "id": "/subscriptions/00b79ef9-128a-48a5-8f05-59ea20c06513/resourceGroups/RG-SEA-SCBAI-DEV-002/providers/Microsoft.ManagedIdentity/userAssignedIdentities/SCBAIJenkinsRole_DEV",
+    "identity": null,
+    "kind": null,
+    "location": "southeastasia",
+    "managedBy": null,
+    "name": "SCBAIJenkinsRole_DEV",
+    "plan": null,
+    "properties": null,
+    "provisioningState": "Succeeded",
+    "resourceGroup": "RG-SEA-SCBAI-DEV-002",
+    "sku": null,
+    "tags": {
+      "adminname": "siwadhol.kanlapakdee@scb.co.th_pinit.chonvithayasitikul@scb.co.th",
+      "appid": "ap2511",
+      "appname": "scbai",
+      "business_criticality": "3",
+      "company": "scb",
+      "data_classification": "internal",
+      "environment": "dev",
+      "internet_facing": "false",
+      "occode": "3246",
+      "provisioner": "gui",
+      "region": "southeastasia",
+      "regulator": "none",
+      "security_protection": "true"
+    },
+    "type": "Microsoft.ManagedIdentity/userAssignedIdentities"
+  },
+  {
+    "changedTime": "2026-10-20T16:16:05.168563+07:00",
+    "createdTime": "2026-10-20T16:06:04.512187+07:00",
+    "extendedLocation": null,
+    "id": "/subscriptions/00b79ef9-128a-48a5-8f05-59ea20c06513/resourceGroups/RG-SEA-SCBAI-DEV-002/providers/Microsoft.ManagedIdentity/userAssignedIdentities/SCBAIDbFlywayRole_DEV",
+    "identity": null,
+    "kind": null,
+    "location": "southeastasia",
+    "managedBy": null,
+    "name": "SCBAIDbFlywayRole_DEV",
+    "plan": null,
+    "properties": null,
+    "provisioningState": "Succeeded",
+    "resourceGroup": "RG-SEA-SCBAI-DEV-002",
+    "sku": null,
+    "tags": {
+      "adminname": "siwadhol.kanlapakdee@scb.co.th_pinit.chonvithayasitikul@scb.co.th",
+      "appid": "ap2511",
+      "appname": "scbai",
+      "business_criticality": "3",
+      "company": "scb",
+      "data_classification": "internal",
+      "environment": "dev",
+      "internet_facing": "false",
+      "occode": "3246",
+      "provisioner": "gui",
+      "region": "southeastasia",
+      "regulator": "none",
+      "security_protection": "true"
+    },
+    "type": "Microsoft.ManagedIdentity/userAssignedIdentities"
+  },
+  {
+    "changedTime": "2026-10-21T16:11:05.173246+07:00",
+    "createdTime": "2026-10-21T16:01:04.644034+07:00",
+    "extendedLocation": null,
+    "id": "/subscriptions/00b79ef9-128a-48a5-8f05-59ea20c06513/resourceGroups/RG-SEA-SCBAI-DEV-002/providers/Microsoft.Search/searchServices/scbscbaiseass001dev",
+    "identity": {
+      "principalId": "02e9e9fe-f5ab-419e-ad4b-f3f42589a1ce",
+      "tenantId": "45202dee-4088-4e8c-8ebd-c01f56740e8f",
+      "type": "SystemAssigned, UserAssigned",
+      "userAssignedIdentities": {
+        "/subscriptions/00b79ef9-128a-48a5-8f05-59ea20c06513/resourcegroups/RG-SEA-SCBAI-DEV-001/providers/Microsoft.ManagedIdentity/userAssignedIdentities/SCBAIAppRole_DEV": {
+          "clientId": "b9c40cee-afc8-474e-a930-7a7709cbd550",
+          "principalId": "faa028bf-666e-41bb-aa71-5e9196214e13"
+        }
+      }
+    },
+    "kind": null,
+    "location": "southeastasia",
+    "managedBy": null,
+    "name": "scbscbaiseass001dev",
+    "plan": null,
+    "properties": null,
+    "provisioningState": "Succeeded",
+    "resourceGroup": "RG-SEA-SCBAI-DEV-002",
+    "sku": {
+      "capacity": null,
+      "family": null,
+      "model": null,
+      "name": "basic",
+      "size": null,
+      "tier": null
+    },
+    "systemData": {
+      "createdAt": "2026-10-21T09:01:16.391Z"
+    },
+    "tags": {
+      "adminname": "kaitkhachon.yaimaroeng@scb.co.th_kerkpon.pripoon@scb.co.th_sarit.soponvattanasevi@scb.co.th",
+      "appid": "ap2511",
+      "appname": "scbai",
+      "business_criticality": "3",
+      "company": "scb",
+      "data_classification": "internal",
+      "environment": "dev",
+      "internet_facing": "false",
+      "occode": "9310",
+      "provisioner": "terraform",
+      "regulator": "none",
+      "unicorncode": "x589",
+      "unicornname": "gdzaiaas"
+    },
+    "type": "Microsoft.Search/searchServices"
+  },
+  {
+    "changedTime": "2026-10-21T16:11:15.416712+07:00",
+    "createdTime": "2026-10-21T16:11:00.918314+07:00",
+    "extendedLocation": null,
+    "id": "/subscriptions/00b79ef9-128a-48a5-8f05-59ea20c06513/resourceGroups/RG-SEA-SCBAI-DEV-002/providers/Microsoft.Network/privateEndpoints/pvpt-scbscbaiseass001dev",
+    "identity": null,
+    "kind": null,
+    "location": "southeastasia",
+    "managedBy": null,
+    "name": "pvpt-scbscbaiseass001dev",
+    "plan": null,
+    "properties": null,
+    "provisioningState": "Succeeded",
+    "resourceGroup": "RG-SEA-SCBAI-DEV-002",
+    "sku": null,
+    "tags": {
+      "adminname": "kaitkhachon.yaimaroeng@scb.co.th_kerkpon.pripoon@scb.co.th_sarit.soponvattanasevi@scb.co.th",
+      "appid": "ap2511",
+      "appname": "scbai",
+      "business_criticality": "3",
+      "company": "scb",
+      "data_classification": "internal",
+      "environment": "dev",
+      "internet_facing": "false",
+      "occode": "9310",
+      "provisioner": "terraform",
+      "regulator": "none",
+      "unicorncode": "x589",
+      "unicornname": "gdzaiaas"
+    },
+    "type": "Microsoft.Network/privateEndpoints"
+  },
+  {
+    "changedTime": "2026-10-21T16:21:13.380353+07:00",
+    "createdTime": "2026-10-21T16:11:12.795477+07:00",
+    "extendedLocation": null,
+    "id": "/subscriptions/00b79ef9-128a-48a5-8f05-59ea20c06513/resourceGroups/RG-SEA-SCBAI-DEV-002/providers/Microsoft.Network/networkInterfaces/pvpt-scbscbaiseass001dev.nic.05ac629c-3409-4773-a515-835797892a57",
+    "identity": null,
+    "kind": null,
+    "location": "southeastasia",
+    "managedBy": "/subscriptions/00b79ef9-128a-48a5-8f05-59ea20c06513/resourceGroups/RG-SEA-SCBAI-DEV-002/providers/Microsoft.Network/privateEndpoints/pvpt-scbscbaiseass001dev",
+    "name": "pvpt-scbscbaiseass001dev.nic.05ac629c-3409-4773-a515-835797892a57",
+    "plan": null,
+    "properties": null,
+    "provisioningState": "Succeeded",
+    "resourceGroup": "RG-SEA-SCBAI-DEV-002",
+    "sku": null,
+    "tags": {
+      "adminname": "kaitkhachon.yaimaroeng@scb.co.th_kerkpon.pripoon@scb.co.th_sarit.soponvattanasevi@scb.co.th",
+      "appid": "ap2511",
+      "appname": "scbai",
+      "business_criticality": "3",
+      "company": "scb",
+      "data_classification": "internal",
+      "environment": "dev",
+      "internet_facing": "false",
+      "occode": "9310",
+      "provisioner": "terraform",
+      "regulator": "none",
+      "unicorncode": "x589",
+      "unicornname": "gdzaiaas"
+    },
+    "type": "Microsoft.Network/networkInterfaces"
+  },
+  {
+    "changedTime": "2026-10-21T22:46:08.38073+07:00",
+    "createdTime": "2026-10-21T16:20:38.109392+07:00",
+    "extendedLocation": null,
+    "id": "/subscriptions/00b79ef9-128a-48a5-8f05-59ea20c06513/resourceGroups/RG-SEA-SCBAI-DEV-002/providers/Microsoft.Storage/storageAccounts/scbscbaiseasta001stddev",
+    "identity": {
+      "principalId": null,
+      "tenantId": null,
+      "type": "UserAssigned",
+      "userAssignedIdentities": {
+        "/subscriptions/7148d64b-54cf-4746-84be-f56a853b5281/resourceGroups/RG-SEA-IAM-003/providers/Microsoft.ManagedIdentity/userAssignedIdentities/StorageFacilityRole_DEV": {
+          "clientId": "cc8d0202-6ee0-4e59-81a4-45e34ab51869",
+          "principalId": "5bf0290f-3f6e-4adc-9555-92fe2afaa1f0",
+          "tenantId": "45202dee-4088-4e8c-8ebd-c01f56740e8f"
+        }
+      }
+    },
+    "kind": "StorageV2",
+    "location": "southeastasia",
+    "managedBy": null,
+    "name": "scbscbaiseasta001stddev",
+    "plan": null,
+    "properties": null,
+    "provisioningState": "Succeeded",
+    "resourceGroup": "RG-SEA-SCBAI-DEV-002",
+    "sku": {
+      "capacity": null,
+      "family": null,
+      "model": null,
+      "name": "Standard_LRS",
+      "size": null,
+      "tier": "Standard"
+    },
+    "tags": {
+      "adminname": "kaitkhachon.yaimaroeng@scb.co.th_kerkpon.pripoon@scb.co.th_sarit.soponvattanasevi@scb.co.th",
+      "appid": "ap2511",
+      "appname": "scbai",
+      "business_criticality": "3",
+      "company": "scb",
+      "data_classification": "internal",
+      "environment": "dev",
+      "internet_facing": "false",
+      "occode": "9310",
+      "provisioner": "terraform",
+      "regulator": "none",
+      "unicorncode": "x589",
+      "unicornname": "gdzaiaas"
+    },
+    "type": "Microsoft.Storage/storageAccounts"
+  },
+  {
+    "changedTime": "2026-10-21T22:46:07.745254+07:00",
+    "createdTime": "2026-10-21T16:20:38.218285+07:00",
+    "extendedLocation": null,
+    "id": "/subscriptions/00b79ef9-128a-48a5-8f05-59ea20c06513/resourceGroups/RG-SEA-SCBAI-DEV-002/providers/Microsoft.Storage/storageAccounts/scbscbaiseasta002stddev",
+    "identity": {
+      "principalId": null,
+      "tenantId": null,
+      "type": "UserAssigned",
+      "userAssignedIdentities": {
+        "/subscriptions/7148d64b-54cf-4746-84be-f56a853b5281/resourceGroups/RG-SEA-IAM-003/providers/Microsoft.ManagedIdentity/userAssignedIdentities/StorageFacilityRole_DEV": {
+          "clientId": "cc8d0202-6ee0-4e59-81a4-45e34ab51869",
+          "principalId": "5bf0290f-3f6e-4adc-9555-92fe2afaa1f0",
+          "tenantId": "45202dee-4088-4e8c-8ebd-c01f56740e8f"
+        }
+      }
+    },
+    "kind": "StorageV2",
+    "location": "southeastasia",
+    "managedBy": null,
+    "name": "scbscbaiseasta002stddev",
+    "plan": null,
+    "properties": null,
+    "provisioningState": "Succeeded",
+    "resourceGroup": "RG-SEA-SCBAI-DEV-002",
+    "sku": {
+      "capacity": null,
+      "family": null,
+      "model": null,
+      "name": "Standard_LRS",
+      "size": null,
+      "tier": "Standard"
+    },
+    "tags": {
+      "adminname": "kaitkhachon.yaimaroeng@scb.co.th_kerkpon.pripoon@scb.co.th_sarit.soponvattanasevi@scb.co.th",
+      "appid": "ap2511",
+      "appname": "scbai",
+      "business_criticality": "3",
+      "company": "scb",
+      "data_classification": "internal",
+      "environment": "dev",
+      "internet_facing": "false",
+      "occode": "9310",
+      "provisioner": "terraform",
+      "regulator": "none",
+      "unicorncode": "x589",
+      "unicornname": "gdzaiaas"
+    },
+    "type": "Microsoft.Storage/storageAccounts"
+  },
+  {
+    "changedTime": "2026-10-22T17:57:36.685737+07:00",
+    "createdTime": "2026-10-22T17:02:14.01059+07:00",
+    "extendedLocation": null,
+    "id": "/subscriptions/00b79ef9-128a-48a5-8f05-59ea20c06513/resourceGroups/RG-SEA-SCBAI-DEV-002/providers/Microsoft.CognitiveServices/accounts/scbscbaiseaai001dev",
+    "identity": {
+      "principalId": null,
+      "tenantId": "45202dee-4088-4e8c-8ebd-c01f56740e8f",
+      "type": "UserAssigned",
+      "userAssignedIdentities": {
+        "/subscriptions/00b79ef9-128a-48a5-8f05-59ea20c06513/resourceGroups/RG-SEA-SCBAI-DEV-001/providers/Microsoft.ManagedIdentity/userAssignedIdentities/SCBAIAppRole_DEV": {
+          "clientId": "b9c40cee-afc8-474e-a930-7a7709cbd550",
+          "principalId": "faa028bf-666e-41bb-aa71-5e9196214e13"
+        },
+        "/subscriptions/7148d64b-54cf-4746-84be-f56a853b5281/resourceGroups/RG-SEA-IAM-003/providers/Microsoft.ManagedIdentity/userAssignedIdentities/DBFacilityRole_DEV": {
+          "clientId": "190a7488-4631-4312-9a40-138cc4fa3569",
+          "principalId": "25e2bb38-6221-4189-bb1d-1e57cc870d4f"
+        }
+      }
+    },
+    "kind": "AIServices",
+    "location": "southeastasia",
+    "managedBy": null,
+    "name": "scbscbaiseaai001dev",
+    "plan": null,
+    "properties": null,
+    "provisioningState": "Succeeded",
+    "resourceGroup": "RG-SEA-SCBAI-DEV-002",
+    "sku": {
+      "capacity": null,
+      "family": null,
+      "model": null,
+      "name": "S0",
+      "size": null,
+      "tier": null
+    },
+    "systemData": {
+      "lastModifiedAt": "2026-10-22T10:46:17.0311992Z",
+      "lastModifiedBy": "190a7488-4631-4312-9a40-138cc4fa3569",
+      "lastModifiedByType": "Application"
+    },
+    "tags": {
+      "adminname": "kaitkhachon.yaimaroeng@scb.co.th_kerkpon.pripoon@scb.co.th_sarit.soponvattanasevi@scb.co.th",
+      "appid": "ap2511",
+      "appname": "scbai",
+      "business_criticality": "3",
+      "company": "scb",
+      "data_classification": "internal",
+      "environment": "dev",
+      "internet_facing": "false",
+      "occode": "9310",
+      "provisioner": "terraform",
+      "regulator": "none",
+      "unicorncode": "x589",
+      "unicornname": "gdzaiaas"
+    },
+    "type": "Microsoft.CognitiveServices/accounts"
+  },
+  {
+    "changedTime": "2026-10-22T10:34:06.342524+07:00",
+    "createdTime": "2026-10-22T10:24:06.08802+07:00",
+    "extendedLocation": null,
+    "id": "/subscriptions/00b79ef9-128a-48a5-8f05-59ea20c06513/resourceGroups/RG-SEA-SCBAI-DEV-002/providers/Microsoft.Insights/components/scbscbaiseaappi002dev",
+    "identity": null,
+    "kind": "web",
+    "location": "southeastasia",
+    "managedBy": null,
+    "name": "scbscbaiseaappi002dev",
+    "plan": null,
+    "properties": null,
+    "provisioningState": "Succeeded",
+    "resourceGroup": "RG-SEA-SCBAI-DEV-002",
+    "sku": null,
+    "tags": {
+      "adminname": "kaitkhachon.yaimaroeng@scb.co.th_kerkpon.pripoon@scb.co.th_sarit.soponvattanasevi@scb.co.th",
+      "appid": "ap2511",
+      "appname": "scbai",
+      "business_criticality": "3",
+      "company": "scb",
+      "data_classification": "internal",
+      "environment": "dev",
+      "internet_facing": "false",
+      "occode": "9310",
+      "provisioner": "terraform",
+      "regulator": "none",
+      "unicorncode": "x589",
+      "unicornname": "gdzaiaas"
+    },
+    "type": "Microsoft.Insights/components"
+  },
+  {
+    "changedTime": "2026-10-22T11:12:32.406236+07:00",
+    "createdTime": "2026-10-22T11:02:31.765964+07:00",
+    "extendedLocation": null,
+    "id": "/subscriptions/00b79ef9-128a-48a5-8f05-59ea20c06513/resourceGroups/RG-SEA-SCBAI-DEV-002/providers/Microsoft.Web/serverFarms/scbscbaiseaplan001dev",
+    "identity": null,
+    "kind": "elastic",
+    "location": "southeastasia",
+    "managedBy": null,
+    "name": "scbscbaiseaplan001dev",
+    "plan": null,
+    "properties": null,
+    "provisioningState": "Succeeded",
+    "resourceGroup": "RG-SEA-SCBAI-DEV-002",
+    "sku": {
+      "capacity": 1,
+      "family": "WS",
+      "model": null,
+      "name": "WS1",
+      "size": "WS1",
+      "tier": "WorkflowStandard"
+    },
+    "tags": {
+      "adminname": "kaitkhachon.yaimaroeng@scb.co.th_kerkpon.pripoon@scb.co.th_sarit.soponvattanasevi@scb.co.th",
+      "appid": "ap2511",
+      "appname": "scbai",
+      "business_criticality": "3",
+      "company": "scb",
+      "data_classification": "internal",
+      "environment": "dev",
+      "internet_facing": "false",
+      "occode": "9310",
+      "provisioner": "terraform",
+      "regulator": "none",
+      "unicorncode": "x589",
+      "unicornname": "gdzaiaas"
+    },
+    "type": "Microsoft.Web/serverFarms"
+  },
+  {
+    "changedTime": "2026-10-22T17:19:39.337382+07:00",
+    "createdTime": "2026-10-22T17:09:26.826062+07:00",
+    "extendedLocation": null,
+    "id": "/subscriptions/00b79ef9-128a-48a5-8f05-59ea20c06513/resourceGroups/RG-SEA-SCBAI-DEV-002/providers/Microsoft.CognitiveServices/accounts/scbscbaiseaai001dev/projects/scbscbaiseaaiproject001dev",
+    "identity": {
+      "principalId": "d780e4bc-3906-48b3-834a-c141e75c73b8",
+      "tenantId": "45202dee-4088-4e8c-8ebd-c01f56740e8f",
+      "type": "SystemAssigned, UserAssigned",
+      "userAssignedIdentities": {
+        "/subscriptions/00b79ef9-128a-48a5-8f05-59ea20c06513/resourceGroups/RG-SEA-SCBAI-DEV-001/providers/Microsoft.ManagedIdentity/userAssignedIdentities/SCBAIAppRole_DEV": {
+          "clientId": "b9c40cee-afc8-474e-a930-7a7709cbd550",
+          "principalId": "faa028bf-666e-41bb-aa71-5e9196214e13"
+        }
+      }
+    },
+    "kind": "AIServices",
+    "location": "southeastasia",
+    "managedBy": null,
+    "name": "scbscbaiseaai001dev/scbscbaiseaaiproject001dev",
+    "plan": null,
+    "properties": null,
+    "provisioningState": "Succeeded",
+    "resourceGroup": "RG-SEA-SCBAI-DEV-002",
+    "sku": null,
+    "systemData": {
+      "createdAt": "2026-10-22T10:09:26.8349221Z",
+      "createdBy": "190a7488-4631-4312-9a40-138cc4fa3569",
+      "createdByType": "Application",
+      "lastModifiedAt": "2026-10-22T10:09:26.8349221Z",
+      "lastModifiedBy": "190a7488-4631-4312-9a40-138cc4fa3569",
+      "lastModifiedByType": "Application"
+    },
+    "tags": {
+      "adminname": "kaitkhachon.yaimaroeng@scb.co.th_kerkpon.pripoon@scb.co.th_sarit.soponvattanasevi@scb.co.th",
+      "appid": "ap2511",
+      "appname": "scbai",
+      "business_criticality": "3",
+      "company": "scb",
+      "data_classification": "internal",
+      "environment": "dev",
+      "internet_facing": "false",
+      "occode": "9310",
+      "provisioner": "terraform",
+      "regulator": "none",
+      "unicorncode": "x589",
+      "unicornname": "gdzaiaas"
+    },
+    "type": "Microsoft.CognitiveServices/accounts/projects"
+  },
+  {
+    "changedTime": "2026-10-22T17:59:39.775833+07:00",
+    "createdTime": "2026-10-22T17:49:09.842888+07:00",
+    "extendedLocation": null,
+    "id": "/subscriptions/00b79ef9-128a-48a5-8f05-59ea20c06513/resourceGroups/rg-sea-scbai-dev-002/providers/Microsoft.CognitiveServices/accounts/kerkp-mvjf4x14-eastus2",
+    "identity": {
+      "principalId": "ee709bb2-8804-41b2-9ff5-07c686da2927",
+      "tenantId": "45202dee-4088-4e8c-8ebd-c01f56740e8f",
+      "type": "SystemAssigned",
+      "userAssignedIdentities": null
+    },
+    "kind": "AIServices",
+    "location": "eastus2",
+    "managedBy": null,
+    "name": "kerkp-mvjf4x14-eastus2",
+    "plan": null,
+    "properties": null,
+    "provisioningState": "Succeeded",
+    "resourceGroup": "rg-sea-scbai-dev-002",
+    "sku": {
+      "capacity": null,
+      "family": null,
+      "model": null,
+      "name": "S0",
+      "size": null,
+      "tier": null
+    },
+    "systemData": {
+      "createdAt": "2026-10-22T10:49:09.8627578Z",
+      "createdBy": "kerkpon.pripoon@scb.co.th",
+      "createdByType": "User",
+      "lastModifiedAt": "2026-10-22T10:49:09.8627578Z",
+      "lastModifiedBy": "kerkpon.pripoon@scb.co.th",
+      "lastModifiedByType": "User"
+    },
+    "tags": {
+      "adminname": "kaitkhachon.yaimaroeng@scb.co.th_kerkpon.pripoon@scb.co.th_sarit.soponvattanasevi@scb.co.th",
+      "appid": "ap2511",
+      "appname": "scbai",
+      "business_criticality": "3",
+      "company": "scb",
+      "data_classification": "internal",
+      "environment": "dev",
+      "internet_facing": "false",
+      "occode": "9310",
+      "provisioner": "terraform",
+      "regulator": "none"
+    },
+    "type": "Microsoft.CognitiveServices/accounts"
+  },
+  {
+    "changedTime": "2026-10-22T17:59:39.01599+07:00",
+    "createdTime": "2026-10-22T17:49:36.366566+07:00",
+    "extendedLocation": null,
+    "id": "/subscriptions/00b79ef9-128a-48a5-8f05-59ea20c06513/resourceGroups/rg-sea-scbai-dev-002/providers/Microsoft.CognitiveServices/accounts/kerkp-mvjf4x14-eastus2/projects/kerkp-mvjf4x14-eastus2_project",
+    "identity": {
+      "principalId": "7ee663d5-5221-4fcf-8428-d71aa783d064",
+      "tenantId": "45202dee-4088-4e8c-8ebd-c01f56740e8f",
+      "type": "SystemAssigned",
+      "userAssignedIdentities": null
+    },
+    "kind": "AIServices",
+    "location": "eastus2",
+    "managedBy": null,
+    "name": "kerkp-mvjf4x14-eastus2/kerkp-mvjf4x14-eastus2_project",
+    "plan": null,
+    "properties": null,
+    "provisioningState": "Succeeded",
+    "resourceGroup": "rg-sea-scbai-dev-002",
+    "sku": null,
+    "systemData": {
+      "createdAt": "2026-10-22T10:49:36.3925489Z",
+      "createdBy": "kerkpon.pripoon@scb.co.th",
+      "createdByType": "User",
+      "lastModifiedAt": "2026-10-22T10:49:36.3925489Z",
+      "lastModifiedBy": "kerkpon.pripoon@scb.co.th",
+      "lastModifiedByType": "User"
+    },
+    "tags": {
+      "adminname": "kaitkhachon.yaimaroeng@scb.co.th_kerkpon.pripoon@scb.co.th_sarit.soponvattanasevi@scb.co.th",
+      "appid": "ap2511",
+      "appname": "scbai",
+      "business_criticality": "3",
+      "company": "scb",
+      "data_classification": "internal",
+      "environment": "dev",
+      "internet_facing": "false",
+      "occode": "9310",
+      "provisioner": "terraform",
+      "regulator": "none"
+    },
+    "type": "Microsoft.CognitiveServices/accounts/projects"
+  }
+]

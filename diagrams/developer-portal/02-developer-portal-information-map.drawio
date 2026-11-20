@@ -1,0 +1,61 @@
+<mxfile host="app.diagrams.net" version="24.7.17" type="device">
+  <diagram id="02" name="developer-portal-information-map">
+    <mxGraphModel dx="1600" dy="900" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="900" math="0" shadow="0" background="#FFFFFF" adaptiveColors="auto">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="n1" value="Developer Portal information map" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fontFamily=Segoe UI;fontSize=36;fontColor=#172B4D;fillColor=#FFFFFF;strokeColor=#CCD5E0;strokeWidth=1.5;align=center;verticalAlign=middle;spacing=10;shadow=0;shape=text;fillColor=none;strokeColor=none;rounded=0;align=left;spacing=0;fontStyle=1;;" vertex="1" parent="1">
+          <mxGeometry x="40" y="28" width="1520" height="52" as="geometry" />
+        </mxCell>
+        <mxCell id="n2" value="Independent capability entry points - not a replacement for authoritative platform sources" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fontFamily=Segoe UI;fontSize=21;fontColor=#57677D;fillColor=#FFFFFF;strokeColor=#CCD5E0;strokeWidth=1.5;align=center;verticalAlign=middle;spacing=10;shadow=0;shape=text;fillColor=none;strokeColor=none;rounded=0;align=left;spacing=0;fontStyle=0;;" vertex="1" parent="1">
+          <mxGeometry x="40" y="87" width="1520" height="32" as="geometry" />
+        </mxCell>
+        <mxCell id="n3" value="AGENTIC AI PLATFORM  /  DEVELOPER EXPERIENCE" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fontFamily=Segoe UI;fontSize=15;fontColor=#57677D;fillColor=#FFFFFF;strokeColor=#CCD5E0;strokeWidth=1.5;align=center;verticalAlign=middle;spacing=10;shadow=0;shape=text;fillColor=none;strokeColor=none;rounded=0;align=left;spacing=0;fontStyle=0;;" vertex="1" parent="1">
+          <mxGeometry x="40" y="865" width="1420" height="23" as="geometry" />
+        </mxCell>
+        <mxCell id="n4" value="2 / 6" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fontFamily=Segoe UI;fontSize=15;fontColor=#57677D;fillColor=#FFFFFF;strokeColor=#CCD5E0;strokeWidth=1.5;align=center;verticalAlign=middle;spacing=10;shadow=0;shape=text;fillColor=none;strokeColor=none;rounded=0;align=right;spacing=0;fontStyle=0;;" vertex="1" parent="1">
+          <mxGeometry x="1475" y="865" width="85" height="23" as="geometry" />
+        </mxCell>
+        <mxCell id="n5" value="&lt;b&gt;Developer Portal&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:22px&quot;&gt;Agentic AI Platform | Direct access to any capability&lt;/span&gt;" style="rounded=0;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontFamily=Segoe UI;fontSize=28;fontColor=#FFFFFF;fillColor=#153B65;strokeColor=none;spacing=22;" vertex="1" parent="1">
+          <mxGeometry x="40" y="146" width="1520" height="108" as="geometry" />
+        </mxCell>
+        <mxCell id="n16" value="Eleven independent entry points. One Developer Portal. No predefined sequence." style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fontFamily=Segoe UI;fontSize=25;fontColor=#57677D;fillColor=#FFFFFF;strokeColor=#CCD5E0;strokeWidth=1.5;align=center;verticalAlign=middle;spacing=10;shadow=0;shape=text;fillColor=none;strokeColor=none;rounded=0;align=center;spacing=0;fontStyle=0;;" vertex="1" parent="1">
+          <mxGeometry x="40" y="804" width="1520" height="36" as="geometry" />
+        </mxCell>
+        <mxCell value="&lt;b&gt;Get Started&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:21px;color:#425B76&quot;&gt;Onboarding &amp;amp; Quick Start&lt;/span&gt;" parent="1" id="cap-get-started" vertex="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;fontFamily=Segoe UI;fontSize=25;fontColor=#153B65;fillColor=#EDF5FD;strokeColor=#C7DCF0;strokeWidth=1;spacing=16;">
+          <mxGeometry as="geometry" y="278" width="362" height="148" x="40" />
+        </mxCell>
+        <mxCell value="&lt;b&gt;SDK&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:21px;color:#425B76&quot;&gt;SDK &amp;amp; Development Guide&lt;/span&gt;" parent="1" id="cap-sdk" vertex="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;fontFamily=Segoe UI;fontSize=25;fontColor=#153B65;fillColor=#EDF5FD;strokeColor=#C7DCF0;strokeWidth=1;spacing=16;">
+          <mxGeometry as="geometry" y="278" width="362" height="148" x="426" />
+        </mxCell>
+        <mxCell value="&lt;b&gt;APIs&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:21px;color:#425B76&quot;&gt;Explore Available APIs&lt;/span&gt;" parent="1" id="cap-apis" vertex="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;fontFamily=Segoe UI;fontSize=25;fontColor=#153B65;fillColor=#EDF5FD;strokeColor=#C7DCF0;strokeWidth=1;spacing=16;">
+          <mxGeometry as="geometry" y="278" width="362" height="148" x="812" />
+        </mxCell>
+        <mxCell value="&lt;b&gt;Agents&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:21px;color:#425B76&quot;&gt;Discover Approved Agents&lt;/span&gt;" parent="1" id="cap-agents" vertex="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;fontFamily=Segoe UI;fontSize=25;fontColor=#153B65;fillColor=#EDF5FD;strokeColor=#C7DCF0;strokeWidth=1;spacing=16;">
+          <mxGeometry as="geometry" y="278" width="362" height="148" x="1198" />
+        </mxCell>
+        <mxCell value="&lt;b&gt;Models&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:21px;color:#425B76&quot;&gt;Explore Models&lt;/span&gt;" parent="1" id="cap-models" vertex="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;fontFamily=Segoe UI;fontSize=25;fontColor=#153B65;fillColor=#EDF5FD;strokeColor=#C7DCF0;strokeWidth=1;spacing=16;">
+          <mxGeometry as="geometry" y="450" width="362" height="148" x="40" />
+        </mxCell>
+        <mxCell value="&lt;b&gt;MCP &amp;amp; Tools&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:21px;color:#425B76&quot;&gt;Discover MCP Servers &amp;amp; Tools&lt;/span&gt;" parent="1" id="cap-mcp-tools" vertex="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;fontFamily=Segoe UI;fontSize=25;fontColor=#153B65;fillColor=#EDF5FD;strokeColor=#C7DCF0;strokeWidth=1;spacing=16;">
+          <mxGeometry as="geometry" y="450" width="362" height="148" x="426" />
+        </mxCell>
+        <mxCell value="&lt;b&gt;Reference Architectures&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:21px;color:#425B76&quot;&gt;Architecture Patterns &amp;amp; Reference Designs&lt;/span&gt;" parent="1" id="cap-reference-architectures" vertex="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;fontFamily=Segoe UI;fontSize=25;fontColor=#153B65;fillColor=#EDF5FD;strokeColor=#C7DCF0;strokeWidth=1;spacing=16;">
+          <mxGeometry as="geometry" y="450" width="362" height="148" x="812" />
+        </mxCell>
+        <mxCell value="&lt;b&gt;Governance&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:21px;color:#425B76&quot;&gt;Governance &amp;amp; Security Checklists&lt;/span&gt;" parent="1" id="cap-governance" vertex="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;fontFamily=Segoe UI;fontSize=25;fontColor=#153B65;fillColor=#EDF5FD;strokeColor=#C7DCF0;strokeWidth=1;spacing=16;">
+          <mxGeometry as="geometry" y="450" width="362" height="148" x="1198" />
+        </mxCell>
+        <mxCell value="&lt;b&gt;Security&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:21px;color:#425B76&quot;&gt;Security Requirements &amp;amp; Guidance&lt;/span&gt;" parent="1" id="cap-security" vertex="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;fontFamily=Segoe UI;fontSize=25;fontColor=#153B65;fillColor=#EDF5FD;strokeColor=#C7DCF0;strokeWidth=1;spacing=16;">
+          <mxGeometry as="geometry" y="622" width="362" height="148" x="40" />
+        </mxCell>
+        <mxCell value="&lt;b&gt;Samples&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:21px;color:#425B76&quot;&gt;Code Samples &amp;amp; Implementation Examples&lt;/span&gt;" parent="1" id="cap-samples" vertex="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;fontFamily=Segoe UI;fontSize=25;fontColor=#153B65;fillColor=#EDF5FD;strokeColor=#C7DCF0;strokeWidth=1;spacing=16;">
+          <mxGeometry as="geometry" y="622" width="362" height="148" x="426" />
+        </mxCell>
+        <mxCell value="&lt;b&gt;Help &amp;amp; Support&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:21px;color:#425B76&quot;&gt;Support, FAQs &amp;amp; Troubleshooting&lt;/span&gt;" parent="1" id="cap-help-support" vertex="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;fontFamily=Segoe UI;fontSize=25;fontColor=#153B65;fillColor=#EDF5FD;strokeColor=#C7DCF0;strokeWidth=1;spacing=16;">
+          <mxGeometry as="geometry" y="622" width="362" height="148" x="812" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

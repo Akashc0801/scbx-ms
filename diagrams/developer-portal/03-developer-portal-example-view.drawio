@@ -1,0 +1,131 @@
+<mxfile host="app.diagrams.net" type="device">
+  <diagram id="03" name="03 - Developer Portal - Example Experience">
+    <mxGraphModel dx="1600" dy="900" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="0" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="900" background="#FFFFFF" math="0" shadow="0" adaptiveColors="auto">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        <mxCell id="slide-title" value="Developer Portal &#8211; Example Experience" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;fontFamily=Segoe UI;fontSize=36;fontStyle=1;fontColor=#172B4D;spacing=0;" vertex="1" parent="1">
+          <mxGeometry x="40" y="26" width="1520" height="52" as="geometry"/>
+        </mxCell>
+        <mxCell id="slide-subtitle" value="One portal. Multiple independent capability entry points." style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;fontFamily=Segoe UI;fontSize=23;fontColor=#57677D;spacing=0;" vertex="1" parent="1">
+          <mxGeometry x="40" y="84" width="1520" height="32" as="geometry"/>
+        </mxCell>
+        <mxCell id="portal" value="" style="rounded=0;html=1;fillColor=#FFFFFF;strokeColor=#CCD5E0;strokeWidth=1;container=1;collapsible=0;recursiveResize=0;" vertex="1" parent="1">
+          <mxGeometry x="40" y="134" width="1520" height="706" as="geometry"/>
+        </mxCell>
+        <mxCell id="header" value="" style="rounded=0;html=1;fillColor=#153B65;strokeColor=none;" vertex="1" parent="portal">
+          <mxGeometry x="0" y="0" width="1520" height="68" as="geometry"/>
+        </mxCell>
+        <mxCell id="portal-title" value="Developer Portal" style="text;html=1;align=left;verticalAlign=middle;fontFamily=Segoe UI;fontSize=29;fontStyle=1;fontColor=#FFFFFF;spacing=0;" vertex="1" parent="portal">
+          <mxGeometry x="24" y="14" width="480" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="platform-title" value="Agentic AI Platform" style="text;html=1;align=right;verticalAlign=middle;fontFamily=Segoe UI;fontSize=23;fontColor=#FFFFFF;spacing=0;" vertex="1" parent="portal">
+          <mxGeometry x="1040" y="18" width="456" height="32" as="geometry"/>
+        </mxCell>
+        <mxCell id="nav-background" value="" style="rounded=0;html=1;fillColor=#F5F7FA;strokeColor=none;" vertex="1" parent="portal">
+          <mxGeometry x="0" y="68" width="256" height="638" as="geometry"/>
+        </mxCell>
+        <mxCell id="nav-home" value="Home" style="rounded=1;arcSize=10;html=1;align=left;verticalAlign=middle;fontFamily=Segoe UI;fontSize=20;fontStyle=1;fontColor=#153B65;fillColor=#DFEAFA;strokeColor=none;spacingLeft=12;" vertex="1" parent="portal">
+          <mxGeometry x="12" y="88" width="232" height="38" as="geometry"/>
+        </mxCell>
+        <mxCell id="nav-get-started" value="Get Started" style="text;html=1;align=left;verticalAlign=middle;fontFamily=Segoe UI;fontSize=20;fontColor=#172B4D;spacing=0;" vertex="1" parent="portal">
+          <mxGeometry x="24" y="132" width="220" height="38" as="geometry"/>
+        </mxCell>
+        <mxCell id="nav-apis" value="APIs" style="text;html=1;align=left;verticalAlign=middle;fontFamily=Segoe UI;fontSize=20;fontColor=#172B4D;spacing=0;" vertex="1" parent="portal">
+          <mxGeometry x="24" y="176" width="220" height="38" as="geometry"/>
+        </mxCell>
+        <mxCell id="nav-sdk" value="SDK" style="text;html=1;align=left;verticalAlign=middle;fontFamily=Segoe UI;fontSize=20;fontColor=#172B4D;spacing=0;" vertex="1" parent="portal">
+          <mxGeometry x="24" y="220" width="220" height="38" as="geometry"/>
+        </mxCell>
+        <mxCell id="nav-agents" value="Agents" style="text;html=1;align=left;verticalAlign=middle;fontFamily=Segoe UI;fontSize=20;fontColor=#172B4D;spacing=0;" vertex="1" parent="portal">
+          <mxGeometry x="24" y="264" width="220" height="38" as="geometry"/>
+        </mxCell>
+        <mxCell id="nav-models" value="Models" style="text;html=1;align=left;verticalAlign=middle;fontFamily=Segoe UI;fontSize=20;fontColor=#172B4D;spacing=0;" vertex="1" parent="portal">
+          <mxGeometry x="24" y="308" width="220" height="38" as="geometry"/>
+        </mxCell>
+        <mxCell id="nav-mcp-tools" value="MCP &amp; Tools" style="text;html=1;align=left;verticalAlign=middle;fontFamily=Segoe UI;fontSize=20;fontColor=#172B4D;spacing=0;" vertex="1" parent="portal">
+          <mxGeometry x="24" y="352" width="220" height="38" as="geometry"/>
+        </mxCell>
+        <mxCell id="nav-reference-architectures" value="Reference Architectures" style="text;html=1;align=left;verticalAlign=middle;fontFamily=Segoe UI;fontSize=19;fontColor=#172B4D;spacing=0;" vertex="1" parent="portal">
+          <mxGeometry x="24" y="396" width="220" height="38" as="geometry"/>
+        </mxCell>
+        <mxCell id="nav-governance" value="Governance" style="text;html=1;align=left;verticalAlign=middle;fontFamily=Segoe UI;fontSize=20;fontColor=#172B4D;spacing=0;" vertex="1" parent="portal">
+          <mxGeometry x="24" y="440" width="220" height="38" as="geometry"/>
+        </mxCell>
+        <mxCell id="nav-security" value="Security" style="text;html=1;align=left;verticalAlign=middle;fontFamily=Segoe UI;fontSize=20;fontColor=#172B4D;spacing=0;" vertex="1" parent="portal">
+          <mxGeometry x="24" y="484" width="220" height="38" as="geometry"/>
+        </mxCell>
+        <mxCell id="nav-samples" value="Samples" style="text;html=1;align=left;verticalAlign=middle;fontFamily=Segoe UI;fontSize=20;fontColor=#172B4D;spacing=0;" vertex="1" parent="portal">
+          <mxGeometry x="24" y="528" width="220" height="38" as="geometry"/>
+        </mxCell>
+        <mxCell id="nav-help-support" value="Help &amp; Support" style="text;html=1;align=left;verticalAlign=middle;fontFamily=Segoe UI;fontSize=20;fontColor=#172B4D;spacing=0;" vertex="1" parent="portal">
+          <mxGeometry x="24" y="572" width="220" height="38" as="geometry"/>
+        </mxCell>
+        <mxCell id="global-search" value="Search documentation, APIs, agents, models, MCP tools..." style="rounded=1;arcSize=10;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;fontFamily=Segoe UI;fontSize=23;fontColor=#57677D;fillColor=#FFFFFF;strokeColor=#7FA8D1;strokeWidth=1.5;spacingLeft=18;" vertex="1" parent="portal">
+          <mxGeometry x="280" y="90" width="1216" height="54" as="geometry"/>
+        </mxCell>
+        <mxCell id="card-get-started" value="&lt;b&gt;Get Started&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:18px;color:#425B76&quot;&gt;Onboarding &amp;amp; Quick Start&lt;/span&gt;" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;fontFamily=Segoe UI;fontSize=22;fontColor=#153B65;fillColor=#EDF5FD;strokeColor=#C7DCF0;strokeWidth=1;spacing=12;" vertex="1" parent="portal">
+          <mxGeometry x="280" y="174" width="292" height="116" as="geometry"/>
+        </mxCell>
+        <mxCell id="card-sdk" value="&lt;b&gt;SDK&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:18px;color:#425B76&quot;&gt;SDK &amp;amp; Development Guide&lt;/span&gt;" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;fontFamily=Segoe UI;fontSize=22;fontColor=#153B65;fillColor=#EDF5FD;strokeColor=#C7DCF0;strokeWidth=1;spacing=12;" vertex="1" parent="portal">
+          <mxGeometry x="588" y="174" width="292" height="116" as="geometry"/>
+        </mxCell>
+        <mxCell id="card-apis" value="&lt;b&gt;APIs&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:18px;color:#425B76&quot;&gt;Explore Available APIs&lt;/span&gt;" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;fontFamily=Segoe UI;fontSize=22;fontColor=#153B65;fillColor=#EDF5FD;strokeColor=#C7DCF0;strokeWidth=1;spacing=12;" vertex="1" parent="portal">
+          <mxGeometry x="896" y="174" width="292" height="116" as="geometry"/>
+        </mxCell>
+        <mxCell id="card-agents" value="&lt;b&gt;Agents&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:18px;color:#425B76&quot;&gt;Discover Approved Agents&lt;/span&gt;" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;fontFamily=Segoe UI;fontSize=22;fontColor=#153B65;fillColor=#EDF5FD;strokeColor=#C7DCF0;strokeWidth=1;spacing=12;" vertex="1" parent="portal">
+          <mxGeometry x="1204" y="174" width="292" height="116" as="geometry"/>
+        </mxCell>
+        <mxCell id="card-models" value="&lt;b&gt;Models&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:18px;color:#425B76&quot;&gt;Explore Models&lt;/span&gt;" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;fontFamily=Segoe UI;fontSize=22;fontColor=#153B65;fillColor=#EDF5FD;strokeColor=#C7DCF0;strokeWidth=1;spacing=12;" vertex="1" parent="portal">
+          <mxGeometry x="280" y="306" width="292" height="116" as="geometry"/>
+        </mxCell>
+        <mxCell id="card-mcp-tools" value="&lt;b&gt;MCP &amp;amp; Tools&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:18px;color:#425B76&quot;&gt;Discover MCP Servers &amp;amp; Tools&lt;/span&gt;" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;fontFamily=Segoe UI;fontSize=22;fontColor=#153B65;fillColor=#EDF5FD;strokeColor=#C7DCF0;strokeWidth=1;spacing=12;" vertex="1" parent="portal">
+          <mxGeometry x="588" y="306" width="292" height="116" as="geometry"/>
+        </mxCell>
+        <mxCell id="card-reference-architectures" value="&lt;b&gt;Reference Architectures&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:18px;color:#425B76&quot;&gt;Architecture Patterns &amp;amp; Reference Designs&lt;/span&gt;" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;fontFamily=Segoe UI;fontSize=22;fontColor=#153B65;fillColor=#EDF5FD;strokeColor=#C7DCF0;strokeWidth=1;spacing=12;" vertex="1" parent="portal">
+          <mxGeometry x="896" y="306" width="292" height="116" as="geometry"/>
+        </mxCell>
+        <mxCell id="card-governance" value="&lt;b&gt;Governance&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:18px;color:#425B76&quot;&gt;Governance &amp;amp; Security Checklists&lt;/span&gt;" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;fontFamily=Segoe UI;fontSize=22;fontColor=#153B65;fillColor=#EDF5FD;strokeColor=#C7DCF0;strokeWidth=1;spacing=12;" vertex="1" parent="portal">
+          <mxGeometry x="1204" y="306" width="292" height="116" as="geometry"/>
+        </mxCell>
+        <mxCell id="card-security" value="&lt;b&gt;Security&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:18px;color:#425B76&quot;&gt;Security Requirements &amp;amp; Guidance&lt;/span&gt;" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;fontFamily=Segoe UI;fontSize=22;fontColor=#153B65;fillColor=#EDF5FD;strokeColor=#C7DCF0;strokeWidth=1;spacing=12;" vertex="1" parent="portal">
+          <mxGeometry x="280" y="438" width="292" height="116" as="geometry"/>
+        </mxCell>
+        <mxCell id="card-samples" value="&lt;b&gt;Samples&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:18px;color:#425B76&quot;&gt;Code Samples &amp;amp; Implementation Examples&lt;/span&gt;" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;fontFamily=Segoe UI;fontSize=22;fontColor=#153B65;fillColor=#EDF5FD;strokeColor=#C7DCF0;strokeWidth=1;spacing=12;" vertex="1" parent="portal">
+          <mxGeometry x="588" y="438" width="292" height="116" as="geometry"/>
+        </mxCell>
+        <mxCell id="card-help-support" value="&lt;b&gt;Help &amp;amp; Support&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:18px;color:#425B76&quot;&gt;Support, FAQs &amp;amp; Troubleshooting&lt;/span&gt;" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;fontFamily=Segoe UI;fontSize=22;fontColor=#153B65;fillColor=#EDF5FD;strokeColor=#C7DCF0;strokeWidth=1;spacing=12;" vertex="1" parent="portal">
+          <mxGeometry x="896" y="438" width="292" height="116" as="geometry"/>
+        </mxCell>
+        <mxCell id="recent-title" value="Popular / Recent Content" style="text;html=1;align=left;verticalAlign=middle;fontFamily=Segoe UI;fontSize=20;fontStyle=1;fontColor=#172B4D;spacing=0;" vertex="1" parent="portal">
+          <mxGeometry x="280" y="574" width="1216" height="28" as="geometry"/>
+        </mxCell>
+        <mxCell id="recent-first-agent" value="Build Your First Agent" style="text;html=1;align=left;verticalAlign=middle;fontFamily=Segoe UI;fontSize=18;fontColor=#0067B8;spacing=0;" vertex="1" parent="portal">
+          <mxGeometry x="280" y="608" width="390" height="26" as="geometry"/>
+        </mxCell>
+        <mxCell id="recent-architecture" value="Agent Reference Architecture" style="text;html=1;align=left;verticalAlign=middle;fontFamily=Segoe UI;fontSize=18;fontColor=#0067B8;spacing=0;" vertex="1" parent="portal">
+          <mxGeometry x="692" y="608" width="390" height="26" as="geometry"/>
+        </mxCell>
+        <mxCell id="recent-mcp" value="MCP Integration Guide" style="text;html=1;align=left;verticalAlign=middle;fontFamily=Segoe UI;fontSize=18;fontColor=#0067B8;spacing=0;" vertex="1" parent="portal">
+          <mxGeometry x="1104" y="608" width="392" height="26" as="geometry"/>
+        </mxCell>
+        <mxCell id="recent-governance" value="Governance Checklist" style="text;html=1;align=left;verticalAlign=middle;fontFamily=Segoe UI;fontSize=18;fontColor=#0067B8;spacing=0;" vertex="1" parent="portal">
+          <mxGeometry x="280" y="638" width="390" height="26" as="geometry"/>
+        </mxCell>
+        <mxCell id="recent-security" value="Security Requirements" style="text;html=1;align=left;verticalAlign=middle;fontFamily=Segoe UI;fontSize=18;fontColor=#0067B8;spacing=0;" vertex="1" parent="portal">
+          <mxGeometry x="692" y="638" width="390" height="26" as="geometry"/>
+        </mxCell>
+        <mxCell id="metadata" value="Owner: Platform Team     |     Last Updated: YYYY-MM-DD     |     Version: vX.Y" style="text;html=1;align=left;verticalAlign=middle;fontFamily=Segoe UI;fontSize=16;fontColor=#57677D;spacing=0;" vertex="1" parent="portal">
+          <mxGeometry x="280" y="678" width="1216" height="22" as="geometry"/>
+        </mxCell>
+        <mxCell id="slide-footer" value="AGENTIC AI PLATFORM  /  DEVELOPER EXPERIENCE" style="text;html=1;align=left;verticalAlign=middle;fontFamily=Segoe UI;fontSize=15;fontColor=#57677D;spacing=0;" vertex="1" parent="1">
+          <mxGeometry x="40" y="862" width="1400" height="24" as="geometry"/>
+        </mxCell>
+        <mxCell id="slide-number" value="3 / 6" style="text;html=1;align=right;verticalAlign=middle;fontFamily=Segoe UI;fontSize=15;fontColor=#57677D;spacing=0;" vertex="1" parent="1">
+          <mxGeometry x="1475" y="862" width="85" height="24" as="geometry"/>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
+
